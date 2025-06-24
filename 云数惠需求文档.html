@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset='utf-8'>
+    <title>云数惠权益营销平台微信优惠券服务接入需求文档</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotPromptForConvert/>
+            <w:DoNotShowInsertionsAndDeletions/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+        body { 
+            font-family: '宋体', SimSun, serif; 
+            font-size: 12pt; 
+            line-height: 1.6; 
+            margin: 1in;
+            background: white;
+        }
+        h1 { 
+            font-size: 18pt; 
+            color: #2c3e50; 
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 10pt; 
+            margin-top: 20pt;
+            margin-bottom: 15pt;
+            page-break-after: avoid;
+        }
+        h2 { 
+            font-size: 16pt; 
+            color: #007bff; 
+            margin-top: 20pt; 
+            margin-bottom: 10pt;
+            page-break-after: avoid;
+        }
+        h3 { 
+            font-size: 14pt; 
+            color: #495057; 
+            margin-top: 15pt; 
+            margin-bottom: 8pt;
+            page-break-after: avoid;
+        }
+        h4 { 
+            font-size: 12pt; 
+            color: #6c757d; 
+            margin-top: 10pt; 
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        p { 
+            margin-bottom: 6pt; 
+            text-align: justify; 
+            text-indent: 0;
+        }
+        ul, ol { 
+            margin-left: 20pt; 
+            margin-bottom: 10pt;
+        }
+        li { 
+            margin-bottom: 3pt; 
+        }
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin: 10pt 0; 
+            font-size: 10pt;
+        }
+        th, td { 
+            border: 1pt solid #000; 
+            padding: 6pt; 
+            text-align: left; 
+            vertical-align: top;
+        }
+        th { 
+            background-color: #f0f0f0; 
+            font-weight: bold; 
+        }
+        .code-block { 
+            background-color: #f8f9fa; 
+            border: 1pt solid #ccc; 
+            padding: 10pt; 
+            font-family: 'Courier New', monospace; 
+            font-size: 10pt;
+            margin: 10pt 0;
+        }
+        .highlight-box { 
+            background-color: #e7f3ff; 
+            border: 1pt solid #b3d9ff; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .warning-box { 
+            background-color: #fff3cd; 
+            border: 1pt solid #ffeaa7; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .success-box { 
+            background-color: #d4edda; 
+            border: 1pt solid #c3e6cb; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30pt; 
+            border-bottom: 3pt solid #007bff; 
+            padding-bottom: 20pt;
+        }
+        .meta { 
+            color: #666; 
+            font-size: 10pt; 
+            margin-top: 10pt;
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 30pt; 
+            border-top: 2pt solid #ccc; 
+            padding-top: 20pt; 
+            color: #666; 
+            font-size: 10pt;
+        }
+        .api-endpoint { 
+            background-color: #28a745; 
+            color: white; 
+            padding: 4pt 8pt; 
+            font-family: 'Courier New', monospace; 
+            font-size: 10pt;
+        }
+        .parameter-list { 
+            background-color: #f8f9fa; 
+            padding: 8pt; 
+            margin: 8pt 0; 
+            border-left: 3pt solid #007bff;
+        }
+        .url-link {
+            color: #0066cc;
+            text-decoration: underline;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        @page {
+            margin: 1in;
+        }
+        @media print {
+            body { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>云数惠权益营销平台微信优惠券服务接入需求文档</h1>
+    </div>
+
+    <h1>1. 项目概述</h1>
+    
+    <h3>1.1 项目背景</h3>
+    <p>接入云数惠第三方微信优惠券服务商，封装其获取openid的h5、发券、数据回调、数据查询接口，为合作银行提供统一的优惠券发放服务，并在联合营销平台、银行联合营销平台展示相关数据。</p>
+
+    <h3>1.2 项目目标</h3>
+    <ul>
+        <li>与云数惠API对接，实现优惠券发放功能</li>
+        <li>封装标准化接口供合作银行调用</li>
+        <li>提供数据统计和查询功能</li>
+        <li>建立完善的回调处理机制</li>
+    </ul>
+
+    <h1>2. 业务需求</h1>
+    
+    <h3>2.1 业务流程</h3>
+    <div class="highlight-box">
+        <p><strong>业务流程时序图：</strong></p>
+        <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
+            <img src="流程图.jpg" alt="云数惠微信优惠券业务流程时序图" style="width: 75%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图2.1 云数惠微信优惠券业务流程时序图</p>
+        </div>
+        
+        <p><strong>流程说明：</strong></p>
+        <div style="background: #e8f5e8; padding: 15px; border-radius: 4px; margin: 10px 0;">
+            <p>该时序图展示了政府小程序、银行营销系统、微信平台三方系统间的完整交互流程：</p>
+            <ol style="margin-top: 10px; margin-left: 20px;">
+                <li><strong>H5获取OpenID：</strong>政府小程序跳转到云数惠H5页面获取用户微信OpenID</li>
+                <li><strong>发券API调用：</strong>银行营销系统调用云数惠发放接口，参数包含openid和活动信息</li>
+                <li><strong>核销回调通知：</strong>用户使用优惠券时，通过回调机制通知相关系统</li>
+                <li><strong>数据查询：</strong>支持实时查询发放结果和核销状态</li>
+            </ol>
+        </div>
+        
+        <p><strong>简化流程概述：</strong></p>
+        <p>用户 → 接入方系统 → 银行营销系统 → 我方系统 → 云数惠 → 微信</p>
+    </div>
+
+    <h3>2.2 接入节点：</h3>
+    
+    <h4>1. 银行嵌入云数惠h5地址获取用户openid，地址示例</h4>
+    <div class="code-block">
+        <a href="https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=xxx" class="url-link">
+        https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=xxx
+        </a>
+    </div>
+    
+    <p><strong>wmcb</strong>参数为接收openid数据的回调页面地址。</p>
+    <p><strong>回调参数拼接：</strong>${redirect_url}&openid=${response.data.openId}&from=dshy</p>
+    <p>银行需记录openid，用于后续发券使用</p>
+
+    <h4>2. 接入云数惠发券接口：</h4>
+    <div class="code-block">
+        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn" class="url-link">
+        https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn
+        </a>
+    </div>
+
+    <h1>3. 系统架构</h1>
+    
+    <h3>3.1 系统组成</h3>
+    <ul>
+        <li><strong>云数惠接入层：</strong>对接云数惠API</li>
+        <li><strong>业务封装层：</strong>封装标准化接口</li>
+        <li><strong>数据存储层：</strong>存储发放和核销数据</li>
+        <li><strong>营销平台层：</strong>数据展示和权限管理</li>
+        <li><strong>银行营销平台：</strong>银行端数据查询</li>
+    </ul>
+
+    <h3>3.2 业务流程</h3>
+    
+    <h4>3.2.1 发券流程</h4>
+    <p>线下创建优惠券，优惠券信息填入联合营销平台——活动编码(营销平台提供)：batchCode；活动编码关联主题活动ID。</p>
+    
+    <div class="code-block">
+        <strong>用户 → 接入方系统 → 我方系统 → 云数惠 → 微信</strong>
+    </div>
+    
+    <p>——使用活动编码+用户访问h5时获取的openid发放优惠券，并实时记录发放结果。</p>
+
+    <h4>3.2.2 详细流程步骤</h4>
+    <div class="code-block">
+        <strong>第一阶段：获取用户OpenID</strong>
+        <ol>
+            <li><strong>H5页面跳转：</strong>政府小程序跳转到云数惠H5页面（拉卡拉填中转地址）</li>
+            <li><strong>微信授权：</strong>H5页面获取用户微信OpenID</li>
+            <li><strong>回调返回：</strong>携带OpenID回跳到银行营销系统<br>
+                格式：<code>${redirect_url}&openid=${response.data.openId}&from=dshy</code>
+            </li>
+        </ol>
+        
+        <strong>第二阶段：优惠券发放</strong>
+        <ol start="4">
+            <li><strong>API调用准备：</strong>银行营销系统准备发券参数</li>
+            <li><strong>发券请求：</strong>调用云数惠发放接口
+                <div class="parameter-list">
+                    "openId": "oPa1U6a_nhfiR-5bdeZrnxzlx3_k",<br>
+                    "batchCode": "1017578611540230144",<br>
+                    "callTradeNo": "1731749631383",<br>
+                    "writeOffNotify": "https://t-bmk-market.dshytest.com/xxx"
+                </div>
+            </li>
+            <li><strong>云数惠处理：</strong>云数惠向微信平台发起优惠券发放</li>
+            <li><strong>结果返回：</strong>微信平台返回发放结果给云数惠</li>
+            <li><strong>异步保存：</strong>云数惠异步保存发放记录</li>
+        </ol>
+        
+        <strong>第三阶段：回调与查询</strong>
+        <ol start="9">
+            <li><strong>核销回调：</strong>用户使用优惠券时，云数惠通过回调通知系统</li>
+            <li><strong>数据查询：</strong>政府小程序查询发放结果</li>
+            <li><strong>结果展示：</strong>银行营销系统返回查询结果</li>
+        </ol>
+    </div>
+
+    <h1>4. 技术需求</h1>
+    
+    <h3>4.1 云数惠API接口</h3>
+    <p><strong>请求格式及加密方式说明文档：</strong></p>
+    <div class="code-block">
+        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffipkojor8up" class="url-link">
+        https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffipkojor8up
+        </a>
+    </div>
+    
+    <p><strong>接口列表：</strong></p>
+    <ul>
+        <li>发放优惠券</li>
+        <li>核销回调通知</li>
+        <li>查询发放结果（用于对账）</li>
+    </ul>
+
+    <p><strong>公共参数说明：</strong></p>
+    <div class="code-block">
+        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffiqbedg1eea" class="url-link">
+        https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffiqbedg1eea
+        </a>
+    </div>
+
+    <h3>4.2 数据回调</h3>
+    <p><strong>接口文档：</strong></p>
+    <div class="code-block">
+        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi" class="url-link">
+        https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi
+        </a>
+    </div>
+    
+    <p>接收云数惠回调请求后，更新明细状态，转发通知到合作银行</p>
+
+    <h3>4.3 数据存储要求</h3>
+    <div class="success-box">
+        <ul>
+            <li><strong>按活动编码：</strong>发放成功、核销成功数量统计</li>
+            <li><strong>核销明细：</strong>详细核销记录——根据回调接口更新明细状态</li>
+            <li><strong>发放明细：</strong>详细发放记录——根据发放接口返回结果，生成发放明细</li>
+            <li><strong>查询支持：</strong>供运营与合作银行查询相关数据</li>
+        </ul>
+    </div>
+
+    <h1>5. 后台需求</h1>
+    
+    <h3>5.1 联合营销平台</h3>
+    
+    <h4>5.1.1 微信活动管理</h4>
+    <div class="highlight-box">
+        <p>在微信活动管理中将活动编码:batchCode填入批次号中，后续对应使用该字段区分微信活动。</p>
+        <p>优惠渠道中增加云数惠-微信选项，用于区别上游通道。</p>
+    </div>
+    
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
+        <img src="5.1.1-1.png" alt="微信活动管理配置界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.1-1 微信活动管理配置界面</p>
+    </div>
+    
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
+        <img src="5.1.1-2.png" alt="优惠渠道选择界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.1-2 优惠渠道选择界面</p>
+    </div>
+
+    <h4>5.1.2 主题活动管理</h4>
+    <div class="highlight-box">
+        <p>在查看批次号中，根据活动编码，展示领取数量、核销数量。</p>
+    </div>
+    
+    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
+        <img src="5.1.2.png" alt="主题活动管理数据展示界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.2 主题活动管理数据展示界面</p>
+    </div>
+
+    <h3>5.2 银行营销平台查询</h3>
+    <div class="warning-box">
+        <p>银行营销平台需要提供完整的数据查询功能，支持银行查询相关的发放和核销数据，包含明细查询和汇总统计功能。</p>
+    </div>
+
+    <h4>5.2.1 数据查询功能菜单</h4>
+    <div class="highlight-box">
+        <p><strong>数据中心模块包含以下查询功能：</strong></p>
+        <ul>
+            <li><strong>实时交易数据查询：</strong>实时查询交易数据状态</li>
+            <li><strong>微信优惠券发放明细查询：</strong>详细的优惠券发放记录查询</li>
+            <li><strong>微信优惠券核销明细查询：</strong>详细的优惠券核销记录查询</li>
+            <li><strong>微信优惠券发放日汇总：</strong>按日统计的发放数据汇总</li>
+            <li><strong>微信优惠券发放月汇总：</strong>按月统计的发放数据汇总</li>
+            <li><strong>微信优惠券核销日汇总：</strong>按日统计的核销数据汇总</li>
+            <li><strong>微信优惠券核销月汇总：</strong>按月统计的核销数据汇总</li>
+            <li><strong>优惠券统计报表：</strong>综合统计分析报表</li>
+            <li><strong>银行发券明细：</strong>银行维度的发券详情</li>
+            <li><strong>活动统计汇总：</strong>活动维度的数据统计</li>
+            <li><strong>数据导出管理：</strong>支持数据批量导出</li>
+        </ul>
+    </div>
+
+    <h4>5.2.2 微信优惠券发放明细查询</h4>
+    <div class="highlight-box">
+        <p><strong>原型链接：</strong></p>
+        <div class="code-block">
+            <a href="微信优惠券发放明细查询.html" class="url-link" target="_blank">
+            微信优惠券发放明细查询.html
+            </a>
+        </div>
+    </div>
+    <div class="parameter-list">
+        <p><strong>查询条件：</strong></p>
+        <ul>
+            <li>活动编码：支持精确匹配查询</li>
+            <li>优惠券类型：满减券/折扣券/代金券</li>
+            <li>活动ID：活动UUID查询</li>
+            <li>OpenID：微信用户唯一标识</li>
+            <li>优惠券状态：已发放/已使用/已过期/已退回</li>
+            <li>流水号：发券流水号查询</li>
+            <li>发券时间：支持时间范围查询</li>
+        </ul>
+        
+        <p><strong>查询结果展示：</strong></p>
+        <ul>
+            <li>流水号、活动ID、活动编码</li>
+            <li>OpenID、优惠券类型、优惠金额</li>
+            <li>使用门槛、发券时间、状态</li>
+            <li>支持分页显示，每页可选5/10/20/50/100条</li>
+            <li>支持多标签页管理</li>
+        </ul>
+    </div>
+
+    <h4>5.2.3 微信优惠券核销明细查询</h4>
+    <div class="highlight-box">
+        <p><strong>原型链接：</strong></p>
+        <div class="code-block">
+            <a href="微信优惠券核销明细查询.html" class="url-link" target="_blank">
+            微信优惠券核销明细查询.html
+            </a>
+        </div>
+    </div>
+    <div class="parameter-list">
+        <p><strong>查询条件：</strong></p>
+        <ul>
+            <li>活动编码：支持精确匹配查询</li>
+            <li>优惠券类型：满减券/折扣券/代金券</li>
+            <li>活动ID：活动UUID查询</li>
+            <li>OpenID：微信用户唯一标识</li>
+            <li>核销状态：核销成功/核销失败/部分核销/核销撤销</li>
+            <li>核销流水号：核销交易流水号</li>
+            <li>商户编号：核销商户信息</li>
+            <li>核销时间：支持时间范围查询</li>
+        </ul>
+        
+        <p><strong>查询结果展示：</strong></p>
+        <ul>
+            <li>发券流水号、交易流水号、活动信息</li>
+            <li>OpenID、优惠券类型、核销金额</li>
+            <li>订单金额、商户信息、核销时间、核销状态</li>
+            <li>支持分页显示和多标签页管理</li>
+        </ul>
+    </div>
+
+    <h4>5.2.4 微信优惠券发放汇总统计</h4>
+    <div class="highlight-box">
+        <p><strong>原型链接：</strong></p>
+        <div class="code-block">
+            <a href="微信优惠券发放日汇总.html" class="url-link" target="_blank">
+            微信优惠券发放日汇总.html
+            </a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="微信优惠券发放月汇总.html" class="url-link" target="_blank">
+            微信优惠券发放月汇总.html
+            </a>
+        </div>
+    </div>
+    <div class="success-box">
+        <p><strong>日汇总统计功能：</strong></p>
+        <ul>
+            <li><strong>统计维度：</strong>按自然日进行数据汇总</li>
+            <li><strong>统计指标：</strong>发放总量、发放成功量、发放失败量、发放成功率、发放金额</li>
+            <li><strong>分类统计：</strong>满减券数量、折扣券数量、代金券数量</li>
+            <li><strong>概览卡片：</strong>总发放量、总发放金额、发放成功率、活跃天数</li>
+        </ul>
+        
+        <p><strong>月汇总统计功能：</strong></p>
+        <ul>
+            <li><strong>统计维度：</strong>按自然月进行数据汇总</li>
+            <li><strong>统计指标：</strong>月发放总量、成功率、发放金额、各类型券数量</li>
+            <li><strong>趋势分析：</strong>环比增长率分析</li>
+            <li><strong>概览卡片：</strong>半年发放总量、半年发放金额、平均成功率、月均发放量</li>
+        </ul>
+    </div>
+
+    <h4>5.2.5 微信优惠券核销汇总统计</h4>
+    <div class="highlight-box">
+        <p><strong>原型链接：</strong></p>
+        <div class="code-block">
+            <a href="微信优惠券核销日汇总.html" class="url-link" target="_blank">
+            微信优惠券核销日汇总.html
+            </a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="微信优惠券核销月汇总.html" class="url-link" target="_blank">
+            微信优惠券核销月汇总.html
+            </a>
+        </div>
+    </div>
+    <div class="success-box">
+        <p><strong>日汇总统计功能：</strong></p>
+        <ul>
+            <li><strong>统计维度：</strong>按自然日进行核销数据汇总</li>
+            <li><strong>统计指标：</strong>核销成功量、核销金额、核销率</li>
+            <li><strong>分类统计：</strong>满减券核销、折扣券核销、代金券核销</li>
+            <li><strong>概览卡片：</strong>总核销量、总核销金额、核销率、平均核销金额</li>
+        </ul>
+        
+        <p><strong>月汇总统计功能：</strong></p>
+        <ul>
+            <li><strong>统计维度：</strong>按自然月进行核销数据汇总</li>
+            <li><strong>统计指标：</strong>月核销量、核销金额、核销率、各类型券核销量</li>
+            <li><strong>趋势分析：</strong>环比增长率、核销率变化趋势</li>
+            <li><strong>深度分析：</strong>用户行为分析、商户核销分布</li>
+        </ul>
+    </div>
+
+    <h4>5.2.6 查询功能技术特性</h4>
+    <div class="highlight-box">
+        <p><strong>用户体验设计：</strong></p>
+        <ul>
+            <li><strong>多标签页管理：</strong>支持同时打开多个查询页面，提高操作效率</li>
+            <li><strong>智能分页：</strong>支持5/10/20/50/100条每页显示选项</li>
+            <li><strong>实时统计：</strong>查询结果显示总记录数和当前页范围</li>
+            <li><strong>响应式设计：</strong>适配不同屏幕尺寸的终端设备</li>
+        </ul>
+        
+        <p><strong>查询性能优化：</strong></p>
+        <ul>
+            <li><strong>索引优化：</strong>基于查询字段建立数据库索引</li>
+            <li><strong>分页查询：</strong>避免大数据量查询影响系统性能</li>
+            <li><strong>缓存机制：</strong>热点查询数据缓存，提升查询速度</li>
+            <li><strong>异步加载：</strong>大数据量统计支持异步处理</li>
+        </ul>
+        
+        <p><strong>数据安全控制：</strong></p>
+        <ul>
+            <li><strong>权限控制：</strong>基于银行机构的数据权限隔离</li>
+            <li><strong>操作日志：</strong>记录所有查询操作的审计日志</li>
+            <li><strong>敏感信息脱敏：</strong>OpenID等敏感信息部分脱敏显示</li>
+            <li><strong>导出限制：</strong>大批量数据导出需要审批流程</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 云数惠权益营销平台微信优惠券服务接入项目</p>
+        <p>本文档包含项目完整的功能需求、技术规范和实施计划</p>
+    </div>
+</body>
+</html> 
