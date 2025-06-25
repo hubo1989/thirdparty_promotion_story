@@ -18,13 +18,13 @@
     <style>
         body { 
             font-family: '宋体', SimSun, serif; 
-            font-size: 12pt; 
+            font-size: 14pt; 
             line-height: 1.6; 
-            margin: 1in;
+            margin: 1in 10% 1in 10%;
             background: white;
         }
         h1 { 
-            font-size: 18pt; 
+            font-size: 20pt; 
             color: #2c3e50; 
             border-bottom: 2px solid #007bff; 
             padding-bottom: 10pt; 
@@ -33,21 +33,21 @@
             page-break-after: avoid;
         }
         h2 { 
-            font-size: 16pt; 
+            font-size: 18pt; 
             color: #007bff; 
             margin-top: 20pt; 
             margin-bottom: 10pt;
             page-break-after: avoid;
         }
         h3 { 
-            font-size: 14pt; 
+            font-size: 16pt; 
             color: #495057; 
             margin-top: 15pt; 
             margin-bottom: 8pt;
             page-break-after: avoid;
         }
         h4 { 
-            font-size: 12pt; 
+            font-size: 14pt; 
             color: #6c757d; 
             margin-top: 10pt; 
             margin-bottom: 6pt;
@@ -69,7 +69,7 @@
             border-collapse: collapse; 
             width: 100%; 
             margin: 10pt 0; 
-            font-size: 10pt;
+            font-size: 12pt;
         }
         th, td { 
             border: 1pt solid #000; 
@@ -86,7 +86,7 @@
             border: 1pt solid #ccc; 
             padding: 10pt; 
             font-family: 'Courier New', monospace; 
-            font-size: 10pt;
+            font-size: 12pt;
             margin: 10pt 0;
         }
         .highlight-box { 
@@ -115,7 +115,7 @@
         }
         .meta { 
             color: #666; 
-            font-size: 10pt; 
+            font-size: 12pt; 
             margin-top: 10pt;
         }
         .footer { 
@@ -124,14 +124,14 @@
             border-top: 2pt solid #ccc; 
             padding-top: 20pt; 
             color: #666; 
-            font-size: 10pt;
+            font-size: 12pt;
         }
         .api-endpoint { 
             background-color: #28a745; 
             color: white; 
             padding: 4pt 8pt; 
             font-family: 'Courier New', monospace; 
-            font-size: 10pt;
+            font-size: 12pt;
         }
         .parameter-list { 
             background-color: #f8f9fa; 
@@ -143,13 +143,13 @@
             color: #0066cc;
             text-decoration: underline;
             font-family: 'Courier New', monospace;
-            font-size: 10pt;
+            font-size: 12pt;
         }
         @page {
-            margin: 1in;
+            margin: 1in 10% 1in 10%;
         }
         @media print {
-            body { margin: 0; }
+            body { margin: 1in 10% 1in 10%; }
         }
     </style>
 </head>
@@ -193,7 +193,7 @@
         </div>
         
         <p><strong>简化流程概述：</strong></p>
-        <p>用户 → 接入方系统 → 银行营销系统 → 我方系统 → 云数惠 → 微信</p>
+        <p>用户 → 接入方系统 → 我方系统 → 云数惠 → 微信</p>
     </div>
 
     <h3>2.2 接入节点：</h3>
@@ -230,7 +230,7 @@
     <h3>3.2 业务流程</h3>
     
     <h4>3.2.1 发券流程</h4>
-    <p>线下创建优惠券，优惠券信息填入联合营销平台——活动编码(营销平台提供)：batchCode；活动编码关联主题活动ID。</p>
+    <p>线下创建优惠券，优惠券信息填入联合营销平台——活动编码(营销平台提供即微信活动批次号)：batchCode；活动编码关联主题活动ID。</p>
     
     <div class="code-block">
         <strong>用户 → 接入方系统 → 我方系统 → 云数惠 → 微信</strong>
@@ -262,7 +262,7 @@
             </li>
             <li><strong>云数惠处理：</strong>云数惠向微信平台发起优惠券发放</li>
             <li><strong>结果返回：</strong>微信平台返回发放结果给云数惠</li>
-            <li><strong>异步保存：</strong>云数惠异步保存发放记录</li>
+            <li><strong>同步保存：</strong>同步保存发放记录</li>
         </ol>
         
         <strong>第三阶段：回调与查询</strong>
@@ -304,8 +304,14 @@
         https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi
         </a>
     </div>
-    
-    <p>接收云数惠回调请求后，更新明细状态，转发通知到合作银行</p>
+    <h3>4.3 数据查询</h3>
+    <p><strong>接口文档：</strong></p>
+    <div class="code-block">
+        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv" class="url-link">
+            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv
+        </a>
+    </div> 
+    <p>接通发放结果查询接口，用于对账</p>
 
     <h3>4.3 数据存储要求</h3>
     <div class="success-box">
@@ -354,19 +360,18 @@
 
     <h4>5.2.1 数据查询功能菜单</h4>
     <div class="highlight-box">
-        <p><strong>数据中心模块包含以下查询功能：</strong></p>
+        <p><strong>数据中心模块新增以下查询功能：</strong></p>
         <ul>
-            <li><strong>实时交易数据查询：</strong>实时查询交易数据状态</li>
             <li><strong>微信优惠券发放明细查询：</strong>详细的优惠券发放记录查询</li>
             <li><strong>微信优惠券核销明细查询：</strong>详细的优惠券核销记录查询</li>
-            <li><strong>微信优惠券发放日汇总：</strong>按日统计的发放数据汇总</li>
+         <!--     <li><strong>微信优惠券发放日汇总：</strong>按日统计的发放数据汇总</li>
             <li><strong>微信优惠券发放月汇总：</strong>按月统计的发放数据汇总</li>
             <li><strong>微信优惠券核销日汇总：</strong>按日统计的核销数据汇总</li>
             <li><strong>微信优惠券核销月汇总：</strong>按月统计的核销数据汇总</li>
             <li><strong>优惠券统计报表：</strong>综合统计分析报表</li>
             <li><strong>银行发券明细：</strong>银行维度的发券详情</li>
             <li><strong>活动统计汇总：</strong>活动维度的数据统计</li>
-            <li><strong>数据导出管理：</strong>支持数据批量导出</li>
+            <li><strong>数据导出管理：</strong>支持数据批量导出</li> -->
         </ul>
     </div>
 
@@ -432,6 +437,7 @@
         </ul>
     </div>
 
+    <!-- 
     <h4>5.2.4 微信优惠券发放汇总统计</h4>
     <div class="highlight-box">
         <p><strong>原型链接：</strong></p>
@@ -493,8 +499,9 @@
             <li><strong>深度分析：</strong>用户行为分析、商户核销分布</li>
         </ul>
     </div>
+    -->
 
-    <h4>5.2.6 查询功能技术特性</h4>
+    <h4>5.2.4 查询功能技术特性</h4>
     <div class="highlight-box">
         <p><strong>用户体验设计：</strong></p>
         <ul>
@@ -521,9 +528,5 @@
         </ul>
     </div>
 
-    <div class="footer">
-        <p>© 2024 云数惠权益营销平台微信优惠券服务接入项目</p>
-        <p>本文档包含项目完整的功能需求、技术规范和实施计划</p>
-    </div>
 </body>
 </html> 
