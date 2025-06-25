@@ -252,15 +252,8 @@
         
         <strong>第二阶段：优惠券发放</strong>
         <ol start="4">
-            <li><strong>API调用准备：</strong>银行营销系统准备发券参数</li>
-            <li><strong>发券请求：</strong>调用云数惠发放接口
-                <div class="parameter-list">
-                    "openId": "oPa1U6a_nhfiR-5bdeZrnxzlx3_k",<br>
-                    "batchCode": "1017578611540230144",<br>
-                    "callTradeNo": "1731749631383",<br>
-                    "writeOffNotify": "https://t-bmk-market.dshytest.com/xxx"
-                </div>
-            </li>
+            <li><strong>API调用准备：</strong>银行营销系统准备发券参数（详细参数说明见技术需求章节）</li>
+            <li><strong>发券请求：</strong>调用云数惠发放接口</li>
             <li><strong>云数惠处理：</strong>云数惠向微信平台发起优惠券发放</li>
             <li><strong>结果返回：</strong>微信平台返回发放结果给云数惠</li>
             <li><strong>同步保存：</strong>同步保存发放记录</li>
@@ -275,8 +268,135 @@
     </div>
 
     <h1>4. 技术需求</h1>
+
+    <h3>4.1 接口封装架构</h3>
+    <div class="highlight-box">
+        <p><strong>接口封装设计：</strong>我方系统作为中间层，对外提供标准化接口给合作银行，对内对接云数惠API，实现参数转换、权限控制、数据记录等功能。</p>
+    </div>
+
+    <h4>4.1.1 银行请求我方系统接口</h4>
+    <div class="success-box">
+        <p><strong>接口名称：</strong>优惠券发放接口</p>
+        <p><strong>接口用途：</strong>银行营销系统调用我方系统发放微信优惠券</p>
+        
+        <div class="parameter-list">
+            <p><strong>请求参数：</strong></p>
+            <ul>
+                <li><strong>bankId</strong>: 合作银行唯一标识，用于区分调用方银行，支持后续基于银行ID与主题活动ID的权限鉴权</li>
+                <li><strong>openId</strong>: 微信用户唯一标识，通过H5授权页面获取（透传给云数惠）</li>
+                <li><strong>batchCode</strong>: 活动编码/微信活动批次号，关联主题活动ID（透传给云数惠）</li>
+                <li><strong>callTradeNo</strong>: 银行方交易流水号，用于幂等性控制（记录后关联，调用云数惠时生成我方系统流水号）</li>
+                <li><strong>writeOffNotify</strong>: 银行方核销回调地址（记录后关联，调用云数惠时使用我方系统回调地址）</li>
+            </ul>
+        </div>
+        
+        <div class="parameter-list">
+            <p><strong>处理逻辑：</strong></p>
+            <ol>
+                <li><strong>权限校验：</strong>验证bankId与batchCode关联的主题活动权限</li>
+                <li><strong>参数校验：</strong>验证openId格式、batchCode有效性等</li>
+                <li><strong>数据记录：</strong>记录银行方callTradeNo和writeOffNotify</li>
+                <li><strong>流水号生成：</strong>生成我方系统交易流水号</li>
+                <li><strong>调用云数惠：</strong>使用转换后的参数调用云数惠发放接口</li>
+                <li><strong>结果处理：</strong>处理云数惠返回结果，记录发放明细</li>
+            </ol>
+        </div>
+    </div>
+
+    <h4>4.1.2 我方系统调用云数惠接口</h4>
+    <div class="success-box">
+        <p><strong>接口名称：</strong>云数惠优惠券发放接口</p>
+        <p><strong>接口用途：</strong>我方系统调用云数惠API发放微信优惠券</p>
+        
+        <div class="parameter-list">
+            <p><strong>请求参数（向云数惠发送）：</strong></p>
+            <ul>
+                <li><strong>openId</strong>: 微信用户唯一标识（从银行请求透传）</li>
+                <li><strong>batchCode</strong>: 活动编码/微信活动批次号（从银行请求透传）</li>
+                <li><strong>callTradeNo</strong>: 我方系统生成的交易流水号（非银行方流水号）</li>
+                <li><strong>writeOffNotify</strong>: 我方系统的核销回调地址（非银行回调地址）</li>
+            </ul>
+        </div>
+        
+        <div class="code-block">
+            <strong>示例请求参数：</strong><br>
+            "openId": "oPa1U6a_nhfiR-5bdeZrnxzlx3_k",<br>
+            "batchCode": "1017578611540230144",<br>
+            "callTradeNo": "SYS1731749631383",<br>
+            "writeOffNotify": "https://our-system.com/callback/writeoff"
+        </div>
+    </div>
+
+    <h4>4.1.3 回调处理接口（异步架构）</h4>
+    <div class="success-box">
+        <p><strong>接口名称：</strong>核销回调处理接口</p>
+        <p><strong>接口用途：</strong>接收云数惠的核销回调通知，采用异步架构处理银行通知</p>
+        <p><strong>架构特点：</strong>接收云数惠回调后立即返回处理结果，后续异步处理合作银行通知逻辑</p>
+        
+        <div class="parameter-list">
+            <p><strong>同步处理阶段：</strong></p>
+            <ol>
+                <li><strong>接收回调：</strong>接收云数惠发送的核销通知</li>
+                <li><strong>数据校验：</strong>校验回调数据完整性和合法性</li>
+                <li><strong>立即响应：</strong>向云数惠返回处理确认，确保回调链路畅通</li>
+            </ol>
+        </div>
+        
+        <div class="parameter-list">
+            <p><strong>异步处理阶段：</strong></p>
+            <ol>
+                <li><strong>数据解析：</strong>解析回调数据，提取核销信息和关联的原始请求记录</li>
+                <li><strong>更新记录：</strong>更新我方系统的核销明细记录状态</li>
+                <li><strong>参数转换：</strong>将云数惠回调参数转换为下游合作银行所需的请求格式</li>
+                <li><strong>银行通知：</strong>根据原始请求记录中的bankId和writeOffNotify地址，异步向对应银行发送核销通知</li>
+                <li><strong>通知重试：</strong>实现通知失败重试机制，确保银行能够接收到核销状态变更</li>
+                <li><strong>日志记录：</strong>记录完整的回调处理和银行通知日志，便于问题排查</li>
+            </ol>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>异步架构优势：</strong></p>
+            <ul>
+                <li><strong>响应速度：</strong>云数惠回调立即得到响应，避免超时重发</li>
+                <li><strong>系统解耦：</strong>云数惠回调处理与银行通知解耦，提高系统稳定性</li>
+                <li><strong>容错能力：</strong>银行系统异常不影响云数惠回调确认</li>
+                <li><strong>重试保障：</strong>异步重试机制确保银行最终能收到通知</li>
+            </ul>
+        </div>
+    </div>
+
+    <h4>4.1.4 数据查询接口封装</h4>
+    <div class="success-box">
+        <p><strong>接口用途：</strong>为银行营销平台提供发放结果查询服务</p>
+        <p><strong>查询范围：</strong>仅支持发放结果查询，核销数据基于回调机制获取，不提供查询接口</p>
+        
+        <div class="parameter-list">
+            <p><strong>支持的查询接口：</strong></p>
+            <ul>
+                <li><strong>发放明细查询：</strong>根据银行ID、活动编码等条件查询发放记录和发放状态</li>
+                <li><strong>发放结果对账：</strong>调用云数惠查询接口进行数据对账，确保数据一致性</li>
+            </ul>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>查询限制说明：</strong></p>
+            <ul>
+                <li><strong>核销数据：</strong>核销状态变更通过回调机制实时更新，不支持主动查询接口</li>
+                <li><strong>数据来源：</strong>查询数据来源于我方系统存储</li>
+            </ul>
+        </div>
+        
+        <div class="parameter-list">
+            <p><strong>权限控制：</strong></p>
+            <ul>
+                <li>基于bankId进行数据权限隔离</li>
+                <li>银行只能查询自己发放的优惠券数据</li>
+                <li>后续支持基于银行ID与主题活动ID的权限鉴权</li>
+            </ul>
+        </div>
+    </div>
     
-    <h3>4.1 云数惠API接口</h3>
+    <h3>4.2 云数惠API接口</h3>
     <p><strong>请求格式及加密方式说明文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffipkojor8up" class="url-link">
@@ -298,14 +418,15 @@
         </a>
     </div>
 
-    <h3>4.2 数据回调</h3>
+    <h3>4.3 云数惠数据回调</h3>
     <p><strong>接口文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi" class="url-link">
         https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi
         </a>
     </div>
-    <h3>4.3 数据查询</h3>
+    
+    <h3>4.4 云数惠数据查询</h3>
     <p><strong>接口文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv" class="url-link">
@@ -314,7 +435,7 @@
     </div> 
     <p>接通发放结果查询接口，用于对账</p>
 
-    <h3>4.3 数据存储要求</h3>
+    <h3>4.5 数据存储要求</h3>
     <div class="success-box">
         <ul>
             <li><strong>按活动编码：</strong>发放成功、核销成功数量统计</li>
