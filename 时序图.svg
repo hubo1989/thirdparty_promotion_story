@@ -17,7 +17,7 @@
   <text x="110" y="85" class="participant">领券页面</text>
   
   <rect x="220" y="60" width="120" height="40" class="participant-box"/>
-  <text x="280" y="85" class="participant">银行营销系统</text>
+  <text x="280" y="85" class="participant">行方系统</text>
   
   <rect x="390" y="60" width="120" height="40" class="participant-box"/>
   <text x="450" y="75" class="participant">我方系统</text>
