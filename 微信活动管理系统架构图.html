@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信活动管理系统架构图 - 可交互版本</title> - 架构设计图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .architecture-container {
+            padding: 40px;
+            background: #fafbfc;
+        }
+
+        .layer {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .layer-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .layer-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: #4a90e2;
+            border-radius: 2px;
+        }
+
+        .module {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #4a90e2;
+        }
+
+        .module.active {
+            border-color: #4a90e2;
+            background: #f8fbff;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .module-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .module-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .module-description {
+            font-size: 14px;
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .module-features {
+            display: none;
+        }
+
+        .module.expanded .module-features {
+            display: block;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 6px 0;
+            font-size: 13px;
+            color: #5a6c7d;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .connection-line {
+            stroke: #bdc3c7;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .connection-line.active {
+            stroke: #4a90e2;
+            stroke-width: 3;
+            opacity: 1;
+            stroke-dasharray: none;
+        }
+
+        .data-flow {
+            stroke: #e74c3c;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .data-flow.show {
+            opacity: 1;
+        }
+
+        .legend {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .legend-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #5a6c7d;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: #95a5a6;
+        }
+
+        .btn.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .architecture-container {
+                padding: 20px;
+            }
+            
+            .module {
+                margin: 5px;
+                padding: 15px;
+            }
+            
+            .legend-items {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .module.highlight {
+            animation: pulse 1s ease-in-out;
+        }
+
+        /* 工具提示 */
+        .tooltip {
+            position: absolute;
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>微信活动管理系统架构设计</h1>
+            <p>基于HTML+SVG的交互式系统架构图 | 点击模块查看详细信息</p>
+        </div>
+
+        <div class="architecture-container">
+            <!-- 控制按钮 -->
+            <div class="controls">
+                <button class="btn" onclick="showDataFlow()">显示数据流</button>
+                <button class="btn secondary" onclick="hideDataFlow()">隐藏数据流</button>
+                <button class="btn" onclick="expandAllModules()">展开所有模块</button>
+                <button class="btn secondary" onclick="collapseAllModules()">收起所有模块</button>
+            </div>
+
+            <!-- SVG架构图 -->
+            <svg width="100%" height="800" viewBox="0 0 1200 800" style="background: #f8f9fa; border-radius: 12px;">
+                <!-- 定义箭头标记 -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+                    </marker>
+                </defs>
+
+                <!-- 表现层 -->
+                <g class="presentation-layer" transform="translate(0, 50)">
+                    <text x="50" y="30" class="layer-title" style="font-size: 18px; font-weight: 600; fill: #2c3e50;">表现层 (Presentation Layer)</text>
+                    
+                    <!-- 用户界面模块 -->
+                    <g class="ui-module" data-module="ui" onclick="toggleModule(this)">
+                        <rect x="100" y="50" width="200" height="80" rx="12" fill="#3498db" stroke="#2980b9" stroke-width="2" class="module-rect"/>
+                        <text x="200" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">用户界面层</text>
+                        <text x="200" y="100" text-anchor="middle" fill="white" font-size="12">HTML + CSS + JavaScript</text>
+                    </g>
+
+                    <!-- 组件库模块 -->
+                    <g class="component-module" data-module="components" onclick="toggleModule(this)">
+                        <rect x="350" y="50" width="200" height="80" rx="12" fill="#9b59b6" stroke="#8e44ad" stroke-width="2" class="module-rect"/>
+                        <text x="450" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">组件库</text>
+                        <text x="450" y="100" text-anchor="middle" fill="white" font-size="12">表格 | 表单 | 弹窗 | 按钮</text>
+                    </g>
+
+                    <!-- 路由管理 -->
+                    <g class="router-module" data-module="router" onclick="toggleModule(this)">
+                        <rect x="600" y="50" width="200" height="80" rx="12" fill="#1abc9c" stroke="#16a085" stroke-width="2" class="module-rect"/>
+                        <text x="700" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">路由管理</text>
+                        <text x="700" y="100" text-anchor="middle" fill="white" font-size="12">页面导航 | 权限控制</text>
+                    </g>
+                </g>
+
+                <!-- 业务层 -->
+                <g class="business-layer" transform="translate(0, 220)">
+                    <text x="50" y="30" class="layer-title" style="font-size: 18px; font-weight: 600; fill: #2c3e50;">业务层 (Business Layer)</text>
+                    
+                    <!-- 活动管理模块 -->
+                    <g class="activity-module" data-module="activity" onclick="toggleModule(this)">
+                        <rect x="80" y="50" width="180" height="100" rx="12" fill="#e67e22" stroke="#d35400" stroke-width="2" class="module-rect"/>
+                        <text x="170" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">活动管理</text>
+                        <text x="170" y="100" text-anchor="middle" fill="white" font-size="11">创建 | 编辑 | 查询</text>
+                        <text x="170" y="115" text-anchor="middle" fill="white" font-size="11">状态管理 | 批量操作</text>
+                    </g>
+
+                    <!-- 数据验证模块 -->
+                    <g class="validation-module" data-module="validation" onclick="toggleModule(this)">
+                        <rect x="300" y="50" width="180" height="100" rx="12" fill="#e74c3c" stroke="#c0392b" stroke-width="2" class="module-rect"/>
+                        <text x="390" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">数据验证</text>
+                        <text x="390" y="100" text-anchor="middle" fill="white" font-size="11">表单验证 | 业务规则</text>
+                        <text x="390" y="115" text-anchor="middle" fill="white" font-size="11">数据格式 | 权限检查</text>
+                    </g>
+
+                    <!-- 状态管理模块 -->
+                    <g class="state-module" data-module="state" onclick="toggleModule(this)">
+                        <rect x="520" y="50" width="180" height="100" rx="12" fill="#f39c12" stroke="#e67e22" stroke-width="2" class="module-rect"/>
+                        <text x="610" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">状态管理</text>
+                        <text x="610" y="100" text-anchor="middle" fill="white" font-size="11">全局状态 | 缓存</text>
+                        <text x="610" y="115" text-anchor="middle" fill="white" font-size="11">事件总线 | 数据同步</text>
+                    </g>
+
+                    <!-- 工具函数模块 -->
+                    <g class="utils-module" data-module="utils" onclick="toggleModule(this)">
+                        <rect x="740" y="50" width="180" height="100" rx="12" fill="#27ae60" stroke="#229954" stroke-width="2" class="module-rect"/>
+                        <text x="830" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">工具函数</text>
+                        <text x="830" y="100" text-anchor="middle" fill="white" font-size="11">日期处理 | 格式化</text>
+                        <text x="830" y="115" text-anchor="middle" fill="white" font-size="11">防抖节流 | 工具类</text>
+                    </g>
+                </g>
+
+                <!-- 数据层 -->
+                <g class="data-layer" transform="translate(0, 420)">
+                    <text x="50" y="30" class="layer-title" style="font-size: 18px; font-weight: 600; fill: #2c3e50;">数据层 (Data Layer)</text>
+                    
+                    <!-- API接口模块 -->
+                    <g class="api-module" data-module="api" onclick="toggleModule(this)">
+                        <rect x="150" y="50" width="200" height="80" rx="12" fill="#34495e" stroke="#2c3e50" stroke-width="2" class="module-rect"/>
+                        <text x="250" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">API接口层</text>
+                        <text x="250" y="100" text-anchor="middle" fill="white" font-size="12">RESTful API | HTTP请求</text>
+                    </g>
+
+                    <!-- 数据缓存模块 -->
+                    <g class="cache-module" data-module="cache" onclick="toggleModule(this)">
+                        <rect x="400" y="50" width="200" height="80" rx="12" fill="#7f8c8d" stroke="#95a5a6" stroke-width="2" class="module-rect"/>
+                        <text x="500" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">数据缓存</text>
+                        <text x="500" y="100" text-anchor="middle" fill="white" font-size="12">LocalStorage | SessionStorage</text>
+                    </g>
+
+                    <!-- 错误处理模块 -->
+                    <g class="error-module" data-module="error" onclick="toggleModule(this)">
+                        <rect x="650" y="50" width="200" height="80" rx="12" fill="#c0392b" stroke="#a93226" stroke-width="2" class="module-rect"/>
+                        <text x="750" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">错误处理</text>
+                        <text x="750" y="100" text-anchor="middle" fill="white" font-size="12">异常捕获 | 错误上报</text>
+                    </g>
+                </g>
+
+                <!-- 基础设施层 -->
+                <g class="infrastructure-layer" transform="translate(0, 580)">
+                    <text x="50" y="30" class="layer-title" style="font-size: 18px; font-weight: 600; fill: #2c3e50;">基础设施层 (Infrastructure Layer)</text>
+                    
+                    <!-- 浏览器API -->
+                    <g class="browser-module" data-module="browser" onclick="toggleModule(this)">
+                        <rect x="100" y="50" width="180" height="80" rx="12" fill="#8e44ad" stroke="#7d3c98" stroke-width="2" class="module-rect"/>
+                        <text x="190" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">浏览器API</text>
+                        <text x="190" y="100" text-anchor="middle" fill="white" font-size="12">DOM | BOM | Storage</text>
+                    </g>
+
+                    <!-- 网络通信 -->
+                    <g class="network-module" data-module="network" onclick="toggleModule(this)">
+                        <rect x="320" y="50" width="180" height="80" rx="12" fill="#16a085" stroke="#138d75" stroke-width="2" class="module-rect"/>
+                        <text x="410" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">网络通信</text>
+                        <text x="410" y="100" text-anchor="middle" fill="white" font-size="12">Fetch API | WebSocket</text>
+                    </g>
+
+                    <!-- 性能监控 -->
+                    <g class="monitor-module" data-module="monitor" onclick="toggleModule(this)">
+                        <rect x="540" y="50" width="180" height="80" rx="12" fill="#d35400" stroke="#ba4a00" stroke-width="2" class="module-rect"/>
+                        <text x="630" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">性能监控</text>
+                        <text x="630" y="100" text-anchor="middle" fill="white" font-size="12">Performance API</text>
+                    </g>
+
+                    <!-- 安全机制 -->
+                    <g class="security-module" data-module="security" onclick="toggleModule(this)">
+                        <rect x="760" y="50" width="180" height="80" rx="12" fill="#922b21" stroke="#7b241c" stroke-width="2" class="module-rect"/>
+                        <text x="850" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="600">安全机制</text>
+                        <text x="850" y="100" text-anchor="middle" fill="white" font-size="12">CSP | HTTPS | XSS防护</text>
+                    </g>
+                </g>
+
+                <!-- 连接线 -->
+                <!-- 表现层到业务层 -->
+                <path class="connection-line" d="M200 180 Q 200 200 170 270" data-connection="ui-activity"/>
+                <path class="connection-line" d="M450 180 Q 450 200 390 270" data-connection="components-validation"/>
+                <path class="connection-line" d="M700 180 Q 700 200 610 270" data-connection="router-state"/>
+
+                <!-- 业务层到数据层 -->
+                <path class="connection-line" d="M170 370 Q 170 400 250 470" data-connection="activity-api"/>
+                <path class="connection-line" d="M390 370 Q 390 400 500 470" data-connection="validation-cache"/>
+                <path class="connection-line" d="M610 370 Q 610 400 750 470" data-connection="state-error"/>
+
+                <!-- 数据层到基础设施层 -->
+                <path class="connection-line" d="M250 550 Q 250 570 190 630" data-connection="api-browser"/>
+                <path class="connection-line" d="M500 550 Q 500 570 410 630" data-connection="cache-network"/>
+                <path class="connection-line" d="M750 550 Q 750 570 630 630" data-connection="error-monitor"/>
+
+                <!-- 数据流线（默认隐藏） -->
+                <path class="data-flow" d="M200 130 Q 300 150 390 270" data-flow="user-input"/>
+                <path class="data-flow" d="M390 320 Q 450 350 500 470" data-flow="validation-cache"/>
+                <path class="data-flow" d="M250 520 Q 350 540 410 630" data-flow="api-network"/>
+            </svg>
+
+            <!-- 模块详情面板 -->
+            <div class="layer">
+                <div class="layer-title">📋 表现层模块</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="module" data-module-detail="ui">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #3498db;">🖥️</div>
+                            <div class="module-title">用户界面层</div>
+                        </div>
+                        <div class="module-description">
+                            负责用户交互界面的渲染和事件处理，采用响应式设计确保多端兼容性。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>响应式布局设计</li>
+                                <li>事件处理机制</li>
+                                <li>DOM操作优化</li>
+                                <li>用户体验增强</li>
+                                <li>无障碍访问支持</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="components">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #9b59b6;">🧩</div>
+                            <div class="module-title">组件库</div>
+                        </div>
+                        <div class="module-description">
+                            提供可复用的UI组件，包括表格、表单、弹窗等，确保界面一致性和开发效率。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>数据表格组件</li>
+                                <li>表单验证组件</li>
+                                <li>模态弹窗组件</li>
+                                <li>按钮和输入框</li>
+                                <li>分页和筛选器</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="router">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #1abc9c;">🗺️</div>
+                            <div class="module-title">路由管理</div>
+                        </div>
+                        <div class="module-description">
+                            管理页面导航和权限控制，提供单页应用的路由功能和用户权限验证。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>页面路由配置</li>
+                                <li>权限验证机制</li>
+                                <li>导航守卫</li>
+                                <li>面包屑导航</li>
+                                <li>历史记录管理</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer">
+                <div class="layer-title">⚙️ 业务层模块</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="module" data-module-detail="activity">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #e67e22;">🎯</div>
+                            <div class="module-title">活动管理</div>
+                        </div>
+                        <div class="module-description">
+                            核心业务模块，处理活动的完整生命周期管理，包括创建、编辑、查询和状态控制。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>活动CRUD操作</li>
+                                <li>状态流转管理</li>
+                                <li>批量操作处理</li>
+                                <li>活动规则配置</li>
+                                <li>数据统计分析</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="validation">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #e74c3c;">✅</div>
+                            <div class="module-title">数据验证</div>
+                        </div>
+                        <div class="module-description">
+                            确保数据完整性和业务规则的正确性，提供前端验证和业务逻辑校验。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>表单字段验证</li>
+                                <li>业务规则检查</li>
+                                <li>数据格式校验</li>
+                                <li>实时验证反馈</li>
+                                <li>错误信息提示</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="state">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #f39c12;">🔄</div>
+                            <div class="module-title">状态管理</div>
+                        </div>
+                        <div class="module-description">
+                            管理应用的全局状态和数据流，确保组件间的数据同步和状态一致性。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>全局状态存储</li>
+                                <li>数据缓存机制</li>
+                                <li>事件总线通信</li>
+                                <li>状态变更监听</li>
+                                <li>数据持久化</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="utils">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #27ae60;">🛠️</div>
+                            <div class="module-title">工具函数</div>
+                        </div>
+                        <div class="module-description">
+                            提供通用的工具函数和辅助方法，提高代码复用性和开发效率。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>日期时间处理</li>
+                                <li>数据格式化</li>
+                                <li>防抖节流函数</li>
+                                <li>深拷贝和合并</li>
+                                <li>类型检查工具</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer">
+                <div class="layer-title">💾 数据层模块</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="module" data-module-detail="api">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #34495e;">🔌</div>
+                            <div class="module-title">API接口层</div>
+                        </div>
+                        <div class="module-description">
+                            封装后端API调用，提供统一的数据接口和请求处理机制。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>RESTful API封装</li>
+                                <li>请求拦截器</li>
+                                <li>响应数据处理</li>
+                                <li>错误重试机制</li>
+                                <li>请求取消功能</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="cache">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #7f8c8d;">💿</div>
+                            <div class="module-title">数据缓存</div>
+                        </div>
+                        <div class="module-description">
+                            实现客户端数据缓存，减少网络请求，提升用户体验和应用性能。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>内存缓存管理</li>
+                                <li>本地存储缓存</li>
+                                <li>缓存过期策略</li>
+                                <li>缓存更新机制</li>
+                                <li>缓存清理功能</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module" data-module-detail="error">
+                        <div class="module-header">
+                            <div class="module-icon" style="background: #c0392b;">🚨</div>
+                            <div class="module-title">错误处理</div>
+                        </div>
+                        <div class="module-description">
+                            统一的错误处理和异常捕获机制，确保应用的稳定性和用户体验。
+                        </div>
+                        <div class="module-features">
+                            <ul class="feature-list">
+                                <li>全局错误捕获</li>
+                                <li>错误日志记录</li>
+                                <li>用户友好提示</li>
+                                <li>错误上报机制</li>
+                                <li>降级处理策略</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图例说明 -->
+            <div class="legend">
+                <div class="legend-title">🎨 图例说明</div>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <span>表现层组件</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e67e22;"></div>
+                        <span>业务逻辑层</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #34495e;"></div>
+                        <span>数据访问层</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #8e44ad;"></div>
+                        <span>基础设施层</span>
+                    </div>
+                    <div class="legend-item">
+                        <div style="width: 20px; height: 2px; background: #bdc3c7; margin-right: 8px;"></div>
+                        <span>模块依赖关系</span>
+                    </div>
+                    <div class="legend-item">
+                        <div style="width: 20px; height: 2px; background: #e74c3c; margin-right: 8px;"></div>
+                        <span>数据流向</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 工具提示 -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 模块交互功能
+        function toggleModule(element) {
+            const moduleId = element.getAttribute('data-module');
+            const detailModule = document.querySelector(`[data-module-detail="${moduleId}"]`);
+            
+            // 移除其他模块的激活状态
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            document.querySelectorAll('g[data-module]').forEach(g => {
+                g.querySelector('.module-rect').setAttribute('stroke-width', '2');
+            });
+            
+            // 激活当前模块
+            if (detailModule) {
+                detailModule.classList.add('active');
+                detailModule.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            // 高亮SVG中的模块
+            element.querySelector('.module-rect').setAttribute('stroke-width', '4');
+            
+            // 高亮相关连接线
+            highlightConnections(moduleId);
+        }
+
+        // 高亮连接线
+        function highlightConnections(moduleId) {
+            document.querySelectorAll('.connection-line').forEach(line => {
+                const connection = line.getAttribute('data-connection');
+                if (connection && connection.includes(moduleId)) {
+                    line.classList.add('active');
+                } else {
+                    line.classList.remove('active');
+                }
+            });
+        }
+
+        // 显示数据流
+        function showDataFlow() {
+            document.querySelectorAll('.data-flow').forEach(flow => {
+                flow.classList.add('show');
+            });
+        }
+
+        // 隐藏数据流
+        function hideDataFlow() {
+            document.querySelectorAll('.data-flow').forEach(flow => {
+                flow.classList.remove('show');
+            });
+        }
+
+        // 展开所有模块
+        function expandAllModules() {
+            document.querySelectorAll('.module').forEach(module => {
+                module.classList.add('expanded');
+            });
+        }
+
+        // 收起所有模块
+        function collapseAllModules() {
+            document.querySelectorAll('.module').forEach(module => {
+                module.classList.remove('expanded', 'active');
+            });
+            
+            // 重置SVG状态
+            document.querySelectorAll('g[data-module] .module-rect').forEach(rect => {
+                rect.setAttribute('stroke-width', '2');
+            });
+            
+            document.querySelectorAll('.connection-line').forEach(line => {
+                line.classList.remove('active');
+            });
+        }
+
+        // 模块点击展开功能
+        document.querySelectorAll('.module').forEach(module => {
+            module.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+                
+                // 添加高亮动画
+                this.classList.add('highlight');
+                setTimeout(() => {
+                    this.classList.remove('highlight');
+                }, 1000);
+            });
+        });
+
+        // 工具提示功能
+        const tooltip = document.getElementById('tooltip');
+        
+        document.querySelectorAll('g[data-module]').forEach(group => {
+            group.addEventListener('mouseenter', function(e) {
+                const moduleId = this.getAttribute('data-module');
+                const moduleNames = {
+                    'ui': '用户界面层：负责页面渲染和用户交互',
+                    'components': '组件库：提供可复用的UI组件',
+                    'router': '路由管理：处理页面导航和权限控制',
+                    'activity': '活动管理：核心业务逻辑处理',
+                    'validation': '数据验证：确保数据完整性和业务规则',
+                    'state': '状态管理：管理应用全局状态',
+                    'utils': '工具函数：提供通用工具方法',
+                    'api': 'API接口：封装后端数据接口',
+                    'cache': '数据缓存：提升应用性能',
+                    'error': '错误处理：统一异常处理机制',
+                    'browser': '浏览器API：基础浏览器功能',
+                    'network': '网络通信：处理网络请求',
+                    'monitor': '性能监控：应用性能监控',
+                    'security': '安全机制：应用安全保障'
+                };
+                
+                tooltip.textContent = moduleNames[moduleId] || '模块信息';
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 30 + 'px';
+                tooltip.classList.add('show');
+            });
+            
+            group.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('show');
+            });
+        });
+
+        // 初始化动画
+        window.addEventListener('load', function() {
+            // 添加加载动画
+            document.querySelectorAll('.module').forEach((module, index) => {
+                setTimeout(() => {
+                    module.style.opacity = '1';
+                    module.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // 设置初始样式
+        document.querySelectorAll('.module').forEach(module => {
+            module.style.opacity = '0';
+            module.style.transform = 'translateY(20px)';
+            module.style.transition = 'all 0.5s ease';
+        });
+    </script>
+</body>
+</html>
