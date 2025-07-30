@@ -714,121 +714,111 @@
             <section id="ui-design">
                 <h2>2. 界面设计</h2>
                 
-                <h3>2.1 系统架构图</h3>
-                <div id="system-architecture-chart" class="chart-container">
-                    <div class="chart-placeholder">图表加载中...</div>
+                <h3>2.1 产品原型预览</h3>
+                <p>以下是微信活动管理系统的界面原型预览，展示了主要功能界面和交互设计：</p>
+                
+                <div class="prototype-preview">
+                    <div class="prototype-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI2MDAiIGZpbGw9IiNlZWUiLz4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjNGE5MGUyIi8+CiAgPHRleHQgeD0iODAiIHk9IjM1IiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5KV1QgQXV0aGVudGljYXRpb24gU3lzdGVtPC90ZXh0PgogIDxyZWN0IHg9IjIwIiB5PSI4MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2RkZCIgcng9IjQiLz4KICA8dGV4dCB4PSI4MCIgeT0iMTA1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzMzMiPlVzZXIgTWFuYWdlbWVudDwvdGV4dD4KICA8cmVjdCB4PSIyMCIgeT0iMTQwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZGRkIiByeD0iNCIvPgogIDx0ZXh0IHg9IjgwIiB5PSIxNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+QWN0aXZpdGllczwvdGV4dD4KICA8cmVjdCB4PSIyMCIgeT0iMjAwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZGRkIiByeD0iNCIvPgogIDx0ZXh0IHg9IjgwIiB5PSIyMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+UmVwb3J0czwvdGV4dD4KICA8cmVjdCB4PSIxODAiIHk9IjgweiIgd2lkdGg9IjU4MCIgaGVpZ2h0PSI0ODAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2NjYyIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHJlY3QgeD0iMjEwIiB5PSIxMTAiIHdpZHRoPSI1MjAiIGhlaWdodD0iNDAiIGZpbGw9IiNlZWUiIHJ4PSI0Ii8+CiAgPHRleHQgeD0iMjMwIiB5PSIxMzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzMzMyI+Q3JlYXRlIEFjdGl2aXR5PC90ZXh0PgogIDxyZWN0IHg9IjIxwKzIwIiB5PSIxNjAiIHdpZHRoPSI1MjAiIGhlaWdodD0iMzYwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNjY2MiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxyZWN0IHg9IjI0MCIgeT0iMTkwIiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZTVlNWU1Ii8+CiAgPHRleHQgeD0iMjUwIiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyI+QWN0aXZpdHkgTGlzdDwvdGV4dD4KICA8cmVjdCB4PSI3MjAiIHk9IjE5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZTVlNWU1Ii8+CiAgPHRleHQgeD0iNzMwIiB5PSIyMTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzMzMyI+RmlsdGVyPC90ZXh0PgogIDxyZWN0IHg9IjI0MCIgeT0iMjMwIiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjI4MCIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjY2NjIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8cmVjdCB4PSI0NDAiIHk9IjI3MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjNGE5MGUyIi8+CiAgPHRleHQgeD0iNDUwIiB5PSIyOTAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0id2hpdGUiPlZpZXc8L3RleHQ+CiAgPHJlY3QgeD0iNTIwIiB5PSIyNzAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0iIzRhOTBlMiIvPgogIDx0ZXh0IHg9IjUzMCIgeT0iMjkwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIj5FZGl0PC90ZXh0PgogIDxyZWN0IHg9IjYwMCIgeT0iMjcwIiB3aWR0aD0iNjAiIGhlaWdodD0iMzAiIGZpbGw9IiM0YTkxZTIiLz4KICA8dGV4dCB4PSI2MTAiIHk9IjI5MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSI+RGVsZXRlPC90ZXh0Pgo8L3N2Zz4=" 
+                             alt="产品原型预览" class="prototype-image">
+                        <div class="prototype-overlay">
+                            <a href="wxpromotionprototype.html" target="_blank" class="prototype-link">点击查看详情</a>
+                        </div>
+                    </div>
+                    <div class="prototype-actions">
+                        <a href="wxpromotionprototype.html" target="_blank" class="btn btn-primary">查看完整原型</a>
+                        <a href="https://github.com/hubo1989/yunshuhui-wechat-coupon/blob/main/wxpromotionprototype.html" target="_blank" class="btn btn-secondary">产品原型链接</a>
+                    </div>
                 </div>
-                <script>
-                    function initSystemArchitectureChart() {
-                        var chartDom = document.getElementById('system-architecture-chart');
-                        if (!chartDom) return;
-                        
-                        // 检查ECharts是否加载成功
-                        if (typeof echarts === 'undefined') {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
-                            return;
-                        }
-                        
-                        try {
-                            // 清空容器内容
-                            chartDom.innerHTML = '';
-                            
-                            var myChart = echarts.init(chartDom);
-                            
-                            myChart.setOption({
-                                title: {
-                                    text: '系统架构图'
-                                },
-                                series: [{
-                                    type: 'graph',
-                                    layout: 'force',
-                                    symbolSize: 60,
-                                    roam: false, // 禁用缩放和漫游
-                                    focusNodeAdjacency: true,
-                                    draggable: false, // 禁用节点拖拽
-                                    force: {
-                                        repulsion: 1500,
-                                        edgeLength: [100, 200]
-                                    },
-                                    label: {
-                                        show: true
-                                    },
-                                    edgeSymbol: ['circle', 'arrow'],
-                                    edgeSymbolSize: [4, 10],
-                                    data: [{
-                                        name: '前端',
-                                        itemStyle: { color: '#66CCFF' }
-                                    }, {
-                                        name: 'API网关',
-                                        itemStyle: { color: '#FF9966' }
-                                    }, {
-                                        name: '活动管理服务',
-                                        itemStyle: { color: '#66FF66' }
-                                    }, {
-                                        name: '权限服务',
-                                        itemStyle: { color: '#66FF66' }
-                                    }, {
-                                        name: '数据服务',
-                                        itemStyle: { color: '#66FF66' }
-                                    }, {
-                                        name: 'MySQL',
-                                        itemStyle: { color: '#CCCCCC' }
-                                    }, {
-                                        name: 'Redis',
-                                        itemStyle: { color: '#CCCCCC' }
-                                    }],
-                                    links: [{
-                                        source: '前端',
-                                        target: 'API网关'
-                                    }, {
-                                        source: 'API网关',
-                                        target: '活动管理服务'
-                                    }, {
-                                        source: 'API网关',
-                                        target: '权限服务'
-                                    }, {
-                                        source: 'API网关',
-                                        target: '数据服务'
-                                    }, {
-                                        source: '活动管理服务',
-                                        target: 'MySQL'
-                                    }, {
-                                        source: '权限服务',
-                                        target: 'MySQL'
-                                    }, {
-                                        source: '数据服务',
-                                        target: 'MySQL'
-                                    }, {
-                                        source: '活动管理服务',
-                                        target: 'Redis'
-                                    }],
-                                    lineStyle: {
-                                        opacity: 0.9,
-                                        width: 2,
-                                        curveness: 0
-                                    }
-                                }]
-                            });
-                            
-                            // 监听窗口大小变化，自适应图表
-                            window.addEventListener('resize', function() {
-                                myChart.resize();
-                            });
-                        } catch (e) {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
-                        }
+                
+                <style>
+                    .prototype-preview {
+                        text-align: center;
+                        margin: 20px 0;
                     }
                     
-                    // 确保DOM加载完成后初始化图表
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // 延迟执行以确保ECharts完全加载
-                            setTimeout(initSystemArchitectureChart, 100);
-                        });
-                    } else {
-                        setTimeout(initSystemArchitectureChart, 100);
+                    .prototype-container {
+                        position: relative;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                        max-width: 100%;
                     }
-                </script>
+                    
+                    .prototype-image {
+                        display: block;
+                        max-width: 100%;
+                        height: auto;
+                    }
+                    
+                    .prototype-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        opacity: 0;
+                        transition: opacity 0.3s ease;
+                    }
+                    
+                    .prototype-container:hover .prototype-overlay {
+                        opacity: 1;
+                    }
+                    
+                    .prototype-link {
+                        color: white;
+                        font-size: 18px;
+                        font-weight: bold;
+                        text-decoration: none;
+                        padding: 12px 24px;
+                        border: 2px solid white;
+                        border-radius: 4px;
+                        background: rgba(74, 144, 226, 0.9);
+                    }
+                    
+                    .prototype-link:hover {
+                        background: rgba(74, 144, 226, 1);
+                    }
+                    
+                    .prototype-actions {
+                        margin-top: 20px;
+                    }
+                    
+                    .btn {
+                        display: inline-block;
+                        padding: 10px 20px;
+                        margin: 0 10px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: bold;
+                        transition: background-color 0.3s ease;
+                    }
+                    
+                    .btn-primary {
+                        background-color: #4a90e2;
+                        color: white;
+                    }
+                    
+                    .btn-primary:hover {
+                        background-color: #3a80d2;
+                    }
+                    
+                    .btn-secondary {
+                        background-color: #f5f5f5;
+                        color: #333;
+                        border: 1px solid #ddd;
+                    }
+                    
+                    .btn-secondary:hover {
+                        background-color: #e5e5e5;
+                    }
+                </style>
 
                 <h3>2.2 操作流程图</h3>
                 <div id="operation-flow-chart" class="chart-container">
