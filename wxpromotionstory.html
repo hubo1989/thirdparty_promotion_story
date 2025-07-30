@@ -16,9 +16,7 @@
         </w:WordDocument>
     </xml>
     <![endif]-->
-    <!-- ECharts图表支持 使用国内CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-    <!-- 代码高亮 -->
+    <!-- ECharts图表支持 使用多个CDN以确保在中国可访问 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
         body { 
@@ -150,6 +148,24 @@
             font-family: 'Courier New', monospace;
             font-size: 12pt;
         }
+        /* 图表容器样式 */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            height: auto;
+            border: 1px solid #ddd;
+            margin: 10pt 0;
+        }
+        .chart-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #f8f9fa;
+            color: #666;
+            font-style: italic;
+        }
         @page {
             margin: 1in 10% 1in 10%;
         }
@@ -184,13 +200,26 @@
                         <td>支持查看领券及核销明细</td>
                     </tr>
                 </table>
-
+                <p>更多详情请参考：<a href="wxpromotionprototype.html" class="url-link">产品原型</a></p>
                 <h3>1.2 活动状态管理</h3>
-                <div id="activity-status-chart" style="width: 100%; height: 400px;"></div>
+                <div id="activity-status-chart" class="chart-container">
+                    <div class="chart-placeholder">图表加载中...</div>
+                </div>
                 <script>
                     function initActivityStatusChart() {
                         var chartDom = document.getElementById('activity-status-chart');
-                        if (chartDom && typeof echarts !== 'undefined') {
+                        if (!chartDom) return;
+                        
+                        // 检查ECharts是否加载成功
+                        if (typeof echarts === 'undefined') {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
+                            return;
+                        }
+                        
+                        try {
+                            // 清空容器内容
+                            chartDom.innerHTML = '';
+                            
                             var myChart = echarts.init(chartDom);
                             
                             myChart.setOption({
@@ -247,13 +276,24 @@
                                     }
                                 }]
                             });
+                            
+                            // 监听窗口大小变化，自适应图表
+                            window.addEventListener('resize', function() {
+                                myChart.resize();
+                            });
+                        } catch (e) {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
                         }
                     }
                     
+                    // 确保DOM加载完成后初始化图表
                     if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', initActivityStatusChart);
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // 延迟执行以确保ECharts完全加载
+                            setTimeout(initActivityStatusChart, 100);
+                        });
                     } else {
-                        initActivityStatusChart();
+                        setTimeout(initActivityStatusChart, 100);
                     }
                 </script>
 
@@ -300,11 +340,24 @@
                 <h2>2. 界面设计</h2>
                 
                 <h3>2.1 系统架构图</h3>
-                <div id="system-architecture-chart" style="width: 100%; height: 600px;"></div>
+                <div id="system-architecture-chart" class="chart-container">
+                    <div class="chart-placeholder">图表加载中...</div>
+                </div>
                 <script>
                     function initSystemArchitectureChart() {
                         var chartDom = document.getElementById('system-architecture-chart');
-                        if (chartDom && typeof echarts !== 'undefined') {
+                        if (!chartDom) return;
+                        
+                        // 检查ECharts是否加载成功
+                        if (typeof echarts === 'undefined') {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
+                            return;
+                        }
+                        
+                        try {
+                            // 清空容器内容
+                            chartDom.innerHTML = '';
+                            
                             var myChart = echarts.init(chartDom);
                             
                             myChart.setOption({
@@ -381,22 +434,46 @@
                                     }
                                 }]
                             });
+                            
+                            // 监听窗口大小变化，自适应图表
+                            window.addEventListener('resize', function() {
+                                myChart.resize();
+                            });
+                        } catch (e) {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
                         }
                     }
                     
+                    // 确保DOM加载完成后初始化图表
                     if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', initSystemArchitectureChart);
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // 延迟执行以确保ECharts完全加载
+                            setTimeout(initSystemArchitectureChart, 100);
+                        });
                     } else {
-                        initSystemArchitectureChart();
+                        setTimeout(initSystemArchitectureChart, 100);
                     }
                 </script>
 
                 <h3>2.2 操作流程图</h3>
-                <div id="operation-flow-chart" style="width: 100%; height: 400px;"></div>
+                <div id="operation-flow-chart" class="chart-container">
+                    <div class="chart-placeholder">图表加载中...</div>
+                </div>
                 <script>
                     function initOperationFlowChart() {
                         var chartDom = document.getElementById('operation-flow-chart');
-                        if (chartDom && typeof echarts !== 'undefined') {
+                        if (!chartDom) return;
+                        
+                        // 检查ECharts是否加载成功
+                        if (typeof echarts === 'undefined') {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
+                            return;
+                        }
+                        
+                        try {
+                            // 清空容器内容
+                            chartDom.innerHTML = '';
+                            
                             var myChart = echarts.init(chartDom);
                             
                             myChart.setOption({
@@ -460,13 +537,24 @@
                                     }
                                 }]
                             });
+                            
+                            // 监听窗口大小变化，自适应图表
+                            window.addEventListener('resize', function() {
+                                myChart.resize();
+                            });
+                        } catch (e) {
+                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
                         }
                     }
                     
+                    // 确保DOM加载完成后初始化图表
                     if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', initOperationFlowChart);
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // 延迟执行以确保ECharts完全加载
+                            setTimeout(initOperationFlowChart, 100);
+                        });
                     } else {
-                        initOperationFlowChart();
+                        setTimeout(initOperationFlowChart, 100);
                     }
                 </script>
                 
@@ -520,26 +608,59 @@
                 </ul>
             </section>
 
-            <!-- 5. 权限设计 -->
-            <section id="perm-design">
-                <h2>5. 权限设计</h2>
-                
-                <h3>5.1 权限矩阵</h3>
-                <table>
-                    <tr><th>操作</th><th>管理员</th><th>操作员</th><th>审计员</th></tr>
-                    <tr>
-                        <td>创建活动</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                        <td>✗</td>
-                    </tr>
-                </table>
-            </section>
+          
 
             
         </div>
     </div>
 
     <script>hljs.highlightAll();</script>
+    
+    <!-- ECharts备用加载方案 -->
+    <script>
+        // 检查是否所有图表都已成功初始化
+        function checkAndInitCharts() {
+            // 检查各个图表是否需要重新初始化
+            var systemChart = document.getElementById('system-architecture-chart');
+            var operationChart = document.getElementById('operation-flow-chart');
+            
+            // 如果图表容器中仍有"加载中"提示，说明初始化失败
+            if (systemChart && systemChart.innerHTML.includes('图表加载中')) {
+                setTimeout(initSystemArchitectureChart, 100);
+            }
+            
+            if (operationChart && operationChart.innerHTML.includes('图表加载中')) {
+                setTimeout(initOperationFlowChart, 100);
+            }
+        }
+        
+        // 如果主CDN加载失败，尝试备用方案
+        if (typeof echarts === 'undefined') {
+            // 创建script元素加载备用CDN
+            var script = document.createElement('script');
+            script.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js';
+            script.onload = function() {
+                // 重新初始化所有图表
+                setTimeout(function() {
+                    initActivityStatusChart();
+                    initSystemArchitectureChart();
+                    initOperationFlowChart();
+                }, 200);
+            };
+            script.onerror = function() {
+                // 如果备用CDN也失败，使用本地fallback方案
+                console.log('ECharts加载失败，使用备用方案');
+                document.querySelectorAll('.chart-container').forEach(function(container) {
+                    if (container.innerHTML.includes('图表加载中')) {
+                        container.innerHTML = '<div class="chart-placeholder">图表库加载失败，请检查网络连接后刷新页面重试</div>';
+                    }
+                });
+            };
+            document.head.appendChild(script);
+        } else {
+            // ECharts已加载，但某些图表可能未正确初始化，检查并重新初始化
+            setTimeout(checkAndInitCharts, 500);
+        }
+    </script>
 </body>
 </html>

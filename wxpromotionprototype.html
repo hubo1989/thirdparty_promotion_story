@@ -1,0 +1,3489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>银行联合营销平台 - 微信活动管理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 0 20px;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a90e2;
+            font-weight: bold;
+        }
+
+        .nav-info {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        /* 面包屑 */
+        .breadcrumb {
+            background-color: #e8f3ff;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #4a90e2;
+        }
+
+        .breadcrumb a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* 主容器 */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 100px);
+            width: 100%;
+        }
+
+        /* 左侧菜单 */
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            max-width: 250px;
+            background-color: white;
+            border-right: 1px solid #e0e0e0;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+        }
+
+        .menu-title {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #606266;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .menu-title:hover {
+            background-color: #f5f7fa;
+            color: #4a90e2;
+        }
+
+        .menu-title.active {
+            background-color: #ecf5ff;
+            color: #4a90e2;
+        }
+
+        .menu-icon {
+            color: #4a90e2;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .menu-arrow {
+            transition: transform 0.3s;
+            font-size: 12px;
+        }
+
+        .menu-arrow.expanded {
+            transform: rotate(90deg);
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .submenu.show {
+            max-height: 300px;
+        }
+
+        .submenu-item {
+            padding: 10px 20px 10px 50px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #606266;
+            transition: all 0.3s;
+        }
+
+        .submenu-item:hover {
+            background-color: #ecf5ff;
+            color: #4a90e2;
+        }
+
+        .submenu-item.active {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        /* 右侧内容区 */
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f5f5f5;
+            width: calc(100% - 250px);
+            overflow-x: hidden;
+        }
+
+        .content-header {
+            margin-bottom: 20px;
+        }
+
+        .content-title {
+            font-size: 24px;
+            color: #303133;
+            font-weight: 500;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            padding: 10px 15px;
+            background-color: white;
+            border: 1px solid #dcdfe6;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px 4px 0 0;
+            color: #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .tab-item.active {
+            background-color: white;
+            color: #4a90e2;
+            border-color: #4a90e2;
+            border-bottom-color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-item:hover:not(.active) {
+            background-color: #f8f9fa;
+            color: #4a90e2;
+        }
+
+        .tab-close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: transparent;
+            color: #999;
+            font-size: 14px;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+
+        .tab-close:hover {
+            background-color: #f56c6c;
+            color: white;
+        }
+
+        /* 渠道标签 */
+        .channel-tags {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .channel-tags::before {
+            content: '渠道：';
+            color: #606266;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .channel-tag {
+            padding: 8px 16px;
+            border: 1px solid #dcdfe6;
+            border-radius: 20px;
+            background-color: #f8f9fa;
+            color: #606266;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .channel-tag:hover {
+            border-color: #4a90e2;
+            color: #4a90e2;
+        }
+
+        .channel-tag.active {
+            background-color: #4a90e2;
+            border-color: #4a90e2;
+            color: white;
+        }
+
+        /* 查询表单 */
+        .query-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 auto;
+        }
+
+        .form-group label {
+            min-width: 80px;
+            color: #606266;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 8px 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        /* 响应式布局 */
+        @media (max-width: 1200px) {
+            .form-row {
+                gap: 15px;
+            }
+            .form-group {
+                min-width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                gap: 10px;
+            }
+            .form-group {
+                min-width: 100%;
+                flex: 1 1 100%;
+            }
+            .form-group label {
+                min-width: 70px;
+            }
+            .form-group input,
+            .form-group select {
+                min-width: 120px;
+                flex: 1;
+            }
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #409eff;
+            box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+        }
+
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5ba0f2;
+        }
+
+        .btn-default {
+            background-color: #f5f7fa;
+            color: #606266;
+            border: 1px solid #dcdfe6;
+        }
+
+        .btn-default:hover {
+            background-color: #ecf5ff;
+            color: #4a90e2;
+            border-color: #4a90e2;
+        }
+
+        .btn-secondary {
+            background-color: #67c23a;
+            color: white;
+            border: 1px solid #67c23a;
+        }
+
+        .btn-secondary:hover {
+            background-color: #85ce61;
+            border-color: #85ce61;
+        }
+
+        .btn-gray {
+            background-color: #909399;
+            color: white;
+            border: 1px solid #909399;
+        }
+
+        .btn-gray:hover {
+            background-color: #82848a;
+            border-color: #82848a;
+        }
+
+        /* 数据表格 */
+        .data-table {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e8eaec;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            position: relative;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+            table-layout: auto;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        th {
+            background-color: #fafafa;
+            font-weight: 600;
+            color: #606266;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .checkbox-col {
+            width: auto;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .action-col {
+            width: auto;
+            min-width: 160px;
+            position: sticky;
+            right: 0;
+            background-color: #fafafa;
+            z-index: 15;
+            box-shadow: -2px 0 4px rgba(0,0,0,0.1);
+        }
+
+        tbody .action-col {
+            background-color: white;
+            z-index: 15;
+        }
+
+        .action-col::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #f0f0f0;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: #f0f9ff;
+            color: #67c23a;
+        }
+
+        .status-inactive {
+            background-color: #fef0f0;
+            color: #f56c6c;
+        }
+
+        .status-pending {
+            background-color: #fdf6ec;
+            color: #e6a23c;
+        }
+
+        .action-link {
+            color: #4a90e2;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fafafa;
+        }
+
+        .pagination-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pagination-info {
+            color: #606266;
+            font-size: 14px;
+        }
+
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #606266;
+            font-size: 14px;
+        }
+
+        .page-size-select {
+            padding: 5px 8px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            background-color: white;
+            color: #606266;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            border: 1px solid #dcdfe6;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .page-btn:hover {
+            background-color: #f5f7fa;
+        }
+
+        .page-btn.active {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* 弹出面板样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-panel {
+            position: fixed;
+            top: 0;
+            right: -640px;
+            width: 640px;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+            z-index: 1001;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            border-left: 1px solid #e5e6eb;
+        }
+
+        .modal-panel.show {
+            right: 0;
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e5e6eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2329;
+            line-height: 28px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #86909c;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #f2f3f5;
+            color: #1f2329;
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+        
+        /* 详情弹窗样式 */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #606266;
+            min-width: 100px;
+            margin-right: 12px;
+        }
+        
+        .detail-value {
+            color: #303133;
+            word-break: break-all;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-grid.single {
+            grid-template-columns: 1fr;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-size: 14px;
+            color: #1f2329;
+            margin-bottom: 10px;
+            font-weight: 500;
+            line-height: 20px;
+        }
+
+        .form-field label.required::after {
+            content: '*';
+            color: #f53f3f;
+            margin-left: 4px;
+            font-weight: normal;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            padding: 8px 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        /* 模态框样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 800px;
+            max-width: 90vw;
+            max-height: 100vh;
+            overflow: hidden;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-panel.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            color: #666;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+        }
+
+        .modal-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #e6e6e6;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* 详情网格 */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: #666;
+            width: 100px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            color: #333;
+            flex: 1;
+        }
+
+        /* 标签页 */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e6e6e6;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            padding: 12px 24px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-item.active {
+            color: #409eff;
+            border-bottom-color: #409eff;
+        }
+
+        .tab-item:hover {
+            color: #409eff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 查询表单 */
+        .query-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .form-group input, .form-group select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .date-range input {
+            width: 140px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-default {
+            background: white;
+            color: #666;
+        }
+
+        .btn-default:hover {
+            background: #f5f5f5;
+        }
+
+        .btn-primary {
+            background: #409eff;
+            color: white;
+            border-color: #409eff;
+        }
+
+        .btn-primary:hover {
+            background: #66b1ff;
+        }
+
+        .btn-success {
+            background: #67c23a;
+            color: white;
+            border-color: #67c23a;
+        }
+
+        .btn-success:hover {
+            background: #85ce61;
+        }
+
+        /* 数据表格 */
+        .data-table {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .table-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        th {
+            background: #fafafa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* 状态徽章 */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: #f0f9ff;
+            color: #1890ff;
+        }
+
+        .status-info {
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+
+        .status-warning {
+            background: #fff7e6;
+            color: #fa8c16;
+        }
+
+        .status-danger {
+            background: #fff2f0;
+            color: #f5222d;
+        }
+
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #fafafa;
+        }
+
+        .pagination-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .page-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .page-size-select {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: #f5f5f5;
+        }
+
+        .page-btn.active {
+            background: #409eff;
+            color: white;
+            border-color: #409eff;
+        }
+
+        .page-btn:disabled {
+            background: #f5f5f5;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* 统计汇总 */
+        .summary-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #409eff;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+            padding: 12px 16px;
+            border: 1px solid #e5e6eb;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 20px;
+            outline: none;
+            transition: all 0.2s ease;
+            background-color: #ffffff;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: #86909c;
+        }
+
+        .form-field input:hover,
+        .form-field select:hover,
+        .form-field textarea:hover {
+            border-color: #c9cdd4;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: #3370ff;
+            box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.1);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .radio-item input[type="radio"] {
+            margin: 0;
+            width: 16px;
+            height: 16px;
+            accent-color: #3370ff;
+        }
+
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            color: #1f2329;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .radio-item:hover label {
+            color: #3370ff;
+        }
+
+        .modal-footer {
+            padding: 24px 32px;
+            border-top: 1px solid #e5e6eb;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .btn-cancel {
+            padding: 12px 24px;
+            border: 1px solid #e5e6eb;
+            background-color: #ffffff;
+            color: #4e5969;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            transition: all 0.2s ease;
+            min-width: 80px;
+        }
+
+        .btn-cancel:hover {
+            background-color: #f7f8fa;
+            border-color: #c9cdd4;
+            color: #1f2329;
+        }
+
+        .btn-submit {
+            padding: 12px 24px;
+            border: none;
+            background-color: #3370ff;
+            color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            transition: all 0.2s ease;
+            min-width: 80px;
+        }
+
+        .btn-submit:hover {
+            background-color: #2954d1;
+        }
+
+        .btn-submit:active {
+            background-color: #1e3fa4;
+        }
+
+        /* 输入框带单位样式 */
+        .input-with-unit {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e5e6eb;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            background-color: #ffffff;
+        }
+
+        .input-with-unit:hover {
+            border-color: #c9cdd4;
+        }
+
+        .input-with-unit:focus-within {
+            border-color: #3370ff;
+            box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.1);
+        }
+
+        .input-with-unit input {
+            border: none;
+            flex: 1;
+            padding: 12px 16px;
+            outline: none;
+            font-size: 14px;
+            line-height: 20px;
+            background: transparent;
+        }
+
+        .input-with-unit input::placeholder {
+            color: #86909c;
+        }
+
+        .input-with-unit .unit {
+            padding: 12px 16px;
+            background-color: #f7f8fa;
+            color: #86909c;
+            font-size: 14px;
+            border-left: 1px solid #e5e6eb;
+            white-space: nowrap;
+        }
+        
+        .input-with-unit .prefix {
+            padding: 12px 16px;
+            background-color: #f7f8fa;
+            color: #4e5969;
+            font-size: 14px;
+            border-right: 1px solid #e5e6eb;
+            white-space: nowrap;
+            min-width: auto;
+            font-weight: 500;
+        }
+
+        /* 使用时段自定义输入样式 */
+        .usage-period-custom {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .inline-input-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .days-input {
+            width: 80px;
+            padding: 6px 8px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .days-input:focus {
+            border-color: #409eff;
+            outline: none;
+        }
+
+        .input-suffix {
+            color: #606266;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* 日期范围样式 */
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .date-range input {
+            flex: 1;
+        }
+
+        .date-range span {
+            color: #86909c;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* 字符计数样式 */
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #86909c;
+            margin-top: 8px;
+            line-height: 16px;
+        }
+
+        /* 二次确认弹窗样式 */
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1002;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .confirm-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .confirm-dialog {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            max-width: 90vw;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .confirm-overlay.show .confirm-dialog {
+            transform: scale(1);
+        }
+
+        .confirm-header {
+            padding: 20px 20px 10px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .confirm-header h4 {
+            margin: 0;
+            font-size: 16px;
+            color: #303133;
+        }
+
+        .confirm-body {
+            padding: 20px;
+        }
+
+        .confirm-body p {
+            margin: 0;
+            color: #606266;
+            line-height: 1.5;
+        }
+
+        .confirm-footer {
+            padding: 10px 20px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-confirm {
+            padding: 10px 20px;
+            border: 1px solid #f56c6c;
+            background-color: #f56c6c;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-confirm:hover {
+            background-color: #f78989;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">L</div>
+            <span>联合营销平台</span>
+        </div>
+        <div class="nav-info">
+            <span>活动管理 / 微信活动管理</span>
+            <span>管理员</span>
+        </div>
+    </div>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="#">活动管理</a> / 微信活动管理
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="main-container">
+        <!-- 左侧菜单 -->
+        <div class="sidebar">
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>首页</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>机构管理</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>用户管理</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>商户管理</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>数据中心</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title active" onclick="toggleSubmenu(this)">
+                    <span><span class="menu-icon">■</span>活动管理</span>
+                    <span class="menu-arrow expanded">▶</span>
+                </div>
+                <div class="submenu show">
+                    <div class="submenu-item active">微信活动管理</div>
+                    <div class="submenu-item">活动模板管理</div>
+                    <div class="submenu-item">活动审核管理</div>
+                    <div class="submenu-item">活动统计分析</div>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span><span class="menu-icon">■</span>系统设置</span>
+                    <span class="menu-arrow">▶</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧内容区 -->
+        <div class="content">
+            <div class="content-header">
+                <h2 class="content-title">微信活动管理</h2>
+            </div>
+
+            <!-- 标签页 -->
+            <div class="tab-nav">
+                <div class="tab-item active">
+                    <span>微信活动管理</span>
+                    <span class="tab-close">×</span>
+                </div>
+                <div class="tab-item">
+                    <span>活动模板管理</span>
+                    <span class="tab-close">×</span>
+                </div>
+                <div class="tab-item">
+                    <span>活动审核管理</span>
+                    <span class="tab-close">×</span>
+                </div>
+            </div>
+
+            <!-- 渠道标签 -->
+            <div class="channel-tags">
+                <div class="channel-tag active" data-channel="yunshuhui">
+                    云数惠
+                </div>
+                <!-- 预留其他渠道标签位置 -->
+                <!-- <div class="channel-tag" data-channel="other">其他渠道</div> -->
+            </div>
+
+            <!-- 查询表单 -->
+            <!-- 开发注意事项：
+                 1. 所有筛选条件支持模糊查询和精确匹配
+                 2. 活动编码：支持32位UUID格式，需要验证格式正确性
+                 3. 活动名称：最大长度100字符，支持中英文混合
+                 4. 时效类型：相对时效(relative)指相对于用户领取时间，绝对时效(absolute)指固定的开始结束时间
+                 5. 活动状态：需要根据当前时间和活动时间范围自动计算状态
+            -->
+            <div class="query-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>活动编码：</label>
+                        <!-- 数据限制：32位UUID格式，如：0F8A5-1B7-1E4A42B8B7-214E8A8-FF20 -->
+                        <input type="text" placeholder="请输入活动编码" maxlength="36">
+                    </div>
+                    <div class="form-group">
+                        <label>活动名称：</label>
+                        <!-- 数据限制：最大100字符，支持中英文数字特殊字符 -->
+                        <input type="text" placeholder="请输入活动名称" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label>时效类型：</label>
+                        <!-- 业务逻辑：相对时效-基于用户领取时间计算有效期；绝对时效-固定开始结束时间 -->
+                        <select>
+                            <option value="">请选择</option>
+                            <option value="relative">相对时效</option>
+                            <option value="absolute">绝对时效</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>活动状态：</label>
+                        <!-- 状态计算：进行中(当前时间在活动时间范围内)，待开始(当前时间小于开始时间)，已结束(当前时间大于结束时间) -->
+                        <select>
+                            <option value="">请选择</option>
+                            <option value="active">进行中</option>
+                            <option value="pending">待开始</option>
+                            <option value="ended">已结束</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>主题活动ID：</label>
+                        <!-- 数据限制：关联主题活动表，格式为THEME+数字，如THEME001 -->
+                        <input type="text" placeholder="请输入主题活动ID" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label>批次号：</label>
+                        <!-- 数据限制：9位数字，用于区分同一活动的不同批次，如207787133 -->
+                        <input type="text" placeholder="请输入批次号" maxlength="9" pattern="[0-9]{9}">
+                    </div>
+                    <div class="form-group">
+                        <label>活动时间：</label>
+                        <!-- 时间范围筛选：开始时间不能大于结束时间，默认查询当天数据 -->
+                        <div class="date-range">
+                            <input type="date" value="2025-01-20">
+                            <span>至</span>
+                            <input type="date" value="2025-01-20">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>状态：</label>
+                        <!-- 启用状态：1-启用(可正常使用)，0-禁用(不可使用但保留数据) -->
+                        <select>
+                            <option value="">请选择</option>
+                            <option value="1">启用</option>
+                            <option value="0">禁用</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 操作按钮区域 -->
+                <!-- 开发注意事项：
+                     1. 搜索按钮：触发查询前需验证必填项和数据格式
+                     2. 重置按钮：清空所有筛选条件，恢复默认值
+                     3. 搜索结果需要分页处理，默认每页20条
+                -->
+                <div class="form-actions">
+                    <!-- 搜索功能：支持组合条件查询，最多返回1000条记录 -->
+                    <button class="btn btn-primary" onclick="queryData()">搜索</button>
+                    <!-- 重置功能：清空所有输入框和下拉选择，日期恢复为当天 -->
+                    <button class="btn btn-default" onclick="resetForm()">重置</button>
+                </div>
+            </div>
+
+            <!-- 数据表格 -->
+            <!-- 表格功能说明：
+                 1. 支持按列排序，点击表头可切换升序/降序
+                 2. 数据分页显示，每页最多20条记录
+                 3. 支持全选和批量操作
+                 4. 状态字段根据时间自动计算显示
+            -->
+            <div class="data-table">
+                <div class="table-header">
+                    <span class="table-title">活动列表</span>
+                    <!-- 表格操作按钮区域 -->
+                    <!-- 权限控制：新增、导出、终止操作需要相应权限 -->
+                    <div class="table-actions">
+                        <!-- 新增活动：打开新增弹窗，需要填写完整活动信息 -->
+                        <button class="btn btn-primary" onclick="openAddActivityModal()">新增活动</button>
+                        <!-- 导出功能：支持Excel格式，最多导出10000条记录 -->
+                        <button class="btn btn-secondary" onclick="exportActivities()">导出</button>
+                        <!-- 终止活动：批量操作，需要二次确认，只能终止进行中的活动 -->
+                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止活动</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <!-- 表格字段说明：
+                         1. 所有时间字段格式：YYYY-MM-DD HH:mm:ss
+                         2. 状态字段支持颜色标识：启用(绿色)、禁用(灰色)、已结束(红色)
+                         3. 操作列根据活动状态和用户权限动态显示可用操作
+                         4. 支持表头点击排序，默认按创建时间倒序
+                    -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <!-- 全选复选框：支持批量选择进行批量操作 -->
+                                <th class="checkbox-col"><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
+                                <!-- 序号：当前页内的行号，从1开始 -->
+                                <th>序号</th>
+                                <!-- 活动ID：32位UUID，系统自动生成的唯一标识 -->
+                                <th>活动ID</th>
+                                <!-- 活动名称：最大100字符，支持中英文，用于业务识别 -->
+                                <th>活动名称</th>
+                                <!-- 批次号：9位数字，用于区分同一活动的不同批次 -->
+                                <th>批次号</th>
+                                <!-- 主题活动ID：关联主题活动表，格式THEME+数字 -->
+                                <th>主题活动ID</th>
+                                <!-- 活动开始时间：活动生效的起始时间，影响状态计算 -->
+                                <th>活动开始时间</th>
+                                <!-- 活动结束时间：活动失效的结束时间，影响状态计算 -->
+                                <th>活动结束时间</th>
+                                <!-- 创建时间：记录首次创建的时间，不可修改 -->
+                                <th>创建时间</th>
+                                <!-- 最后修改时间：记录最近一次修改的时间，自动更新 -->
+                                <th>最后修改时间</th>
+                                <!-- 状态：根据当前时间和活动时间范围自动计算 -->
+                                <th>状态</th>
+                                <!-- 创建人：记录创建该活动的用户名 -->
+                                <th>创建人</th>
+                                <!-- 修改人：记录最后修改该活动的用户名 -->
+                                <th>修改人</th>
+                                <!-- 操作列：根据活动状态和用户权限显示可用操作 -->
+                                <th class="action-col">操作</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>1</td>
+                            <td>0F8A5-1B7-1E4A42B8B7-214E8A8-FF20</td>
+                            <td>微信优惠券营销活动20240428（207787133）</td>
+                            <td>207787133</td>
+                            <td>5000000074</td>
+                            <td>2025-07-28 00:00:00</td>
+                            <td>2025-10-22 23:59:59</td>
+                            <td>2025-07-28 17:15:04</td>
+                            <td>2025-07-28 17:15:04</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>张三</td>
+                            <td>李四</td>
+                            <!-- 操作列：根据活动状态动态显示可用操作 -->
+                            <!-- 开发注意事项：
+                                 1. 查看：所有状态的活动都可查看，只读模式
+                                 2. 编辑：只有待开始和进行中的活动可编辑
+                                 3. 终止：只有进行中的活动可终止，需要二次确认
+                                 4. 操作权限需要根据用户角色进行控制
+                            -->
+                            <td class="action-col">
+                                <!-- 查看详情：打开只读模式弹窗，显示完整活动信息 -->
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <!-- 编辑活动：打开编辑弹窗，允许修改活动信息 -->
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <!-- 终止活动：立即结束活动，需要确认操作 -->
+                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>2</td>
+                            <td>2CC5C0B8B01B41C8-B1B8-4F8F-8A2A-F8B2C0B8B01B</td>
+                            <td>微信优惠券营销活动20240428（207787133）</td>
+                            <td>207787133</td>
+                            <td>5000000074</td>
+                            <td>2025-07-28 00:00:00</td>
+                            <td>2025-10-22 23:59:59</td>
+                            <td>2025-07-28 17:06:48</td>
+                            <td>2025-07-28 17:06:48</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>王五</td>
+                            <td>赵六</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>3</td>
+                            <td>E2E4B0C2E4E-2B8B5C0A4T004-FF22AC</td>
+                            <td>建设银行优惠券营销活动20240724（792699738）</td>
+                            <td>792699738</td>
+                            <td>5000000074</td>
+                            <td>2025-07-28 00:00:00</td>
+                            <td>2025-10-22 23:59:59</td>
+                            <td>2025-07-28 17:06:48</td>
+                            <td>2025-07-28 17:06:48</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>孙七</td>
+                            <td>周八</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>4</td>
+                            <td>715E4093707-E8C2A9-7B6C2F0BF-9C08</td>
+                            <td>建设银行优惠券营销活动20240428（207790140）</td>
+                            <td>207790140</td>
+                            <td>5000000074</td>
+                            <td>2025-07-28 00:00:00</td>
+                            <td>2025-10-22 23:59:59</td>
+                            <td>2025-07-28 18:59:38</td>
+                            <td>2025-07-28 18:59:38</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>吴九</td>
+                            <td>郑十</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>5</td>
+                            <td>1B4C7B84C2D4F-D9B8A6C2F-8B4C7B84C2D4F</td>
+                            <td>建设银行优惠券营销活动20240428（207790140）</td>
+                            <td>207790140</td>
+                            <td>5000000074</td>
+                            <td>2025-07-28 00:00:00</td>
+                            <td>2025-10-21 23:59:59</td>
+                            <td>2025-07-29 17:30:59</td>
+                            <td>2025-07-29 17:30:59</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>冯一</td>
+                            <td>陈二</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>6</td>
+                            <td>B1B2C3D4E5F6-A2B3C4D5E6F7-C3D4E5F6A7B8</td>
+                            <td>内蒙古建设银行优惠券营销活动20240427（207698980）</td>
+                            <td>207698980</td>
+                            <td>5000000074</td>
+                            <td>2025-07-23 00:00:00</td>
+                            <td>2025-10-21 23:59:59</td>
+                            <td>2025-07-23 17:30:59</td>
+                            <td>2025-07-23 17:30:59</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>褚三</td>
+                            <td>卫四</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>7</td>
+                            <td>F4A4B0B5A3T-B8B4A6T-7F0C0B5C0B1T</td>
+                            <td>山西省建设银行优惠券营销活动（205764517）</td>
+                            <td>205764517</td>
+                            <td>5000000074</td>
+                            <td>2025-07-23 00:00:00</td>
+                            <td>2025-08-28 23:59:59</td>
+                            <td>2025-07-23 16:54:44</td>
+                            <td>2025-07-23 16:54:44</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>蒋五</td>
+                            <td>沈六</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>8</td>
+                            <td>A5F7D3A1B6C8-D1B6A2C7F8-2B7C8F6B1T</td>
+                            <td>青海省建设银行优惠券营销活动（207570795）</td>
+                            <td>207570795</td>
+                            <td>5000000074</td>
+                            <td>2025-07-23 00:00:00</td>
+                            <td>2025-10-21 23:59:59</td>
+                            <td>2025-07-23 18:59:04</td>
+                            <td>2025-07-23 18:59:04</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>韩七</td>
+                            <td>杨八</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>9</td>
+                            <td>CF1E4A8B9B-6E8B3A4F6B8F7-8B5C6A1T</td>
+                            <td>河南省建设银行优惠券营销活动20240722（207608882）</td>
+                            <td>207608882</td>
+                            <td>5000000074</td>
+                            <td>2025-07-23 00:00:00</td>
+                            <td>2025-10-20 23:59:59</td>
+                            <td>2025-07-23 13:22:08</td>
+                            <td>2025-07-23 13:22:08</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>朱九</td>
+                            <td>秦十</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td>10</td>
+                            <td>8A37E4T-4E0A6E5B8B5C1-B1FE2A4</td>
+                            <td>河南省建设银行优惠券营销活动20240722（207608882）</td>
+                            <td>207608882</td>
+                            <td>5000000074</td>
+                            <td>2025-07-22 00:00:00</td>
+                            <td>2025-10-17 23:59:59</td>
+                            <td>2025-07-22 16:38:35</td>
+                            <td>2025-07-22 16:38:35</td>
+                            <td><span class="status-badge status-active">启用</span></td>
+                            <td>尤一</td>
+                            <td>许二</td>
+                            <td class="action-col">
+                                <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
+                                <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <div class="pagination">
+                    <div class="pagination-left">
+                        <div class="pagination-info">共 243 条记录</div>
+                        <div class="page-size-selector">
+                            <span>每页显示</span>
+                            <select class="page-size-select">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span>条</span>
+                        </div>
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn" disabled>上一页</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">4</button>
+                        <button class="page-btn">5</button>
+                        <button class="page-btn">...</button>
+                        <button class="page-btn">25</button>
+                        <button class="page-btn">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增活动弹出面板 -->
+    <div class="modal-overlay" id="addActivityModal">
+        <div class="modal-panel" style="height: 100vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3 class="modal-title">新增活动</h3>
+                <button class="modal-close" onclick="closeAddActivityModal()">&times;</button>
+            </div>
+            <!-- 新增活动表单 -->
+            <!-- 表单验证规则：
+                 1. 必填字段标记红色星号，提交前验证
+                 2. 数字字段支持小数点后2位
+                 3. 日期字段不能选择过去时间
+                 4. 文本字段有长度限制和字符计数
+            -->
+            <div class="modal-body">
+                <form id="addActivityForm">
+                    <div class="form-section">
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">活动名称</label>
+                                <!-- 数据限制：最大100字符，用于业务识别，不能重复 -->
+                                <input type="text" name="activityName" placeholder="请输入活动名称" maxlength="100" required>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">主题活动ID</label>
+                                <!-- 数据限制：关联主题活动表，格式THEME+数字，如THEME001 -->
+                                <input type="text" name="themeActivityId" placeholder="请输入主题活动ID" maxlength="20" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">批次号</label>
+                                <!-- 数据限制：9位数字，系统自动生成或手动输入，用于区分批次 -->
+                                <input type="text" name="batchNumber" placeholder="请输入批次号" maxlength="9" pattern="[0-9]{9}" required>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">是否在小程序展示</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="showInMiniProgram1" name="showInMiniProgram" value="true" checked>
+                                        <label for="showInMiniProgram1">是</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="showInMiniProgram2" name="showInMiniProgram" value="false">
+                                        <label for="showInMiniProgram2">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">面额</label>
+                                <!-- 数据限制：正数，最多2位小数，最大值9999.99元 -->
+                                <div class="input-with-unit">
+                                    <input type="number" name="faceValue" placeholder="请输入面额" min="0.01" max="9999.99" step="0.01" required>
+                                    <span class="unit">元</span>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">使用门槛</label>
+                                <!-- 业务规则：使用门槛必须大于面额，最大值99999.99元 -->
+                                <div class="input-with-unit">
+                                    <span class="prefix">满</span>
+                                    <input type="number" name="threshold" placeholder="请输入使用门槛" min="0" max="99999.99" step="0.01" required>
+                                    <span class="unit">元可用</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">活动有效期</label>
+                                <!-- 时间限制：开始时间不能早于当前时间，结束时间必须晚于开始时间 -->
+                                <div class="date-range">
+                                    <input type="date" name="startDate" required>
+                                    <span>至</span>
+                                    <input type="date" name="endDate" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">使用时段</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="usagePeriod1" name="usagePeriod" value="anytime" checked>
+                                        <label for="usagePeriod1">有效期内，任意时段可用</label>
+                                    </div>
+                                    <div class="radio-item usage-period-custom">
+                                        <input type="radio" id="usagePeriod2" name="usagePeriod" value="afterReceive">
+                                        <label for="usagePeriod2">有效期内，用户领取后</label>
+                                        <div class="inline-input-group">
+                                            <input type="number" name="usageDays" placeholder="天数" min="1" class="days-input">
+                                            <span class="input-suffix">天可用</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label>使用说明</label>
+                                <!-- 数据限制：最大256字符，支持换行，用于向用户说明使用规则 -->
+                                <textarea name="usageInstructions" placeholder="必填，限制256字" rows="3" maxlength="256"></textarea>
+                                <div class="char-count">0/256</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <!-- 弹窗操作按钮 -->
+            <!-- 开发注意事项：
+                 1. 取消按钮：关闭弹窗，不保存数据，需要确认是否有未保存内容
+                 2. 确定按钮：验证表单数据，提交到后端，成功后刷新列表
+                 3. 提交前需要验证所有必填字段和数据格式
+            -->
+            <div class="modal-footer">
+                <!-- 取消操作：关闭弹窗，清空表单数据 -->
+                <button type="button" class="btn-cancel" onclick="closeAddActivityModal()">取消</button>
+                <!-- 提交操作：验证并保存活动数据，成功后关闭弹窗刷新列表 -->
+                <button type="button" class="btn-submit" onclick="submitAddActivity()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑活动面板 -->
+    <div id="editActivityModal" class="modal-overlay" style="display: none;">
+        <div class="modal-panel" style="height: 100vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3 class="modal-title">编辑活动</h3>
+                <button type="button" class="modal-close" onclick="closeEditActivityModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editActivityForm">
+                    <div class="form-container">
+                        <div class="form-section">
+                            <h4 class="section-title">基本信息</h4>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">活动名称</label>
+                                <input type="text" name="activityName" placeholder="请输入活动名称" required>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">主题活动ID</label>
+                                <input type="text" name="themeActivityId" placeholder="请输入主题活动ID" readonly disabled>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">批次号</label>
+                                <input type="text" name="batchNumber" placeholder="请输入批次号" readonly disabled>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">活动状态</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="editStatus1" name="activityStatus" value="active" checked>
+                                        <label for="editStatus1">生效</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="editStatus2" name="activityStatus" value="inactive">
+                                        <label for="editStatus2">失效</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="editStatus3" name="activityStatus" value="deleted">
+                                        <label for="editStatus3">已删除</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">是否在小程序展示</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="editDisplay1" name="displayInMiniProgram" value="yes" disabled>
+                                        <label for="editDisplay1">是</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="editDisplay2" name="displayInMiniProgram" value="no" checked disabled>
+                                        <label for="editDisplay2">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">面值</label>
+                                <div class="input-group">
+                                    <span class="input-prefix">¥</span>
+                                    <input type="number" name="faceValue" placeholder="请输入面值" step="0.01" min="0" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label class="required">使用门槛</label>
+                                <div class="input-group">
+                                    <span class="input-prefix">满</span>
+                                    <input type="number" name="usageThreshold" placeholder="请输入使用门槛" step="0.01" min="0" disabled>
+                                    <span class="input-suffix">元可用</span>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">活动时间</label>
+                                <div class="date-range">
+                                    <input type="date" name="startDate" required readonly disabled>
+                                    <span>至</span>
+                                    <input type="date" name="endDate" required readonly disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">使用时段</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="editUsagePeriod1" name="usagePeriod" value="anytime" checked disabled>
+                                        <label for="editUsagePeriod1">有效期内，任意时段可用</label>
+                                    </div>
+                                    <div class="radio-item usage-period-custom">
+                                        <input type="radio" id="editUsagePeriod2" name="usagePeriod" value="afterReceive" disabled>
+                                        <label for="editUsagePeriod2">有效期内，用户领取后</label>
+                                        <div class="inline-input-group">
+                                            <input type="number" name="usageDays" placeholder="天数" min="1" class="days-input" readonly disabled>
+                                            <span class="input-suffix">天可用</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label>使用说明</label>
+                                <textarea name="usageInstructions" placeholder="必填，限制256字" rows="3" maxlength="256" readonly disabled></textarea>
+                                <div class="char-count">0/256</div>
+                            </div>
+                        </div>
+                        <div class="form-section">
+                            <h4 class="section-title">结算信息</h4>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">结算方式</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="editSettlement1" name="settlement" value="bank" checked disabled>
+                                        <label for="editSettlement1">银行承担</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="editSettlement2" name="settlement" value="merchant" disabled>
+                                        <label for="editSettlement2">商户承担</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>结算比例</label>
+                                <div class="input-group">
+                                    <input type="number" name="settlementRatio" placeholder="请输入结算比例" step="0.1" min="0" max="100" disabled>
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <!-- 占位符，保持网格布局 -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeEditActivityModal()">取消</button>
+                <button type="button" class="btn-submit" onclick="submitEditActivity()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看详情弹窗 -->
+    <div id="viewActivityModal" class="modal-overlay" style="display: none;">
+        <div class="modal-panel" style="width: 90%; max-width: 1200px; height: 100vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3 class="modal-title">活动详情</h3>
+                <button type="button" class="modal-close" onclick="closeViewActivityModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- 标签页 -->
+                <div class="tabs">
+                    <div class="tab-item active" data-tab="detail">活动详情</div>
+                    <div class="tab-item" data-tab="issuance">发放明细</div>
+                    <div class="tab-item" data-tab="verification">核销明细</div>
+                </div>
+
+                <!-- 活动详情标签页 -->
+                <div class="tab-content active" id="detail-content">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <label class="detail-label">活动ID：</label>
+                            <span class="detail-value" id="detail-activity-id"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">活动名称：</label>
+                            <span class="detail-value" id="detail-activity-name"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">主题活动ID：</label>
+                            <span class="detail-value" id="detail-theme-id"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">批次号：</label>
+                            <span class="detail-value" id="detail-batch-number"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">生效时间：</label>
+                            <span class="detail-value" id="detail-start-time"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">失效时间：</label>
+                            <span class="detail-value" id="detail-end-time"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">创建时间：</label>
+                            <span class="detail-value" id="detail-create-time"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">更新时间：</label>
+                            <span class="detail-value" id="detail-update-time"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">活动状态：</label>
+                            <span class="detail-value" id="detail-status"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">创建人：</label>
+                            <span class="detail-value" id="detail-creator"></span>
+                        </div>
+                        <div class="detail-item">
+                            <label class="detail-label">更新人：</label>
+                            <span class="detail-value" id="detail-updater"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 发放明细标签页 -->
+                <div class="tab-content" id="issuance-content">
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">1,256</div>
+                            <div class="stat-label">总发放数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">892</div>
+                            <div class="stat-label">已核销数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">364</div>
+                            <div class="stat-label">未核销数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">71.0%</div>
+                            <div class="stat-label">核销率</div>
+                        </div>
+                    </div>
+
+                    <div class="query-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>OpenID：</label>
+                                <input type="text" placeholder="请输入OpenID">
+                            </div>
+                            <div class="form-group">
+                                <label>状态：</label>
+                                <select>
+                                    <option value="">全部</option>
+                                    <option value="issued">已发放</option>
+                                    <option value="used">已使用</option>
+                                    <option value="expired">已过期</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>流水号：</label>
+                                <input type="text" placeholder="请输入流水号">
+                            </div>
+                            <div class="form-group">
+                                <label>发放时间：</label>
+                                <div class="date-range">
+                                    <input type="date" value="2024-06-01">
+                                    <span>至</span>
+                                    <input type="date" value="2024-06-24">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-default" onclick="resetForm()">重置</button>
+                            <button class="btn btn-primary" onclick="queryData()">查询</button>
+                            <button class="btn btn-success" onclick="downloadData('issuance')">下载发放明细</button>
+                        </div>
+                    </div>
+
+                    <div class="data-table">
+                        <div class="table-header">
+                            <span class="table-title">发放明细表</span>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>发券流水号</th>
+                                        <th>活动ID</th>
+                                        <th>OpenID</th>
+                                        <th>优惠券类型</th>
+                                        <th>优惠金额</th>
+                                        <th>使用门槛</th>
+                                        <th>发放时间</th>
+                                        <th>优惠券状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>WX20240601001001</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oGH8k5_8j7K3mN4pQ2rS6tU9vW0xY1z</td>
+                                        <td>满减券</td>
+                                        <td>¥20.00</td>
+                                        <td>满¥100.00</td>
+                                        <td>2024-06-01 10:30:25</td>
+                                        <td><span class="status-badge status-info">已使用</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001002</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oMN9j6_7k8L4nO5qR3sT7uV0wX2yZ3a</td>
+                                        <td>折扣券</td>
+                                        <td>9折</td>
+                                        <td>满¥50.00</td>
+                                        <td>2024-06-01 11:15:42</td>
+                                        <td><span class="status-badge status-info">已使用</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001003</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oRS0k7_8l9M5oP6rT4uV8wX1yZ3aB4c</td>
+                                        <td>代金券</td>
+                                        <td>¥50.00</td>
+                                        <td>满¥200.00</td>
+                                        <td>2024-06-01 14:22:18</td>
+                                        <td><span class="status-badge status-info">已使用</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001004</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oWX1l8_9m0N6pQ7sU5vW9xY2zA4bC5d</td>
+                                        <td>满减券</td>
+                                        <td>¥15.00</td>
+                                        <td>满¥80.00</td>
+                                        <td>2024-06-01 16:45:33</td>
+                                        <td><span class="status-badge status-warning">已过期</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001005</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oAB2m9_0n1O7qR8tV6wX0yZ3aB5cD6e</td>
+                                        <td>满减券</td>
+                                        <td>¥25.00</td>
+                                        <td>满¥150.00</td>
+                                        <td>2024-06-02 09:20:07</td>
+                                        <td><span class="status-badge status-success">已发放</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <div class="pagination-left">
+                                <div class="pagination-info">显示第 1 到 5 条记录，共 1,256 条</div>
+                                <div class="page-size-selector">
+                                    <span>每页显示</span>
+                                    <select class="page-size-select">
+                                        <option value="5" selected>5条</option>
+                                        <option value="10">10条</option>
+                                        <option value="20">20条</option>
+                                        <option value="50">50条</option>
+                                        <option value="100">100条</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="pagination-controls">
+                                <button class="page-btn" disabled>上一页</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">...</button>
+                                <button class="page-btn">252</button>
+                                <button class="page-btn">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 核销明细标签页 -->
+                <div class="tab-content" id="verification-content">
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">1,256</div>
+                            <div class="stat-label">总发放数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">892</div>
+                            <div class="stat-label">已核销数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">364</div>
+                            <div class="stat-label">未核销数量</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">71.0%</div>
+                            <div class="stat-label">核销率</div>
+                        </div>
+                    </div>
+
+                    <div class="query-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>OpenID：</label>
+                                <input type="text" placeholder="请输入OpenID">
+                            </div>
+                            <div class="form-group">
+                                <label>状态：</label>
+                                <select>
+                                    <option value="">全部</option>
+                                    <option value="success">核销成功</option>
+                                    <option value="failed">核销失败</option>
+                                    <option value="partial">部分核销</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>流水号：</label>
+                                <input type="text" placeholder="请输入流水号">
+                            </div>
+                            <div class="form-group">
+                                <label>核销时间：</label>
+                                <div class="date-range">
+                                    <input type="date" value="2024-06-01">
+                                    <span>至</span>
+                                    <input type="date" value="2024-06-24">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-default" onclick="resetForm()">重置</button>
+                            <button class="btn btn-primary" onclick="queryData()">查询</button>
+                            <button class="btn btn-success" onclick="downloadData('verification')">下载核销明细</button>
+                        </div>
+                    </div>
+
+                    <div class="data-table">
+                        <div class="table-header">
+                            <span class="table-title">核销明细表</span>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>发券流水号</th>
+                                        <th>交易流水号</th>
+                                        <th>活动ID</th>
+                                        <th>OpenID</th>
+                                        <th>优惠券类型</th>
+                                        <th>核销金额</th>
+                                        <th>订单金额</th>
+                                        <th>商户编号</th>
+                                        <th>商户名称</th>
+                                        <th>核销时间</th>
+                                        <th>核销状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>WX20240601001001</td>
+                                        <td>HX20240601001001</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oGH8k5_8j7K3mN4pQ2rS6tU9vW0xY1z</td>
+                                        <td>满减券</td>
+                                        <td>¥20.00</td>
+                                        <td>¥128.50</td>
+                                        <td>MC001</td>
+                                        <td>星巴克咖啡(中关村店)</td>
+                                        <td>2024-06-01 15:30:25</td>
+                                        <td><span class="status-badge status-info">核销成功</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001002</td>
+                                        <td>HX20240601001002</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oMN9j6_7k8L4nO5qR3sT7uV0wX2yZ3a</td>
+                                        <td>折扣券</td>
+                                        <td>¥5.50</td>
+                                        <td>¥55.00</td>
+                                        <td>MC002</td>
+                                        <td>肯德基(建国门店)</td>
+                                        <td>2024-06-01 18:15:42</td>
+                                        <td><span class="status-badge status-info">核销成功</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001003</td>
+                                        <td>HX20240601001003</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oRS0k7_8l9M5oP6rT4uV8wX1yZ3aB4c</td>
+                                        <td>代金券</td>
+                                        <td>¥50.00</td>
+                                        <td>¥258.80</td>
+                                        <td>MC003</td>
+                                        <td>麦当劳(王府井店)</td>
+                                        <td>2024-06-01 20:22:18</td>
+                                        <td><span class="status-badge status-info">核销成功</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001004</td>
+                                        <td>HX20240601001004</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oWX1l8_9m0N6pQ7sU5vW9xY2zA4bC5d</td>
+                                        <td>满减券</td>
+                                        <td>¥0.00</td>
+                                        <td>¥68.00</td>
+                                        <td>MC001</td>
+                                        <td>星巴克咖啡(中关村店)</td>
+                                        <td>2024-06-01 21:45:33</td>
+                                        <td><span class="status-badge status-danger">核销失败</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>WX20240601001005</td>
+                                        <td>HX20240601001005</td>
+                                        <td>a1b2c3d4-e5f6-7890-abcd-ef1234567890</td>
+                                        <td>oAB2m9_0n1O7qR8tV6wX0yZ3aB5cD6e</td>
+                                        <td>满减券</td>
+                                        <td>¥15.00</td>
+                                        <td>¥156.60</td>
+                                        <td>MC004</td>
+                                        <td>海底捞火锅(三里屯店)</td>
+                                        <td>2024-06-02 12:20:07</td>
+                                        <td><span class="status-badge status-warning">部分核销</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <div class="pagination-left">
+                                <div class="pagination-info">显示第 1 到 5 条记录，共 892 条</div>
+                                <div class="page-size-selector">
+                                    <span>每页显示</span>
+                                    <select class="page-size-select">
+                                        <option value="5" selected>5条</option>
+                                        <option value="10">10条</option>
+                                        <option value="20">20条</option>
+                                        <option value="50">50条</option>
+                                        <option value="100">100条</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="pagination-controls">
+                                <button class="page-btn" disabled>上一页</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">...</button>
+                                <button class="page-btn">179</button>
+                                <button class="page-btn">下一页</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeViewActivityModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 切换子菜单
+        function toggleSubmenu(element) {
+            const submenu = element.nextElementSibling;
+            const arrow = element.querySelector('.menu-arrow');
+            
+            if (submenu.classList.contains('show')) {
+                submenu.classList.remove('show');
+                arrow.classList.remove('expanded');
+            } else {
+                submenu.classList.add('show');
+                arrow.classList.add('expanded');
+            }
+        }
+
+        // 重置表单
+        function resetForm() {
+            const form = document.querySelector('.query-form');
+            const inputs = form.querySelectorAll('input, select');
+            
+            inputs.forEach(input => {
+                if (input.type === 'date') {
+                    input.value = '2025-01-20';
+                } else if (input.type !== 'checkbox') {
+                    input.value = '';
+                }
+            });
+        }
+
+        // 全选/取消全选
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        // 单行复选框变化
+        function updateSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            const checkedCount = document.querySelectorAll('.row-checkbox:checked').length;
+            
+            selectAllCheckbox.checked = checkedCount === rowCheckboxes.length;
+            selectAllCheckbox.indeterminate = checkedCount > 0 && checkedCount < rowCheckboxes.length;
+        }
+
+        // 查询数据
+        function queryData() {
+            const activeChannel = document.querySelector('.channel-tag.active')?.dataset.channel || 'yunshuhui';
+            console.log('执行查询操作，当前渠道：', activeChannel);
+            // 这里可以根据选中的渠道执行不同的查询逻辑
+        }
+
+        // 渠道标签切换
+        function switchChannel(channelElement) {
+            // 移除所有标签的active状态
+            document.querySelectorAll('.channel-tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            
+            // 为当前点击的标签添加active状态
+            channelElement.classList.add('active');
+            
+            // 获取选中的渠道
+            const selectedChannel = channelElement.dataset.channel;
+            console.log('切换到渠道：', selectedChannel);
+            
+            // 这里可以根据选中的渠道加载对应的数据
+            // 例如：loadChannelData(selectedChannel);
+        }
+
+        // 打开新增活动弹出面板
+        function openAddActivityModal() {
+            const modal = document.getElementById('addActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 显示遮罩层
+            modal.style.display = 'flex';
+            
+            // 延迟添加动画类，确保过渡效果
+            setTimeout(() => {
+                modal.classList.add('show');
+                panel.classList.add('show');
+            }, 10);
+            
+            // 初始化表单数据
+            initializeForm();
+        }
+
+        // 关闭新增活动弹出面板
+        function closeAddActivityModal() {
+            const modal = document.getElementById('addActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 移除动画类
+            modal.classList.remove('show');
+            panel.classList.remove('show');
+            
+            // 延迟隐藏遮罩层
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // 重置表单
+                document.getElementById('addActivityForm').reset();
+            }, 300);
+        }
+
+        // 初始化表单
+        function initializeForm() {
+            // 设置默认创建人和修改人
+            const form = document.getElementById('addActivityForm');
+            const creatorInput = form.querySelector('input[name="creator"]');
+            const modifierInput = form.querySelector('input[name="modifier"]');
+            
+            // 模拟当前用户信息
+            const currentUser = '管理员';
+            creatorInput.value = currentUser;
+            modifierInput.value = currentUser;
+            
+            // 设置默认时间
+            const now = new Date();
+            const startTimeInput = form.querySelector('input[name="startTime"]');
+            const endTimeInput = form.querySelector('input[name="endTime"]');
+            
+            // 设置开始时间为当前时间
+            startTimeInput.value = now.toISOString().slice(0, 16);
+            
+            // 设置结束时间为一个月后
+            const endTime = new Date(now);
+            endTime.setMonth(endTime.getMonth() + 1);
+            endTimeInput.value = endTime.toISOString().slice(0, 16);
+        }
+
+        // 提交新增活动表单
+        function submitAddActivity() {
+            const form = document.getElementById('addActivityForm');
+            const formData = new FormData(form);
+            
+            // 验证必填字段
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#f56c6c';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#dcdfe6';
+                }
+            });
+            
+            if (!isValid) {
+                alert('请填写所有必填字段');
+                return;
+            }
+            
+            // 验证日期逻辑
+            const startDate = new Date(formData.get('startDate'));
+            const endDate = new Date(formData.get('endDate'));
+            
+            if (endDate <= startDate) {
+                alert('结束日期必须大于开始日期');
+                return;
+            }
+            
+            // 验证面额
+            const faceValue = parseFloat(formData.get('faceValue'));
+            if (faceValue <= 0) {
+                alert('面额必须大于0');
+                return;
+            }
+            
+            // 显示二次确认弹窗
+            showConfirmModal();
+        }
+        
+        // 显示确认弹窗
+        function showConfirmModal() {
+            const confirmModal = document.getElementById('confirmModal');
+            confirmModal.classList.add('show');
+        }
+        
+        // 关闭确认弹窗
+        function closeConfirmModal() {
+            const confirmModal = document.getElementById('confirmModal');
+            confirmModal.classList.remove('show');
+        }
+        
+        // 确认提交
+        function confirmSubmit() {
+            const form = document.getElementById('addActivityForm');
+            const formData = new FormData(form);
+            
+            // 构建提交数据
+            const activityData = {
+                activityName: formData.get('activityName'),
+                themeActivityId: formData.get('themeActivityId'),
+                batchNumber: formData.get('batchNumber'),
+                showInMiniProgram: formData.get('showInMiniProgram'),
+                faceValue: formData.get('faceValue'),
+                threshold: formData.get('threshold'),
+                startDate: formData.get('startDate'),
+                endDate: formData.get('endDate'),
+                usagePeriod: formData.get('usagePeriod'),
+                usageDays: formData.get('usageDays'),
+                usageInstructions: formData.get('usageInstructions'),
+                settlement: formData.get('settlement'),
+                settlementRatio: formData.get('settlementRatio')
+            };
+            
+            console.log('提交活动数据：', activityData);
+            
+            // 关闭确认弹窗
+            closeConfirmModal();
+            
+            // 模拟提交成功
+            alert('活动创建成功！');
+            closeAddActivityModal();
+            
+            // 这里可以调用实际的API接口
+            // submitActivityToServer(activityData);
+        }
+
+        // 点击遮罩层关闭弹窗
+        document.addEventListener('click', function(e) {
+            const addModal = document.getElementById('addActivityModal');
+            const editModal = document.getElementById('editActivityModal');
+            const confirmModal = document.getElementById('confirmModal');
+            
+            if (e.target === addModal) {
+                closeAddActivityModal();
+            }
+            
+            if (e.target === editModal) {
+                closeEditActivityModal();
+            }
+            
+            if (e.target === confirmModal) {
+                closeConfirmModal();
+            }
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const addModal = document.getElementById('addActivityModal');
+                const editModal = document.getElementById('editActivityModal');
+                const confirmModal = document.getElementById('confirmModal');
+                
+                if (confirmModal.classList.contains('show')) {
+                    closeConfirmModal();
+                } else if (editModal.classList.contains('show')) {
+                    closeEditActivityModal();
+                } else if (addModal.classList.contains('show')) {
+                    closeAddActivityModal();
+                }
+            }
+        });
+
+        // 页面加载完成后绑定事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为渠道标签绑定点击事件
+            document.querySelectorAll('.channel-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    switchChannel(this);
+                });
+            });
+            
+            // 初始化标签页切换功能
+            setupTabSwitching();
+        });
+
+        // 字符计数功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.querySelector('textarea[name="usageInstructions"]');
+            const charCount = document.querySelector('.char-count');
+            
+            if (textarea && charCount) {
+                textarea.addEventListener('input', function() {
+                    const currentLength = this.value.length;
+                    charCount.textContent = currentLength + '/256';
+                });
+            }
+        });
+        
+        // 查看活动详情函数
+        function viewActivity(button) {
+            // 获取当前行的数据
+            const row = button.closest('tr');
+            const cells = row.querySelectorAll('td');
+            
+            // 从表格行中提取数据（根据实际表格结构调整）
+            const activityData = {
+                activityId: cells[2].textContent.trim(), // 活动ID
+                activityName: cells[3].textContent.trim(), // 活动名称
+                themeActivityId: cells[5].textContent.trim(), // 主题活动ID
+                batchNumber: cells[4].textContent.trim(), // 批次号
+                effectiveTime: cells[6].textContent.trim(), // 活动开始时间
+                expiryTime: cells[7].textContent.trim(), // 活动结束时间
+                createTime: cells[8].textContent.trim(), // 创建时间
+                updateTime: cells[9].textContent.trim(), // 最后修改时间
+                activityStatus: cells[10].querySelector('.status-badge').textContent.trim(), // 状态
+                creator: cells[11].textContent.trim(), // 创建人
+                updater: cells[12].textContent.trim() // 修改人
+            };
+            
+            openViewActivityModal(activityData);
+        }
+        
+        // 打开查看详情弹窗
+        function openViewActivityModal(activityData) {
+            const modal = document.getElementById('viewActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 填充详情数据
+            if (activityData) {
+                document.getElementById('detail-activity-id').textContent = activityData.activityId || '-';
+                document.getElementById('detail-activity-name').textContent = activityData.activityName || '-';
+                document.getElementById('detail-theme-id').textContent = activityData.themeActivityId || '-';
+                document.getElementById('detail-batch-number').textContent = activityData.batchNumber || '-';
+                document.getElementById('detail-start-time').textContent = activityData.effectiveTime || '-';
+                document.getElementById('detail-end-time').textContent = activityData.expiryTime || '-';
+                document.getElementById('detail-create-time').textContent = activityData.createTime || '-';
+                document.getElementById('detail-update-time').textContent = activityData.updateTime || '-';
+                document.getElementById('detail-status').textContent = activityData.activityStatus || '-';
+                document.getElementById('detail-creator').textContent = activityData.creator || '-';
+                document.getElementById('detail-updater').textContent = activityData.updater || '-';
+            }
+            
+            // 显示遮罩层
+            modal.style.display = 'flex';
+            
+            // 延迟添加动画类，确保过渡效果
+            setTimeout(() => {
+                modal.classList.add('show');
+                panel.classList.add('show');
+            }, 10);
+            
+            // 设置默认标签页为活动详情
+            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tab-item[data-tab="detail"]').classList.add('active');
+            document.getElementById('detail-content').classList.add('active');
+        }
+        
+        // 关闭查看详情弹窗
+        function closeViewActivityModal() {
+            const modal = document.getElementById('viewActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 移除动画类
+            modal.classList.remove('show');
+            panel.classList.remove('show');
+            
+            // 延迟隐藏遮罩层
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+        
+        // 标签页切换功能
+        function setupTabSwitching() {
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有活动状态
+                    document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // 添加当前活动状态
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-content').classList.add('active');
+                });
+            });
+        }
+        
+        // 重置表单
+        function resetForm() {
+            const activeTab = document.querySelector('.tab-content.active');
+            const inputs = activeTab.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.type === 'date') {
+                    // 重置日期为默认值
+                    if (input.parentElement.querySelector('span') && input.parentElement.querySelector('span').textContent === '至') {
+                        // 结束日期
+                        input.value = '2024-06-24';
+                    } else {
+                        // 开始日期
+                        input.value = '2024-06-01';
+                    }
+                } else if (input.tagName === 'SELECT') {
+                    input.selectedIndex = 0;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+
+        // 查询数据
+        function queryData() {
+            const activeTab = document.querySelector('.tab-item.active').getAttribute('data-tab');
+            console.log('查询' + (activeTab === 'issuance' ? '发放' : '核销') + '数据');
+            // 这里添加查询逻辑
+        }
+
+        // 下载数据
+        function downloadData(type) {
+            const activityId = document.getElementById('detail-activity-id').textContent || 'ACT001';
+            const activityName = document.getElementById('detail-activity-name').textContent || '微信活动';
+            
+            const typeName = type === 'issuance' ? '发放' : '核销';
+            
+            // 模拟生成CSV数据
+            let csvContent = '';
+            let filename = '';
+            
+            if (type === 'issuance') {
+                filename = `${activityName}_发放明细_${new Date().toISOString().split('T')[0]}.csv`;
+                csvContent = '流水号,活动ID,OpenID,券类型,券金额,使用门槛,发放时间,状态\n';
+                // 这里应该从实际数据源获取数据
+                csvContent += `FP202406010001,${activityId},oWm1234567890,满减券,10.00,50.00,2024-06-01 10:30:15,已发放\n`;
+                csvContent += `FP202406010002,${activityId},oWm1234567891,满减券,20.00,100.00,2024-06-01 10:31:20,已发放\n`;
+            } else {
+                filename = `${activityName}_核销明细_${new Date().toISOString().split('T')[0]}.csv`;
+                csvContent = '发放流水号,交易流水号,活动ID,OpenID,券类型,核销金额,订单金额,商户号,商户名称,核销时间,核销状态\n';
+                // 这里应该从实际数据源获取数据
+                csvContent += `FP202406010001,TX202406010001,${activityId},oWm1234567890,满减券,10.00,60.00,M001,测试商户A,2024-06-01 14:25:30,核销成功\n`;
+            }
+            
+            // 创建并下载文件
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            console.log(`下载文件: ${filename}`);
+        }
+
+        // 打开查看详情弹窗
+        function openViewActivityModal(activityData) {
+            const modal = document.getElementById('viewActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 填充详情数据
+            if (activityData) {
+                document.getElementById('detail-activity-id').textContent = activityData.activityId || '-';
+                document.getElementById('detail-activity-name').textContent = activityData.activityName || '-';
+                document.getElementById('detail-theme-id').textContent = activityData.themeActivityId || '-';
+                document.getElementById('detail-batch-number').textContent = activityData.batchNumber || '-';
+                document.getElementById('detail-start-time').textContent = activityData.effectiveTime || '-';
+                document.getElementById('detail-end-time').textContent = activityData.expiryTime || '-';
+                document.getElementById('detail-create-time').textContent = activityData.createTime || '-';
+                document.getElementById('detail-update-time').textContent = activityData.updateTime || '-';
+                document.getElementById('detail-status').textContent = activityData.activityStatus || '-';
+                document.getElementById('detail-creator').textContent = activityData.creator || '-';
+                document.getElementById('detail-updater').textContent = activityData.updater || '-';
+            }
+            
+            // 显示遮罩层
+            modal.style.display = 'flex';
+            
+            // 延迟添加动画类，确保过渡效果
+            setTimeout(() => {
+                modal.classList.add('show');
+                panel.classList.add('show');
+            }, 10);
+            
+            // 设置默认标签页为活动详情
+            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector('.tab-item[data-tab="detail"]').classList.add('active');
+            document.getElementById('detail-content').classList.add('active');
+        }
+        
+        // 编辑活动相关函数
+        function openEditActivityModal(activityData) {
+            const modal = document.getElementById('editActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            const form = document.getElementById('editActivityForm');
+            
+            // 填充表单数据
+            if (activityData) {
+                form.querySelector('input[name="activityName"]').value = activityData.activityName || '';
+                form.querySelector('input[name="themeActivityId"]').value = activityData.themeActivityId || '';
+                form.querySelector('input[name="batchNumber"]').value = activityData.batchNumber || '';
+                form.querySelector('input[name="faceValue"]').value = activityData.faceValue || '';
+                form.querySelector('input[name="usageThreshold"]').value = activityData.usageThreshold || '';
+                form.querySelector('input[name="startDate"]').value = activityData.startDate || '';
+                form.querySelector('input[name="endDate"]').value = activityData.endDate || '';
+                form.querySelector('textarea[name="usageInstructions"]').value = activityData.usageInstructions || '';
+                
+                // 设置活动状态
+                const statusRadios = form.querySelectorAll('input[name="activityStatus"]');
+                statusRadios.forEach(radio => {
+                    if (radio.value === activityData.activityStatus) {
+                        radio.checked = true;
+                    }
+                });
+                
+                // 设置其他单选框
+                const displayRadios = form.querySelectorAll('input[name="displayInMiniProgram"]');
+                displayRadios.forEach(radio => {
+                    if (radio.value === activityData.displayInMiniProgram) {
+                        radio.checked = true;
+                    }
+                });
+                
+                const usagePeriodRadios = form.querySelectorAll('input[name="usagePeriod"]');
+                usagePeriodRadios.forEach(radio => {
+                    if (radio.value === activityData.usagePeriod) {
+                        radio.checked = true;
+                    }
+                });
+                
+                if (activityData.usageDays) {
+                    form.querySelector('input[name="usageDays"]').value = activityData.usageDays;
+                }
+                
+                // 设置结算方式
+                const settlementRadios = form.querySelectorAll('input[name="settlement"]');
+                settlementRadios.forEach(radio => {
+                    if (radio.value === activityData.settlement) {
+                        radio.checked = true;
+                    }
+                });
+                
+                if (activityData.settlementRatio) {
+                    form.querySelector('input[name="settlementRatio"]').value = activityData.settlementRatio;
+                }
+            }
+            
+            // 显示遮罩层
+            modal.style.display = 'flex';
+            
+            // 延迟添加动画类，确保过渡效果
+            setTimeout(() => {
+                modal.classList.add('show');
+                panel.classList.add('show');
+            }, 10);
+        }
+        
+        function closeEditActivityModal() {
+            const modal = document.getElementById('editActivityModal');
+            const panel = modal.querySelector('.modal-panel');
+            
+            // 移除动画类
+            modal.classList.remove('show');
+            panel.classList.remove('show');
+            
+            // 延迟隐藏遮罩层
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // 重置表单
+                document.getElementById('editActivityForm').reset();
+            }, 300);
+        }
+        
+        function submitEditActivity() {
+            const form = document.getElementById('editActivityForm');
+            const formData = new FormData(form);
+            
+            // 验证活动名称
+            const activityName = formData.get('activityName');
+            if (!activityName.trim()) {
+                alert('请填写活动名称');
+                return;
+            }
+            
+            // 构建提交数据（只包含可编辑的字段）
+            const editData = {
+                activityName: activityName,
+                activityStatus: formData.get('activityStatus')
+            };
+            
+            console.log('提交编辑数据：', editData);
+            
+            // 模拟提交成功
+            alert('活动编辑成功！');
+            closeEditActivityModal();
+            
+            // 这里可以调用实际的API接口
+            // updateActivityToServer(editData);
+        }
+        
+        // 编辑活动：从表格行中提取数据并打开编辑弹窗
+        function editActivity(button) {
+            const row = button.closest('tr');
+            const cells = row.querySelectorAll('td');
+            
+            // 从表格行中提取活动数据
+            const activityData = {
+                activityId: cells[2].textContent.trim(),
+                activityName: cells[3].textContent.trim(),
+                batchNumber: cells[4].textContent.trim(),
+                themeActivityId: cells[5].textContent.trim(),
+                startDate: cells[6].textContent.trim().split(' ')[0], // 只取日期部分
+                endDate: cells[7].textContent.trim().split(' ')[0], // 只取日期部分
+                createTime: cells[8].textContent.trim(),
+                updateTime: cells[9].textContent.trim(),
+                activityStatus: cells[10].querySelector('.status-badge').textContent.trim(),
+                creator: cells[11].textContent.trim(),
+                updater: cells[12].textContent.trim(),
+                // 以下字段在表格中不显示，使用默认值
+                faceValue: '10.00',
+                usageThreshold: '100.00',
+                usageInstructions: '请在有效期内使用',
+                displayInMiniProgram: 'true',
+                usagePeriod: 'anytime'
+            };
+            
+            openEditActivityModal(activityData);
+        }
+        
+        // 导出活动数据
+        function exportActivities() {
+            // 获取当前表格数据
+            const table = document.querySelector('.data-table table');
+            const rows = table.querySelectorAll('tbody tr');
+            
+            // 构建CSV数据
+            let csvContent = '序号,活动ID,活动名称,主题活动ID,批次号,生效时间,失效时间,创建时间,更新时间,活动状态,创建人,更新人\n';
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 1) { // 排除操作列
+                    const rowData = [];
+                    // 跳过复选框列和操作列，提取数据列
+                    for (let i = 1; i < cells.length - 1; i++) {
+                        let cellText = cells[i].textContent.trim();
+                        // 处理包含逗号的数据，用双引号包围
+                        if (cellText.includes(',')) {
+                            cellText = '"' + cellText + '"';
+                        }
+                        rowData.push(cellText);
+                    }
+                    csvContent += rowData.join(',') + '\n';
+                }
+            });
+            
+            // 创建下载链接
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', '微信活动数据_' + new Date().toISOString().slice(0, 10) + '.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // 显示导出成功提示
+            alert('数据导出成功！');
+        }
+
+        // 终止活动确认相关函数
+        let currentTerminateElement = null;
+
+        function showTerminateConfirm(element) {
+            currentTerminateElement = element;
+            const modal = document.getElementById('terminateConfirmModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeTerminateConfirm() {
+            const modal = document.getElementById('terminateConfirmModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                currentTerminateElement = null;
+            }, 300);
+        }
+
+        function confirmTerminate() {
+             if (currentTerminateElement) {
+                 // 获取当前行的活动信息
+                 const row = currentTerminateElement.closest('tr');
+                 const activityName = row.cells[3].textContent.trim();
+                 
+                 // 这里可以添加实际的终止活动逻辑
+                 // 例如发送AJAX请求到后端
+                 console.log('终止活动:', activityName);
+                 
+                 // 模拟终止成功，更新状态
+                 const statusCell = row.cells[10];
+                 statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                 
+                 // 禁用终止按钮
+                 currentTerminateElement.style.color = '#c0c4cc';
+                 currentTerminateElement.style.pointerEvents = 'none';
+                 currentTerminateElement.onclick = null;
+                 
+                 alert('活动已成功终止！');
+             }
+             closeTerminateConfirm();
+         }
+
+         // 批量终止活动相关函数
+         function showBatchTerminateConfirm() {
+             console.log('showBatchTerminateConfirm 函数被调用');
+             const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+             
+             if (checkedBoxes.length === 0) {
+                 alert('请先选择要终止的活动！');
+                 return;
+             }
+             
+             // 显示选中的活动数量
+             const selectedCountElement = document.getElementById('selectedCount');
+             selectedCountElement.textContent = `已选中 ${checkedBoxes.length} 个活动`;
+             
+             const modal = document.getElementById('batchTerminateConfirmModal');
+             modal.style.display = 'flex';
+             setTimeout(() => {
+                 modal.classList.add('show');
+             }, 10);
+         }
+
+         function closeBatchTerminateConfirm() {
+             const modal = document.getElementById('batchTerminateConfirmModal');
+             modal.classList.remove('show');
+             setTimeout(() => {
+                 modal.style.display = 'none';
+             }, 300);
+         }
+
+         function confirmBatchTerminate() {
+             const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+             let terminatedCount = 0;
+             
+             checkedBoxes.forEach(checkbox => {
+                 const row = checkbox.closest('tr');
+                 const statusCell = row.cells[10];
+                 const terminateLink = row.querySelector('.action-link[onclick*="showTerminateConfirm"]');
+                 
+                 // 只终止未终止的活动
+                 if (!statusCell.textContent.includes('已终止')) {
+                     // 更新状态
+                     statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                     
+                     // 禁用终止按钮
+                     if (terminateLink) {
+                         terminateLink.style.color = '#c0c4cc';
+                         terminateLink.style.pointerEvents = 'none';
+                         terminateLink.onclick = null;
+                     }
+                     
+                     // 取消选中
+                     checkbox.checked = false;
+                     terminatedCount++;
+                 }
+             });
+             
+             // 更新全选状态
+             updateSelectAll();
+             
+             alert(`成功终止 ${terminatedCount} 个活动！`);
+             closeBatchTerminateConfirm();
+         }
+    </script>
+
+    <!-- 二次确认弹窗 -->
+    <div class="confirm-overlay" id="confirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认提交</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要提交新增活动吗？请确认信息无误。</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeConfirmModal()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmSubmit()">确定提交</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 终止活动确认弹窗 -->
+    <div class="confirm-overlay" id="terminateConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认终止活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要终止此活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeTerminateConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmTerminate()" style="background-color: #f56c6c;">确定终止</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量终止活动确认弹窗 -->
+    <div class="confirm-overlay" id="batchTerminateConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认批量终止活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要终止全部选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p id="selectedCount" style="color: #f56c6c; font-weight: bold; margin-top: 10px;"></p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeBatchTerminateConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmBatchTerminate()" style="background-color: #f56c6c;">确定终止</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
