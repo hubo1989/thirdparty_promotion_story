@@ -578,107 +578,63 @@
                 
                 <h3>1.4 活动状态管理</h3>
                 <div id="activity-status-chart" class="chart-container">
-                    <div class="chart-placeholder">图表加载中...</div>
+                    <svg width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                        <style>
+                            .node { 
+                                fill: #66CCFF; 
+                                stroke: #333;
+                                stroke-width: 1;
+                            }
+                            .node-label { 
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                text-anchor: middle;
+                                dominant-baseline: middle;
+                            }
+                            .link { 
+                                stroke: #333; 
+                                stroke-width: 2; 
+                                marker-end: url(#arrowhead);
+                            }
+                            .link-label { 
+                                font-family: Arial, sans-serif;
+                                font-size: 12px;
+                                fill: #333;
+                                text-anchor: middle;
+                            }
+                        </style>
+                        
+                        <!-- 定义箭头标记 -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                                    refX="10" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- 节点 -->
+                        <circle class="node" cx="150" cy="200" r="40" fill="#66CCFF"/>
+                        <text class="node-label" x="150" y="200">待开始</text>
+                        
+                        <circle class="node" cx="350" cy="200" r="40" fill="#66FF66"/>
+                        <text class="node-label" x="350" y="200">进行中</text>
+                        
+                        <circle class="node" cx="550" cy="100" r="40" fill="#FF6666"/>
+                        <text class="node-label" x="550" y="100">已终止</text>
+                        
+                        <circle class="node" cx="550" cy="300" r="40" fill="#CCCCCC"/>
+                        <text class="node-label" x="550" y="300">已结束</text>
+                        
+                        <!-- 连接线 -->
+                        <line class="link" x1="190" y1="200" x2="310" y2="200"/>
+                        
+                        <line class="link" x1="380" y1="180" x2="520" y2="120"/>
+                        <text class="link-label" x="450" y="135">手动终止</text>
+                        
+                        <line class="link" x1="380" y1="220" x2="520" y2="280"/>
+                        <text class="link-label" x="450" y="265">时间到达</text>
+                    </svg>
                 </div>
-                <script>
-                    function initActivityStatusChart() {
-                        var chartDom = document.getElementById('activity-status-chart');
-                        if (!chartDom) return;
-                        
-                        // 检查ECharts是否加载成功
-                        if (typeof echarts === 'undefined') {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
-                            return;
-                        }
-                        
-                        try {
-                            // 清空容器内容
-                            chartDom.innerHTML = '';
-                            
-                            var myChart = echarts.init(chartDom);
-                            
-                            myChart.setOption({
-                                title: {
-                                    text: '活动状态流转图'
-                                },
-                                series: [{
-                                    type: 'graph',
-                                    layout: 'force',
-                                    symbolSize: 50,
-                                    roam: false, // 禁用缩放和漫游
-                                    focusNodeAdjacency: true,
-                                    draggable: false, // 禁用节点拖拽
-                                    force: {
-                                        repulsion: 1000,
-                                        edgeLength: [50, 100]
-                                    },
-                                    label: {
-                                        show: true
-                                    },
-                                    edgeSymbol: ['circle', 'arrow'],
-                                    edgeSymbolSize: [4, 10],
-                                    data: [{
-                                        name: '待开始',
-                                        itemStyle: { color: '#66CCFF' }
-                                    }, {
-                                        name: '进行中',
-                                        itemStyle: { color: '#66FF66' }
-                                    }, {
-                                        name: '已终止',
-                                        itemStyle: { color: '#FF6666' }
-                                    }, {
-                                        name: '已结束',
-                                        itemStyle: { color: '#CCCCCC' }
-                                    }],
-                                    links: [{
-                                        source: '待开始',
-                                        target: '进行中'
-                                    }, {
-                                        source: '进行中',
-                                        target: '已终止',
-                                        lineStyle: { width: 2 },
-                                        label: { show: true, formatter: '手动终止' }
-                                    }, {
-                                        source: '进行中',
-                                        target: '已结束',
-                                        lineStyle: { width: 2 },
-                                        label: { show: true, formatter: '时间到达' }
-                                    }],
-                                    lineStyle: {
-                                        opacity: 0.9,
-                                        width: 2,
-                                        curveness: 0
-                                    }
-                                }]
-                            });
-                            
-                            // 监听窗口大小变化，自适应图表
-                            window.addEventListener('resize', function() {
-                                myChart.resize();
-                            });
-                        } catch (e) {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
-                        }
-                    }
-                    
-                    // 确保DOM加载完成后初始化图表
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // 延迟执行以确保ECharts完全加载
-                            setTimeout(initActivityStatusChart, 100);
-                        });
-                    } else {
-                        setTimeout(initActivityStatusChart, 100);
-                    }
-                    
-                    // 添加图表初始化检查函数
-                    function checkActivityStatusChart() {
-                        var chartDom = document.getElementById('activity-status-chart');
-                        if (chartDom && chartDom.innerHTML.includes('图表加载中')) {
-                            initActivityStatusChart();
-                        }
-                    }
-                </script>
 
                 <!-- 
                     操作权限控制表
@@ -733,122 +689,69 @@
 
                 <h3>2.2 操作流程图</h3>
                 <div id="operation-flow-chart" class="chart-container">
-                    <div class="chart-placeholder">图表加载中...</div>
+                    <svg width="100%" height="400" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+                        <style>
+                            .node { 
+                                fill: #66CCFF; 
+                                stroke: #333;
+                                stroke-width: 1;
+                            }
+                            .node-label { 
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                text-anchor: middle;
+                                dominant-baseline: middle;
+                            }
+                            .link { 
+                                stroke: #333; 
+                                stroke-width: 2; 
+                                marker-end: url(#arrowhead);
+                            }
+                            .link-label { 
+                                font-family: Arial, sans-serif;
+                                font-size: 12px;
+                                fill: #333;
+                                text-anchor: middle;
+                            }
+                        </style>
+                        
+                        <!-- 定义箭头标记 -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                                    refX="10" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- 节点 -->
+                        <circle class="node" cx="100" cy="200" r="40" fill="#66CCFF"/>
+                        <text class="node-label" x="100" y="200">创建活动</text>
+                        
+                        <circle class="node" cx="300" cy="200" r="40" fill="#FF9966"/>
+                        <text class="node-label" x="300" y="200">待生效</text>
+                        
+                        <circle class="node" cx="500" cy="200" r="40" fill="#66FF66"/>
+                        <text class="node-label" x="500" y="200">生效中</text>
+                        
+                        <circle class="node" cx="700" cy="100" r="40" fill="#FF9966"/>
+                        <text class="node-label" x="700" y="100">编辑活动</text>
+                        
+                        <circle class="node" cx="700" cy="300" r="40" fill="#CCCCCC"/>
+                        <text class="node-label" x="700" y="300">已终止</text>
+                        
+                        <!-- 连接线 -->
+                        <line class="link" x1="140" y1="200" x2="260" y2="200"/>
+                        
+                        <line class="link" x1="340" y1="200" x2="460" y2="200"/>
+                        
+                        <line class="link" x1="540" y1="180" x2="660" y2="120"/>
+                        
+                        <line class="link" x1="660" y1="140" x2="540" y2="220" marker-end="url(#arrowhead)"/>
+                        
+                        <line class="link" x1="540" y1="220" x2="660" y2="280"/>
+                        <text class="link-label" x="620" y="270">手动终止</text>
+                    </svg>
                 </div>
-                <script>
-                    function initOperationFlowChart() {
-                        var chartDom = document.getElementById('operation-flow-chart');
-                        if (!chartDom) {
-                            console.log('操作流程图容器未找到');
-                            return;
-                        }
-                        
-                        // 检查ECharts是否加载成功
-                        if (typeof echarts === 'undefined') {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
-                            console.log('ECharts库未加载');
-                            return;
-                        }
-                        
-                        try {
-                            // 清空容器内容
-                            chartDom.innerHTML = '';
-                            
-                            var myChart = echarts.init(chartDom);
-                            
-                            myChart.setOption({
-                                title: {
-                                    text: '操作流程图'
-                                },
-                                series: [{
-                                    type: 'graph',
-                                    layout: 'force',
-                                    symbolSize: 60,
-                                    roam: false, // 禁用缩放和漫游
-                                    focusNodeAdjacency: true,
-                                    draggable: false, // 禁用节点拖拽
-                                    force: {
-                                        repulsion: 1000,
-                                        edgeLength: [50, 100]
-                                    },
-                                    label: {
-                                        show: true
-                                    },
-                                    edgeSymbol: ['circle', 'arrow'],
-                                    edgeSymbolSize: [4, 10],
-                                    data: [{
-                                        name: '创建活动',
-                                        itemStyle: { color: '#66CCFF' }
-                                    }, {
-                                        name: '待生效',
-                                        itemStyle: { color: '#FF9966' }
-                                    }, {
-                                        name: '编辑活动',
-                                        itemStyle: { color: '#FF9966' }
-                                    }, {
-                                        name: '生效中',
-                                        itemStyle: { color: '#66FF66' }
-                                    }, {
-                                        name: '已终止',
-                                        itemStyle: { color: '#CCCCCC' }
-                                    }],
-                                    links: [{
-                                        source: '创建活动',
-                                        target: '待生效'
-                                    }, {
-                                        source: '待生效',
-                                        target: '生效中'
-                                    }, {
-                                        source: '生效中',
-                                        target: '编辑活动'
-                                    }, {
-                                        source: '编辑活动',
-                                        target: '待生效'
-                                    }, {
-                                        source: '生效中',
-                                        target: '已终止',
-                                        lineStyle: { width: 2 },
-                                        label: { show: true, formatter: '手动终止' }
-                                    }],
-                                    lineStyle: {
-                                        opacity: 0.9,
-                                        width: 2,
-                                        curveness: 0
-                                    }
-                                }]
-                            });
-                            
-                            // 监听窗口大小变化，自适应图表
-                            window.addEventListener('resize', function() {
-                                myChart.resize();
-                            });
-                            
-                            console.log('操作流程图初始化成功');
-                        } catch (e) {
-                            chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
-                            console.error('操作流程图初始化失败:', e);
-                        }
-                    }
-                    
-                    // 确保DOM加载完成后初始化图表
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', function() {
-                            // 延迟执行以确保ECharts完全加载
-                            setTimeout(initOperationFlowChart, 100);
-                        });
-                    } else {
-                        setTimeout(initOperationFlowChart, 100);
-                    }
-                    
-                    // 添加图表初始化检查函数
-                    function checkOperationFlowChart() {
-                        var chartDom = document.getElementById('operation-flow-chart');
-                        if (chartDom && chartDom.innerHTML.includes('图表加载中')) {
-                            console.log('重新尝试初始化操作流程图');
-                            initOperationFlowChart();
-                        }
-                    }
-                </script>
                 
             </section>
 
@@ -907,59 +810,5 @@
     </div>
 
     <script>hljs.highlightAll();</script>
-    
-    <!-- ECharts备用加载方案 -->
-    <script>
-        // 检查是否所有图表都已成功初始化
-        function checkAndInitCharts() {
-            // 检查各个图表是否需要重新初始化
-            var systemChart = document.getElementById('system-architecture-chart');
-            var operationChart = document.getElementById('operation-flow-chart');
-            
-            // 如果图表容器中仍有"加载中"提示，说明初始化失败
-            if (systemChart && systemChart.innerHTML.includes('图表加载中')) {
-                setTimeout(initSystemArchitectureChart, 100);
-            }
-            
-            if (operationChart && operationChart.innerHTML.includes('图表加载中')) {
-                setTimeout(initOperationFlowChart, 100);
-            }
-        }
-        
-        // 如果主CDN加载失败，尝试备用方案
-        if (typeof echarts === 'undefined') {
-            console.log('ECharts未定义，尝试加载备用CDN');
-            // 创建script元素加载备用CDN
-            var script = document.createElement('script');
-            script.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js';
-            script.onload = function() {
-                console.log('ECharts备用CDN加载成功');
-                // 重新初始化所有图表
-                setTimeout(function() {
-                    initActivityStatusChart();
-                    initSystemArchitectureChart();
-                    initOperationFlowChart();
-                }, 200);
-            };
-            script.onerror = function() {
-                // 如果备用CDN也失败，使用本地fallback方案
-                console.log('ECharts加载失败，使用备用方案');
-                document.querySelectorAll('.chart-container').forEach(function(container) {
-                    if (container.innerHTML.includes('图表加载中')) {
-                        container.innerHTML = '<div class="chart-placeholder">图表库加载失败，请检查网络连接后刷新页面重试</div>';
-                    }
-                });
-            };
-            document.head.appendChild(script);
-        } else {
-            // ECharts已加载，但某些图表可能未正确初始化，检查并重新初始化
-            console.log('ECharts已加载，检查各图表初始化状态');
-            setTimeout(function() {
-                checkActivityStatusChart();
-                checkSystemArchitectureChart();
-                checkOperationFlowChart();
-            }, 500);
-        }
-    </script>
 </body>
 </html>
