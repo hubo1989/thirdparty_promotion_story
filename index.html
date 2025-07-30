@@ -448,153 +448,15 @@
     </div>
 
     <h1>5. 后台需求</h1>
-    
-    <h3>5.1 联合营销平台</h3>
-    
-    <h4>5.1.1 微信活动管理</h4>
-    <div class="highlight-box">
-        <p>在微信活动管理中将活动编码:batchCode填入批次号中，后续对应使用该字段区分微信活动。</p>
-        <p>优惠渠道中增加云数惠-微信选项，用于区别上游通道。</p>
-    </div>
-    
-    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
-        <img src="5.1.1-1.png" alt="微信活动管理配置界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.1-1 微信活动管理配置界面</p>
-    </div>
-    
-    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
-        <img src="5.1.1-2.png" alt="优惠渠道选择界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.1-2 优惠渠道选择界面</p>
-    </div>
-
-    <h4>5.1.2 主题活动管理</h4>
-    <div class="highlight-box">
-        <p>在查看批次号中，根据活动编码，展示领取数量、核销数量。</p>
-        <p><strong>新增功能：</strong>在每个微信活动的操作栏中增加"查看明细"按钮，点击后弹出活动明细查询窗口，支持查看该活动的发放明细和核销明细数据，并提供数据下载功能。</p>
-    </div>
-    
-    <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
-        <img src="5.1.2.png" alt="主题活动管理数据展示界面" style="width: 85%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图5.1.2 主题活动管理数据展示界面</p>
-    </div>
-    
-    <div class="success-box">
-        <p><strong>活动明细查询功能说明：</strong></p>
-        <ul>
-            <li><strong>触发方式：</strong>在微信活动操作栏点击"查看明细"按钮</li>
-            <li><strong>查询范围：</strong>仅显示当前选中活动的明细数据</li>
-            <li><strong>数据展示：</strong>通过标签页分别展示发放明细和核销明细</li>
-            <li><strong>统计汇总：</strong>弹窗顶部显示活动的总发放数量、已核销数量、未核销数量和核销率</li>
-            <li><strong>查询条件：</strong>支持按状态、流水号、时间范围等条件筛选</li>
-            <li><strong>数据下载：</strong>支持分别下载发放明细和核销明细的Excel文件</li>
-        </ul>
-    </div>
-
-    <h3>5.2 联合营销平台查询</h3>
+   
+    <h3>5.1 联合营销平台查询</h3>
     <div class="warning-box">
         <p>微信活动管理后台需要提供完整的数据查询功能，支持运营人员查询相关的发放和核销数据，包含明细查询和汇总统计功能。</p>
         <p>后台系统需对接云数惠回调接口， 在联合营销平台创建微信活动绑定主题活动后，活动数据存在本地，回调的优惠券数据除接口透传外，也需将数据进行保存，并用于后续的查询服务。</p>
-        <p>详细需求请参考 <a href="微信活动管理系统需求文档.html" class="url-link">微信活动管理系统需求文档.html</a></p>
-    </div>
-<!-- 
-    <h4>5.2.1 微信活动明细查看入口</h4>
-    <div class="highlight-box">
-        <p><strong>功能描述：</strong>在微信活动管理页面中增加查看明细入口，为每个微信活动提供详细的发放和核销数据查询功能。</p>
-        
-        <p><strong>原型链接：</strong></p>
-        <div class="code-block">
-            <a href="微信活动明细弹窗.html" class="url-link" target="_blank">
-            微信活动明细弹窗.html
-            </a>
-        </div>
-        
-        <p><strong>实现方式：</strong></p>
-        <ul>
-            <li><strong>入口位置：</strong>在微信活动管理列表的操作栏中增加"查看明细"按钮</li>
-            <li><strong>弹窗形式：</strong>采用右侧抽屉式弹窗，宽度占屏幕80%（最大1200px）</li>
-            <li><strong>数据展示：</strong>通过标签页分别展示发放明细和核销明细</li>
-            <li><strong>参数传递：</strong>自动传入当前活动的ID、名称和编码信息</li>
-            <li><strong>权限控制：</strong>基于银行机构进行数据权限隔离</li>
-            <li><strong>数据导出：</strong>支持分别导出发放明细和核销明细的CSV文件</li>
-        </ul>
-        
-        <p><strong>功能特性：</strong></p>
-        <ul>
-            <li><strong>实时数据：</strong>展示当前活动的最新发放和核销数据</li>
-            <li><strong>统计汇总：</strong>弹窗顶部显示活动的总发放数量、已核销数量、未核销数量和核销率</li>
-            <li><strong>条件筛选：</strong>支持按状态、流水号、时间范围等条件进行数据筛选</li>
-            <li><strong>分页显示：</strong>支持大数据量的分页展示，提升查询性能</li>
-            <li><strong>用户体验：</strong>抽屉式设计，不影响主页面操作，支持ESC键关闭</li>
-        </ul>
+        <p>详细需求请参考 <a href="wxpromotionstory.html" class="url-link">微信活动需求.html</a></p>
     </div>
 
-
-
-    
-    <h4>5.2.4 微信优惠券发放汇总统计</h4>
-    <div class="highlight-box">
-        <p><strong>原型链接：</strong></p>
-        <div class="code-block">
-            <a href="微信优惠券发放日汇总.html" class="url-link" target="_blank">
-            微信优惠券发放日汇总.html
-            </a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="微信优惠券发放月汇总.html" class="url-link" target="_blank">
-            微信优惠券发放月汇总.html
-            </a>
-        </div>
-    </div>
-    <div class="success-box">
-        <p><strong>日汇总统计功能：</strong></p>
-        <ul>
-            <li><strong>统计维度：</strong>按自然日进行数据汇总</li>
-            <li><strong>统计指标：</strong>发放总量、发放成功量、发放失败量、发放成功率、发放金额</li>
-            <li><strong>分类统计：</strong>满减券数量、折扣券数量、代金券数量</li>
-            <li><strong>概览卡片：</strong>总发放量、总发放金额、发放成功率、活跃天数</li>
-        </ul>
-        
-        <p><strong>月汇总统计功能：</strong></p>
-        <ul>
-            <li><strong>统计维度：</strong>按自然月进行数据汇总</li>
-            <li><strong>统计指标：</strong>月发放总量、成功率、发放金额、各类型券数量</li>
-            <li><strong>趋势分析：</strong>环比增长率分析</li>
-            <li><strong>概览卡片：</strong>半年发放总量、半年发放金额、平均成功率、月均发放量</li>
-        </ul>
-    </div>
-
-    <h4>5.2.5 微信优惠券核销汇总统计</h4>
-    <div class="highlight-box">
-        <p><strong>原型链接：</strong></p>
-        <div class="code-block">
-            <a href="微信优惠券核销日汇总.html" class="url-link" target="_blank">
-            微信优惠券核销日汇总.html
-            </a>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="微信优惠券核销月汇总.html" class="url-link" target="_blank">
-            微信优惠券核销月汇总.html
-            </a>
-        </div>
-    </div>
-    <div class="success-box">
-        <p><strong>日汇总统计功能：</strong></p>
-        <ul>
-            <li><strong>统计维度：</strong>按自然日进行核销数据汇总</li>
-            <li><strong>统计指标：</strong>核销成功量、核销金额、核销率</li>
-            <li><strong>分类统计：</strong>满减券核销、折扣券核销、代金券核销</li>
-            <li><strong>概览卡片：</strong>总核销量、总核销金额、核销率、平均核销金额</li>
-        </ul>
-        
-        <p><strong>月汇总统计功能：</strong></p>
-        <ul>
-            <li><strong>统计维度：</strong>按自然月进行核销数据汇总</li>
-            <li><strong>统计指标：</strong>月核销量、核销金额、核销率、各类型券核销量</li>
-            <li><strong>趋势分析：</strong>环比增长率、核销率变化趋势</li>
-            <li><strong>深度分析：</strong>用户行为分析、商户核销分布</li>
-        </ul>
-    </div>
-    -->
-
-    <h4>5.2.2 查询功能技术特性</h4>
+    <h4>5.1.1 查询功能技术特性</h4>
     <div class="highlight-box">
         <p><strong>用户体验设计：</strong></p>
         <ul>
@@ -638,7 +500,7 @@
             `;
             
             const iframe = document.createElement('iframe');
-            iframe.src = '微信活动明细弹窗.html?activityId=' + encodeURIComponent(activityId) + 
+            iframe.src = 'wxpromotionsotry.html?activityId=' + encodeURIComponent(activityId) + 
                         '&activityName=' + encodeURIComponent(activityName) + 
                         '&activityCode=' + encodeURIComponent(activityCode);
             iframe.style.cssText = `

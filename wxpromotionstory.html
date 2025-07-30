@@ -1,158 +1,176 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
 <head>
-    <meta charset="UTF-8">
-    <title>微信活动管理系统需求文档</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ECharts图表支持 -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>微信活动需求文档</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotPromptForConvert/>
+            <w:DoNotShowInsertionsAndDeletions/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <!-- ECharts图表支持 使用国内CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <!-- 代码高亮 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <style>
-        :root {
-            --primary-color: #409EFF;
-            --text-color: #333;
-            --bg-color: #f5f7fa;
+        body { 
+            font-family: '宋体', SimSun, serif; 
+            font-size: 14pt; 
+            line-height: 1.6; 
+            margin: 1in 10% 1in 10%;
+            background: white;
         }
-        
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+        h1 { 
+            font-size: 20pt; 
+            color: #2c3e50; 
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 10pt; 
+            margin-top: 20pt;
+            margin-bottom: 15pt;
+            page-break-after: avoid;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        h2 { 
+            font-size: 18pt; 
+            color: #007bff; 
+            margin-top: 20pt; 
+            margin-bottom: 10pt;
+            page-break-after: avoid;
         }
-        
-        header {
-            background: #1a73e8;
-            color: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
+        h3 { 
+            font-size: 16pt; 
+            color: #495057; 
+            margin-top: 15pt; 
+            margin-bottom: 8pt;
+            page-break-after: avoid;
         }
-        
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        h4 { 
+            font-size: 14pt; 
+            color: #6c757d; 
+            margin-top: 10pt; 
+            margin-bottom: 6pt;
+            page-break-after: avoid;
         }
-        
-        .toc {
-            width: 200px;
-            position: sticky;
-            top: 2rem;
-            height: calc(100vh - 4rem);
-            overflow-y: auto;
+        p { 
+            margin-bottom: 6pt; 
+            text-align: justify; 
+            text-indent: 0;
         }
-        
-        .content {
-            flex: 1;
-            padding: 0 2rem;
+        ul, ol { 
+            margin-left: 20pt; 
+            margin-bottom: 10pt;
         }
-        
-        section {
-            margin-bottom: 3rem;
-            scroll-margin-top: 6rem;
+        li { 
+            margin-bottom: 3pt; 
         }
-        
-        h1, h2, h3 {
-            color: #1a73e8;
-            margin-top: 2rem;
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin: 10pt 0; 
+            font-size: 12pt;
         }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 0.25em 0.6em;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-        
-        .status-draft { background: #e6e6e6; }
-        .status-pending { background: #a5d8ff; }
-        .status-active { background: #4ecdc4; }
-        .status-ended { background: #dcdcdc; }
-        .status-terminated { background: #ff8080; }
-        
-        .code-block {
-            background: #f8f8f8;
-            padding: 1rem;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-        
-        th, td {
-            border: 1px solid #ddd;
-            padding: 0.75rem;
+        th, td { 
+            border: 1pt solid #000; 
+            padding: 6pt; 
+            text-align: left; 
             vertical-align: top;
         }
-        
-        th {
-            background: #f0f0f0;
+        th { 
+            background-color: #f0f0f0; 
+            font-weight: bold; 
+        }
+        .code-block { 
+            background-color: #f8f9fa; 
+            border: 1pt solid #ccc; 
+            padding: 10pt; 
+            font-family: 'Courier New', monospace; 
+            font-size: 12pt;
+            margin: 10pt 0;
+        }
+        .highlight-box { 
+            background-color: #e7f3ff; 
+            border: 1pt solid #b3d9ff; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .warning-box { 
+            background-color: #fff3cd; 
+            border: 1pt solid #ffeaa7; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .success-box { 
+            background-color: #d4edda; 
+            border: 1pt solid #c3e6cb; 
+            padding: 10pt; 
+            margin: 10pt 0; 
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 30pt; 
+            border-bottom: 3pt solid #007bff; 
+            padding-bottom: 20pt;
+        }
+        .meta { 
+            color: #666; 
+            font-size: 12pt; 
+            margin-top: 10pt;
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 30pt; 
+            border-top: 2pt solid #ccc; 
+            padding-top: 20pt; 
+            color: #666; 
+            font-size: 12pt;
+        }
+        .api-endpoint { 
+            background-color: #28a745; 
+            color: white; 
+            padding: 4pt 8pt; 
+            font-family: 'Courier New', monospace; 
+            font-size: 12pt;
+        }
+        .parameter-list { 
+            background-color: #f8f9fa; 
+            padding: 8pt; 
+            margin: 8pt 0; 
+            border-left: 3pt solid #007bff;
+        }
+        .url-link {
+            color: #0066cc;
+            text-decoration: underline;
+            font-family: 'Courier New', monospace;
+            font-size: 12pt;
+        }
+        @page {
+            margin: 1in 10% 1in 10%;
+        }
+        @media print {
+            body { margin: 1in 10% 1in 10%; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>微信活动管理系统需求文档</h1>
-            <p class="version">文档版本：v1.1 | 最后更新：2025-07-30</p>
-        </div>
-    </header>
+    <div class="header">
+        <h1>微信活动需求文档</h1>
+    </div>
 
-    <div class="container" style="display: flex; gap: 2rem;">
-        <div class="toc">
-            <h3>目录</h3>
-            <ul>
-                <li><a href="#doc-info">1. 文档信息</a></li>
-                <li><a href="#project-bg">2. 项目背景</a></li>
-                <li><a href="#func-req">3. 功能需求</a></li>
-                <li><a href="#ui-design">4. 界面设计</a></li>
-                <li><a href="#data-spec">5. 数据规范</a></li>
-                <li><a href="#non-func">6. 非功能需求</a></li>
-                <li><a href="#perm-design">7. 权限设计</a></li>
-                <li><a href="#appendix">8. 附录</a></li>
-            </ul>
-        </div>
-
+    <div class="container">
         <div class="content">
-            <!-- 1. 文档信息 -->
-            <section id="doc-info">
-                <h2>1. 文档信息</h2>
-                <table>
-                    <tr><th>属性</th><th>内容</th></tr>
-                    <tr><td>文档名称</td><td>微信活动管理系统需求文档</td></tr>
-                    <tr><td>编写人</td><td>呼博</td></tr>
-                </table>
-            </section>
 
-            <!-- 2. 项目背景 -->
-            <section id="project-bg">
-                <h2>2. 项目背景</h2>
-                <p>本功能针对第三方微信活动管理，支持银行等金融机构开展线上营销活动。主要目标包括：</p>
-                <ul>
-                    <li>多渠道通用（通过标签区分）</li>
-                    <li>强化权限管理（按角色控制）</li>
-                    <li>实现全流程可视化（支持多维度数据分析）</li>
-                </ul>
-            </section>
-
-            <!-- 3. 功能需求 -->
+           <!-- 1. 功能需求 -->
             <section id="func-req">
-                <h2>3. 功能需求</h2>
+                <h2>1. 功能需求</h2>
                 
-                <h3>3.1 核心功能模块</h3>
+                <h3>1.1 核心功能模块</h3>
                 <table>
                     <tr><th>模块</th><th>功能描述</th><th>业务规则</th></tr>
                     <tr>
@@ -167,7 +185,7 @@
                     </tr>
                 </table>
 
-                <h3>3.2 活动状态管理</h3>
+                <h3>1.2 活动状态管理</h3>
                 <div id="activity-status-chart" style="width: 100%; height: 400px;"></div>
                 <script>
                     function initActivityStatusChart() {
@@ -244,7 +262,7 @@
                     描述了不同用户角色对活动管理功能的访问权限
                     权限基于控制台用户角色可配置
                 -->
-                <h3>3.3 操作权限控制</h3>
+                <h3>1.3 操作权限控制</h3>
                 <!-- 
                     权限矩阵表
                     展示了管理员、操作员和审计员三种角色对系统功能的访问权限
@@ -277,11 +295,11 @@
                 </table>
             </section>
 
-            <!-- 4. 界面设计 -->
+            <!-- 2. 界面设计 -->
             <section id="ui-design">
-                <h2>4. 界面设计</h2>
+                <h2>2. 界面设计</h2>
                 
-                <h3>4.1 系统架构图</h3>
+                <h3>2.1 系统架构图</h3>
                 <div id="system-architecture-chart" style="width: 100%; height: 600px;"></div>
                 <script>
                     function initSystemArchitectureChart() {
@@ -373,7 +391,7 @@
                     }
                 </script>
 
-                <h3>4.2 操作流程图</h3>
+                <h3>2.2 操作流程图</h3>
                 <div id="operation-flow-chart" style="width: 100%; height: 400px;"></div>
                 <script>
                     function initOperationFlowChart() {
@@ -454,11 +472,11 @@
                 
             </section>
 
-            <!-- 5. 数据规范 -->
+            <!-- 3. 数据规范 -->
             <section id="data-spec">
-                <h2>5. 数据规范</h2>
+                <h2>3. 数据规范</h2>
                 
-                <h3>5.1 数据字典</h3>
+                <h3>3.1 数据字典</h3>
                 <table>
                     <tr><th>字段</th><th>类型</th><th>描述</th><th>约束</th></tr>
                     <tr>
@@ -475,7 +493,7 @@
                     </tr>
                 </table>
 
-                <h3>5.2 时间规范</h3>
+                <h3>3.2 时间规范</h3>
                 <ul>
                     <li>时间格式：ISO 8601（YYYY-MM-DDTHH:mm:ssZ）</li>
                     <li>时区：UTC+8</li>
@@ -483,18 +501,18 @@
                 </ul>
             </section>
 
-            <!-- 6. 非功能需求 -->
+            <!-- 4. 非功能需求 -->
             <section id="non-func">
-                <h2>6. 非功能需求</h2>
+                <h2>4. 非功能需求</h2>
                 
-                <h3>6.1 性能指标</h3>
+                <h3>4.1 性能指标</h3>
                 <table>
                     <tr><th>指标</th><th>要求</th></tr>
                     <tr><td>并发处理</td><td>≥1000 TPS</td></tr>
                     <tr><td>响应时间</td><td>≤500ms（P95）</td></tr>
                 </table>
 
-                <h3>6.2 安全要求</h3>
+                <h3>4.2 安全要求</h3>
                 <ul>
                     <li>敏感数据加密存储（AES-256）</li>
                     <li>操作日志保留36个月</li>
@@ -502,11 +520,11 @@
                 </ul>
             </section>
 
-            <!-- 7. 权限设计 -->
+            <!-- 5. 权限设计 -->
             <section id="perm-design">
-                <h2>7. 权限设计</h2>
+                <h2>5. 权限设计</h2>
                 
-                <h3>7.1 权限矩阵</h3>
+                <h3>5.1 权限矩阵</h3>
                 <table>
                     <tr><th>操作</th><th>管理员</th><th>操作员</th><th>审计员</th></tr>
                     <tr>
@@ -518,24 +536,7 @@
                 </table>
             </section>
 
-            <!-- 8. 附录 -->
-            <section id="appendix">
-                <h2>8. 附录</h2>
-                
-                <h3>8.1 术语表</h3>
-                <table>
-                    <tr><th>术语</th><th>说明</th></tr>
-                    <tr><td>TPS</td><td>每秒事务处理量</td></tr>
-                    <tr><td>P95</td><td>95分位响应时间</td></tr>
-                </table>
-
-                <h3>8.2 版本变更记录</h3>
-                <table>
-                    <tr><th>版本</th><th>变更内容</th><th>日期</th></tr>
-                    <tr><td>v1.0</td><td>初始版本</td><td>2024-03-15</td></tr>
-                    <tr><td>v1.1</td><td>补充安全规范</td><td>2024-03-20</td></tr>
-                </table>
-            </section>
+            
         </div>
     </div>
 
