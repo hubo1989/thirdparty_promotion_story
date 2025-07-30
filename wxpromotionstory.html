@@ -731,9 +731,6 @@
                     <img src="wxprototype.png" alt="产品原型预览" style="max-width: 100%; height: auto;">
                 </div>
 
-
-                </button>
-
                 <h3>2.2 操作流程图</h3>
                 <div id="operation-flow-chart" class="chart-container">
                     <div class="chart-placeholder">图表加载中...</div>
@@ -741,11 +738,15 @@
                 <script>
                     function initOperationFlowChart() {
                         var chartDom = document.getElementById('operation-flow-chart');
-                        if (!chartDom) return;
+                        if (!chartDom) {
+                            console.log('操作流程图容器未找到');
+                            return;
+                        }
                         
                         // 检查ECharts是否加载成功
                         if (typeof echarts === 'undefined') {
                             chartDom.innerHTML = '<div class="chart-placeholder">图表库加载失败，请刷新页面重试</div>';
+                            console.log('ECharts库未加载');
                             return;
                         }
                         
@@ -821,8 +822,11 @@
                             window.addEventListener('resize', function() {
                                 myChart.resize();
                             });
+                            
+                            console.log('操作流程图初始化成功');
                         } catch (e) {
                             chartDom.innerHTML = '<div class="chart-placeholder">图表初始化失败: ' + e.message + '</div>';
+                            console.error('操作流程图初始化失败:', e);
                         }
                     }
                     
@@ -840,6 +844,7 @@
                     function checkOperationFlowChart() {
                         var chartDom = document.getElementById('operation-flow-chart');
                         if (chartDom && chartDom.innerHTML.includes('图表加载中')) {
+                            console.log('重新尝试初始化操作流程图');
                             initOperationFlowChart();
                         }
                     }
@@ -923,10 +928,12 @@
         
         // 如果主CDN加载失败，尝试备用方案
         if (typeof echarts === 'undefined') {
+            console.log('ECharts未定义，尝试加载备用CDN');
             // 创建script元素加载备用CDN
             var script = document.createElement('script');
             script.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js';
             script.onload = function() {
+                console.log('ECharts备用CDN加载成功');
                 // 重新初始化所有图表
                 setTimeout(function() {
                     initActivityStatusChart();
@@ -946,6 +953,7 @@
             document.head.appendChild(script);
         } else {
             // ECharts已加载，但某些图表可能未正确初始化，检查并重新初始化
+            console.log('ECharts已加载，检查各图表初始化状态');
             setTimeout(function() {
                 checkActivityStatusChart();
                 checkSystemArchitectureChart();
