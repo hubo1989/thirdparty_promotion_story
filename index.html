@@ -5,7 +5,7 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>云数惠权益营销平台微信优惠券服务接入需求文档</title>
+    <title>云数汇权益营销平台微信优惠券服务接入需求文档</title>
     <!--[if gte mso 9]>
     <xml>
         <w:WordDocument>
@@ -156,17 +156,17 @@
 </head>
 <body>
     <div class="header">
-        <h1>云数惠权益营销平台微信优惠券服务接入需求文档</h1>
+        <h1>云数汇权益营销平台微信优惠券服务接入需求文档</h1>
     </div>
 
     <h1>1. 项目概述</h1>
     
     <h3>1.1 项目背景</h3>
-    <p>接入云数惠第三方微信优惠券服务商，封装其获取openid的h5、发券、数据回调、数据查询接口，为合作银行提供统一的优惠券发放服务，并在联合营销平台、银行联合营销平台展示相关数据。</p>
+    <p>接入云数汇第三方微信优惠券服务商，封装其获取openid的h5、发券、数据回调、数据查询接口，为合作银行提供统一的优惠券发放服务，并在联合营销平台、银行联合营销平台展示相关数据。</p>
 
     <h3>1.2 项目目标</h3>
     <ul>
-        <li>与云数惠API对接，实现优惠券发放功能</li>
+        <li>与云数汇API对接，实现优惠券发放功能</li>
         <li>封装标准化接口供合作银行调用</li>
         <li>提供数据统计和查询功能</li>
         <li>建立完善的回调处理机制</li>
@@ -178,28 +178,161 @@
     <div class="highlight-box">
         <p><strong>业务流程时序图：</strong></p>
         <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
-            <img src="时序图.svg" alt="云数惠微信优惠券业务流程时序图" style="width: 95%; height: auto; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图2.1 云数惠微信优惠券业务流程时序图（详细版）</p>
+            <?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+    .participant { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
+    .step { font-family: Arial, sans-serif; font-size: 11px; fill: #34495e; }
+    .phase { font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #e74c3c; text-anchor: middle; }
+    .line { stroke: #34495e; stroke-width: 1; }
+    .arrow { stroke: #34495e; stroke-width: 2; fill: none; }
+    .participant-box { fill: #ecf0f1; stroke: #2c3e50; stroke-width: 1; }
+    .phase-box { fill: #fef9e7; stroke: #f39c12; stroke-width: 1; }
+  </style>
+  
+  <text x="500" y="30" class="title" text-anchor="middle">云数汇微信优惠券业务流程时序图</text>
+  
+  <rect x="50" y="60" width="120" height="40" class="participant-box"/>
+  <text x="110" y="85" class="participant">领券页面</text>
+  
+  <rect x="220" y="60" width="120" height="40" class="participant-box"/>
+  <text x="280" y="85" class="participant">行方系统</text>
+  
+  <rect x="390" y="60" width="120" height="40" class="participant-box"/>
+  <text x="450" y="75" class="participant">我方系统</text>
+  <text x="450" y="90" class="participant">(联合营销平台)</text>
+  
+  <rect x="560" y="60" width="120" height="40" class="participant-box"/>
+  <text x="620" y="85" class="participant">云数汇系统</text>
+  
+  <rect x="730" y="60" width="120" height="40" class="participant-box"/>
+  <text x="790" y="85" class="participant">微信平台</text>
+  
+  <line x1="110" y1="100" x2="110" y2="750" class="line"/>
+  <line x1="280" y1="100" x2="280" y2="750" class="line"/>
+  <line x1="450" y1="100" x2="450" y2="750" class="line"/>
+  <line x1="620" y1="100" x2="620" y2="750" class="line"/>
+  <line x1="790" y1="100" x2="790" y2="750" class="line"/>
+  
+  <rect x="50" y="130" width="800" height="25" class="phase-box"/>
+  <text x="450" y="147" class="phase">第一阶段：获取用户OpenID</text>
+  
+  <line x1="110" y1="170" x2="620" y2="170" class="arrow"/>
+  <polygon points="615,165 625,170 615,175" fill="#34495e"/>
+  <text x="360" y="165" class="step">1. H5页面获取OpenID</text>
+  
+  <line x1="620" y1="190" x2="790" y2="190" class="arrow"/>
+  <polygon points="785,185 795,190 785,195" fill="#34495e"/>
+  <text x="700" y="185" class="step">2. 微信授权</text>
+  
+  <line x1="790" y1="210" x2="620" y2="210" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="625,205 615,210 625,215" fill="#34495e"/>
+  <text x="700" y="205" class="step">3. 返回OpenID</text>
+  
+  <line x1="620" y1="230" x2="110" y2="230" class="arrow"/>
+  <polygon points="115,225 105,230 115,235" fill="#34495e"/>
+  <text x="360" y="225" class="step">4. 回调返回OpenID</text>
+  
+  <rect x="50" y="260" width="800" height="25" class="phase-box"/>
+  <text x="450" y="277" class="phase">第二阶段：优惠券发放</text>
+  
+  <line x1="110" y1="300" x2="280" y2="300" class="arrow"/>
+  <polygon points="275,295 285,300 275,305" fill="#34495e"/>
+  <text x="190" y="295" class="step">5. 发券请求</text>
+  
+  <line x1="280" y1="320" x2="450" y2="320" class="arrow"/>
+  <polygon points="445,315 455,320 445,325" fill="#34495e"/>
+  <text x="360" y="315" class="step">6. 调用发券接口</text>
+  
+  <line x1="450" y1="340" x2="620" y2="340" class="arrow"/>
+  <polygon points="615,335 625,340 615,345" fill="#34495e"/>
+  <text x="530" y="335" class="step">7. 云数汇发券API</text>
+  
+  <line x1="620" y1="360" x2="790" y2="360" class="arrow"/>
+  <polygon points="785,355 795,360 785,365" fill="#34495e"/>
+  <text x="700" y="355" class="step">8. 微信发券</text>
+  
+  <line x1="790" y1="380" x2="620" y2="380" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="625,375 615,380 625,385" fill="#34495e"/>
+  <text x="700" y="375" class="step">9. 发放结果</text>
+  
+  <line x1="620" y1="400" x2="450" y2="400" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="455,395 445,400 455,405" fill="#34495e"/>
+  <text x="530" y="395" class="step">10. 返回结果</text>
+  
+  <circle cx="450" cy="420" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="425" class="step" text-anchor="middle">11. 保存记录</text>
+  
+  <line x1="450" y1="440" x2="280" y2="440" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,435 275,440 285,445" fill="#34495e"/>
+  <text x="360" y="435" class="step">12. 返回结果</text>
+  
+  <line x1="280" y1="460" x2="110" y2="460" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="115,455 105,460 115,465" fill="#34495e"/>
+  <text x="190" y="455" class="step">13. 返回状态</text>
+  
+  <rect x="50" y="490" width="800" height="25" class="phase-box"/>
+  <text x="450" y="507" class="phase">第三阶段：核销回调</text>
+  
+  <rect x="720" y="530" width="100" height="30" fill="#fff3cd" stroke="#ffeaa7"/>
+  <text x="770" y="545" class="step" text-anchor="middle">用户使用优惠券</text>
+  
+  <line x1="790" y1="575" x2="620" y2="575" class="arrow"/>
+  <polygon points="625,570 615,575 625,580" fill="#34495e"/>
+  <text x="700" y="570" class="step">14. 核销通知</text>
+  
+  <line x1="620" y1="595" x2="450" y2="595" class="arrow"/>
+  <polygon points="445,590 455,595 445,600" fill="#34495e"/>
+  <text x="530" y="590" class="step">15. 回调通知</text>
+  
+  <circle cx="450" cy="615" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="620" class="step" text-anchor="middle">16. 更新记录</text>
+  
+  <line x1="450" y1="635" x2="620" y2="635" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="615,630 625,635 615,640" fill="#34495e"/>
+  <text x="530" y="630" class="step">17. 确认回调</text>
+  
+  <rect x="50" y="665" width="800" height="25" class="phase-box"/>
+  <text x="450" y="682" class="phase">第四阶段：数据查询与展示</text>
+  
+  <line x1="110" y1="705" x2="280" y2="705" class="arrow"/>
+  <polygon points="275,700 285,705 275,710" fill="#34495e"/>
+  <text x="190" y="700" class="step">18. 查询请求</text>
+  
+  <line x1="280" y1="720" x2="450" y2="720" class="arrow"/>
+  <polygon points="445,715 455,720 445,725" fill="#34495e"/>
+  <text x="360" y="715" class="step">19. 查询接口</text>
+  
+  <line x1="450" y1="735" x2="280" y2="735" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,730 275,735 285,740" fill="#34495e"/>
+  <text x="360" y="730" class="step">20. 返回数据</text>
+  
+  <line x1="280" y1="750" x2="110" y2="750" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="115,745 105,750 115,755" fill="#34495e"/>
+  <text x="190" y="745" class="step">21. 展示结果</text>
+</svg>
+            <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图2.1 云数汇微信优惠券业务流程时序图（详细版）</p>
         </div>
         
         <p><strong>流程说明：</strong></p>
         <div style="background: #e8f5e8; padding: 15px; border-radius: 4px; margin: 10px 0;">
             <p>该时序图展示了行方系统、微信平台等系统间的完整交互流程：</p>
             <ol style="margin-top: 10px; margin-left: 20px;">
-                <li><strong>H5获取OpenID：</strong>跳转到拉卡拉提供的中转地址，最终跳转到云数惠H5页面获取用户微信OpenID</li>
-                <li><strong>发券API调用：</strong>行方系统调用云数惠发放接口，参数包含openid和活动信息</li>
+                <li><strong>H5获取OpenID：</strong>跳转到拉卡拉提供的中转地址，最终跳转到云数汇H5页面获取用户微信OpenID</li>
+                <li><strong>发券API调用：</strong>行方系统调用云数汇发放接口，参数包含openid和活动信息</li>
                 <li><strong>核销回调通知：</strong>用户使用优惠券时，通过回调机制通知相关系统</li>
                 <li><strong>数据查询：</strong>支持实时查询发放结果和核销状态</li>
             </ol>
         </div>
         
         <p><strong>简化流程概述：</strong></p>
-        <p>用户 → 接入方系统 → 我方系统 → 云数惠 → 微信</p>
+        <p>用户 → 接入方系统 → 我方系统 → 云数汇 → 微信</p>
     </div>
 
     <h3>2.2 接入节点：</h3>
     
-    <h4>1. 银行嵌入云数惠h5地址获取用户openid，地址示例</h4>
+    <h4>1. 银行嵌入云数汇h5地址获取用户openid，地址示例</h4>
     <div class="code-block">
         <a href="https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=xxx" class="url-link">
         https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=xxx
@@ -210,7 +343,7 @@
     <p><strong>回调参数拼接：</strong>${redirect_url}&openid=${response.data.openId}&from=dshy</p>
     <p>银行需记录openid，用于后续发券使用</p>
 
-    <h4>2. 接入云数惠发券接口：</h4>
+    <h4>2. 接入云数汇发券接口：</h4>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn" class="url-link">
         https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn
@@ -221,7 +354,7 @@
     
     <h3>3.1 系统组成</h3>
     <ul>
-        <li><strong>云数惠接入层：</strong>对接云数惠API</li>
+        <li><strong>云数汇接入层：</strong>对接云数汇API</li>
         <li><strong>业务封装层：</strong>封装标准化接口</li>
         <li><strong>数据存储层：</strong>存储发放和核销数据</li>
         <li><strong>营销平台层：</strong>数据展示和权限管理</li>
@@ -234,7 +367,7 @@
     <p>线下创建优惠券，优惠券信息填入联合营销平台——活动编码(营销平台提供即微信活动批次号)：batchCode；活动编码关联主题活动ID。</p>
     
     <div class="code-block">
-        <strong>用户 → 接入方系统 → 我方系统 → 云数惠 → 微信</strong>
+        <strong>用户 → 接入方系统 → 我方系统 → 云数汇 → 微信</strong>
     </div>
     
     <p>——使用活动编码+用户访问h5时获取的openid发放优惠券，并实时记录发放结果。</p>
@@ -243,7 +376,7 @@
     <div class="code-block">
         <strong>第一阶段：获取用户OpenID</strong>
         <ol>
-            <li><strong>H5页面跳转：</strong>跳转到拉卡拉提供的中转地址，最终跳转到云数惠H5页面</li>
+            <li><strong>H5页面跳转：</strong>跳转到拉卡拉提供的中转地址，最终跳转到云数汇H5页面</li>
             <li><strong>微信授权：</strong>H5页面获取用户微信OpenID</li>
             <li><strong>回调返回：</strong>携带OpenID回跳到行方系统<br>
                 格式：<code>${redirect_url}&openid=${response.data.openId}&from=dshy</code>
@@ -253,15 +386,15 @@
         <strong>第二阶段：优惠券发放</strong>
         <ol start="4">
             <li><strong>API调用准备：</strong>行方系统准备发券参数（详细参数说明见技术需求章节）</li>
-            <li><strong>发券请求：</strong>调用云数惠发放接口</li>
-            <li><strong>云数惠处理：</strong>云数惠向微信平台发起优惠券发放</li>
-            <li><strong>结果返回：</strong>微信平台返回发放结果给云数惠</li>
+            <li><strong>发券请求：</strong>调用云数汇发放接口</li>
+            <li><strong>云数汇处理：</strong>云数汇向微信平台发起优惠券发放</li>
+            <li><strong>结果返回：</strong>微信平台返回发放结果给云数汇</li>
             <li><strong>同步保存：</strong>同步保存发放记录</li>
         </ol>
         
         <strong>第三阶段：回调与查询</strong>
         <ol start="9">
-            <li><strong>核销回调：</strong>用户使用优惠券时，云数惠通过回调通知系统</li>
+            <li><strong>核销回调：</strong>用户使用优惠券时，云数汇通过回调通知系统</li>
             <li><strong>数据查询：</strong>查询发放结果</li>
             <li><strong>结果展示：</strong>行方系统返回查询结果</li>
         </ol>
@@ -271,7 +404,7 @@
 
     <h3>4.1 接口封装架构</h3>
     <div class="highlight-box">
-        <p><strong>接口封装设计：</strong>我方系统作为中间层，对外提供标准化接口给合作银行，对内对接云数惠API，实现参数转换、权限控制、数据记录等功能。</p>
+        <p><strong>接口封装设计：</strong>我方系统作为中间层，对外提供标准化接口给合作银行，对内对接云数汇API，实现参数转换、权限控制、数据记录等功能。</p>
         <p><strong>中间层重要意义：</strong>后续可能同时接入多个上游发券通道，中间层设计确保为合作银行提供统一的外部接口规范，避免因上游通道变更影响下游系统，提高系统的可扩展性和稳定性。</p>
     </div>
 
@@ -284,10 +417,10 @@
             <p><strong>请求参数：</strong></p>
             <ul>
                 <li><strong>bankId</strong>: 合作银行唯一标识，用于区分调用方银行</li>
-                <li><strong>openId</strong>: 微信用户唯一标识，通过H5授权页面获取（透传给云数惠）</li>
-                <li><strong>batchCode</strong>: 活动编码/微信活动批次号，关联主题活动ID（透传给云数惠）</li>
-                <li><strong>callTradeNo</strong>: 银行方交易流水号，用于幂等性控制（记录后关联，调用云数惠时生成我方系统流水号）</li>
-                <li><strong>writeOffNotify</strong>: 银行方核销回调地址（记录后关联，调用云数惠时使用我方系统回调地址）</li>
+                <li><strong>openId</strong>: 微信用户唯一标识，通过H5授权页面获取（透传给云数汇）</li>
+                <li><strong>batchCode</strong>: 活动编码/微信活动批次号，关联主题活动ID（透传给云数汇）</li>
+                <li><strong>callTradeNo</strong>: 银行方交易流水号，用于幂等性控制（记录后关联，调用云数汇时生成我方系统流水号）</li>
+                <li><strong>writeOffNotify</strong>: 银行方核销回调地址（记录后关联，调用云数汇时使用我方系统回调地址）</li>
             </ul>
         </div>
         
@@ -298,19 +431,19 @@
                 <li><strong>参数校验：</strong>验证openId格式、batchCode有效性等</li>
                 <li><strong>数据记录：</strong>记录银行方callTradeNo和writeOffNotify</li>
                 <li><strong>流水号生成：</strong>生成我方系统交易流水号</li>
-                <li><strong>调用云数惠：</strong>使用转换后的参数调用云数惠发放接口</li>
-                <li><strong>结果处理：</strong>处理云数惠返回结果，记录发放明细</li>
+                <li><strong>调用云数汇：</strong>使用转换后的参数调用云数汇发放接口</li>
+                <li><strong>结果处理：</strong>处理云数汇返回结果，记录发放明细</li>
             </ol>
         </div>
     </div>
 
-    <h4>4.1.2 我方系统调用云数惠接口</h4>
+    <h4>4.1.2 我方系统调用云数汇接口</h4>
     <div class="success-box">
-        <p><strong>接口名称：</strong>云数惠优惠券发放接口</p>
-        <p><strong>接口用途：</strong>我方系统调用云数惠API发放微信优惠券</p>
+        <p><strong>接口名称：</strong>云数汇优惠券发放接口</p>
+        <p><strong>接口用途：</strong>我方系统调用云数汇API发放微信优惠券</p>
         
         <div class="parameter-list">
-            <p><strong>请求参数（向云数惠发送）：</strong></p>
+            <p><strong>请求参数（向云数汇发送）：</strong></p>
             <ul>
                 <li><strong>openId</strong>: 微信用户唯一标识（从银行请求透传）</li>
                 <li><strong>batchCode</strong>: 活动编码/微信活动批次号（从银行请求透传）</li>
@@ -331,15 +464,15 @@
     <h4>4.1.3 回调处理接口（异步架构）</h4>
     <div class="success-box">
         <p><strong>接口名称：</strong>核销回调处理接口</p>
-        <p><strong>接口用途：</strong>接收云数惠的核销回调通知，采用异步架构处理银行通知</p>
-        <p><strong>架构特点：</strong>接收云数惠回调后立即返回处理结果，后续异步处理合作银行通知逻辑</p>
+        <p><strong>接口用途：</strong>接收云数汇的核销回调通知，采用异步架构处理银行通知</p>
+        <p><strong>架构特点：</strong>接收云数汇回调后立即返回处理结果，后续异步处理合作银行通知逻辑</p>
         
         <div class="parameter-list">
             <p><strong>同步处理阶段：</strong></p>
             <ol>
-                <li><strong>接收回调：</strong>接收云数惠发送的核销通知</li>
+                <li><strong>接收回调：</strong>接收云数汇发送的核销通知</li>
                 <li><strong>数据校验：</strong>校验回调数据完整性和合法性</li>
-                <li><strong>立即响应：</strong>向云数惠返回处理确认，确保回调链路畅通</li>
+                <li><strong>立即响应：</strong>向云数汇返回处理确认，确保回调链路畅通</li>
             </ol>
         </div>
         
@@ -348,7 +481,7 @@
             <ol>
                 <li><strong>数据解析：</strong>解析回调数据，提取核销信息和关联的原始请求记录</li>
                 <li><strong>更新记录：</strong>更新我方系统的核销明细记录状态</li>
-                <li><strong>参数转换：</strong>将云数惠回调参数转换为下游合作银行所需的请求格式</li>
+                <li><strong>参数转换：</strong>将云数汇回调参数转换为下游合作银行所需的请求格式</li>
                 <li><strong>银行通知：</strong>根据原始请求记录中的bankId和writeOffNotify地址，异步向对应银行发送核销通知</li>
                 <li><strong>通知重试：</strong>实现通知失败重试机制，确保银行能够接收到核销状态变更</li>
                 <li><strong>日志记录：</strong>记录完整的回调处理和银行通知日志，便于问题排查</li>
@@ -358,9 +491,9 @@
         <div class="warning-box">
             <p><strong>异步架构优势：</strong></p>
             <ul>
-                <li><strong>响应速度：</strong>云数惠回调立即得到响应，避免超时重发</li>
-                <li><strong>系统解耦：</strong>云数惠回调处理与银行通知解耦，提高系统稳定性</li>
-                <li><strong>容错能力：</strong>银行系统异常不影响云数惠回调确认</li>
+                <li><strong>响应速度：</strong>云数汇回调立即得到响应，避免超时重发</li>
+                <li><strong>系统解耦：</strong>云数汇回调处理与银行通知解耦，提高系统稳定性</li>
+                <li><strong>容错能力：</strong>银行系统异常不影响云数汇回调确认</li>
                 <li><strong>重试保障：</strong>异步重试机制确保银行最终能收到通知</li>
             </ul>
         </div>
@@ -375,7 +508,7 @@
             <p><strong>支持的查询接口：</strong></p>
             <ul>
                 <li><strong>发放明细查询：</strong>根据银行ID、活动编码等条件查询发放记录和发放状态</li>
-                <li><strong>发放结果对账：</strong>调用云数惠查询接口进行数据对账，确保数据一致性</li>
+                <li><strong>发放结果对账：</strong>调用云数汇查询接口进行数据对账，确保数据一致性</li>
             </ul>
         </div>
         
@@ -398,7 +531,7 @@
         </div>
     </div>
     
-    <h3>4.2 云数惠API接口</h3>
+    <h3>4.2 云数汇API接口</h3>
     <p><strong>请求格式及加密方式说明文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffipkojor8up" class="url-link">
@@ -420,7 +553,7 @@
         </a>
     </div>
 
-    <h3>4.3 云数惠数据回调</h3>
+    <h3>4.3 云数汇数据回调</h3>
     <p><strong>接口文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi" class="url-link">
@@ -428,7 +561,7 @@
         </a>
     </div>
     
-    <h3>4.4 云数惠数据查询</h3>
+    <h3>4.4 云数汇数据查询</h3>
     <p><strong>接口文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv" class="url-link">
@@ -452,7 +585,7 @@
     <h3>5.1 联合营销平台查询</h3>
     <div class="warning-box">
         <p>微信活动管理后台需要提供完整的数据查询功能，支持运营人员查询相关的发放和核销数据，包含明细查询和汇总统计功能。</p>
-        <p>后台系统需对接云数惠回调接口， 在联合营销平台创建微信活动绑定主题活动后，活动数据存在本地，回调的优惠券数据除接口透传外，也需将数据进行保存，并用于后续的查询服务。</p>
+        <p>后台系统需对接云数汇回调接口， 在联合营销平台创建微信活动绑定主题活动后，活动数据存在本地，回调的优惠券数据除接口透传外，也需将数据进行保存，并用于后续的查询服务。</p>
         <p>详细需求请参考 <a href="wxpromotionstory.html" class="url-link">微信活动需求.html</a></p>
     </div>
 
