@@ -272,14 +272,95 @@
             background-color: #82848a;
             border-color: #82848a;
         }
-
-        .btn-default {
-            background-color: #f5f7fa;
-            color: #606266;
-            border: 1px solid #dcdfe6;
+        
+        /* 二次确认弹窗样式 */
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1002;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .btn-default:hover {
+        .confirm-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .confirm-dialog {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            max-width: 90vw;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .confirm-overlay.show .confirm-dialog {
+            transform: scale(1);
+        }
+
+        .confirm-header {
+            padding: 20px 20px 10px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .confirm-header h4 {
+            margin: 0;
+            font-size: 16px;
+            color: #303133;
+        }
+
+        .confirm-body {
+            padding: 20px;
+        }
+
+        .confirm-body p {
+            margin: 0;
+            color: #606266;
+            line-height: 1.5;
+        }
+
+        .confirm-footer {
+            padding: 10px 20px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-confirm {
+            padding: 10px 20px;
+            border: 1px solid #f56c6c;
+            background-color: #f56c6c;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-confirm:hover {
+            background-color: #f78989;
+        }
+
+        .btn-cancel {
+            padding: 10px 20px;
+            border: 1px solid #dcdfe6;
+            background-color: #f5f7fa;
+            color: #606266;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-cancel:hover {
             background-color: #ecf5ff;
             color: #4a90e2;
             border-color: #4a90e2;
@@ -497,6 +578,28 @@
             border-color: #4a90e2;
             color: white;
         }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: #f0f9ff;
+            color: #67c23a;
+        }
+
+        .status-inactive {
+            background-color: #fef0f0;
+            color: #f56c6c;
+        }
+
+        .status-pending {
+            background-color: #fdf6ec;
+            color: #e6a23c;
+        }
     </style>
 </head>
 <body>
@@ -607,7 +710,7 @@
                         <thead>
                             <tr>
                                 <th class="checkbox-col">
-                                    <input type="checkbox" id="selectAll" title="全选">
+                                    <input type="checkbox" id="selectAll" title="全选" onchange="toggleSelectAll()">
                                 </th>
                                 <th>序号</th>
                                 <th>主题活动ID</th>
@@ -627,7 +730,7 @@
                             <!-- 示例数据 -->
                             <tr>
                                 <td class="checkbox-col">
-                                    <input type="checkbox" title="选择行">
+                                    <input type="checkbox" title="选择行" class="row-checkbox" onchange="updateSelectAll()">
                                 </td>
                                 <td>1</td>
                                 <td>5000000084</td>
@@ -639,10 +742,10 @@
                                 <td>2025-07-30 15:02:56</td>
                                 <td>曹政</td>
                                 <td>2025-07-30 15:02:56</td>
-                                <td>否</td>
+                                <td><span class="status-badge status-active">启用</span></td>
                                 <td class="action-col">
                                     <a href="#" class="action-link">编辑</a> | 
-                                    <a href="#" class="action-link">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
                             </tr>
@@ -688,5 +791,167 @@
             </div>
         </div>
     </div>
+
+    <!-- 终止活动确认弹窗 -->
+    <div class="confirm-overlay" id="terminateConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认终止活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要终止此活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeTerminateConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmTerminate()" style="background-color: #f56c6c;">确定终止</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量终止活动确认弹窗 -->
+    <div class="confirm-overlay" id="batchTerminateConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认批量终止活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要终止全部选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p id="selectedCount" style="color: #f56c6c; font-weight: bold; margin-top: 10px;"></p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeBatchTerminateConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmBatchTerminate()" style="background-color: #f56c6c;">确定终止</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 终止活动确认相关函数
+        let currentTerminateElement = null;
+
+        function showTerminateConfirm(element) {
+            currentTerminateElement = element;
+            const modal = document.getElementById('terminateConfirmModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeTerminateConfirm() {
+            const modal = document.getElementById('terminateConfirmModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                currentTerminateElement = null;
+            }, 300);
+        }
+
+        function confirmTerminate() {
+            if (currentTerminateElement) {
+                // 获取当前行的活动信息
+                const row = currentTerminateElement.closest('tr');
+                const activityName = row.cells[4].textContent.trim();
+
+                // 这里可以添加实际的终止活动逻辑
+                // 例如发送AJAX请求到后端
+                console.log('终止活动:', activityName);
+
+                // 模拟终止成功，更新状态
+                // 注意：根据表格结构调整了列索引
+                const statusCell = row.cells[12]; // 调整为正确的列索引
+                statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+
+                // 禁用终止按钮
+                currentTerminateElement.style.color = '#c0c4cc';
+                currentTerminateElement.style.pointerEvents = 'none';
+                currentTerminateElement.onclick = null;
+
+                alert('活动已成功终止！');
+            }
+            closeTerminateConfirm();
+        }
+
+        // 批量终止活动相关函数
+        function showBatchTerminateConfirm() {
+            const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+
+            if (checkedBoxes.length === 0) {
+                alert('请先选择要终止的活动！');
+                return;
+            }
+
+            // 显示选中的活动数量
+            const selectedCountElement = document.getElementById('selectedCount');
+            selectedCountElement.textContent = `已选中 ${checkedBoxes.length} 个活动`;
+
+            const modal = document.getElementById('batchTerminateConfirmModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeBatchTerminateConfirm() {
+            const modal = document.getElementById('batchTerminateConfirmModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function confirmBatchTerminate() {
+            const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+            let terminatedCount = 0;
+
+            checkedBoxes.forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                // 注意：根据表格结构调整了列索引
+                const statusCell = row.cells[12]; // 调整为正确的列索引
+                const terminateLink = row.querySelector('.action-link[onclick*="showTerminateConfirm"]');
+
+                // 只终止未终止的活动
+                if (!statusCell.textContent.includes('已终止')) {
+                    // 更新状态
+                    statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+
+                    // 禁用终止按钮
+                    if (terminateLink) {
+                        terminateLink.style.color = '#c0c4cc';
+                        terminateLink.style.pointerEvents = 'none';
+                        terminateLink.onclick = null;
+                    }
+
+                    // 取消选中
+                    checkbox.checked = false;
+                    terminatedCount++;
+                }
+            });
+
+            alert(`成功终止 ${terminatedCount} 个活动！`);
+            closeBatchTerminateConfirm();
+        }
+
+        // 全选/取消全选功能
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            
+            // 为所有行复选框设置与全选复选框相同的状态
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+
+        // 更新全选状态
+        function updateSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            const checkedCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+            
+            // 如果所有行复选框都被选中，则全选复选框也选中
+            selectAllCheckbox.checked = rowCheckboxes.length === checkedCheckboxes.length;
+        }
+    </script>
 </body>
 </html>
