@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联合营销平台 - 主题活动管理</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .sidebar li:hover {
+            background-color: #34495e;
+        }
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+        .table-container {
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li>运营中心</li>
+            <li>数据中心</li>
+            <li>配置中心</li>
+            <li>下载中心</li>
+            <li>营销中心</li>
+            <li>主题活动管理</li>
+            <li>微信活动管理</li>
+            <li>银行卡活动管理</li>
+            <li>机构管理</li>
+            <li>对账中心</li>
+            <li>银行服务管理</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header">
+            <span>欢迎 ×</span>
+            <span>主题活动配置 ×</span>
+        </div>
+        <div class="search-bar">
+            <label for="activityId">主题活动ID:</label>
+            <input type="text" id="activityId" placeholder="请输入">
+            <label for="activityName">主题名称:</label>
+            <input type="text" id="activityName" placeholder="请输入">
+            <label for="headerNumber">头寸编号:</label>
+            <input type="text" id="headerNumber" placeholder="请输入">
+            <button>搜索</button>
+            <button>重置</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>主题活动ID</th>
+                        <th>头寸编号</th>
+                        <th>主题名称</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>最后修改人</th>
+                        <th>最后修改时间</th>
+                        <th>是否开启大转盘</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 示例数据 -->
+                    <tr>
+                        <td>1</td>
+                        <td>5000000084</td>
+                        <td>02001018113100000000000</td>
+                        <td>湖北银行扫码权益</td>
+                        <td>曹政</td>
+                        <td>2025-07-30 15:02:56</td>
+                        <td>曹政</td>
+                        <td>2025-07-30 15:02:56</td>
+                        <td>否</td>
+                        <td><a href="#">查看批次号</a> | <a href="#">更多</a></td>
+                    </tr>
+                    <!-- 更多行数据... -->
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button>&lt;</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>&gt;</button>
+            <span>10条/页</span>
+            <input type="number" placeholder="跳至">
+            <button>跳至</button>
+        </div>
+    </div>
+</body>
+</html>
