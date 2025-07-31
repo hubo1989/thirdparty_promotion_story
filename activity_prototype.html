@@ -702,7 +702,7 @@
                     <div class="table-actions">
                         <button class="btn btn-secondary">新增</button>
                         <button class="btn btn-default">导出</button>
-                        <button class="btn btn-gray">终止</button>
+                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止</button>
                     </div>
                 </div>
                 <div class="table-container">
@@ -723,6 +723,7 @@
                                 <th>最后修改人</th>
                                 <th>最后修改时间</th>
                                 <th>是否开启大转盘</th>
+                                <th>状态</th>
                                 <th class="action-col">操作</th>
                             </tr>
                         </thead>
@@ -742,7 +743,8 @@
                                 <td>2025-07-30 15:02:56</td>
                                 <td>曹政</td>
                                 <td>2025-07-30 15:02:56</td>
-                                <td><span class="status-badge status-active">启用</span></td>
+                                <td>否</td>
+                                <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
                                     <a href="#" class="action-link">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
@@ -815,7 +817,7 @@
                 <h4>确认批量终止活动</h4>
             </div>
             <div class="confirm-body">
-                <p>确定要终止全部选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p>确定要终止选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
                 <p id="selectedCount" style="color: #f56c6c; font-weight: bold; margin-top: 10px;"></p>
             </div>
             <div class="confirm-footer">
