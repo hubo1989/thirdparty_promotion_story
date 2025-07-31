@@ -342,6 +342,37 @@
             z-index: 10;
         }
 
+        .checkbox-col {
+            width: auto;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .action-col {
+            width: auto;
+            min-width: 160px;
+            position: sticky;
+            right: 0;
+            background-color: #fafafa;
+            z-index: 15;
+            box-shadow: -2px 0 4px rgba(0,0,0,0.1);
+        }
+
+        tbody .action-col {
+            background-color: white;
+            z-index: 15;
+        }
+
+        .action-col::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #f0f0f0;
+        }
+
         tr:hover {
             background-color: #f8f9fa;
         }
@@ -575,31 +606,41 @@
                     <table>
                         <thead>
                             <tr>
+                                <th class="checkbox-col">
+                                    <input type="checkbox" id="selectAll" title="全选">
+                                </th>
                                 <th>序号</th>
                                 <th>主题活动ID</th>
                                 <th>头寸编号</th>
                                 <th>主题名称</th>
+                                <th>报名机构</th>
+                                <th>活动时间</th>
                                 <th>创建人</th>
                                 <th>创建时间</th>
                                 <th>最后修改人</th>
                                 <th>最后修改时间</th>
                                 <th>是否开启大转盘</th>
-                                <th>操作</th>
+                                <th class="action-col">操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- 示例数据 -->
                             <tr>
+                                <td class="checkbox-col">
+                                    <input type="checkbox" title="选择行">
+                                </td>
                                 <td>1</td>
                                 <td>5000000084</td>
                                 <td>02001018113100000000000</td>
                                 <td>湖北银行扫码权益</td>
+                                <td>10000001</td>
+                                <td>2025-07-30 15:02:56 - 2025-08-30 15:02:56</td>
                                 <td>曹政</td>
                                 <td>2025-07-30 15:02:56</td>
                                 <td>曹政</td>
                                 <td>2025-07-30 15:02:56</td>
                                 <td>否</td>
-                                <td>
+                                <td class="action-col">
                                     <a href="#" class="action-link">查看批次号</a> | 
                                     <a href="#" class="action-link">更多</a>
                                 </td>
