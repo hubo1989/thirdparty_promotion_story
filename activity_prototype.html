@@ -227,6 +227,12 @@
             box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
         }
 
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .form-actions {
             display: flex;
             gap: 10px;
@@ -688,6 +694,36 @@
                     <div class="form-group">
                         <label for="headerNumber">头寸编号:</label>
                         <input type="text" id="headerNumber" placeholder="请输入">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="institution">报名机构:</label>
+                        <input type="text" id="institution" placeholder="请输入8位机构号">
+                    </div>
+                    <div class="form-group">
+                        <label for="wheelEnabled">是否开启大转盘:</label>
+                        <select id="wheelEnabled">
+                            <option value="">全部</option>
+                            <option value="是">是</option>
+                            <option value="否">否</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">状态:</label>
+                        <select id="status">
+                            <option value="">全部</option>
+                            <option value="生效中">生效中</option>
+                            <option value="已终止">已终止</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="activityTime">活动时间:</label>
+                        <div class="date-range">
+                            <input type="date" id="startTime" title="开始时间">
+                            <span>-</span>
+                            <input type="date" id="endTime" title="结束时间">
+                        </div>
                     </div>
                 </div>
                 <div class="form-actions">
