@@ -781,12 +781,12 @@
                         <label for="headerNumber">头寸编号:</label>
                         <input type="text" id="headerNumber" placeholder="请输入">
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
                         <label for="institution">报名机构:</label>
                         <input type="text" id="institution" placeholder="请输入8位机构号">
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label for="wheelEnabled">是否开启大转盘:</label>
                         <select id="wheelEnabled">
@@ -817,7 +817,7 @@
                     <button class="btn btn-primary">搜索</button>
                 </div>
             </div>
-            
+
             <div class="data-table">
                 <div class="table-header">
                     <div class="table-title">主题活动列表</div>
@@ -1168,10 +1168,9 @@
                 <div class="form-group">
                     <label for="newInstitution">* 报名机构：</label>
                     <select id="newInstitution" required>
-                        <option value="">请选择或搜索机构</option>
+                        <option value="">请输入机构名称或机构号查询</option>
                         <!-- 这里可以添加一些默认选项 -->
                     </select>
-                    <input type="text" id="institutionSearch" placeholder="输入机构名称或编号搜索" style="margin-top: 5px; width: 100%; padding: 8px 12px; border: 1px solid #dcdfe6; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
                     <div id="institutionOptions" style="max-height: 200px; overflow-y: auto; border: 1px solid #dcdfe6; border-top: none; display: none;">
                         <!-- 搜索结果将动态显示在这里 -->
                     </div>
@@ -1199,9 +1198,13 @@
                 </div>
                 <div class="form-group">
                     <label for="newParticipationLimit">* 参与限制：</label>
-                    <input type="number" id="newParticipationLimit" placeholder="每个用户最多可以参与" required>
-                    <span>最大领取次数</span>
-                    <input type="number" id="newMaxDraws" placeholder="次" required style="margin-top: 5px;">
+                    <span id="newParticipationLimit">每个用户最多可以参与</span>
+                    <div style="margin-top: 5px;">
+                        <input type="number" id="newMaxDraws" placeholder="最大领取次数" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newParticipationLimitNote"></label>
                     <p style="margin-top: 5px; color: #909399; font-size: 12px;">如上传了6张优惠券信息，设置用户最大可参与6次，那么用户可以领取六张，若为4次，用户可以选择领取4张。</p>
                 </div>
             </form>
@@ -1343,12 +1346,16 @@
         // 新增主题活动相关函数
         function showAddActivityModal() {
             const modal = document.getElementById('addActivityModal');
-            modal.classList.add('show');
+            if (modal) {
+                modal.classList.add('show');
+            }
         }
 
         function closeAddActivityModal() {
             const modal = document.getElementById('addActivityModal');
-            modal.classList.remove('show');
+            if (modal) {
+                modal.classList.remove('show');
+            }
         }
 
         function submitAddActivityForm() {
@@ -1465,38 +1472,65 @@
             }
         }
         
-        // 绑定事件
+        // 页面加载完成后绑定事件
         document.addEventListener('DOMContentLoaded', function() {
             // 新增按钮事件
-            document.getElementById('addActivityBtn').addEventListener('click', showAddActivityModal);
+            const addActivityBtn = document.getElementById('addActivityBtn');
+            if (addActivityBtn) {
+                addActivityBtn.addEventListener('click', showAddActivityModal);
+            }
             
             // 取消按钮事件
-            document.getElementById('cancelAddActivity').addEventListener('click', closeAddActivityModal);
+            const cancelAddActivity = document.getElementById('cancelAddActivity');
+            if (cancelAddActivity) {
+                cancelAddActivity.addEventListener('click', closeAddActivityModal);
+            }
             
             // 提交按钮事件
-            document.getElementById('submitAddActivity').addEventListener('click', submitAddActivityForm);
+            const submitAddActivity = document.getElementById('submitAddActivity');
+            if (submitAddActivity) {
+                submitAddActivity.addEventListener('click', submitAddActivityForm);
+            }
             
             // 关闭按钮事件
-            document.getElementById('closeAddActivityModal').addEventListener('click', closeAddActivityModal);
+            const closeAddActivityModalBtn = document.getElementById('closeAddActivityModal');
+            if (closeAddActivityModalBtn) {
+                closeAddActivityModalBtn.addEventListener('click', closeAddActivityModal);
+            }
             
             // 图片上传区域点击事件
-            document.getElementById('imageUploadArea').addEventListener('click', function() {
-                document.getElementById('imageUpload').click();
-            });
+            const imageUploadArea = document.getElementById('imageUploadArea');
+            if (imageUploadArea) {
+                imageUploadArea.addEventListener('click', function() {
+                    const imageUpload = document.getElementById('imageUpload');
+                    if (imageUpload) {
+                        imageUpload.click();
+                    }
+                });
+            }
             
             // 文件选择变化事件
-            document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+            const imageUpload = document.getElementById('imageUpload');
+            if (imageUpload) {
+                imageUpload.addEventListener('change', handleImageUpload);
+            }
             
             // 机构搜索事件
-            document.getElementById('institutionSearch').addEventListener('input', function() {
-                searchInstitutions(this.value);
-            });
+            const institutionSearch = document.getElementById('institutionSearch');
+            if (institutionSearch) {
+                institutionSearch.addEventListener('input', function() {
+                    searchInstitutions(this.value);
+                });
+            }
             
             // 点击其他地方隐藏搜索结果
             document.addEventListener('click', function(event) {
-                const searchContainer = document.getElementById('institutionSearch').parentElement;
-                if (!searchContainer.contains(event.target)) {
-                    document.getElementById('institutionOptions').style.display = 'none';
+                const searchContainer = document.getElementById('institutionSearch') ? document.getElementById('institutionSearch').parentElement : null;
+                if (searchContainer && !searchContainer.contains(event.target)) {
+                    const institutionOptions = document.getElementById('institutionOptions');
+                    if (institutionOptions) {
+                        institutionOptions.style.display = 'none';
+                    }
                 }
             });
         });
