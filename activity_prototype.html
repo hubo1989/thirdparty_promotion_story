@@ -736,7 +736,7 @@
                 <div class="table-header">
                     <div class="table-title">主题活动列表</div>
                     <div class="table-actions">
-                        <button class="btn btn-secondary">新增</button>
+                        <button class="btn btn-secondary" id="addActivityBtn">新增</button>
                         <button class="btn btn-default">导出</button>
                         <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止</button>
                     </div>
@@ -1060,6 +1060,65 @@
         </div>
     </div>
     
+    <!-- 新增主题活动模态框 -->
+    <div class="confirm-overlay" id="addActivityModal" style="display: none;">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>新增主题活动</h4>
+            </div>
+            <div class="confirm-body">
+                <form id="addActivityForm">
+                    <div class="form-group">
+                        <label for="newThemeName">* 主题名称：</label>
+                        <input type="text" id="newThemeName" placeholder="请输入主题名称" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="newHeaderNumber">* 头寸编号：</label>
+                        <select id="newHeaderNumber" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px;">
+                            <option value="">请选择</option>
+                            <!-- 假设这里有一些预定义的选项 -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newInstitution">* 报名机构：</label>
+                        <input type="text" id="newInstitution" placeholder="请输入8位机构号" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="newActivityTime">* 活动时间：</label>
+                        <div class="date-range">
+                            <input type="date" id="newStartTime" title="开始时间" required>
+                            <span>~</span>
+                            <input type="date" id="newEndTime" title="结束时间" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newBackgroundImage">* 背景图：</label>
+                        <div id="imageUploadArea" style="border: 1px dashed #ccc; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <span id="uploadText" style="font-size: 24px;">+</span>
+                            <img id="previewImage" src="" style="max-width: 100%; max-height: 100%; display: none;">
+                        </div>
+                        <p style="margin-top: 5px;">建议尺寸 375px*812px</p>
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label for="newRules">* 规则说明：</label>
+                        <textarea id="newRules" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="newParticipationLimit">* 参与限制：</label>
+                        <input type="number" id="newParticipationLimit" placeholder="每个用户最多可以参与" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px;">
+                        <span>最大领取次数</span>
+                        <input type="number" id="newMaxDraws" placeholder="次" required style="width: 100%; padding: 8px; border: 1px solid #dcdfe6; border-radius: 4px; margin-top: 5px;">
+                    </div>
+                </form>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" id="cancelAddActivity">取消</button>
+                <button type="button" class="btn-confirm" id="submitAddActivity" style="background-color: #4a90e2;">确定</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // 终止活动确认相关函数
         let currentTerminateElement = null;
@@ -1187,6 +1246,104 @@
             // 如果所有行复选框都被选中，则全选复选框也选中
             selectAllCheckbox.checked = rowCheckboxes.length === checkedCheckboxes.length;
         }
+        
+        // 新增主题活动相关函数
+        function showAddActivityModal() {
+            const modal = document.getElementById('addActivityModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeAddActivityModal() {
+            const modal = document.getElementById('addActivityModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function submitAddActivityForm() {
+            // 获取表单数据
+            const themeName = document.getElementById('newThemeName').value;
+            const headerNumber = document.getElementById('newHeaderNumber').value;
+            const institution = document.getElementById('newInstitution').value;
+            const startTime = document.getElementById('newStartTime').value;
+            const endTime = document.getElementById('newEndTime').value;
+            const rules = document.getElementById('newRules').value;
+            const participationLimit = document.getElementById('newParticipationLimit').value;
+            const maxDraws = document.getElementById('newMaxDraws').value;
+            
+            // 简单验证
+            if (!themeName || !headerNumber || !institution || !startTime || !endTime || !rules || !participationLimit || !maxDraws) {
+                alert('请填写所有必填项！');
+                return;
+            }
+            
+            // 这里可以添加实际的表单提交逻辑
+            // 例如发送AJAX请求到后端
+            console.log('新增主题活动:', {
+                themeName,
+                headerNumber,
+                institution,
+                startTime,
+                endTime,
+                rules,
+                participationLimit,
+                maxDraws
+            });
+            
+            // 模拟提交成功，关闭模态框并重置表单
+            closeAddActivityModal();
+            resetAddActivityForm();
+            alert('主题活动新增成功！');
+        }
+        
+        function resetAddActivityForm() {
+            document.getElementById('addActivityForm').reset();
+            // 重置图片上传区域
+            document.getElementById('previewImage').style.display = 'none';
+            document.getElementById('uploadText').style.display = 'block';
+        }
+        
+        // 图片上传处理
+        function handleImageUpload() {
+            const fileInput = document.getElementById('imageUpload');
+            const previewImage = document.getElementById('previewImage');
+            const uploadText = document.getElementById('uploadText');
+            
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    uploadText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // 绑定事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 新增按钮事件
+            document.getElementById('addActivityBtn').addEventListener('click', showAddActivityModal);
+            
+            // 取消按钮事件
+            document.getElementById('cancelAddActivity').addEventListener('click', closeAddActivityModal);
+            
+            // 提交按钮事件
+            document.getElementById('submitAddActivity').addEventListener('click', submitAddActivityForm);
+            
+            // 图片上传区域点击事件
+            document.getElementById('imageUploadArea').addEventListener('click', function() {
+                document.getElementById('imageUpload').click();
+            });
+            
+            // 文件选择变化事件
+            document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+        });
     </script>
 </body>
 </html>
