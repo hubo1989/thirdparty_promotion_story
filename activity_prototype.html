@@ -378,6 +378,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow: hidden;
+            width: 100%;
+            margin-top: 20px;
         }
 
         .table-header {
@@ -692,6 +694,13 @@
             border-color: #409eff;
             box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
         }
+        
+        .form-group input:disabled,
+        .form-group select:disabled {
+            background-color: #f5f7fa;
+            color: #909399;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -817,7 +826,7 @@
                     <button class="btn btn-primary">搜索</button>
                 </div>
             </div>
-
+            
             <div class="data-table">
                 <div class="table-header">
                     <div class="table-title">主题活动列表</div>
@@ -868,7 +877,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000084')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -890,7 +899,7 @@
                                 <td>是</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000085')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -912,7 +921,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000086')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -934,7 +943,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-inactive">已终止</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000087')">编辑</a> | 
                                     <a href="#" class="action-link" style="color: #c0c4cc; pointer-events: none;">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -956,7 +965,7 @@
                                 <td>是</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000088')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -978,7 +987,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-inactive">已终止</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000089')">编辑</a> | 
                                     <a href="#" class="action-link" style="color: #c0c4cc; pointer-events: none;">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -1000,7 +1009,7 @@
                                 <td>是</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000090')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -1022,7 +1031,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000091')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -1044,7 +1053,7 @@
                                 <td>是</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000092')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -1066,7 +1075,7 @@
                                 <td>否</td>
                                 <td><span class="status-badge status-active">生效中</span></td>
                                 <td class="action-col">
-                                    <a href="#" class="action-link">编辑</a> | 
+                                    <a href="#" class="action-link" onclick="showEditActivityModal('5000000093')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
@@ -1212,6 +1221,76 @@
         <div class="slide-modal-footer">
             <button type="button" class="btn-cancel" id="cancelAddActivity">取消</button>
             <button type="button" class="btn-confirm" id="submitAddActivity" style="background-color: #4a90e2;">确定</button>
+        </div>
+    </div>
+    
+    <!-- 编辑主题活动右侧弹出模态框 -->
+    <div class="slide-modal" id="editActivityModal">
+        <div class="slide-modal-header">
+            <h3>编辑主题活动</h3>
+            <button class="slide-modal-close" id="closeEditActivityModal">&times;</button>
+        </div>
+        <div class="slide-modal-body">
+            <form id="editActivityForm">
+                <div class="form-group">
+                    <label for="editActivityId">主题活动ID：</label>
+                    <input type="text" id="editActivityId" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="editThemeName">* 主题名称：</label>
+                    <input type="text" id="editThemeName" placeholder="请输入主题名称" required>
+                </div>
+                <div class="form-group">
+                    <label for="editHeaderNumber">头寸编号：</label>
+                    <select id="editHeaderNumber" disabled>
+                        <option value="">请选择</option>
+                        <!-- 假设这里有一些预定义的选项 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editInstitution">* 报名机构：</label>
+                    <select id="editInstitution" required disabled>
+                        <option value="">请输入机构名称或机构号查询</option>
+                        <!-- 这里可以添加一些默认选项 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityTime">* 活动时间：</label>
+                    <div class="date-range">
+                        <input type="date" id="editStartTime" title="开始时间" required>
+                        <span>~</span>
+                        <input type="date" id="editEndTime" title="结束时间" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editBackgroundImage">* 背景图：</label>
+                    <div id="editImageUploadArea" style="border: 1px dashed #ccc; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                        <span id="editUploadText" style="font-size: 24px;">+</span>
+                        <img id="editPreviewImage" src="" style="max-width: 100%; max-height: 100%; display: none;">
+                    </div>
+                    <p style="margin-top: 5px; color: #909399; font-size: 12px;">建议尺寸 375px*812px</p>
+                    <input type="file" id="editImageUpload" accept="image/*" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label for="editRules">* 规则说明：</label>
+                    <textarea id="editRules" rows="4" required placeholder="请输入规则说明"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editParticipationLimit">* 参与限制：</label>
+                    <span id="editParticipationLimit">每个用户最多可以参与</span>
+                    <div style="margin-top: 5px;">
+                        <input type="number" id="editMaxDraws" placeholder="最大领取次数" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editParticipationLimitNote"></label>
+                    <p style="margin-top: 5px; color: #909399; font-size: 12px;">如上传了6张优惠券信息，设置用户最大可参与6次，那么用户可以领取六张，若为4次，用户可以选择领取4张。</p>
+                </div>
+            </form>
+        </div>
+        <div class="slide-modal-footer">
+            <button type="button" class="btn-cancel" id="cancelEditActivity">取消</button>
+            <button type="button" class="btn-confirm" id="submitEditActivity" style="background-color: #4a90e2;">确定</button>
         </div>
     </div>
     
@@ -1394,6 +1473,56 @@
             alert('主题活动新增成功！');
         }
         
+        // 编辑主题活动相关函数
+        function showEditActivityModal(activityId) {
+            const modal = document.getElementById('editActivityModal');
+            if (modal) {
+                // 设置主题活动ID
+                document.getElementById('editActivityId').value = activityId || '';
+                
+                // 显示模态框
+                modal.classList.add('show');
+            }
+        }
+
+        function closeEditActivityModal() {
+            const modal = document.getElementById('editActivityModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        function submitEditActivityForm() {
+            // 获取表单数据
+            const activityId = document.getElementById('editActivityId').value;
+            const themeName = document.getElementById('editThemeName').value;
+            const startTime = document.getElementById('editStartTime').value;
+            const endTime = document.getElementById('editEndTime').value;
+            const rules = document.getElementById('editRules').value;
+            const maxDraws = document.getElementById('editMaxDraws').value;
+            
+            // 简单验证
+            if (!themeName || !startTime || !endTime || !rules || !maxDraws) {
+                alert('请填写所有必填项！');
+                return;
+            }
+            
+            // 这里可以添加实际的表单提交逻辑
+            // 例如发送AJAX请求到后端
+            console.log('编辑主题活动:', {
+                activityId,
+                themeName,
+                startTime,
+                endTime,
+                rules,
+                maxDraws
+            });
+            
+            // 模拟提交成功，关闭模态框并重置表单
+            closeEditActivityModal();
+            alert('主题活动编辑成功！');
+        }
+        
         function resetAddActivityForm() {
             document.getElementById('addActivityForm').reset();
             // 重置图片上传区域
@@ -1498,6 +1627,22 @@
                 closeAddActivityModalBtn.addEventListener('click', closeAddActivityModal);
             }
             
+            // 编辑模态框相关事件
+            const cancelEditActivity = document.getElementById('cancelEditActivity');
+            if (cancelEditActivity) {
+                cancelEditActivity.addEventListener('click', closeEditActivityModal);
+            }
+            
+            const submitEditActivity = document.getElementById('submitEditActivity');
+            if (submitEditActivity) {
+                submitEditActivity.addEventListener('click', submitEditActivityForm);
+            }
+            
+            const closeEditActivityModalBtn = document.getElementById('closeEditActivityModal');
+            if (closeEditActivityModalBtn) {
+                closeEditActivityModalBtn.addEventListener('click', closeEditActivityModal);
+            }
+            
             // 图片上传区域点击事件
             const imageUploadArea = document.getElementById('imageUploadArea');
             if (imageUploadArea) {
@@ -1509,10 +1654,38 @@
                 });
             }
             
+            // 编辑图片上传区域点击事件
+            const editImageUploadArea = document.getElementById('editImageUploadArea');
+            if (editImageUploadArea) {
+                editImageUploadArea.addEventListener('click', function() {
+                    const editImageUpload = document.getElementById('editImageUpload');
+                    if (editImageUpload) {
+                        editImageUpload.click();
+                    }
+                });
+            }
+            
             // 文件选择变化事件
             const imageUpload = document.getElementById('imageUpload');
             if (imageUpload) {
                 imageUpload.addEventListener('change', handleImageUpload);
+            }
+            
+            // 编辑文件选择变化事件
+            const editImageUpload = document.getElementById('editImageUpload');
+            if (editImageUpload) {
+                editImageUpload.addEventListener('change', function() {
+                    const file = editImageUpload.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('editPreviewImage').src = e.target.result;
+                            document.getElementById('editPreviewImage').style.display = 'block';
+                            document.getElementById('editUploadText').style.display = 'none';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
             }
             
             // 机构搜索事件
