@@ -1159,15 +1159,22 @@
                     <input type="text" id="newThemeName" placeholder="请输入主题名称" required>
                 </div>
                 <div class="form-group">
-                    <label for="newHeaderNumber">* 头寸编号：</label>
-                    <select id="newHeaderNumber" required>
+                    <label for="newHeaderNumber">头寸编号：</label>
+                    <select id="newHeaderNumber">
                         <option value="">请选择</option>
                         <!-- 假设这里有一些预定义的选项 -->
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="newInstitution">* 报名机构：</label>
-                    <input type="text" id="newInstitution" placeholder="请输入8位机构号" required>
+                    <select id="newInstitution" required>
+                        <option value="">请选择或搜索机构</option>
+                        <!-- 这里可以添加一些默认选项 -->
+                    </select>
+                    <input type="text" id="institutionSearch" placeholder="输入机构名称或编号搜索" style="margin-top: 5px; width: 100%; padding: 8px 12px; border: 1px solid #dcdfe6; border-radius: 4px; font-size: 14px; box-sizing: border-box;">
+                    <div id="institutionOptions" style="max-height: 200px; overflow-y: auto; border: 1px solid #dcdfe6; border-top: none; display: none;">
+                        <!-- 搜索结果将动态显示在这里 -->
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="newActivityTime">* 活动时间：</label>
@@ -1195,6 +1202,7 @@
                     <input type="number" id="newParticipationLimit" placeholder="每个用户最多可以参与" required>
                     <span>最大领取次数</span>
                     <input type="number" id="newMaxDraws" placeholder="次" required style="margin-top: 5px;">
+                    <p style="margin-top: 5px; color: #909399; font-size: 12px;">如上传了6张优惠券信息，设置用户最大可参与6次，那么用户可以领取六张，若为4次，用户可以选择领取4张。</p>
                 </div>
             </form>
         </div>
@@ -1354,8 +1362,8 @@
             const participationLimit = document.getElementById('newParticipationLimit').value;
             const maxDraws = document.getElementById('newMaxDraws').value;
             
-            // 简单验证
-            if (!themeName || !headerNumber || !institution || !startTime || !endTime || !rules || !participationLimit || !maxDraws) {
+            // 简单验证（头寸编号不再必填）
+            if (!themeName || !institution || !startTime || !endTime || !rules || !participationLimit || !maxDraws) {
                 alert('请填写所有必填项！');
                 return;
             }
@@ -1384,6 +1392,59 @@
             // 重置图片上传区域
             document.getElementById('previewImage').style.display = 'none';
             document.getElementById('uploadText').style.display = 'block';
+            // 隐藏机构搜索结果
+            document.getElementById('institutionOptions').style.display = 'none';
+        }
+        
+        // 模拟机构数据（实际项目中应该从后端获取）
+        const institutionData = [
+            { id: '10000001', name: '湖北银行' },
+            { id: '10000002', name: '建设银行' },
+            { id: '10000003', name: '工商银行' },
+            { id: '10000004', name: '农业银行' },
+            { id: '10000005', name: '中国银行' },
+            { id: '10000006', name: '招商银行' },
+            { id: '10000007', name: '交通银行' },
+            { id: '10000008', name: '中信银行' },
+            { id: '10000009', name: '光大银行' },
+            { id: '10000010', name: '华夏银行' }
+        ];
+        
+        // 机构搜索功能
+        function searchInstitutions(keyword) {
+            const optionsContainer = document.getElementById('institutionOptions');
+            
+            if (!keyword) {
+                optionsContainer.style.display = 'none';
+                return;
+            }
+            
+            const filteredInstitutions = institutionData.filter(inst => 
+                inst.id.includes(keyword) || inst.name.includes(keyword)
+            );
+            
+            if (filteredInstitutions.length > 0) {
+                let optionsHTML = '';
+                filteredInstitutions.forEach(inst => {
+                    optionsHTML += `<div class="institution-option" data-id="${inst.id}" style="padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0;" onmouseover="this.style.backgroundColor='#f5f7fa'" onmouseout="this.style.backgroundColor='white'">${inst.name} (${inst.id})</div>`;
+                });
+                optionsContainer.innerHTML = optionsHTML;
+                optionsContainer.style.display = 'block';
+                
+                // 为每个选项添加点击事件
+                document.querySelectorAll('.institution-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const name = this.textContent;
+                        document.getElementById('newInstitution').value = id;
+                        document.getElementById('institutionSearch').value = name;
+                        optionsContainer.style.display = 'none';
+                    });
+                });
+            } else {
+                optionsContainer.innerHTML = '<div style="padding: 8px 12px; color: #909399;">未找到匹配的机构</div>';
+                optionsContainer.style.display = 'block';
+            }
         }
         
         // 图片上传处理
@@ -1425,6 +1486,19 @@
             
             // 文件选择变化事件
             document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+            
+            // 机构搜索事件
+            document.getElementById('institutionSearch').addEventListener('input', function() {
+                searchInstitutions(this.value);
+            });
+            
+            // 点击其他地方隐藏搜索结果
+            document.addEventListener('click', function(event) {
+                const searchContainer = document.getElementById('institutionSearch').parentElement;
+                if (!searchContainer.contains(event.target)) {
+                    document.getElementById('institutionOptions').style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
