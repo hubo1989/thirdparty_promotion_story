@@ -1033,6 +1033,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000091')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)">启用转盘</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
                             </tr>
@@ -1077,6 +1078,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000093')">编辑</a> | 
                                     <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)">启用转盘</a> | 
                                     <a href="#" class="action-link">查看</a>
                                 </td>
                             </tr>
@@ -1151,6 +1153,22 @@
             <div class="confirm-footer">
                 <button type="button" class="btn-cancel" onclick="closeBatchTerminateConfirm()">取消</button>
                 <button type="button" class="btn-confirm" onclick="confirmBatchTerminate()" style="background-color: #f56c6c;">确定终止</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 启用转盘确认弹窗 -->
+    <div class="confirm-overlay" id="enableWheelConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认启用转盘</h4>
+            </div>
+            <div class="confirm-body">
+                <p>启用转盘以后将不能再次关联微信活动，并且关联的活动不能超过10个，确定启用吗？</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeEnableWheelConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmEnableWheel()" style="background-color: #409eff;">确定启用</button>
             </div>
         </div>
     </div>
@@ -1522,6 +1540,43 @@
             closeEditActivityModal();
             alert('主题活动编辑成功！');
         }
+        
+        // 启用转盘确认相关函数
+        
+        // 启用转盘确认相关函数
+        let currentEnableWheelElement = null;
+        
+        function showEnableWheelConfirm(element) {
+            currentEnableWheelElement = element;
+            const modal = document.getElementById('enableWheelConfirmModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+        
+        function closeEnableWheelConfirm() {
+            const modal = document.getElementById('enableWheelConfirmModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                currentEnableWheelElement = null;
+            }, 300);
+        }
+        
+        function confirmEnableWheel() {
+            // 这里可以添加实际的启用转盘逻辑
+            // 例如发送AJAX请求到后端
+            console.log('启用转盘');
+            
+            // 模拟启用成功
+            alert('转盘启用成功！');
+            
+            // 关闭弹窗
+            closeEnableWheelConfirm();
+        }
+        
+
         
         function resetAddActivityForm() {
             document.getElementById('addActivityForm').reset();
