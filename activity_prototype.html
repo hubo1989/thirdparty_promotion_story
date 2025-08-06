@@ -2350,7 +2350,7 @@
                 </div>
                 <div class="submenu show">
                     <div class="submenu-item active" onclick="navigateToPage('activity_prototype.html')">主题活动管理</div>
-                    <div class="submenu-item" onclick="navigateToPage('wxpromotionprototype.html')">活动优惠券管理</div>
+                    <div class="submenu-item" onclick="navigateToPage('promotion_prototype.html')">活动优惠券管理</div>
                 </div>
             </div>
             <div class="menu-item">
@@ -2392,7 +2392,7 @@
                 <div class="tab-item active" onclick="navigateToPage('activity_prototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
                     <span>主题活动管理</span>
                 </div>
-                <div class="tab-item" onclick="navigateToPage('wxpromotionprototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
+                <div class="tab-item" onclick="navigateToPage('promotion_prototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
                     <span>活动优惠券管理</span>
                 </div>
             </div>
@@ -2413,7 +2413,19 @@
                     </div>
                     <div class="form-group">
                         <label for="headerNumber">头寸编号:</label>
-                        <input type="text" id="headerNumber" placeholder="请输入">
+                        <select id="headerNumber">
+                            <option value="">请选择头寸编号</option>
+                            <option value="02001018113100000000000">02001018113100000000000</option>
+                            <option value="02001018113100000000001">02001018113100000000001</option>
+                            <option value="02001018113100000000002">02001018113100000000002</option>
+                            <option value="02001018113100000000003">02001018113100000000003</option>
+                            <option value="02001018113100000000004">02001018113100000000004</option>
+                            <option value="02001018113100000000005">02001018113100000000005</option>
+                            <option value="02001018113100000000006">02001018113100000000006</option>
+                            <option value="02001018113100000000007">02001018113100000000007</option>
+                            <option value="02001018113100000000008">02001018113100000000008</option>
+                            <option value="02001018113100000000009">02001018113100000000009</option>
+                        </select>
                     </div>
                     <div class="form-group dropdown-group">
                         <label for="institution">报名机构:</label>
@@ -2492,7 +2504,7 @@
                     <div class="table-actions">
                         <button class="btn btn-secondary" id="addActivityBtn" onclick="openAddActivityModal()">新增</button>
                         <button class="btn btn-default" onclick="exportActivities()">导出</button>
-                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止</button>
+                        <button class="btn btn-gray" onclick="showBatchPauseConfirm()">暂停</button>
                     </div>
                 </div>
                 <div class="table-container">
@@ -2540,7 +2552,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000084')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: inline;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2564,7 +2576,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000085')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showConfigWheelModal('5000000085', event)">配置转盘</a>
                                 </td>
                             </tr>
@@ -2588,7 +2600,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000086')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: inline;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2612,7 +2624,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000087')">编辑</a> | 
-                                    <a href="#" class="action-link" style="color: #c0c4cc; pointer-events: none;">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showEnableConfirm(this)">启用</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: none;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2636,7 +2648,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000088')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showConfigWheelModal('5000000088', event)">配置转盘</a>
                                 </td>
                             </tr>
@@ -2660,7 +2672,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000089')">编辑</a> | 
-                                    <a href="#" class="action-link" style="color: #c0c4cc; pointer-events: none;">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showEnableConfirm(this)">启用</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: none;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2684,7 +2696,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000090')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showConfigWheelModal('5000000090', event)">配置转盘</a>
                                 </td>
                             </tr>
@@ -2708,7 +2720,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000091')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: inline;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2732,7 +2744,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000092')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showConfigWheelModal('5000000092', event)">配置转盘</a>
                                 </td>
                             </tr>
@@ -2756,7 +2768,7 @@
                                 <td class="action-col">
                                     <a href="#" class="action-link" onclick="showViewActivityModal()">查看</a> | 
                                     <a href="#" class="action-link" onclick="showEditActivityModal('5000000093')">编辑</a> | 
-                                    <a href="#" class="action-link" onclick="showTerminateConfirm(this)">终止</a> | 
+                                    <a href="#" class="action-link" onclick="showPauseConfirm(this)">暂停</a> | 
                                     <a href="#" class="action-link" onclick="showEnableWheelConfirm(this)" style="display: inline;">开启转盘</a>
                                 </td>
                             </tr>
@@ -2802,35 +2814,51 @@
         </div>
     </div>
 
-    <!-- 终止活动确认弹窗 -->
-    <div class="confirm-overlay" id="terminateConfirmModal">
+    <!-- 暂停活动确认弹窗 -->
+    <div class="confirm-overlay" id="pauseConfirmModal">
         <div class="confirm-dialog">
             <div class="confirm-header">
-                <h4>确认终止活动</h4>
+                <h4>确认暂停活动</h4>
             </div>
             <div class="confirm-body">
-                <p>确定要终止此活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p>确定要暂停此活动吗？暂停后活动将停止运行，可以重新启用。</p>
             </div>
             <div class="confirm-footer">
-                <button type="button" class="btn-cancel" onclick="closeTerminateConfirm()">取消</button>
-                <button type="button" class="btn-confirm" onclick="confirmTerminate()" style="background-color: #f56c6c;">确定终止</button>
+                <button type="button" class="btn-cancel" onclick="closePauseConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmPause()" style="background-color: #f56c6c;">确定暂停</button>
             </div>
         </div>
     </div>
 
-    <!-- 批量终止活动确认弹窗 -->
-    <div class="confirm-overlay" id="batchTerminateConfirmModal">
+    <!-- 批量暂停活动确认弹窗 -->
+    <div class="confirm-overlay" id="batchPauseConfirmModal">
         <div class="confirm-dialog">
             <div class="confirm-header">
-                <h4>确认批量终止活动</h4>
+                <h4>确认批量暂停活动</h4>
             </div>
             <div class="confirm-body">
-                <p>确定要终止选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p>确定要暂停选中的活动吗？暂停后活动将停止运行，可以重新启用。</p>
                 <p id="selectedCount" style="color: #f56c6c; font-weight: bold; margin-top: 10px;"></p>
             </div>
             <div class="confirm-footer">
-                <button type="button" class="btn-cancel" onclick="closeBatchTerminateConfirm()">取消</button>
-                <button type="button" class="btn-confirm" onclick="confirmBatchTerminate()" style="background-color: #f56c6c;">确定终止</button>
+                <button type="button" class="btn-cancel" onclick="closeBatchPauseConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmBatchPause()" style="background-color: #f56c6c;">确定暂停</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 启用活动确认弹窗 -->
+    <div class="confirm-overlay" id="enableConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认启用活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要启用此活动吗？启用后活动将重新开始运行。</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeEnableConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmEnable()" style="background-color: #67c23a;">确定启用</button>
             </div>
         </div>
     </div>
@@ -2866,8 +2894,17 @@
                 <div class="form-group">
                     <label for="newHeaderNumber">头寸编号：</label>
                     <select id="newHeaderNumber">
-                        <option value="">请选择</option>
-                        <!-- 假设这里有一些预定义的选项 -->
+                        <option value="">请选择头寸编号</option>
+                        <option value="02001018113100000000000">02001018113100000000000</option>
+                        <option value="02001018113100000000001">02001018113100000000001</option>
+                        <option value="02001018113100000000002">02001018113100000000002</option>
+                        <option value="02001018113100000000003">02001018113100000000003</option>
+                        <option value="02001018113100000000004">02001018113100000000004</option>
+                        <option value="02001018113100000000005">02001018113100000000005</option>
+                        <option value="02001018113100000000006">02001018113100000000006</option>
+                        <option value="02001018113100000000007">02001018113100000000007</option>
+                        <option value="02001018113100000000008">02001018113100000000008</option>
+                        <option value="02001018113100000000009">02001018113100000000009</option>
                     </select>
                 </div>
                 <!-- 报名机构选择 -->
@@ -2963,9 +3000,18 @@
                 </div>
                 <div class="form-group">
                     <label for="editHeaderNumber">头寸编号：</label>
-                    <select id="editHeaderNumber" disabled>
-                        <option value="">请选择</option>
-                        <!-- 假设这里有一些预定义的选项 -->
+                    <select id="editHeaderNumber">
+                        <option value="">请选择头寸编号</option>
+                        <option value="02001018113100000000000">02001018113100000000000</option>
+                        <option value="02001018113100000000001">02001018113100000000001</option>
+                        <option value="02001018113100000000002">02001018113100000000002</option>
+                        <option value="02001018113100000000003">02001018113100000000003</option>
+                        <option value="02001018113100000000004">02001018113100000000004</option>
+                        <option value="02001018113100000000005">02001018113100000000005</option>
+                        <option value="02001018113100000000006">02001018113100000000006</option>
+                        <option value="02001018113100000000007">02001018113100000000007</option>
+                        <option value="02001018113100000000008">02001018113100000000008</option>
+                        <option value="02001018113100000000009">02001018113100000000009</option>
                     </select>
                 </div>
                 <!-- 报名机构选择 -->
@@ -3457,52 +3503,88 @@
     </div>
     
     <script>
-        // 终止活动确认相关函数
-        let currentTerminateElement = null;
+        // 暂停活动确认相关函数
+        let currentPauseElement = null;
 
-        function showTerminateConfirm(element) {
-            currentTerminateElement = element;
-            const modal = document.getElementById('terminateConfirmModal');
+        function showPauseConfirm(element) {
+            currentPauseElement = element;
+            const modal = document.getElementById('pauseConfirmModal');
             modal.classList.add('show');
         }
 
-        function closeTerminateConfirm() {
-            const modal = document.getElementById('terminateConfirmModal');
+        function closePauseConfirm() {
+            const modal = document.getElementById('pauseConfirmModal');
             modal.classList.remove('show');
-            currentTerminateElement = null;
+            currentPauseElement = null;
         }
 
-        function confirmTerminate() {
-            if (currentTerminateElement) {
+        function confirmPause() {
+            if (currentPauseElement) {
                 // 获取当前行的活动信息
-                const row = currentTerminateElement.closest('tr');
+                const row = currentPauseElement.closest('tr');
                 const activityName = row.cells[4].textContent.trim();
 
-                // 这里可以添加实际的终止活动逻辑
+                // 这里可以添加实际的暂停活动逻辑
                 // 例如发送AJAX请求到后端
-                console.log('终止活动:', activityName);
+                console.log('暂停活动:', activityName);
 
-                // 模拟终止成功，更新状态
-                // 注意：根据表格结构调整了列索引
-                const statusCell = row.cells[12]; // 调整为正确的列索引
-                statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                // 模拟暂停成功，更新状态
+                const statusCell = row.cells[12];
+                statusCell.innerHTML = '<span class="status-badge status-inactive">已暂停</span>';
 
-                // 禁用终止按钮
-                currentTerminateElement.style.color = '#c0c4cc';
-                currentTerminateElement.style.pointerEvents = 'none';
-                currentTerminateElement.onclick = null;
+                // 将暂停按钮改为启用按钮
+                currentPauseElement.textContent = '启用';
+                currentPauseElement.onclick = function() { showEnableConfirm(this); };
 
-                alert('活动已成功终止！');
+                alert('活动已成功暂停！');
             }
-            closeTerminateConfirm();
+            closePauseConfirm();
         }
 
-        // 批量终止活动相关函数
-        function showBatchTerminateConfirm() {
+        // 启用活动确认相关函数
+        let currentEnableElement = null;
+
+        function showEnableConfirm(element) {
+            currentEnableElement = element;
+            const modal = document.getElementById('enableConfirmModal');
+            modal.classList.add('show');
+        }
+
+        function closeEnableConfirm() {
+            const modal = document.getElementById('enableConfirmModal');
+            modal.classList.remove('show');
+            currentEnableElement = null;
+        }
+
+        function confirmEnable() {
+            if (currentEnableElement) {
+                // 获取当前行的活动信息
+                const row = currentEnableElement.closest('tr');
+                const activityName = row.cells[4].textContent.trim();
+
+                // 这里可以添加实际的启用活动逻辑
+                // 例如发送AJAX请求到后端
+                console.log('启用活动:', activityName);
+
+                // 模拟启用成功，更新状态
+                const statusCell = row.cells[12];
+                statusCell.innerHTML = '<span class="status-badge status-active">生效中</span>';
+
+                // 将启用按钮改为暂停按钮
+                currentEnableElement.textContent = '暂停';
+                currentEnableElement.onclick = function() { showPauseConfirm(this); };
+
+                alert('活动已成功启用！');
+            }
+            closeEnableConfirm();
+        }
+
+        // 批量暂停活动相关函数
+        function showBatchPauseConfirm() {
             const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
 
             if (checkedBoxes.length === 0) {
-                alert('请先选择要终止的活动！');
+                alert('请先选择要暂停的活动！');
                 return;
             }
 
@@ -3510,45 +3592,43 @@
             const selectedCountElement = document.getElementById('selectedCount');
             selectedCountElement.textContent = `已选中 ${checkedBoxes.length} 个活动`;
 
-            const modal = document.getElementById('batchTerminateConfirmModal');
+            const modal = document.getElementById('batchPauseConfirmModal');
             modal.classList.add('show');
         }
 
-        function closeBatchTerminateConfirm() {
-            const modal = document.getElementById('batchTerminateConfirmModal');
+        function closeBatchPauseConfirm() {
+            const modal = document.getElementById('batchPauseConfirmModal');
             modal.classList.remove('show');
         }
 
-        function confirmBatchTerminate() {
+        function confirmBatchPause() {
             const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
-            let terminatedCount = 0;
+            let pausedCount = 0;
 
             checkedBoxes.forEach(checkbox => {
                 const row = checkbox.closest('tr');
-                // 注意：根据表格结构调整了列索引
-                const statusCell = row.cells[12]; // 调整为正确的列索引
-                const terminateLink = row.querySelector('.action-link[onclick*="showTerminateConfirm"]');
+                const statusCell = row.cells[12];
+                const pauseLink = row.querySelector('.action-link[onclick*="showPauseConfirm"]');
 
-                // 只终止未终止的活动
-                if (!statusCell.textContent.includes('已终止')) {
+                // 只暂停生效中的活动
+                if (statusCell.textContent.includes('生效中')) {
                     // 更新状态
-                    statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                    statusCell.innerHTML = '<span class="status-badge status-inactive">已暂停</span>';
 
-                    // 禁用终止按钮
-                    if (terminateLink) {
-                        terminateLink.style.color = '#c0c4cc';
-                        terminateLink.style.pointerEvents = 'none';
-                        terminateLink.onclick = null;
+                    // 将暂停按钮改为启用按钮
+                    if (pauseLink) {
+                        pauseLink.textContent = '启用';
+                        pauseLink.onclick = function() { showEnableConfirm(this); };
                     }
 
                     // 取消选中
                     checkbox.checked = false;
-                    terminatedCount++;
+                    pausedCount++;
                 }
             });
             
-            alert(`成功终止 ${terminatedCount} 个活动！`);
-            closeBatchTerminateConfirm();
+            alert(`成功暂停 ${pausedCount} 个活动！`);
+            closeBatchPauseConfirm();
         }
 
         // 全选/取消全选功能
@@ -4460,6 +4540,45 @@
                     }
                 });
             }, 100);
+            
+            // URL参数处理 - 根据参数自动打开对应的模态框
+            const urlParams = new URLSearchParams(window.location.search);
+            const action = urlParams.get('action');
+            const id = urlParams.get('id');
+            
+            // 延迟执行，确保页面完全加载
+            setTimeout(function() {
+                switch(action) {
+                    case 'add':
+                        showAddActivityModal();
+                        break;
+                    case 'edit':
+                        if (id) {
+                            showEditActivityModal(id);
+                        }
+                        break;
+                    case 'view':
+                        if (id) {
+                            showViewActivityModal();
+                        }
+                        break;
+                    case 'wheel':
+                        if (id) {
+                            showConfigWheelModal(id, null);
+                        }
+                        break;
+                    case 'institution':
+                        if (id) {
+                            showInstitutionModal(id);
+                        }
+                        break;
+                    case 'bank':
+                        if (id) {
+                            showBankModal(id);
+                        }
+                        break;
+                }
+            }, 500);
         });
         
         // 控制开启转盘和配置转盘按钮的显示逻辑

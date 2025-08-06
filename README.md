@@ -8,11 +8,11 @@
 
 ### 需求文档
 - **[index.html](index.html)** - 云数汇权益营销平台微信优惠券服务接入需求文档（主文档）
-- **[wxpromotionstory.html](wxpromotionstory.html)** - 微信活动管理系统需求文档
+- **[promotion_story.html](promotion_story.html)** - 微信活动管理系统需求文档
 - **[activity_story.html](activity_story.html)** - 主题活动需求文档
 
 ### 功能原型
-- **[wxpromotionprototype.html](wxpromotionprototype.html)** - 微信活动管理功能原型
+- **[promotion_prototype.html](promotion_prototype.html)** - 微信活动管理功能原型
 - **[activity_prototype.html](activity_prototype.html)** - 主题活动管理功能原型
 
 ### 开发文档

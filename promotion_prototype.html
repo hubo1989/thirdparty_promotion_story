@@ -256,8 +256,8 @@
             }
         }
 
-        /* 渠道标签 */
-        .channel-tags {
+        /* 通道标签 */
+        .tunnel-tags {
             background-color: white;
             padding: 15px 20px;
             border-radius: 8px;
@@ -268,14 +268,14 @@
             align-items: center;
         }
 
-        .channel-tags::before {
-            content: '渠道：';
+        .tunnel-tags::before {
+            content: '通道：';
             color: #606266;
             font-size: 14px;
             margin-right: 5px;
         }
 
-        .channel-tag {
+        .tunnel-tag {
             padding: 8px 16px;
             border: 1px solid #dcdfe6;
             border-radius: 20px;
@@ -284,15 +284,16 @@
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
+            -webkit-user-select: none;
             user-select: none;
         }
 
-        .channel-tag:hover {
+        .tunnel-tag:hover {
             border-color: #4a90e2;
             color: #4a90e2;
         }
 
-        .channel-tag.active {
+        .tunnel-tag.active {
             background-color: #4a90e2;
             border-color: #4a90e2;
             color: white;
@@ -530,6 +531,11 @@
             width: auto;
             min-width: 50px;
             text-align: center;
+        }
+        
+        .checkbox-col input[type="checkbox"] {
+            margin: 0 auto;
+            display: block;
         }
 
         .action-col {
@@ -772,6 +778,77 @@
         
         .detail-value {
             color: #303133;
+        }
+        
+        /* 详情区域分组样式 */
+        .detail-section {
+            margin-bottom: 30px;
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #303133;
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #409eff;
+        }
+        
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .detail-item.full-width .detail-label {
+            margin-bottom: 8px;
+            min-width: auto;
+        }
+        
+        .detail-item.full-width .detail-value {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            min-height: 60px;
+            line-height: 1.5;
+        }
+        
+        /* 状态徽章样式优化 */
+        .detail-value.status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge.status-success {
+            background: #f0f9ff;
+            color: #67c23a;
+            border: 1px solid #b3e19d;
+        }
+        
+        .status-badge.status-warning {
+            background: #fdf6ec;
+            color: #e6a23c;
+            border: 1px solid #f5dab1;
+        }
+        
+        .status-badge.status-danger {
+            background: #fef0f0;
+            color: #f56c6c;
+            border: 1px solid #fbc4c4;
+        }
+        
+        .status-badge.status-info {
+            background: #f4f4f5;
+            color: #909399;
+            border: 1px solid #d3d4d6;
             word-break: break-all;
         }
 
@@ -1249,12 +1326,19 @@
             flex-wrap: wrap;
         }
 
+        .radio-group.vertical {
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
         .radio-item {
             display: flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
             padding: 4px 0;
+            justify-content: flex-start;
         }
 
         .radio-item input[type="radio"] {
@@ -1578,7 +1662,7 @@
                 </div>
                 <div class="submenu show">
                     <div class="submenu-item" onclick="navigateToPage('activity_prototype.html')">主题活动管理</div>
-                    <div class="submenu-item active" onclick="navigateToPage('wxpromotionprototype.html')">活动优惠券管理</div>
+                    <div class="submenu-item active" onclick="navigateToPage('promotion_prototype.html')">活动优惠券管理</div>
                 </div>
             </div>
             <div class="menu-item">
@@ -1621,18 +1705,18 @@
                 <div class="tab-item" onclick="navigateToPage('activity_prototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
                     <span>主题活动管理</span>
                 </div>
-                <div class="tab-item active" onclick="navigateToPage('wxpromotionprototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
+                <div class="tab-item active" onclick="navigateToPage('promotion_prototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
                     <span>活动优惠券管理</span>
                 </div>
             </div>
 
-            <!-- 渠道标签 -->
-            <div class="channel-tags">
-                <div class="channel-tag active" data-channel="yunshuhui">
+            <!-- 通道标签 -->
+            <div class="tunnel-tags">
+                <div class="tunnel-tag active" data-tunnel="yunshuhui">
                     云数汇
                 </div>
-                <!-- 预留其他渠道标签位置 -->
-                <!-- <div class="channel-tag" data-channel="other">其他渠道</div> -->
+                <!-- 预留其他通道标签位置 -->
+                <!-- <div class="tunnel-tag" data-tunnel="other">其他通道</div> -->
             </div>
 
             <!-- 查询表单 -->
@@ -1646,34 +1730,25 @@
             <div class="query-form">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>活动编码：</label>
-                        <!-- 数据限制：32位UUID格式，如：0F8A5-1B7-1E4A42B8B7-214E8A8-FF20 -->
-                        <input type="text" placeholder="请输入活动编码" maxlength="36">
+                        <label>活动优惠券编码：</label>
+                        <!-- 数据限制：WX+主题活动编码+时间戳格式，如：WX5000000074_1642492800 -->
+                        <input type="text" placeholder="请输入活动优惠券编码" maxlength="50">
                     </div>
                     <div class="form-group">
-                        <label>活动名称：</label>
+                        <label>活动优惠券名称：</label>
                         <!-- 数据限制：最大100字符，支持中英文数字特殊字符 -->
-                        <input type="text" placeholder="请输入活动名称" maxlength="100">
+                        <input type="text" placeholder="请输入活动优惠券名称" maxlength="100">
                     </div>
                     <div class="form-group">
                         <label>时效类型：</label>
                         <!-- 业务逻辑：相对时效-基于用户领取时间计算有效期；绝对时效-固定开始结束时间 -->
-                        <select>
+                        <select aria-label="时效类型">
                             <option value="">请选择</option>
                             <option value="relative">相对时效</option>
                             <option value="absolute">绝对时效</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>活动状态：</label>
-                        <!-- 状态计算：进行中(当前时间在活动时间范围内)，待开始(当前时间小于开始时间)，已结束(当前时间大于结束时间) -->
-                        <select>
-                            <option value="">请选择</option>
-                            <option value="active">进行中</option>
-                            <option value="pending">待开始</option>
-                            <option value="ended">已结束</option>
-                        </select>
-                    </div>
+
                 </div>
 
                 <div class="form-row">
@@ -1688,21 +1763,31 @@
                         <input type="text" placeholder="请输入批次号" maxlength="9" pattern="[0-9]{9}">
                     </div>
                     <div class="form-group">
+                        <label>渠道：</label>
+                        <!-- 通道筛选：支持微信、支付宝、银联三种通道 -->
+                        <select aria-label="渠道>
+                            <option value="">请选择</option>
+                            <option value="wechat">微信</option>
+                            <option value="alipay">支付宝</option>
+                            <option value="unionpay">银联</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>活动时间：</label>
                         <!-- 时间范围筛选：开始时间不能大于结束时间，默认查询当天数据 -->
                         <div class="date-range">
-                            <input type="date" value="2025-01-20">
+                            <input type="date" value="2025-01-20" aria-label="开始日期">
                             <span>至</span>
-                            <input type="date" value="2025-01-20">
+                            <input type="date" value="2025-01-20" aria-label="结束日期">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>状态：</label>
                         <!-- 启用状态：1-启用(可正常使用)，0-禁用(不可使用但保留数据) -->
-                        <select>
+                        <select aria-label="状态">
                             <option value="">请选择</option>
-                            <option value="1">启用</option>
-                            <option value="0">禁用</option>
+                            <option value="1">生效</option>
+                            <option value="0">失效</option>
                         </select>
                     </div>
                 </div>
@@ -1738,8 +1823,8 @@
                         <button class="btn btn-secondary" onclick="openAddActivityModal()">新增</button>
                         <!-- 导出功能：支持Excel格式，最多导出10000条记录 -->
                         <button class="btn btn-default" onclick="exportActivities()">导出</button>
-                        <!-- 终止活动：批量操作，需要二次确认，只能终止进行中的活动 -->
-                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止</button>
+                        <!-- 暂停活动：批量操作，需要二次确认，只能暂停进行中的活动 -->
+                        <button class="btn btn-gray" onclick="showBatchPauseConfirm()">暂停</button>
                     </div>
                 </div>
 
@@ -1754,50 +1839,65 @@
                         <thead>
                             <tr>
                                 <!-- 全选复选框：支持批量选择进行批量操作 -->
-                                <th class="checkbox-col"><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
+                                <th class="checkbox-col"><input type="checkbox" id="selectAll" onchange="toggleSelectAll()" aria-label="全选"></th>
                                 <!-- 序号：当前页内的行号，从1开始 -->
                                 <th>序号</th>
-                                <!-- 活动ID：32位UUID，系统自动生成的唯一标识 -->
-                                <th>活动ID</th>
-                                <!-- 活动名称：最大100字符，支持中英文，用于业务识别 -->
-                                <th>活动名称</th>
+                                <!-- 活动优惠券编码：WX+主题活动编码+时间戳格式，系统自动生成的唯一标识 -->
+                                <th>活动优惠券编码</th>
+                                <!-- 活动优惠券名称：最大100字符，支持中英文，用于业务识别 -->
+                                <th>活动优惠券名称</th>
                                 <!-- 批次号：9位数字，用于区分同一活动的不同批次 -->
                                 <th>批次号</th>
+                                <!-- 渠道：微信、支付宝、银联 -->
+                                <th>渠道</th>
                                 <!-- 主题活动ID：关联主题活动表，格式THEME+数字 -->
                                 <th>主题活动ID</th>
-                                <!-- 活动开始时间：活动生效的起始时间，影响状态计算 -->
-                                <th>活动开始时间</th>
-                                <!-- 活动结束时间：活动失效的结束时间，影响状态计算 -->
-                                <th>活动结束时间</th>
+                                <!-- 报名机构：参与活动的机构名称 -->
+                                <th>报名机构</th>
+                                <!-- 时效类型：固定期限、相对期限等 -->
+                                <th>时效类型</th>
+                                <!-- 小程序展示：是否在小程序中展示 -->
+                                <th>小程序展示</th>
+                                <!-- 是否结算：活动是否已结算 -->
+                                <th>是否结算</th>
+                                <!-- 开始时间：活动生效的起始时间，影响状态计算 -->
+                                <th>开始时间</th>
+                                <!-- 结束时间：活动失效的结束时间，影响状态计算 -->
+                                <th>结束时间</th>
                                 <!-- 创建时间：记录首次创建的时间，不可修改 -->
                                 <th>创建时间</th>
-                                <!-- 最后修改时间：记录最近一次修改的时间，自动更新 -->
-                                <th>最后修改时间</th>
-                                <!-- 状态：根据当前时间和活动时间范围自动计算 -->
-                                <th>状态</th>
                                 <!-- 创建人：记录创建该活动的用户名 -->
                                 <th>创建人</th>
+                                <!-- 修改时间：记录最近一次修改的时间，自动更新 -->
+                                <th>修改时间</th>
                                 <!-- 修改人：记录最后修改该活动的用户名 -->
                                 <th>修改人</th>
+                                <!-- 状态：根据当前时间和活动时间范围自动计算 -->
+                                <th>状态</th>
                                 <!-- 操作列：根据活动状态和用户权限显示可用操作 -->
                                 <th class="action-col">操作</th>
                             </tr>
                         </thead>
                     <tbody>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>1</td>
-                            <td>0F8A5-1B7-1E4A42B8B7-214E8A8-FF20</td>
+                            <td>WX5000000074_1642492800</td>
                             <td>微信优惠券营销活动20240428（207787133）</td>
                             <td>207787133</td>
+                            <td>微信</td>
                             <td>5000000074</td>
+                            <td>拉卡拉支付有限公司</td>
+                            <td>固定期限</td>
+                            <td>是</td>
+                            <td>否</td>
                             <td>2025-07-28 00:00:00</td>
                             <td>2025-10-22 23:59:59</td>
                             <td>2025-07-28 17:15:04</td>
-                            <td>2025-07-28 17:15:04</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>张三</td>
+                            <td>2025-07-28 17:15:04</td>
                             <td>李四</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <!-- 操作列：根据活动状态动态显示可用操作 -->
                             <!-- 开发注意事项：
                                  1. 查看：所有状态的活动都可查看，只读模式
@@ -1810,188 +1910,233 @@
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <!-- 编辑活动：打开编辑弹窗，允许修改活动信息 -->
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <!-- 终止活动：立即结束活动，需要确认操作 -->
-                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <!-- 暂停活动：立即暂停活动，需要确认操作 -->
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>2</td>
-                            <td>2CC5C0B8B01B41C8-B1B8-4F8F-8A2A-F8B2C0B8B01B</td>
+                            <td>WX5000000074_1642492801</td>
                             <td>微信优惠券营销活动20240428（207787133）</td>
                             <td>207787133</td>
+                            <td>微信</td>
                             <td>5000000074</td>
+                            <td>北京拉卡拉网络技术有限公司</td>
+                            <td>相对期限</td>
+                            <td>否</td>
+                            <td>是</td>
                             <td>2025-07-28 00:00:00</td>
                             <td>2025-10-22 23:59:59</td>
                             <td>2025-07-28 17:06:48</td>
-                            <td>2025-07-28 17:06:48</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>王五</td>
+                            <td>2025-07-28 17:06:48</td>
                             <td>赵六</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>3</td>
-                            <td>E2E4B0C2E4E-2B8B5C0A4T004-FF22AC</td>
+                            <td>ALI5000000074_1642492802</td>
                             <td>建设银行优惠券营销活动20240724（792699738）</td>
                             <td>792699738</td>
+                            <td>支付宝</td>
                             <td>5000000074</td>
+                            <td>中国建设银行股份有限公司</td>
+                            <td>固定期限</td>
+                            <td>是</td>
+                            <td>是</td>
                             <td>2025-07-28 00:00:00</td>
                             <td>2025-10-22 23:59:59</td>
                             <td>2025-07-28 17:06:48</td>
-                            <td>2025-07-28 17:06:48</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>孙七</td>
+                            <td>2025-07-28 17:06:48</td>
                             <td>周八</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>4</td>
-                            <td>715E4093707-E8C2A9-7B6C2F0BF-9C08</td>
+                            <td>UNI5000000074_1642492803</td>
                             <td>建设银行优惠券营销活动20240428（207790140）</td>
                             <td>207790140</td>
+                            <td>云闪付</td>
                             <td>5000000074</td>
+                            <td>中国银联股份有限公司</td>
+                            <td>相对期限</td>
+                            <td>否</td>
+                            <td>否</td>
                             <td>2025-07-28 00:00:00</td>
                             <td>2025-10-22 23:59:59</td>
                             <td>2025-07-28 18:59:38</td>
-                            <td>2025-07-28 18:59:38</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>吴九</td>
+                            <td>2025-07-28 18:59:38</td>
                             <td>郑十</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>5</td>
-                            <td>1B4C7B84C2D4F-D9B8A6C2F-8B4C7B84C2D4F</td>
+                            <td>WX5000000074_1642492804</td>
                             <td>建设银行优惠券营销活动20240428（207790140）</td>
                             <td>207790140</td>
+                            <td>微信</td>
                             <td>5000000074</td>
+                            <td>中国建设银行股份有限公司</td>
+                            <td>固定期限</td>
+                            <td>是</td>
+                            <td>否</td>
                             <td>2025-07-28 00:00:00</td>
                             <td>2025-10-21 23:59:59</td>
                             <td>2025-07-29 17:30:59</td>
-                            <td>2025-07-29 17:30:59</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>冯一</td>
+                            <td>2025-07-29 17:30:59</td>
                             <td>陈二</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>6</td>
-                            <td>B1B2C3D4E5F6-A2B3C4D5E6F7-C3D4E5F6A7B8</td>
+                            <td>ALI5000000074_1642492805</td>
                             <td>内蒙古建设银行优惠券营销活动20240427（207698980）</td>
                             <td>207698980</td>
+                            <td>支付宝</td>
                             <td>5000000074</td>
+                            <td>内蒙古建设银行股份有限公司</td>
+                            <td>相对期限</td>
+                            <td>否</td>
+                            <td>是</td>
                             <td>2025-07-23 00:00:00</td>
                             <td>2025-10-21 23:59:59</td>
                             <td>2025-07-23 17:30:59</td>
-                            <td>2025-07-23 17:30:59</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>褚三</td>
+                            <td>2025-07-23 17:30:59</td>
                             <td>卫四</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>7</td>
-                            <td>F4A4B0B5A3T-B8B4A6T-7F0C0B5C0B1T</td>
+                            <td>UNI5000000074_1642492806</td>
                             <td>山西省建设银行优惠券营销活动（205764517）</td>
                             <td>205764517</td>
+                            <td>云闪付</td>
                             <td>5000000074</td>
+                            <td>山西省建设银行股份有限公司</td>
+                            <td>固定期限</td>
+                            <td>是</td>
+                            <td>否</td>
                             <td>2025-07-23 00:00:00</td>
                             <td>2025-08-28 23:59:59</td>
                             <td>2025-07-23 16:54:44</td>
-                            <td>2025-07-23 16:54:44</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>蒋五</td>
+                            <td>2025-07-23 16:54:44</td>
                             <td>沈六</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>8</td>
-                            <td>A5F7D3A1B6C8-D1B6A2C7F8-2B7C8F6B1T</td>
+                            <td>WX5000000074_1642492807</td>
                             <td>青海省建设银行优惠券营销活动（207570795）</td>
                             <td>207570795</td>
+                            <td>微信</td>
                             <td>5000000074</td>
+                            <td>青海省建设银行股份有限公司</td>
+                            <td>相对期限</td>
+                            <td>否</td>
+                            <td>是</td>
                             <td>2025-07-23 00:00:00</td>
                             <td>2025-10-21 23:59:59</td>
                             <td>2025-07-23 18:59:04</td>
-                            <td>2025-07-23 18:59:04</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>韩七</td>
+                            <td>2025-07-23 18:59:04</td>
                             <td>杨八</td>
+                            <td><span class="status-badge status-inactive">失效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #67C23A;" onclick="showEnableConfirm(this)">启用</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>9</td>
-                            <td>CF1E4A8B9B-6E8B3A4F6B8F7-8B5C6A1T</td>
+                            <td>ALI5000000074_1642492808</td>
                             <td>河南省建设银行优惠券营销活动20240722（207608882）</td>
                             <td>207608882</td>
+                            <td>支付宝</td>
                             <td>5000000074</td>
+                            <td>河南省建设银行股份有限公司</td>
+                            <td>固定期限</td>
+                            <td>是</td>
+                            <td>否</td>
                             <td>2025-07-23 00:00:00</td>
                             <td>2025-10-20 23:59:59</td>
                             <td>2025-07-23 13:22:08</td>
-                            <td>2025-07-23 13:22:08</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>朱九</td>
+                            <td>2025-07-23 13:22:08</td>
                             <td>秦十</td>
+                            <td><span class="status-badge status-active">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #909399;" onclick="showPauseConfirm(this)">暂停</a>
                             </td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()"></td>
+                            <td class="checkbox-col"><input type="checkbox" class="row-checkbox" onchange="updateSelectAll()" aria-label="选择此行"></td>
                             <td>10</td>
-                            <td>8A37E4T-4E0A6E5B8B5C1-B1FE2A4</td>
+                            <td>UNI5000000074_1642492809</td>
                             <td>河南省建设银行优惠券营销活动20240722（207608882）</td>
                             <td>207608882</td>
+                            <td>云闪付</td>
                             <td>5000000074</td>
+                            <td>河南省建设银行股份有限公司</td>
+                            <td>相对期限</td>
+                            <td>否</td>
+                            <td>是</td>
                             <td>2025-07-22 00:00:00</td>
                             <td>2025-10-17 23:59:59</td>
                             <td>2025-07-22 16:38:35</td>
-                            <td>2025-07-22 16:38:35</td>
-                            <td><span class="status-badge status-active">启用</span></td>
                             <td>尤一</td>
+                            <td>2025-07-22 16:38:35</td>
                             <td>许二</td>
+                            <td><span class="status-badge status-inactive">失效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
-                                <a href="#" class="action-link" style="color: #909399;" onclick="showTerminateConfirm(this)">终止</a>
+                                <a href="#" class="action-link" style="color: #67C23A;" onclick="showEnableConfirm(this)">启用</a>
                             </td>
                         </tr>
                     </tbody>
@@ -2003,7 +2148,7 @@
                         <div class="pagination-info">共 243 条记录</div>
                         <div class="page-size-selector">
                             <span>每页显示</span>
-                            <select class="page-size-select">
+                            <select class="page-size-select" aria-label="每页显示条数">
                                 <option value="10" selected>10</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
@@ -2064,6 +2209,25 @@
                                 <input type="text" name="batchNumber" placeholder="请输入批次号" maxlength="9" pattern="[0-9]{9}" required>
                             </div>
                         </div>
+                        <div class="form-grid double">
+                            <div class="form-field">
+                                <label class="required">通道</label>
+                                <select name="channelType" required aria-label="通道选择">
+                                    <option value="">请选择通道</option>
+                                    <option value="internal">内部</option>
+                                    <option value="yunshuhui">云数汇</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label class="required">渠道</label>
+                                <select name="channel" required aria-label="渠道选择">
+                                    <option value="">请选择渠道</option>
+                                    <option value="wechat">微信</option>
+                                    <option value="alipay">支付宝</option>
+                                    <option value="unionpay">银联</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-grid single">
                             <div class="form-field">
                                 <label class="required">是否在小程序展示</label>
@@ -2103,16 +2267,16 @@
                                 <label class="required">活动有效期</label>
                                 <!-- 时间限制：开始时间不能早于当前时间，结束时间必须晚于开始时间 -->
                                 <div class="date-range">
-                                    <input type="date" name="startDate" required>
+                                    <input type="date" name="startDate" required aria-label="活动开始日期">
                                     <span>至</span>
-                                    <input type="date" name="endDate" required>
+                                    <input type="date" name="endDate" required aria-label="活动结束日期">
                                 </div>
                             </div>
                         </div>
                         <div class="form-grid single">
                             <div class="form-field">
                                 <label class="required">使用时段</label>
-                                <div class="radio-group">
+                                <div class="radio-group vertical">
                                     <div class="radio-item">
                                         <input type="radio" id="usagePeriod1" name="usagePeriod" value="anytime" checked>
                                         <label for="usagePeriod1">有效期内，任意时段可用</label>
@@ -2134,6 +2298,21 @@
                                 <!-- 数据限制：最大256字符，支持换行，用于向用户说明使用规则 -->
                                 <textarea name="usageInstructions" placeholder="必填，限制256字" rows="3" maxlength="256"></textarea>
                                 <div class="char-count">0/256</div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">是否结算</label>
+                                <div class="radio-group">
+                                    <div class="radio-item">
+                                        <input type="radio" id="isSettlement1" name="isSettlement" value="yes" checked>
+                                        <label for="isSettlement1">是</label>
+                                    </div>
+                                    <div class="radio-item">
+                                        <input type="radio" id="isSettlement2" name="isSettlement" value="no">
+                                        <label for="isSettlement2">否</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -2184,6 +2363,27 @@
                                 <input type="text" name="batchNumber" placeholder="请输入批次号" readonly disabled>
                             </div>
                             <div class="form-field">
+                                <label class="required">通道</label>
+                                <select name="channelType" aria-label="通道选择" disabled>
+                                    <option value="">请选择通道</option>
+                                    <option value="内部">内部</option>
+                                    <option value="云数汇">云数汇</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">渠道</label>
+                                <select name="channel" aria-label="渠道选择" disabled>
+                                    <option value="">请选择渠道</option>
+                                    <option value="微信">微信</option>
+                                    <option value="支付宝">支付宝</option>
+                                    <option value="银联">银联</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
                                 <label class="required">活动状态</label>
                                 <div class="radio-group">
                                     <div class="radio-item">
@@ -2194,11 +2394,13 @@
                                         <input type="radio" id="editStatus2" name="activityStatus" value="inactive">
                                         <label for="editStatus2">失效</label>
                                     </div>
-                                    <div class="radio-item">
-                                        <input type="radio" id="editStatus3" name="activityStatus" value="deleted">
-                                        <label for="editStatus3">已删除</label>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-grid single">
+                            <div class="form-field">
+                                <label class="required">报名机构</label>
+                                <input type="text" name="organization" placeholder="示例机构 1" readonly disabled>
                             </div>
                         </div>
                         <div class="form-grid">
@@ -2244,7 +2446,7 @@
                         <div class="form-grid single">
                             <div class="form-field">
                                 <label class="required">使用时段</label>
-                                <div class="radio-group">
+                                <div class="radio-group vertical">
                                     <div class="radio-item">
                                         <input type="radio" id="editUsagePeriod1" name="usagePeriod" value="anytime" checked disabled>
                                         <label for="editUsagePeriod1">有效期内，任意时段可用</label>
@@ -2272,29 +2474,17 @@
                         </div>
                         <div class="form-grid single">
                             <div class="form-field">
-                                <label class="required">结算方式</label>
+                                <label class="required">是否结算</label>
                                 <div class="radio-group">
                                     <div class="radio-item">
-                                        <input type="radio" id="editSettlement1" name="settlement" value="bank" checked disabled>
-                                        <label for="editSettlement1">银行承担</label>
+                                        <input type="radio" id="editIsSettlement1" name="isSettlement" value="yes" checked>
+                                        <label for="editIsSettlement1">是</label>
                                     </div>
                                     <div class="radio-item">
-                                        <input type="radio" id="editSettlement2" name="settlement" value="merchant" disabled>
-                                        <label for="editSettlement2">商户承担</label>
+                                        <input type="radio" id="editIsSettlement2" name="isSettlement" value="no">
+                                        <label for="editIsSettlement2">否</label>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-grid">
-                            <div class="form-field">
-                                <label>结算比例</label>
-                                <div class="input-group">
-                                    <input type="number" name="settlementRatio" placeholder="请输入结算比例" step="0.1" min="0" max="100" disabled>
-                                    <span class="input-suffix">%</span>
-                                </div>
-                            </div>
-                            <div class="form-field">
-                                <!-- 占位符，保持网格布局 -->
                             </div>
                         </div>
                     </div>
@@ -2309,7 +2499,7 @@
 
     <!-- 查看详情弹窗 -->
     <div id="viewActivityModal" class="modal-overlay" style="display: none;">
-        <div class="modal-panel" style="width: 90%; max-width: 1200px; height: 100vh; overflow-y: auto;">
+        <div class="modal-panel" style="height: 100vh; overflow-y: auto;">
             <div class="modal-header">
                 <h3 class="modal-title">活动详情</h3>
                 <button type="button" class="modal-close" onclick="closeViewActivityModal()">&times;</button>
@@ -2324,52 +2514,123 @@
 
                 <!-- 活动详情标签页 -->
                 <div class="tab-content active" id="detail-content">
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label class="detail-label">活动ID：</label>
-                            <span class="detail-value" id="detail-activity-id"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">活动名称：</label>
-                            <span class="detail-value" id="detail-activity-name"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">主题活动ID：</label>
-                            <span class="detail-value" id="detail-theme-id"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">批次号：</label>
-                            <span class="detail-value" id="detail-batch-number"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">生效时间：</label>
-                            <span class="detail-value" id="detail-start-time"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">失效时间：</label>
-                            <span class="detail-value" id="detail-end-time"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">创建时间：</label>
-                            <span class="detail-value" id="detail-create-time"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">更新时间：</label>
-                            <span class="detail-value" id="detail-update-time"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">活动状态：</label>
-                            <span class="detail-value" id="detail-status"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">创建人：</label>
-                            <span class="detail-value" id="detail-creator"></span>
-                        </div>
-                        <div class="detail-item">
-                            <label class="detail-label">更新人：</label>
-                            <span class="detail-value" id="detail-updater"></span>
+                    <!-- 基本信息区域 -->
+                    <div class="detail-section">
+                        <h4 class="section-title">基本信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label class="detail-label">活动ID：</label>
+                                <span class="detail-value" id="detail-activity-id"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">活动名称：</label>
+                                <span class="detail-value" id="detail-activity-name"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">主题活动ID：</label>
+                                <span class="detail-value" id="detail-theme-id"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">批次号：</label>
+                                <span class="detail-value" id="detail-batch-number"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">通道：</label>
+                                <span class="detail-value" id="detail-channel-type"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">渠道：</label>
+                                <span class="detail-value" id="detail-channel"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">报名机构：</label>
+                                <span class="detail-value" id="detail-organization"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">活动状态：</label>
+                                <span class="detail-value status-badge" id="detail-status"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">是否在小程序展示：</label>
+                                <span class="detail-value" id="detail-miniprogram-display"></span>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- 时间信息区域 -->
+                    <div class="detail-section">
+                        <h4 class="section-title">时间信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label class="detail-label">生效时间：</label>
+                                <span class="detail-value" id="detail-start-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">失效时间：</label>
+                                <span class="detail-value" id="detail-end-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">创建时间：</label>
+                                <span class="detail-value" id="detail-create-time"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">更新时间：</label>
+                                <span class="detail-value" id="detail-update-time"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 优惠券配置区域 -->
+                    <div class="detail-section">
+                        <h4 class="section-title">优惠券配置</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label class="detail-label">优惠券类型：</label>
+                                <span class="detail-value" id="detail-coupon-type"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">优惠金额：</label>
+                                <span class="detail-value" id="detail-discount-amount"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">使用门槛：</label>
+                                <span class="detail-value" id="detail-min-amount"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">发放总量：</label>
+                                <span class="detail-value" id="detail-total-quantity"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">每人限领：</label>
+                                <span class="detail-value" id="detail-per-user-limit"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">有效期类型：</label>
+                                <span class="detail-value" id="detail-validity-type"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">有效天数：</label>
+                                <span class="detail-value" id="detail-validity-days"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label class="detail-label">使用说明：</label>
+                                <span class="detail-value" id="detail-usage-description"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 使用规则区域 -->
+                    <div class="detail-section">
+                        <h4 class="section-title">使用规则</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item full-width">
+                                <label class="detail-label">使用规则：</label>
+                                <div class="detail-value" id="detail-usage-rules"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                 </div>
 
                 <!-- 发放明细标签页 -->
@@ -2761,27 +3022,27 @@
 
         // 查询数据
         function queryData() {
-            const activeChannel = document.querySelector('.channel-tag.active')?.dataset.channel || 'yunshuhui';
-            console.log('执行查询操作，当前渠道：', activeChannel);
-            // 这里可以根据选中的渠道执行不同的查询逻辑
+            const activeTunnel = document.querySelector('.tunnel-tag.active')?.dataset.tunnel || 'yunshuhui';
+            console.log('执行查询操作，当前通道：', activeTunnel);
+            // 这里可以根据选中的通道执行不同的查询逻辑
         }
 
-        // 渠道标签切换
-        function switchChannel(channelElement) {
+        // 通道标签切换
+        function switchTunnel(tunnelElement) {
             // 移除所有标签的active状态
-            document.querySelectorAll('.channel-tag').forEach(tag => {
+            document.querySelectorAll('.tunnel-tag').forEach(tag => {
                 tag.classList.remove('active');
             });
             
             // 为当前点击的标签添加active状态
-            channelElement.classList.add('active');
+            tunnelElement.classList.add('active');
             
-            // 获取选中的渠道
-            const selectedChannel = channelElement.dataset.channel;
-            console.log('切换到渠道：', selectedChannel);
+            // 获取选中的通道
+            const selectedTunnel = tunnelElement.dataset.tunnel;
+            console.log('切换到通道：', selectedTunnel);
             
-            // 这里可以根据选中的渠道加载对应的数据
-            // 例如：loadChannelData(selectedChannel);
+            // 这里可以根据选中的通道加载对应的数据
+            // 例如：loadTunnelData(selectedTunnel);
         }
 
         // 打开新增活动弹出面板
@@ -2821,28 +3082,21 @@
 
         // 初始化表单
         function initializeForm() {
-            // 设置默认创建人和修改人
-            const form = document.getElementById('addActivityForm');
-            const creatorInput = form.querySelector('input[name="creator"]');
-            const modifierInput = form.querySelector('input[name="modifier"]');
-            
-            // 模拟当前用户信息
-            const currentUser = '管理员';
-            creatorInput.value = currentUser;
-            modifierInput.value = currentUser;
-            
             // 设置默认时间
+            const form = document.getElementById('addActivityForm');
             const now = new Date();
-            const startTimeInput = form.querySelector('input[name="startTime"]');
-            const endTimeInput = form.querySelector('input[name="endTime"]');
+            const startDateInput = form.querySelector('input[name="startDate"]');
+            const endDateInput = form.querySelector('input[name="endDate"]');
             
-            // 设置开始时间为当前时间
-            startTimeInput.value = now.toISOString().slice(0, 16);
-            
-            // 设置结束时间为一个月后
-            const endTime = new Date(now);
-            endTime.setMonth(endTime.getMonth() + 1);
-            endTimeInput.value = endTime.toISOString().slice(0, 16);
+            if (startDateInput && endDateInput) {
+                // 设置开始时间为当前日期
+                startDateInput.value = now.toISOString().slice(0, 10);
+                
+                // 设置结束时间为一个月后
+                const endTime = new Date(now);
+                endTime.setMonth(endTime.getMonth() + 1);
+                endDateInput.value = endTime.toISOString().slice(0, 10);
+            }
         }
 
         // 提交新增活动表单
@@ -2973,10 +3227,10 @@
 
         // 页面加载完成后绑定事件
         document.addEventListener('DOMContentLoaded', function() {
-            // 为渠道标签绑定点击事件
-            document.querySelectorAll('.channel-tag').forEach(tag => {
+            // 为通道标签绑定点击事件
+            document.querySelectorAll('.tunnel-tag').forEach(tag => {
                 tag.addEventListener('click', function() {
-                    switchChannel(this);
+                    switchTunnel(this);
                 });
             });
             
@@ -3003,19 +3257,37 @@
             const row = button.closest('tr');
             const cells = row.querySelectorAll('td');
             
+            // 安全获取单元格内容的辅助函数
+            function getCellText(index) {
+                return cells[index] ? cells[index].textContent.trim() : '-';
+            }
+            
+            function getStatusText(index) {
+                if (cells[index]) {
+                    const statusBadge = cells[index].querySelector('.status-badge');
+                    return statusBadge ? statusBadge.textContent.trim() : cells[index].textContent.trim();
+                }
+                return '-';
+            }
+            
             // 从表格行中提取数据（根据实际表格结构调整）
             const activityData = {
-                activityId: cells[2].textContent.trim(), // 活动ID
-                activityName: cells[3].textContent.trim(), // 活动名称
-                themeActivityId: cells[5].textContent.trim(), // 主题活动ID
-                batchNumber: cells[4].textContent.trim(), // 批次号
-                effectiveTime: cells[6].textContent.trim(), // 活动开始时间
-                expiryTime: cells[7].textContent.trim(), // 活动结束时间
-                createTime: cells[8].textContent.trim(), // 创建时间
-                updateTime: cells[9].textContent.trim(), // 最后修改时间
-                activityStatus: cells[10].querySelector('.status-badge').textContent.trim(), // 状态
-                creator: cells[11].textContent.trim(), // 创建人
-                updater: cells[12].textContent.trim() // 修改人
+                activityId: getCellText(2), // 活动ID
+                activityName: getCellText(3), // 活动名称
+                batchNumber: getCellText(4), // 批次号
+                tunnel: getCellText(5), // 渠道
+                themeActivityId: getCellText(6), // 主题活动ID
+                organization: getCellText(7), // 报名机构
+                miniProgramDisplay: getCellText(8), // 小程序展示
+                isSettlement: getCellText(10), // 是否结算
+                effectiveTime: getCellText(11), // 活动开始时间
+                expiryTime: getCellText(12), // 活动结束时间
+                createTime: getCellText(13), // 创建时间
+                creator: getCellText(14), // 创建人
+                updateTime: getCellText(15), // 最后修改时间
+                updater: getCellText(16), // 修改人
+                activityStatus: getStatusText(17), // 状态
+                channelType: '云数汇' // 通道类型，默认为云数汇
             };
             
             openViewActivityModal(activityData);
@@ -3028,17 +3300,50 @@
             
             // 填充详情数据
             if (activityData) {
+                // 基本信息
                 document.getElementById('detail-activity-id').textContent = activityData.activityId || '-';
                 document.getElementById('detail-activity-name').textContent = activityData.activityName || '-';
                 document.getElementById('detail-theme-id').textContent = activityData.themeActivityId || '-';
                 document.getElementById('detail-batch-number').textContent = activityData.batchNumber || '-';
+                document.getElementById('detail-channel-type').textContent = activityData.channelType || '云数汇';
+                document.getElementById('detail-channel').textContent = activityData.tunnel || '微信';
+                document.getElementById('detail-organization').textContent = activityData.organization || '拉卡拉支付有限公司';
+                
+                // 设置活动状态样式
+                const statusElement = document.getElementById('detail-status');
+                const status = activityData.activityStatus || '未知';
+                statusElement.textContent = status;
+                statusElement.className = 'detail-value status-badge';
+                if (status === '进行中') {
+                    statusElement.classList.add('status-success');
+                } else if (status === '待开始') {
+                    statusElement.classList.add('status-warning');
+                } else if (status === '已结束') {
+                    statusElement.classList.add('status-info');
+                } else {
+                    statusElement.classList.add('status-danger');
+                }
+                
+                document.getElementById('detail-miniprogram-display').textContent = activityData.miniprogramDisplay || '是';
+                
+                // 时间信息
                 document.getElementById('detail-start-time').textContent = activityData.effectiveTime || '-';
                 document.getElementById('detail-end-time').textContent = activityData.expiryTime || '-';
                 document.getElementById('detail-create-time').textContent = activityData.createTime || '-';
                 document.getElementById('detail-update-time').textContent = activityData.updateTime || '-';
-                document.getElementById('detail-status').textContent = activityData.activityStatus || '-';
-                document.getElementById('detail-creator').textContent = activityData.creator || '-';
-                document.getElementById('detail-updater').textContent = activityData.updater || '-';
+                
+                // 优惠券配置
+                document.getElementById('detail-coupon-type').textContent = activityData.couponType || '满减券';
+                document.getElementById('detail-discount-amount').textContent = activityData.discountAmount || '¥20.00';
+                document.getElementById('detail-min-amount').textContent = activityData.minAmount || '¥100.00';
+                document.getElementById('detail-total-quantity').textContent = activityData.totalQuantity || '1000';
+                document.getElementById('detail-per-user-limit').textContent = activityData.perUserLimit || '1';
+                document.getElementById('detail-validity-type').textContent = activityData.validityType || '固定期限';
+                document.getElementById('detail-validity-days').textContent = activityData.validityDays || '30天';
+                document.getElementById('detail-usage-description').textContent = activityData.usageDescription || '仅限线上消费使用';
+                
+                // 使用规则
+                document.getElementById('detail-usage-rules').textContent = activityData.usageRules || '1. 仅限微信支付使用\n2. 不可与其他优惠同时使用\n3. 退款时优惠券不予退还\n4. 活动最终解释权归拉卡拉所有';
             }
             
             // 显示遮罩层
@@ -3055,6 +3360,11 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelector('.tab-item[data-tab="detail"]').classList.add('active');
             document.getElementById('detail-content').classList.add('active');
+            
+            // 绑定模态框外部点击关闭事件
+            setTimeout(() => {
+                bindViewModalOutsideClick();
+            }, 100);
         }
         
         // 关闭查看详情弹窗
@@ -3156,40 +3466,7 @@
         }
 
         // 打开查看详情弹窗
-        function openViewActivityModal(activityData) {
-            const modal = document.getElementById('viewActivityModal');
-            const panel = modal.querySelector('.modal-panel');
-            
-            // 填充详情数据
-            if (activityData) {
-                document.getElementById('detail-activity-id').textContent = activityData.activityId || '-';
-                document.getElementById('detail-activity-name').textContent = activityData.activityName || '-';
-                document.getElementById('detail-theme-id').textContent = activityData.themeActivityId || '-';
-                document.getElementById('detail-batch-number').textContent = activityData.batchNumber || '-';
-                document.getElementById('detail-start-time').textContent = activityData.effectiveTime || '-';
-                document.getElementById('detail-end-time').textContent = activityData.expiryTime || '-';
-                document.getElementById('detail-create-time').textContent = activityData.createTime || '-';
-                document.getElementById('detail-update-time').textContent = activityData.updateTime || '-';
-                document.getElementById('detail-status').textContent = activityData.activityStatus || '-';
-                document.getElementById('detail-creator').textContent = activityData.creator || '-';
-                document.getElementById('detail-updater').textContent = activityData.updater || '-';
-            }
-            
-            // 显示遮罩层
-            modal.style.display = 'flex';
-            
-            // 延迟添加动画类，确保过渡效果
-            setTimeout(() => {
-                modal.classList.add('show');
-                panel.classList.add('show');
-            }, 10);
-            
-            // 设置默认标签页为活动详情
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelector('.tab-item[data-tab="detail"]').classList.add('active');
-            document.getElementById('detail-content').classList.add('active');
-        }
+
         
         // 编辑活动相关函数
         function openEditActivityModal(activityData) {
@@ -3199,14 +3476,39 @@
             
             // 填充表单数据
             if (activityData) {
-                form.querySelector('input[name="activityName"]').value = activityData.activityName || '';
-                form.querySelector('input[name="themeActivityId"]').value = activityData.themeActivityId || '';
-                form.querySelector('input[name="batchNumber"]').value = activityData.batchNumber || '';
-                form.querySelector('input[name="faceValue"]').value = activityData.faceValue || '';
-                form.querySelector('input[name="usageThreshold"]').value = activityData.usageThreshold || '';
-                form.querySelector('input[name="startDate"]').value = activityData.startDate || '';
-                form.querySelector('input[name="endDate"]').value = activityData.endDate || '';
-                form.querySelector('textarea[name="usageInstructions"]').value = activityData.usageInstructions || '';
+                // 安全地设置表单字段值
+                const setFieldValue = (selector, value) => {
+                    const field = form.querySelector(selector);
+                    if (field) {
+                        field.value = value || '';
+                    }
+                };
+                
+                setFieldValue('input[name="activityName"]', activityData.activityName);
+                setFieldValue('input[name="themeActivityId"]', activityData.themeActivityId);
+                setFieldValue('input[name="batchNumber"]', activityData.batchNumber);
+                setFieldValue('input[name="faceValue"]', activityData.faceValue);
+                setFieldValue('input[name="usageThreshold"]', activityData.usageThreshold);
+                setFieldValue('input[name="startDate"]', activityData.startDate);
+                setFieldValue('input[name="endDate"]', activityData.endDate);
+                setFieldValue('textarea[name="usageInstructions"]', activityData.usageInstructions);
+                
+                // 设置新增字段
+                setFieldValue('input[name="organization"]', activityData.organization);
+                
+                // 设置通道选择框
+                const channelTypeSelect = form.querySelector('select[name="channelType"]');
+                if (channelTypeSelect && activityData.channelType) {
+                    channelTypeSelect.value = activityData.channelType;
+                }
+                
+                // 设置渠道选择框
+                const channelSelect = form.querySelector('select[name="channel"]');
+                if (channelSelect && activityData.tunnel) {
+                    channelSelect.value = activityData.tunnel;
+                }
+                
+
                 
                 // 设置活动状态
                 const statusRadios = form.querySelectorAll('input[name="activityStatus"]');
@@ -3235,17 +3537,13 @@
                     form.querySelector('input[name="usageDays"]').value = activityData.usageDays;
                 }
                 
-                // 设置结算方式
-                const settlementRadios = form.querySelectorAll('input[name="settlement"]');
-                settlementRadios.forEach(radio => {
-                    if (radio.value === activityData.settlement) {
+                // 设置是否结算
+                const isSettlementRadios = form.querySelectorAll('input[name="isSettlement"]');
+                isSettlementRadios.forEach(radio => {
+                    if (radio.value === activityData.isSettlement) {
                         radio.checked = true;
                     }
                 });
-                
-                if (activityData.settlementRatio) {
-                    form.querySelector('input[name="settlementRatio"]').value = activityData.settlementRatio;
-                }
             }
             
             // 显示遮罩层
@@ -3306,25 +3604,45 @@
             const row = button.closest('tr');
             const cells = row.querySelectorAll('td');
             
-            // 从表格行中提取活动数据
+            // 安全地获取单元格内容
+            const getCellText = (index) => {
+                return cells[index] && cells[index].textContent ? cells[index].textContent.trim() : '';
+            };
+            
+            const getStatusText = (index) => {
+                const cell = cells[index];
+                if (cell) {
+                    const statusBadge = cell.querySelector('.status-badge');
+                    return statusBadge ? statusBadge.textContent.trim() : '';
+                }
+                return '';
+            };
+            
+            // 从表格行中提取活动数据（根据实际表格结构调整索引）
             const activityData = {
-                activityId: cells[2].textContent.trim(),
-                activityName: cells[3].textContent.trim(),
-                batchNumber: cells[4].textContent.trim(),
-                themeActivityId: cells[5].textContent.trim(),
-                startDate: cells[6].textContent.trim().split(' ')[0], // 只取日期部分
-                endDate: cells[7].textContent.trim().split(' ')[0], // 只取日期部分
-                createTime: cells[8].textContent.trim(),
-                updateTime: cells[9].textContent.trim(),
-                activityStatus: cells[10].querySelector('.status-badge').textContent.trim(),
-                creator: cells[11].textContent.trim(),
-                updater: cells[12].textContent.trim(),
+                activityId: getCellText(2),
+                activityName: getCellText(3),
+                batchNumber: getCellText(4),
+                tunnel: getCellText(5),
+                themeActivityId: getCellText(6),
+                startDate: getCellText(7).split(' ')[0], // 只取日期部分
+                endDate: getCellText(8).split(' ')[0], // 只取日期部分
+                createTime: getCellText(9),
+                creator: getCellText(10),
+                updateTime: getCellText(11),
+                updater: getCellText(12),
+                activityStatus: getStatusText(13),
+                // 新增字段
+                organization: getCellText(14), // 报名机构
+                miniProgramDisplay: getCellText(15), // 小程序展示
+                isSettlement: getCellText(17), // 是否结算
                 // 以下字段在表格中不显示，使用默认值
                 faceValue: '10.00',
                 usageThreshold: '100.00',
                 usageInstructions: '请在有效期内使用',
                 displayInMiniProgram: 'true',
-                usagePeriod: 'anytime'
+                usagePeriod: 'anytime',
+                channelType: '云数汇' // 通道类型，默认为云数汇
             };
             
             openEditActivityModal(activityData);
@@ -3371,58 +3689,101 @@
             alert('数据导出成功！');
         }
 
-        // 终止活动确认相关函数
-        let currentTerminateElement = null;
+        // 失效活动确认相关函数
+        let currentPauseElement = null;
 
-        function showTerminateConfirm(element) {
-            currentTerminateElement = element;
-            const modal = document.getElementById('terminateConfirmModal');
+        function showPauseConfirm(element) {
+            currentPauseElement = element;
+            const modal = document.getElementById('pauseConfirmModal');
             modal.style.display = 'flex';
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
         }
 
-        function closeTerminateConfirm() {
-            const modal = document.getElementById('terminateConfirmModal');
+        function closePauseConfirm() {
+            const modal = document.getElementById('pauseConfirmModal');
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
-                currentTerminateElement = null;
+                currentPauseElement = null;
             }, 300);
         }
 
-        function confirmTerminate() {
-             if (currentTerminateElement) {
+        function confirmPause() {
+             if (currentPauseElement) {
                  // 获取当前行的活动信息
-                 const row = currentTerminateElement.closest('tr');
+                 const row = currentPauseElement.closest('tr');
                  const activityName = row.cells[3].textContent.trim();
                  
-                 // 这里可以添加实际的终止活动逻辑
+                 // 这里可以添加实际的失效活动逻辑
                  // 例如发送AJAX请求到后端
-                 console.log('终止活动:', activityName);
+                 console.log('失效活动:', activityName);
                  
-                 // 模拟终止成功，更新状态
+                 // 模拟失效成功，更新状态
                  const statusCell = row.cells[10];
-                 statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                 statusCell.innerHTML = '<span class="status-badge status-inactive">失效</span>';
                  
-                 // 禁用终止按钮
-                 currentTerminateElement.style.color = '#c0c4cc';
-                 currentTerminateElement.style.pointerEvents = 'none';
-                 currentTerminateElement.onclick = null;
+                 // 将失效按钮改为生效按钮
+                 currentPauseElement.textContent = '生效';
+                 currentPauseElement.onclick = function() { showEnableConfirm(this); };
                  
-                 alert('活动已成功终止！');
+                 alert('活动已成功失效！');
              }
-             closeTerminateConfirm();
+             closePauseConfirm();
          }
 
-         // 批量终止活动相关函数
-         function showBatchTerminateConfirm() {
-             console.log('showBatchTerminateConfirm 函数被调用');
+        // 生效活动确认相关函数
+        let currentEnableElement = null;
+
+        function showEnableConfirm(element) {
+            currentEnableElement = element;
+            const modal = document.getElementById('enableConfirmModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeEnableConfirm() {
+            const modal = document.getElementById('enableConfirmModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                currentEnableElement = null;
+            }, 300);
+        }
+
+        function confirmEnable() {
+             if (currentEnableElement) {
+                 // 获取当前行的活动信息
+                 const row = currentEnableElement.closest('tr');
+                 const activityName = row.cells[3].textContent.trim();
+                 
+                 // 这里可以添加实际的生效活动逻辑
+                 // 例如发送AJAX请求到后端
+                 console.log('生效活动:', activityName);
+                 
+                 // 模拟生效成功，更新状态
+                 const statusCell = row.cells[10];
+                 statusCell.innerHTML = '<span class="status-badge status-active">生效</span>';
+                 
+                 // 将生效按钮改为失效按钮
+                 currentEnableElement.textContent = '失效';
+                 currentEnableElement.onclick = function() { showPauseConfirm(this); };
+                 
+                 alert('活动已成功生效！');
+             }
+             closeEnableConfirm();
+         }
+
+         // 批量失效活动相关函数
+         function showBatchPauseConfirm() {
+             console.log('showBatchPauseConfirm 函数被调用');
              const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
              
              if (checkedBoxes.length === 0) {
-                 alert('请先选择要终止的活动！');
+                 alert('请先选择要失效的活动！');
                  return;
              }
              
@@ -3430,58 +3791,70 @@
              const selectedCountElement = document.getElementById('selectedCount');
              selectedCountElement.textContent = `已选中 ${checkedBoxes.length} 个活动`;
              
-             const modal = document.getElementById('batchTerminateConfirmModal');
+             const modal = document.getElementById('batchPauseConfirmModal');
              modal.style.display = 'flex';
              setTimeout(() => {
                  modal.classList.add('show');
              }, 10);
          }
 
-         function closeBatchTerminateConfirm() {
-             const modal = document.getElementById('batchTerminateConfirmModal');
+         function closeBatchPauseConfirm() {
+             const modal = document.getElementById('batchPauseConfirmModal');
              modal.classList.remove('show');
              setTimeout(() => {
                  modal.style.display = 'none';
              }, 300);
          }
 
-         function confirmBatchTerminate() {
+         function confirmBatchPause() {
              const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
-             let terminatedCount = 0;
+             let pausedCount = 0;
              
              checkedBoxes.forEach(checkbox => {
                  const row = checkbox.closest('tr');
                  const statusCell = row.cells[10];
-                 const terminateLink = row.querySelector('.action-link[onclick*="showTerminateConfirm"]');
+                 const pauseLink = row.querySelector('.action-link[onclick*="showPauseConfirm"]');
                  
-                 // 只终止未终止的活动
-                 if (!statusCell.textContent.includes('已终止')) {
+                 // 只失效生效中的活动
+                 if (statusCell.textContent.includes('生效')) {
                      // 更新状态
-                     statusCell.innerHTML = '<span class="status-badge status-inactive">已终止</span>';
+                     statusCell.innerHTML = '<span class="status-badge status-inactive">失效</span>';
                      
-                     // 禁用终止按钮
-                     if (terminateLink) {
-                         terminateLink.style.color = '#c0c4cc';
-                         terminateLink.style.pointerEvents = 'none';
-                         terminateLink.onclick = null;
+                     // 将失效按钮改为生效按钮
+                     if (pauseLink) {
+                         pauseLink.textContent = '生效';
+                         pauseLink.onclick = function() { showEnableConfirm(this); };
                      }
                      
                      // 取消选中
                      checkbox.checked = false;
-                     terminatedCount++;
+                     pausedCount++;
                  }
              });
              
              // 更新全选状态
              updateSelectAll();
              
-                         alert(`成功终止 ${terminatedCount} 个活动！`);
-            closeBatchTerminateConfirm();
+                         alert(`成功失效 ${pausedCount} 个活动！`);
+            closeBatchPauseConfirm();
         }
 
         // 页面跳转函数
         function navigateToPage(pageName) {
             window.location.href = pageName;
+        }
+        
+        // 绑定查看模态框外部点击关闭事件
+        function bindViewModalOutsideClick() {
+            const modal = document.getElementById('viewActivityModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    // 如果点击的是模态框背景（不是内容区域），则关闭模态框
+                    if (e.target === modal) {
+                        closeViewActivityModal();
+                    }
+                });
+            }
         }
     </script>
 
@@ -3501,35 +3874,51 @@
         </div>
     </div>
 
-    <!-- 终止活动确认弹窗 -->
-    <div class="confirm-overlay" id="terminateConfirmModal">
+    <!-- 失效活动确认弹窗 -->
+    <div class="confirm-overlay" id="pauseConfirmModal">
         <div class="confirm-dialog">
             <div class="confirm-header">
-                <h4>确认终止活动</h4>
+                <h4>确认失效活动</h4>
             </div>
             <div class="confirm-body">
-                <p>确定要终止此活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p>确定要失效此活动吗？失效后活动将停止运行，可以随时重新生效。</p>
             </div>
             <div class="confirm-footer">
-                <button type="button" class="btn-cancel" onclick="closeTerminateConfirm()">取消</button>
-                <button type="button" class="btn-confirm" onclick="confirmTerminate()" style="background-color: #f56c6c;">确定终止</button>
+                <button type="button" class="btn-cancel" onclick="closePauseConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmPause()" style="background-color: #f56c6c;">确定失效</button>
             </div>
         </div>
     </div>
 
-    <!-- 批量终止活动确认弹窗 -->
-    <div class="confirm-overlay" id="batchTerminateConfirmModal">
+    <!-- 生效活动确认弹窗 -->
+    <div class="confirm-overlay" id="enableConfirmModal">
         <div class="confirm-dialog">
             <div class="confirm-header">
-                <h4>确认批量终止活动</h4>
+                <h4>确认生效活动</h4>
             </div>
             <div class="confirm-body">
-                <p>确定要终止全部选中的活动吗？终止后活动将无法恢复，请谨慎操作。</p>
+                <p>确定要生效此活动吗？生效后活动将重新开始运行。</p>
+            </div>
+            <div class="confirm-footer">
+                <button type="button" class="btn-cancel" onclick="closeEnableConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmEnable()" style="background-color: #67c23a;">确定生效</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 批量失效活动确认弹窗 -->
+    <div class="confirm-overlay" id="batchPauseConfirmModal">
+        <div class="confirm-dialog">
+            <div class="confirm-header">
+                <h4>确认批量失效活动</h4>
+            </div>
+            <div class="confirm-body">
+                <p>确定要失效全部选中的活动吗？失效后活动将停止运行，可以随时重新生效。</p>
                 <p id="selectedCount" style="color: #f56c6c; font-weight: bold; margin-top: 10px;"></p>
             </div>
             <div class="confirm-footer">
-                <button type="button" class="btn-cancel" onclick="closeBatchTerminateConfirm()">取消</button>
-                <button type="button" class="btn-confirm" onclick="confirmBatchTerminate()" style="background-color: #f56c6c;">确定终止</button>
+                <button type="button" class="btn-cancel" onclick="closeBatchPauseConfirm()">取消</button>
+                <button type="button" class="btn-confirm" onclick="confirmBatchPause()" style="background-color: #f56c6c;">确定失效</button>
             </div>
         </div>
     </div>

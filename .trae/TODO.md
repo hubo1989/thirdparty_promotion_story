@@ -1,8 +1,8 @@
 # TODO:
 
-- [x] analyze_current_structure: 分析当前activity_prototype.html文件中报名机构和关联银行的实现结构 (priority: High)
-- [x] update_data_table: 修改数据表格，将查看详情链接改为直接展示机构号和银行ID (priority: High)
-- [x] modify_form_dropdowns: 将创建和编辑活动表单中的报名机构和关联银行改为单选下拉框 (priority: High)
-- [x] remove_multiselect_code: 移除多选相关的JavaScript代码和模态框 (priority: Medium)
-- [x] update_javascript_events: 更新相关的JavaScript事件处理逻辑 (priority: Medium)
-- [x] test_changes: 测试修改后的功能是否正常工作 (priority: Low)
+- [x] modify_activity_prototype: 修改activity_prototype.html文件中的终止按钮为暂停按钮，实现暂停/启用切换功能 (priority: High)
+- [x] modify_wxpromotion_prototype: 修改wxpromotionprototype.html文件中的终止按钮为暂停按钮，实现暂停/启用切换功能 (priority: High)
+- [x] update_table_buttons: 修改数据表格中的按钮逻辑，根据状态显示暂停或启用按钮 (priority: High)
+- [x] update_javascript_functions: 修改相关JavaScript函数名和逻辑，添加状态切换功能 (priority: High)
+- [x] update_confirmation_dialogs: 修改确认弹窗的文本内容 (priority: Medium)
+- [x] test_functionality: 测试修改后的功能是否正常工作 (priority: Low)
