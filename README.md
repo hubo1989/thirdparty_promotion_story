@@ -85,6 +85,14 @@
 
 ### 更新日志
 
+#### v2.2.4 (2025-01-27)
+- **修复**: `promotion_prototype.html` 活动优惠券管理原型中的状态标签样式和按钮操作问题
+  - 修复JavaScript中状态单元格索引错误（从 `cells[10]` 改为 `cells[12]`）
+  - 统一状态标签CSS类名（`status-active` 改为 `status-success`，`status-inactive` 改为 `status-danger`）
+  - 确保暂停/启用按钮操作后状态显示正确
+  - 修复批量操作中的状态更新逻辑
+  - 解决了活动状态切换时显示不正确的问题
+
 #### v2.2.3 (2024-12-19)
 - **promotion_story.html 修复状态标签样式和标签页交互功能**
   - 添加状态标签CSS样式定义（status-success绿色、status-danger红色等）
