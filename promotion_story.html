@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>银行联合营销平台 - 微信活动管理需求说明文档</title>
+    <title>联合营销平台 - 活动优惠券管理需求说明文档</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -288,8 +288,8 @@
     
     <!-- 原型图片预览 -->
     <figure class="prototype-preview">
-        <img src="image/promotion_prototype.png" alt="微信活动管理系统原型预览">
-        <figcaption>微信活动管理系统原型界面预览 - <a href="promotion_prototype.html" target="_blank" class="prototype-btn">查看完整原型</a></figcaption>
+        <img src="image/promotion_preview.png" alt="活动优惠券管理系统原型预览">
+        <figcaption>活动优惠券管理系统原型界面预览 - <a href="promotion_prototype.html" target="_blank" class="prototype-btn">查看完整原型</a></figcaption>
     </figure>
 
     <section>
@@ -299,17 +299,11 @@
         <h3>1.1 核心功能模块</h3>
         <p>系统包含以下主要功能模块：</p>
         <ul>
-            <li><strong>活动管理</strong>：新增、编辑、查看、暂停/启用微信活动</li>
+            <li><strong>活动管理</strong>：新增、编辑、查看、暂停/启用活动优惠券</li>
             <li><strong>查询筛选</strong>：支持多维度条件查询和智能筛选</li>
-            <li><strong>通道管理</strong>：配置支付通道和渠道信息</li>
-            <li><strong>机构管理</strong>：管理报名机构和关联银行信息</li>
             <li><strong>批量操作</strong>：支持批量暂停、导出等操作</li>
             <li><strong>数据查看</strong>：查看活动详情、使用规则等信息</li>
         </ul>
-
-        <h3>1.2 原型界面访问</h3>
-        <p>完整的功能原型可通过以下链接访问：</p>
-        <a href="promotion_prototype.html" target="_blank" class="prototype-btn">🔗 查看完整功能原型</a>
     </section>
     
     <section>
@@ -663,51 +657,79 @@
         <a href="promotion_prototype.html" target="_blank" class="function-link">👁️ 体验查看活动详情功能</a>
         
         <h3>5.1 功能概述</h3>
-        <p>查看活动详情功能允许管理员查看已创建活动的完整信息。该功能通过只读模式展示活动的所有字段信息，界面简洁清晰，专注于信息展示。</p>
+        <p>查看活动详情功能允许管理员查看已创建活动的完整信息，包括活动详情、发放明细和核销明细三个维度的数据。该功能通过标签页切换的方式组织信息，界面简洁清晰，专注于信息展示和数据分析。</p>
         
         <h3>5.2 界面设计</h3>
-        <p>查看活动详情界面采用简化设计：</p>
+        <p>查看活动详情界面采用标签页设计：</p>
         <ul>
-            <li><strong>标题显示</strong>：模态框标题显示为"查看活动详情"</li>
-            <li><strong>只读模式</strong>：所有字段均为只读，不可编辑</li>
+            <li><strong>模态框标题</strong>：显示为"活动详情"</li>
+            <li><strong>标签页导航</strong>：包含"活动详情"、"发放明细"、"核销明细"三个标签</li>
+            <li><strong>标签页切换</strong>：点击标签可切换不同内容区域</li>
+            <li><strong>只读模式</strong>：所有信息均为只读，不可编辑</li>
             <li><strong>操作按钮</strong>：只显示"关闭"按钮</li>
-            <li><strong>信息布局</strong>：采用表格形式清晰展示字段信息</li>
         </ul>
                 
-        <h3>5.3 显示内容</h3>
-        <p>查看活动详情显示以下信息：</p>
+        <h3>5.3 标签页内容</h3>
+        
+        <h4>5.3.1 活动详情标签页</h4>
+        <p>显示活动的基本配置信息，按区域分组展示：</p>
         <table>
             <thead>
                 <tr>
-                    <th>信息类别</th>
+                    <th>信息区域</th>
                     <th>包含字段</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>基本信息</td>
-                    <td>活动名称、主题活动ID、批次号、报名机构</td>
+                    <td>活动ID、活动名称、主题活动ID、批次号、通道、渠道、报名机构、活动状态、是否在小程序展示</td>
                 </tr>
                 <tr>
                     <td>时间信息</td>
-                    <td>生效时间、失效时间</td>
+                    <td>生效时间、失效时间、创建时间、更新时间</td>
                 </tr>
                 <tr>
-                    <td>通道信息</td>
-                    <td>通道、渠道</td>
+                    <td>优惠券配置</td>
+                    <td>优惠券类型、优惠金额、使用门槛、发放总量、每人限领、有效期类型、有效天数、使用说明</td>
                 </tr>
                 <tr>
-                    <td>优惠信息</td>
-                    <td>优惠券类型、面值、使用门槛</td>
-                </tr>
-                <tr>
-                    <td>规则信息</td>
-                    <td>使用规则、使用周期、是否在小程序显示</td>
+                    <td>使用规则</td>
+                    <td>详细的使用规则说明文本</td>
                 </tr>
             </tbody>
         </table>
+        
+        <h4>5.3.2 发放明细标签页</h4>
+        <p>显示优惠券的发放统计和明细数据：</p>
+        <ul>
+            <li><strong>统计概览</strong>：总发放数量、已核销数量、未核销数量、核销率</li>
+            <li><strong>查询筛选</strong>：支持按OpenID、状态、流水号、发放时间筛选</li>
+            <li><strong>明细列表</strong>：券ID、活动ID、OpenID、优惠券类型、优惠金额、使用门槛、发放时间、优惠券状态</li>
+            <li><strong>数据导出</strong>：支持下载发放明细数据</li>
+            <li><strong>分页显示</strong>：支持分页浏览和每页条数设置</li>
+        </ul>
+        
+        <h4>5.3.3 核销明细标签页</h4>
+        <p>显示优惠券的核销统计和明细数据：</p>
+        <ul>
+            <li><strong>统计概览</strong>：总发放数量、已核销数量、未核销数量、核销率</li>
+            <li><strong>查询筛选</strong>：支持按OpenID、状态、流水号、核销时间筛选</li>
+            <li><strong>明细列表</strong>：券ID、交易流水号、活动ID、OpenID、优惠券类型、核销金额、订单金额、商户编号、商户名称、核销时间、核销状态</li>
+            <li><strong>数据导出</strong>：支持下载核销明细数据</li>
+            <li><strong>分页显示</strong>：支持分页浏览和每页条数设置</li>
+        </ul>
                 
-        <h3>5.4 操作流程</h3>
+        <h3>5.4 标签页切换功能</h3>
+        <p>标签页切换功能的技术实现：</p>
+        <ul>
+            <li><strong>标签激活状态</strong>：当前选中的标签显示为激活状态（蓝色背景）</li>
+            <li><strong>内容区域切换</strong>：点击标签时隐藏其他内容区域，显示对应的内容</li>
+            <li><strong>默认标签</strong>：打开模态框时默认显示"活动详情"标签</li>
+            <li><strong>平滑过渡</strong>：标签切换时有平滑的过渡效果</li>
+        </ul>
+        
+        <h3>5.5 操作流程</h3>
         <div class="workflow-step">
             <div class="step-number">1</div>
             <div>用户在活动列表中点击"查看"按钮</div>
@@ -718,14 +740,18 @@
         </div>
         <div class="workflow-step">
             <div class="step-number">3</div>
-            <div>系统以只读模式显示活动的所有信息</div>
+            <div>系统默认显示"活动详情"标签页内容</div>
         </div>
         <div class="workflow-step">
             <div class="step-number">4</div>
-            <div>用户查看活动详情信息</div>
+            <div>用户可点击"发放明细"或"核销明细"标签切换查看不同内容</div>
         </div>
         <div class="workflow-step">
             <div class="step-number">5</div>
+            <div>在发放明细和核销明细标签页中，用户可进行数据筛选和导出操作</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">6</div>
             <div>用户点击"关闭"按钮关闭模态框</div>
         </div>
                 
