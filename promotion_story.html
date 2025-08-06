@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:o='urn:schemas-microsoft-com:office:office' 
-      xmlns:w='urn:schemas-microsoft-com:office:word' 
-      xmlns='http://www.w3.org/TR/REC-html40'>
+<html lang="zh-CN">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>微信活动需求文档</title>
-    <!--[if gte mso 9]>
-    <xml>
-        <w:WordDocument>
-            <w:View>Print</w:View>
-            <w:Zoom>90</w:Zoom>
-            <w:DoNotPromptForConvert/>
-            <w:DoNotShowInsertionsAndDeletions/>
-        </w:WordDocument>
-    </xml>
-    <![endif]-->
-    <!-- ECharts图表支持 使用多个CDN以确保在中国可访问 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>银行联合营销平台 - 微信活动管理需求说明文档</title>
     <style>
-        body { 
-            font-family: '宋体', SimSun, serif; 
-            font-size: 14pt; 
-            line-height: 1.6; 
-            margin: 1in 10% 1in 10%;
-            background: white;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
         }
-        h1 { 
+        
+        header {
+            text-align: center; 
+            margin-bottom: 30pt; 
+            border-bottom: 3pt solid #007bff; 
+            padding-bottom: 20pt;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 0;
+        }
+        
+        h1 {
             font-size: 20pt; 
             color: #2c3e50; 
             border-bottom: 2px solid #007bff; 
@@ -35,68 +35,174 @@
             margin-bottom: 15pt;
             page-break-after: avoid;
         }
-        h2 { 
-            font-size: 18pt; 
-            color: #007bff; 
-            margin-top: 20pt; 
-            margin-bottom: 10pt;
-            page-break-after: avoid;
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
         }
-        h3 { 
-            font-size: 16pt; 
-            color: #495057; 
-            margin-top: 15pt; 
-            margin-bottom: 8pt;
-            page-break-after: avoid;
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        h4 { 
-            font-size: 14pt; 
-            color: #6c757d; 
-            margin-top: 10pt; 
-            margin-bottom: 6pt;
-            page-break-after: avoid;
+        
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
         }
-        p { 
-            margin-bottom: 6pt; 
-            text-align: justify; 
-            text-indent: 0;
+        
+        h3 {
+            color: #495057;
         }
-        ul, ol { 
-            margin-left: 20pt; 
-            margin-bottom: 10pt;
+        
+        h4 {
+            color: #333;
+            margin-top: 1.5rem;
         }
-        li { 
-            margin-bottom: 3pt; 
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
         }
-        table { 
-            border-collapse: collapse; 
-            width: 100%; 
-            margin: 10pt 0; 
-            font-size: 12pt;
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: left;
         }
-        th, td { 
-            border: 1pt solid #000; 
-            padding: 6pt; 
-            text-align: left; 
-            vertical-align: top;
+        
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
         }
-        th { 
-            background-color: #f0f0f0; 
-            font-weight: bold; 
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
-        .code-block { 
-            background-color: #f8f9fa; 
-            border: 1pt solid #ccc; 
-            padding: 10pt; 
-            font-family: 'Courier New', monospace; 
-            font-size: 12pt;
-            margin: 10pt 0;
+        
+        .prototype-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+            transition: all 0.3s ease;
         }
-        .highlight-box { 
-            background-color: #e7f3ff; 
-            border: 1pt solid #b3d9ff; 
-            padding: 10pt; 
-            margin: 10pt 0; 
+        
+        .prototype-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .function-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 8px 4px;
+            border: 2px solid #bbdefb;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .function-link:hover {
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(25, 118, 210, 0.3);
+        }
+
+        .field-constraint {
+            background-color: #fff3e0;
+            padding: 8px;
+            border-left: 4px solid #ff9800;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        .workflow-step .step-number {
+            background-color: #007bff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .dev-note {
+            background-color: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .dev-note-title {
+            font-weight: bold;
+            color: #f57f17;
+            margin-bottom: 8px;
+        }
+        
+        .prototype-preview {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .prototype-preview img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        
+        .prototype-preview figcaption {
+            margin-top: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #666;
+            font-size: 0.9em;
         }
         .warning-box { 
             background-color: #fff3cd; 
@@ -175,645 +281,824 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>微信活动需求文档</h1>
-    </div>
-    <div style="text-align: center;">
-        <img src="image/wxprototype.png" alt="产品原型预览" style="max-width: 100%; height: auto;">
-        <figcaption>微信活动原型界面预览</figcaption>
-    </div>
-    <div class="container">
-        <div class="content">
+    <header>
+        <h1>银行联合营销平台 - 微信活动管理需求说明文档</h1>
+        <p class="subtitle">基于原型界面的详细功能需求与开发指南</p>
+    </header>
+    
+    <!-- 原型图片预览 -->
+    <figure class="prototype-preview">
+        <img src="image/promotion_prototype.png" alt="微信活动管理系统原型预览">
+        <figcaption>微信活动管理系统原型界面预览 - <a href="promotion_prototype.html" target="_blank" class="prototype-btn">查看完整原型</a></figcaption>
+    </figure>
 
-           <!-- 1. 功能需求 -->
-            <section id="functional-requirements">
-                <h2>1. 功能需求</h2>
+    <section>
+        <h2>1. 系统概述</h2>
+        <p>银行联合营销平台微信活动管理系统是一个基于Web的企业级营销活动管理平台，主要用于管理微信优惠券营销活动的全生命周期。系统提供活动创建、查询、编辑、状态管理等核心功能，支持批量操作和多维度数据筛选。</p>
+        
+        <h3>1.1 核心功能模块</h3>
+        <p>系统包含以下主要功能模块：</p>
+        <ul>
+            <li><strong>活动管理</strong>：新增、编辑、查看、暂停/启用微信活动</li>
+            <li><strong>查询筛选</strong>：支持多维度条件查询和智能筛选</li>
+            <li><strong>通道管理</strong>：配置支付通道和渠道信息</li>
+            <li><strong>机构管理</strong>：管理报名机构和关联银行信息</li>
+            <li><strong>批量操作</strong>：支持批量暂停、导出等操作</li>
+            <li><strong>数据查看</strong>：查看活动详情、使用规则等信息</li>
+        </ul>
 
-                <h3>1.1 新增活动</h3>
-                
-                <h4>1.1.1 功能概述</h4>
-                <p>系统应提供新增微信活动的功能，允许管理员创建新的微信优惠券营销活动。新增活动包括填写活动基本信息、配置优惠券规则、设置使用限制等。</p>
-                
-                <h4>1.1.2 界面设计</h4>
-                <p>新增活动功能通过弹出面板实现，包含以下元素：</p>
-                <ul>
-                    <li><strong>弹出面板</strong>：覆盖整个屏幕，包含表单内容和操作按钮</li>
-                    <li><strong>关闭按钮</strong>：右上角"×"按钮，用于关闭面板</li>
-                    <li><strong>表单区域</strong>：包含活动信息输入字段</li>
-                    <li><strong>操作按钮</strong>：包括"取消"和"确定"按钮</li>
-                </ul>
-                
-                <h4>1.1.3 表单字段</h4>
-                <p>新增活动表单应包含以下字段：</p>
-                <table>
-                    <tr><th>字段名称</th><th>字段类型</th><th>必填</th><th>约束条件</th></tr>
-                    <tr>
-                        <td>活动名称</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>最大100字符，用于业务识别，不能重复</td>
-                    </tr>
-                    <tr>
-                        <td>主题活动ID</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>关联主题活动表，格式THEME+数字</td>
-                    </tr>
-                    <tr>
-                        <td>批次号</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>9位数字，用于区分同一活动的不同批次</td>
-                    </tr>
-                    <tr>
-                        <td>生效时间</td>
-                        <td>日期时间选择器</td>
-                        <td>是</td>
-                        <td>不能选择过去时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>失效时间</td>
-                        <td>日期时间选择器</td>
-                        <td>是</td>
-                        <td>必须晚于生效时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>优惠券类型</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：满减券、折扣券、代金券</td>
-                    </tr>
-                    <tr>
-                        <td>优惠金额</td>
-                        <td>数值输入框</td>
-                        <td>是</td>
-                        <td>最多支持小数点后2位</td>
-                    </tr>
-                    <tr>
-                        <td>使用门槛</td>
-                        <td>数值输入框</td>
-                        <td>否</td>
-                        <td>最多支持小数点后2位，0表示无门槛</td>
-                    </tr>
-                    <tr>
-                        <td>使用周期</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：固定天数、指定日期范围</td>
-                    </tr>
-                    <tr>
-                        <td>结算方式</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：银行承担、商户承担、按比例承担</td>
-                    </tr>
-                    <tr>
-                        <td>结算比例</td>
-                        <td>数值输入框</td>
-                        <td>条件</td>
-                        <td>当结算方式为按比例承担时必填，最多支持小数点后2位</td>
-                    </tr>
-                </table>
-                
-                <h4>1.1.4 表单验证规则</h4>
-                <ul>
-                    <li>必填字段需标记红色星号，提交前必须填写</li>
-                    <li>数字字段支持小数点后2位</li>
-                    <li>日期字段不能选择过去时间</li>
-                    <li>文本字段有长度限制和字符计数</li>
-                    <li>失效时间必须晚于生效时间</li>
-                    <li>当结算方式为按比例承担时，结算比例为必填</li>
-                </ul>
-                
-                <h4>1.1.5 操作流程</h4>
-                <ol>
-                    <li>用户点击"新增活动"按钮</li>
-                    <li>系统显示新增活动弹出面板</li>
-                    <li>用户填写活动信息</li>
-                    <li>用户点击"确定"按钮</li>
-                    <li>系统验证表单数据</li>
-                    <li>如验证通过，系统保存活动信息并关闭面板</li>
-                    <li>如验证失败，系统显示错误提示信息</li>
-                </ol>
-                
-                <h3>1.2 编辑活动</h3>
-                
-                <h4>1.2.1 功能概述</h4>
-                <p>系统应提供编辑微信活动的功能，允许管理员修改已创建的微信优惠券营销活动。只有状态为"待开始"和"进行中"的活动可以编辑。</p>
-                
-                <h4>1.2.2 界面设计</h4>
-                <p>编辑活动功能通过弹出面板实现，包含以下元素：</p>
-                <ul>
-                    <li><strong>弹出面板</strong>：覆盖整个屏幕，包含表单内容和操作按钮</li>
-                    <li><strong>关闭按钮</strong>：右上角"×"按钮，用于关闭面板</li>
-                    <li><strong>表单区域</strong>：包含活动信息输入字段，已存在的信息需预填充</li>
-                    <li><strong>操作按钮</strong>：包括"取消"和"确定"按钮</li>
-                </ul>
-                
-                <h4>1.2.3 表单字段</h4>
-                <p>编辑活动表单应包含以下字段（与新增活动表单相同）：</p>
-                <table>
-                    <tr><th>字段名称</th><th>字段类型</th><th>必填</th><th>约束条件</th></tr>
-                    <tr>
-                        <td>活动名称</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>最大100字符，用于业务识别，不能重复</td>
-                    </tr>
-                    <tr>
-                        <td>主题活动ID</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>关联主题活动表，格式THEME+数字（只读）</td>
-                    </tr>
-                    <tr>
-                        <td>批次号</td>
-                        <td>文本输入框</td>
-                        <td>是</td>
-                        <td>9位数字，用于区分同一活动的不同批次（只读）</td>
-                    </tr>
-                    <tr>
-                        <td>生效时间</td>
-                        <td>日期时间选择器</td>
-                        <td>是</td>
-                        <td>不能选择过去时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>失效时间</td>
-                        <td>日期时间选择器</td>
-                        <td>是</td>
-                        <td>必须晚于生效时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>优惠券类型</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：满减券、折扣券、代金券</td>
-                    </tr>
-                    <tr>
-                        <td>优惠金额</td>
-                        <td>数值输入框</td>
-                        <td>是</td>
-                        <td>最多支持小数点后2位</td>
-                    </tr>
-                    <tr>
-                        <td>使用门槛</td>
-                        <td>数值输入框</td>
-                        <td>否</td>
-                        <td>最多支持小数点后2位，0表示无门槛</td>
-                    </tr>
-                    <tr>
-                        <td>使用周期</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：固定天数、指定日期范围</td>
-                    </tr>
-                    <tr>
-                        <td>结算方式</td>
-                        <td>单选按钮组</td>
-                        <td>是</td>
-                        <td>可选：银行承担、商户承担、按比例承担</td>
-                    </tr>
-                    <tr>
-                        <td>结算比例</td>
-                        <td>数值输入框</td>
-                        <td>条件</td>
-                        <td>当结算方式为按比例承担时必填，最多支持小数点后2位</td>
-                    </tr>
-                </table>
-                
-                <h4>1.2.4 表单验证规则</h4>
-                <ul>
-                    <li>必填字段需标记红色星号，提交前必须填写</li>
-                    <li>数字字段支持小数点后2位</li>
-                    <li>日期字段不能选择过去时间</li>
-                    <li>文本字段有长度限制和字符计数</li>
-                    <li>失效时间必须晚于生效时间</li>
-                    <li>当结算方式为按比例承担时，结算比例为必填</li>
-                    <li>主题活动ID和批次号为只读字段，不可修改</li>
-                </ul>
-                
-                <h4>1.2.5 操作流程</h4>
-                <ol>
-                    <li>用户在活动列表中点击某活动的"编辑"按钮</li>
-                    <li>系统显示编辑活动弹出面板，并预填充该活动的现有信息</li>
-                    <li>用户修改活动信息</li>
-                    <li>用户点击"确定"按钮</li>
-                    <li>系统验证表单数据</li>
-                    <li>如验证通过，系统更新活动信息并关闭面板</li>
-                    <li>如验证失败，系统显示错误提示信息</li>
-                </ol>
-                
-                <h4>1.2.6 权限控制</h4>
-                <ul>
-                    <li>只有状态为"待开始"和"进行中"的活动可以编辑</li>
-                    <li>用户需要具有编辑权限才能执行此操作</li>
-                </ul>
-                
-                <h3>1.3 查看活动详情</h3>
-                
-                <h4>1.3.1 功能概述</h4>
-                <p>系统应提供查看微信活动详情的功能，允许用户查看活动的完整信息，包括基本信息、发放明细和核销明细。所有状态的活动都可以查看。</p>
-                
-                <h4>1.3.2 界面设计</h4>
-                <p>查看活动详情功能通过弹出面板实现，包含以下元素：</p>
-                <ul>
-                    <li><strong>弹出面板</strong>：宽度为屏幕的90%，最大宽度1200px，高度为全屏，支持滚动</li>
-                    <li><strong>关闭按钮</strong>：右上角"×"按钮，用于关闭面板</li>
-                    <li><strong>标签页</strong>：包含"活动详情"、"发放明细"、"核销明细"三个标签页</li>
-                    <li><strong>活动详情标签页</strong>：显示活动的基本信息</li>
-                    <li><strong>发放明细标签页</strong>：以表格形式显示该活动的所有发放记录</li>
-                    <li><strong>核销明细标签页</strong>：以表格形式显示该活动的所有核销记录</li>
-                </ul>
-                
-                <h4>1.3.3 活动详情标签页</h4>
-                <p>活动详情标签页显示以下信息：</p>
-                <table>
-                    <tr><th>字段名称</th><th>显示内容</th></tr>
-                    <tr>
-                        <td>活动ID</td>
-                        <td>32位UUID，系统自动生成的唯一标识</td>
-                    </tr>
-                    <tr>
-                        <td>活动名称</td>
-                        <td>用户定义的活动名称</td>
-                    </tr>
-                    <tr>
-                        <td>主题活动ID</td>
-                        <td>关联的主题活动ID</td>
-                    </tr>
-                    <tr>
-                        <td>批次号</td>
-                        <td>9位数字批次号</td>
-                    </tr>
-                    <tr>
-                        <td>生效时间</td>
-                        <td>活动开始时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>失效时间</td>
-                        <td>活动结束时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>创建时间</td>
-                        <td>活动创建时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>更新时间</td>
-                        <td>活动最后更新时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>活动状态</td>
-                        <td>活动当前状态（待开始、进行中、已终止、已结束）</td>
-                    </tr>
-                    <tr>
-                        <td>创建人</td>
-                        <td>创建该活动的用户</td>
-                    </tr>
-                    <tr>
-                        <td>更新人</td>
-                        <td>最后更新该活动的用户</td>
-                    </tr>
-                </table>
-                
-                <h4>1.3.4 发放明细标签页</h4>
-                <p>发放明细标签页以表格形式显示该活动的所有发放记录，包含以下字段：</p>
-                <table>
-                    <tr><th>字段名称</th><th>说明</th></tr>
-                    <tr>
-                        <td>券 ID</td>
-                        <td>发放优惠券的唯一标识</td>
-                    </tr>
-                    <tr>
-                        <td>活动ID</td>
-                        <td>关联的活动ID</td>
-                    </tr>
-                    <tr>
-                        <td>OpenID</td>
-                        <td>用户微信OpenID</td>
-                    </tr>
-                    <tr>
-                        <td>优惠券类型</td>
-                        <td>优惠券类型（满减券、折扣券、代金券）</td>
-                    </tr>
-                    <tr>
-                        <td>优惠金额</td>
-                        <td>优惠券的优惠金额</td>
-                    </tr>
-                    <tr>
-                        <td>使用门槛</td>
-                        <td>使用该优惠券的最低消费金额</td>
-                    </tr>
-                    <tr>
-                        <td>发放时间</td>
-                        <td>优惠券发放时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>优惠券状态</td>
-                        <td>优惠券当前状态（未使用、已使用、已过期）</td>
-                    </tr>
-                </table>
-                
-                <h4>1.3.5 核销明细标签页</h4>
-                <p>核销明细标签页以表格形式显示该活动的所有核销记录，包含以下字段：</p>
-                <table>
-                    <tr><th>字段名称</th><th>说明</th></tr>
-                    <tr>
-                        <td>券 ID</td>
-                        <td>发放优惠券的唯一标识</td>
-                    </tr>
-                    <tr>
-                        <td>交易流水号</td>
-                        <td>核销交易的唯一标识</td>
-                    </tr>
-                    <tr>
-                        <td>活动ID</td>
-                        <td>关联的活动ID</td>
-                    </tr>
-                    <tr>
-                        <td>OpenID</td>
-                        <td>用户微信OpenID</td>
-                    </tr>
-                    <tr>
-                        <td>优惠券类型</td>
-                        <td>优惠券类型（满减券、折扣券、代金券）</td>
-                    </tr>
-                    <tr>
-                        <td>核销金额</td>
-                        <td>实际核销的优惠金额</td>
-                    </tr>
-                    <tr>
-                        <td>订单金额</td>
-                        <td>用户实际支付的订单金额</td>
-                    </tr>
-                    <tr>
-                        <td>商户编号</td>
-                        <td>核销商户的编号</td>
-                    </tr>
-                    <tr>
-                        <td>商户名称</td>
-                        <td>核销商户的名称</td>
-                    </tr>
-                    <tr>
-                        <td>核销时间</td>
-                        <td>优惠券核销时间，格式YYYY-MM-DD HH:mm:ss</td>
-                    </tr>
-                    <tr>
-                        <td>核销状态</td>
-                        <td>核销状态（核销成功、核销失败）</td>
-                    </tr>
-                </table>
-                
-                <h4>1.3.6 操作流程</h4>
-                <ol>
-                    <li>用户在活动列表中点击某活动的"查看"按钮</li>
-                    <li>系统显示查看活动详情弹出面板，默认显示活动详情标签页</li>
-                    <li>用户可以通过点击标签页切换到发放明细或核销明细</li>
-                    <li>用户点击关闭按钮关闭面板</li>
-                </ol>
-                
-                <h4>1.3.7 权限控制</h4>
-                <ul>
-                    <li>所有状态的活动都可以查看</li>
-                    <li>查看为只读模式，不允许修改任何信息</li>
-                    <li>用户需要具有查看权限才能执行此操作</li>
-                </ul>
-                
-                <h3>1.4 活动状态管理</h3>
-                <div id="activity-status-chart" class="chart-container">
-                    <svg width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <style>
-                                #activity-status-chart .node { 
-                                    fill: #66CCFF; 
-                                    stroke: #333;
-                                    stroke-width: 1;
-                                }
-                                #activity-status-chart .node-label { 
-                                    font-family: Arial, sans-serif;
-                                    font-size: 14px;
-                                    text-anchor: middle;
-                                    dominant-baseline: middle;
-                                }
-                                #activity-status-chart .link { 
-                                    stroke: #333; 
-                                    stroke-width: 2; 
-                                    marker-end: url(#arrowhead);
-                                }
-                                #activity-status-chart .link-label { 
-                                    font-family: Arial, sans-serif;
-                                    font-size: 12px;
-                                    fill: #333;
-                                    text-anchor: middle;
-                                }
-                            </style>
-                        </defs>
-                        
-                        <!-- 定义箭头标记 -->
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                    refX="10" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- 节点 -->
-                        <circle class="node" cx="150" cy="200" r="40" fill="#66CCFF"/>
-                        <text class="node-label" x="150" y="200">待开始</text>
-                        
-                        <circle class="node" cx="350" cy="200" r="40" fill="#66FF66"/>
-                        <text class="node-label" x="350" y="200">进行中</text>
-                        
-                        <circle class="node" cx="550" cy="100" r="40" fill="#FF6666"/>
-                        <text class="node-label" x="550" y="100">已终止</text>
-                        
-                        <circle class="node" cx="550" cy="300" r="40" fill="#CCCCCC"/>
-                        <text class="node-label" x="550" y="300">已结束</text>
-                        
-                        <!-- 连接线 -->
-                        <line class="link" x1="190" y1="200" x2="310" y2="200"/>
-                        
-                        <line class="link" x1="380" y1="180" x2="520" y2="120"/>
-                        <text class="link-label" x="450" y="135">手动终止</text>
-                        
-                        <line class="link" x1="380" y1="220" x2="520" y2="280"/>
-                        <text class="link-label" x="450" y="265">时间到达</text>
-                    </svg>
-                </div>
+        <h3>1.2 原型界面访问</h3>
+        <p>完整的功能原型可通过以下链接访问：</p>
+        <a href="promotion_prototype.html" target="_blank" class="prototype-btn">🔗 查看完整功能原型</a>
+    </section>
+    
+    <section>
+        <h2>2. 查询筛选功能</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">🔍 体验查询筛选功能</a>
+        
+        <h3>2.1 功能描述</h3>
+        <p>系统提供多维度的活动查询筛选功能，支持精确查找和模糊搜索，帮助用户快速定位目标活动。</p>
 
-                <!-- 
-                    操作权限控制表
-                    描述了不同用户角色对活动管理功能的访问权限
-                    权限基于控制台用户角色可配置
-                -->
-                <h3>1.3 操作权限控制</h3>
-                <!-- 
-                    权限矩阵表
-                    展示了管理员、操作员和审计员三种角色对系统功能的访问权限
-                    ✓ 表示有权限，✗ 表示无权限
-                    权限控制基于控制台用户角色配置，支持灵活调整
-                -->
-                <table>
-                    <tr><th>角色</th><th>查看</th><th>创建</th><th>编辑</th><th>终止</th></tr>
-                    <tr>
-                        <td>管理员</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>操作员</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                        <td>✓</td>
-                        <td>✗</td>
-                    </tr>
-                    <tr>
-                        <td>审计员</td>
-                        <td>✓</td>
-                        <td>✗</td>
-                        <td>✗</td>
-                        <td>✗</td>
-                    </tr>
-                </table>
-            </section>
-
-            <!-- 2. 界面设计 -->
-            <section id="ui-design">
-                <h2>2. 界面设计</h2>
-                
-                <h3>2.1 产品原型预览</h3>
-                <p>以下是微信活动管理系统的界面原型预览，展示了主要功能界面和交互设计：</p>
-                <button style="background-color: #4a90e2; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;" onclick="window.location.href='promotion_prototype.html'">
-                    查看完整原型
-                </button>
-
-
-                <h3>2.2 操作流程图</h3>
-                <div id="operation-flow-chart" class="chart-container">
-                    <svg width="100%" height="400" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <style>
-                                #operation-flow-chart .node { 
-                                    fill: #66CCFF; 
-                                    stroke: #333;
-                                    stroke-width: 1;
-                                }
-                                #operation-flow-chart .node-label { 
-                                    font-family: Arial, sans-serif;
-                                    font-size: 14px;
-                                    text-anchor: middle;
-                                    dominant-baseline: middle;
-                                }
-                                #operation-flow-chart .link { 
-                                    stroke: #333; 
-                                    stroke-width: 2; 
-                                    marker-end: url(#arrowhead);
-                                }
-                                #operation-flow-chart .link-label { 
-                                    font-family: Arial, sans-serif;
-                                    font-size: 12px;
-                                    fill: #333;
-                                    text-anchor: middle;
-                                }
-                            </style>
-                        </defs>
-                        
-                        <!-- 定义箭头标记 -->
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                    refX="10" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
-                            </marker>
-                        </defs>
-                        
-                        <!-- 节点 -->
-                        <circle class="node" cx="100" cy="200" r="40" fill="#66CCFF"/>
-                        <text class="node-label" x="100" y="200">创建活动</text>
-                        
-                        <circle class="node" cx="300" cy="200" r="40" fill="#FF9966"/>
-                        <text class="node-label" x="300" y="200">待生效</text>
-                        
-                        <circle class="node" cx="500" cy="200" r="40" fill="#66FF66"/>
-                        <text class="node-label" x="500" y="200">生效中</text>
-                        
-                        <circle class="node" cx="700" cy="100" r="40" fill="#FF9966"/>
-                        <text class="node-label" x="700" y="100">编辑活动</text>
-                        
-                        <circle class="node" cx="700" cy="300" r="40" fill="#CCCCCC"/>
-                        <text class="node-label" x="700" y="300">已终止</text>
-                        
-                        <!-- 连接线 -->
-                        <line class="link" x1="140" y1="200" x2="260" y2="200"/>
-                        
-                        <line class="link" x1="340" y1="200" x2="460" y2="200"/>
-                        
-                        <line class="link" x1="540" y1="180" x2="660" y2="120"/>
-                        
-                        <line class="link" x1="660" y1="140" x2="540" y2="220" marker-end="url(#arrowhead)"/>
-                        
-                        <line class="link" x1="540" y1="220" x2="660" y2="280"/>
-                        <text class="link-label" x="620" y="270">手动终止</text>
-                    </svg>
-                </div>
-                
-            </section>
-
-            <!-- 3. 数据规范 -->
-            <section id="data-spec">
-                <h2>3. 数据规范</h2>
-                
-                <h3>3.1 数据字典</h3>
-                <table>
-                    <tr><th>字段</th><th>类型</th><th>描述</th><th>约束</th></tr>
-                    <tr>
-                        <td>activityId</td>
-                        <td>string</td>
-                        <td>活动唯一标识</td>
-                        <td>32位UUID</td>
-                    </tr>
-                    <tr>
-                        <td>effectiveTime</td>
-                        <td>datetime</td>
-                        <td>生效时间</td>
-                        <td>未来6个月内</td>
-                    </tr>
-                </table>
-
-                <h3>3.2 时间规范</h3>
-                <ul>
-                    <li>时间格式：ISO 8601（YYYY-MM-DDTHH:mm:ssZ）</li>
-                    <li>时区：UTC+8</li>
-                    <li>时间精度：秒级</li>
-                </ul>
-            </section>
-
-            <!-- 4. 非功能需求 -->
-            <section id="non-func">
-                <h2>4. 非功能需求</h2>
-                
-                <h3>4.1 性能指标</h3>
-                <table>
-                    <tr><th>指标</th><th>要求</th></tr>
-                    <tr><td>并发处理</td><td>≥1000 TPS</td></tr>
-                    <tr><td>响应时间</td><td>≤500ms（P95）</td></tr>
-                </table>
-
-                <h3>4.2 安全要求</h3>
-                <ul>
-                    <li>敏感数据加密存储（AES-256）</li>
-                    <li>操作日志保留36个月</li>
-                    <li>权限粒度控制到字段级别</li>
-                </ul>
-            </section>
-
-          
-
-            
+        <h3>2.2 筛选字段</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名称</th>
+                    <th>字段类型</th>
+                    <th>查询方式</th>
+                    <th>是否必填</th>
+                    <th>字段限制</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>活动名称</td>
+                    <td>文本输入</td>
+                    <td>模糊匹配</td>
+                    <td>否</td>
+                    <td>最大长度100字符</td>
+                </tr>
+                <tr>
+                    <td>主题活动ID</td>
+                    <td>文本输入</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>最大长度50字符，支持数字和字母</td>
+                </tr>
+                <tr>
+                    <td>批次号</td>
+                    <td>文本输入</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>9位数字</td>
+                </tr>
+                <tr>
+                    <td>通道</td>
+                    <td>下拉选择</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>微信支付/支付宝/云闪付</td>
+                </tr>
+                <tr>
+                    <td>渠道</td>
+                    <td>下拉选择</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>从预设渠道列表选择</td>
+                </tr>
+                <tr>
+                    <td>报名机构</td>
+                    <td>下拉搜索</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>从预设机构列表选择</td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>下拉选择</td>
+                    <td>精确匹配</td>
+                    <td>否</td>
+                    <td>生效中/已终止/全部</td>
+                </tr>
+                <tr>
+                    <td>活动时间</td>
+                    <td>日期范围</td>
+                    <td>范围查询</td>
+                    <td>否</td>
+                    <td>开始时间不能晚于结束时间</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="field-constraint">
+            <strong>字段约束说明：</strong>
+            <ul>
+                <li>批次号：9位数字，用于区分同一活动的不同批次</li>
+                <li>机构下拉框支持输入搜索，实时过滤匹配项</li>
+                <li>日期选择器默认格式为YYYY-MM-DD</li>
+                <li>所有文本输入框支持中英文和数字</li>
+            </ul>
         </div>
-    </div>
 
-    <script>hljs.highlightAll();</script>
+        <h3>2.3 业务流程</h3>
+        <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div>用户在筛选区域输入查询条件</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div>系统进行前端字段验证（格式、长度等）</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div>点击查询按钮，系统发送查询请求</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">4</div>
+            <div>后端处理查询条件，返回匹配的活动列表</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">5</div>
+            <div>前端更新表格显示查询结果</div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>3. 新增活动功能</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">➕ 体验新增活动功能</a>
+                
+        <h3>3.1 功能概述</h3>
+        <p>系统提供新增微信活动的功能，允许管理员创建新的微信优惠券营销活动。新增活动包括填写活动基本信息、配置优惠券规则、设置使用限制等。</p>
+                
+        <h3>3.2 界面设计</h3>
+        <p>新增活动功能通过弹出模态框实现，包含以下元素：</p>
+        <ul>
+            <li><strong>模态框</strong>：覆盖整个屏幕，包含表单内容和操作按钮</li>
+            <li><strong>关闭按钮</strong>：右上角"×"按钮，用于关闭模态框</li>
+            <li><strong>表单区域</strong>：包含活动信息输入字段</li>
+            <li><strong>操作按钮</strong>：包括"取消"和"确定"按钮</li>
+        </ul>
+        
+        <h3>3.3 表单字段</h3>
+        <p>新增活动表单包含以下字段：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名称</th>
+                    <th>字段类型</th>
+                    <th>必填</th>
+                    <th>约束条件</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>活动名称</td>
+                    <td>文本输入框</td>
+                    <td>是</td>
+                    <td>最大100字符，用于业务识别，不能重复</td>
+                </tr>
+                <tr>
+                    <td>主题活动ID</td>
+                    <td>文本输入框</td>
+                    <td>是</td>
+                    <td>关联主题活动表，格式THEME+数字</td>
+                </tr>
+                <tr>
+                    <td>批次号</td>
+                    <td>文本输入框</td>
+                    <td>是</td>
+                    <td>9位数字，用于区分同一活动的不同批次</td>
+                </tr>
+                <tr>
+                    <td>生效时间</td>
+                    <td>日期时间选择器</td>
+                    <td>是</td>
+                    <td>不能选择过去时间，格式YYYY-MM-DD HH:mm:ss</td>
+                </tr>
+                <tr>
+                    <td>失效时间</td>
+                    <td>日期时间选择器</td>
+                    <td>是</td>
+                    <td>必须晚于生效时间，格式YYYY-MM-DD HH:mm:ss</td>
+                </tr>
+                <tr>
+                    <td>通道</td>
+                    <td>下拉选择框</td>
+                    <td>是</td>
+                    <td>可选：微信支付、支付宝、云闪付（编辑时禁用）</td>
+                </tr>
+                <tr>
+                    <td>渠道</td>
+                    <td>下拉选择框</td>
+                    <td>是</td>
+                    <td>从预设渠道列表选择（编辑时禁用）</td>
+                </tr>
+                <tr>
+                    <td>报名机构</td>
+                    <td>文本输入框</td>
+                    <td>是</td>
+                    <td>示例：拉卡拉支付股份有限公司</td>
+                </tr>
+                <tr>
+                    <td>优惠券类型</td>
+                    <td>单选按钮组</td>
+                    <td>是</td>
+                    <td>可选：满减券、折扣券、代金券</td>
+                </tr>
+                <tr>
+                    <td>面值</td>
+                    <td>数值输入框</td>
+                    <td>是</td>
+                    <td>最多支持小数点后2位</td>
+                </tr>
+                <tr>
+                    <td>使用门槛</td>
+                    <td>数值输入框</td>
+                    <td>否</td>
+                    <td>最多支持小数点后2位，0表示无门槛</td>
+                </tr>
+                <tr>
+                    <td>使用规则</td>
+                    <td>文本域</td>
+                    <td>是</td>
+                    <td>详细描述优惠券的使用规则和限制条件</td>
+                </tr>
+                <tr>
+                    <td>使用周期</td>
+                    <td>单选按钮组</td>
+                    <td>是</td>
+                    <td>可选：固定天数、指定日期范围</td>
+                </tr>
+                <tr>
+                    <td>是否在小程序显示</td>
+                    <td>单选按钮组</td>
+                    <td>是</td>
+                    <td>可选：是、否</td>
+                </tr>
+            </tbody>
+        </table>
+                
+        <h3>3.4 表单验证规则</h3>
+        <p>系统对用户输入进行实时验证：</p>
+        <ul>
+            <li><strong>必填字段验证</strong>：所有必填字段为空时显示错误提示</li>
+            <li><strong>格式验证</strong>：日期时间格式、数值格式、字符长度等</li>
+            <li><strong>业务逻辑验证</strong>：失效时间必须晚于生效时间</li>
+            <li><strong>唯一性验证</strong>：活动名称不能重复</li>
+            <li><strong>字段约束验证</strong>：通道和渠道在编辑模式下禁用修改</li>
+            <li><strong>数值精度验证</strong>：面值和使用门槛支持小数点后2位</li>
+        </ul>
+        
+        <h3>3.5 操作流程</h3>
+        <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div>用户点击"新增活动"按钮</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div>系统弹出新增活动模态框</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div>用户填写活动信息（所有字段可编辑）</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">4</div>
+            <div>系统实时验证用户输入</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">5</div>
+            <div>用户点击"确定"按钮</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">6</div>
+            <div>系统验证所有字段</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">7</div>
+            <div>验证通过后保存活动信息并关闭模态框</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">8</div>
+            <div>刷新活动列表显示新增的活动</div>
+        </div>
+                
+    </section>
+    
+    <section>
+        <h2>4. 编辑活动功能</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">✏️ 体验编辑活动功能</a>
+        
+        <h3>4.1 功能概述</h3>
+        <p>编辑活动功能允许管理员修改已存在的活动信息。编辑功能保持与新增功能相同的界面设计和字段配置，但需要预填充现有活动的数据，并对某些字段进行编辑限制。</p>
+        
+        <h3>4.2 界面设计</h3>
+        <p>编辑活动界面与新增活动界面基本相同，主要区别：</p>
+        <ul>
+            <li><strong>标题显示</strong>：模态框标题显示为"编辑活动"</li>
+            <li><strong>数据预填充</strong>：所有字段预填充当前活动的数据</li>
+            <li><strong>字段限制</strong>：通道和渠道字段禁用编辑</li>
+            <li><strong>操作按钮</strong>：保持"取消"和"确定"按钮</li>
+        </ul>
+                
+        <h3>4.3 字段编辑限制</h3>
+        <div class="field-constraint">
+            <p><strong>禁用编辑的字段：</strong></p>
+            <ul>
+                <li>通道：显示当前值但不可修改</li>
+                <li>渠道：显示当前值但不可修改</li>
+            </ul>
+            <p><strong>可编辑的字段：</strong></p>
+            <ul>
+                <li>活动名称、主题活动ID、批次号</li>
+                <li>生效时间、失效时间</li>
+                <li>报名机构、优惠券类型、面值</li>
+                <li>使用门槛、使用规则、使用周期</li>
+                <li>是否在小程序显示</li>
+            </ul>
+        </div>
+                
+        <h3>4.4 操作流程</h3>
+        <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div>用户在活动列表中点击"编辑"按钮</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div>系统弹出编辑活动模态框</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div>系统预填充当前活动的所有信息</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">4</div>
+            <div>系统禁用通道和渠道字段的编辑功能</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">5</div>
+            <div>用户修改可编辑的字段</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">6</div>
+            <div>用户点击"确定"按钮</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">7</div>
+            <div>系统验证修改后的数据</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">8</div>
+            <div>验证通过后更新活动信息并关闭模态框</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">9</div>
+            <div>刷新活动列表显示更新后的活动</div>
+        </div>
+                
+    </section>
+    
+    <section>
+        <h2>5. 查看活动详情功能</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">👁️ 体验查看活动详情功能</a>
+        
+        <h3>5.1 功能概述</h3>
+        <p>查看活动详情功能允许管理员查看已创建活动的完整信息。该功能通过只读模式展示活动的所有字段信息，界面简洁清晰，专注于信息展示。</p>
+        
+        <h3>5.2 界面设计</h3>
+        <p>查看活动详情界面采用简化设计：</p>
+        <ul>
+            <li><strong>标题显示</strong>：模态框标题显示为"查看活动详情"</li>
+            <li><strong>只读模式</strong>：所有字段均为只读，不可编辑</li>
+            <li><strong>操作按钮</strong>：只显示"关闭"按钮</li>
+            <li><strong>信息布局</strong>：采用表格形式清晰展示字段信息</li>
+        </ul>
+                
+        <h3>5.3 显示内容</h3>
+        <p>查看活动详情显示以下信息：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>信息类别</th>
+                    <th>包含字段</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>基本信息</td>
+                    <td>活动名称、主题活动ID、批次号、报名机构</td>
+                </tr>
+                <tr>
+                    <td>时间信息</td>
+                    <td>生效时间、失效时间</td>
+                </tr>
+                <tr>
+                    <td>通道信息</td>
+                    <td>通道、渠道</td>
+                </tr>
+                <tr>
+                    <td>优惠信息</td>
+                    <td>优惠券类型、面值、使用门槛</td>
+                </tr>
+                <tr>
+                    <td>规则信息</td>
+                    <td>使用规则、使用周期、是否在小程序显示</td>
+                </tr>
+            </tbody>
+        </table>
+                
+        <h3>5.4 操作流程</h3>
+        <div class="workflow-step">
+            <div class="step-number">1</div>
+            <div>用户在活动列表中点击"查看"按钮</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">2</div>
+            <div>系统弹出查看活动详情模态框</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">3</div>
+            <div>系统以只读模式显示活动的所有信息</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">4</div>
+            <div>用户查看活动详情信息</div>
+        </div>
+        <div class="workflow-step">
+            <div class="step-number">5</div>
+            <div>用户点击"关闭"按钮关闭模态框</div>
+        </div>
+                
+    </section>
+    
+    <section>
+        <h2>6. 活动状态管理</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">🔄 体验状态管理功能</a>
+        
+        <h3>6.1 状态流转图</h3>
+        <div id="activity-status-chart" class="chart-container">
+            <svg width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- 状态节点 -->
+                <circle cx="100" cy="200" r="40" fill="#e8f5e8" stroke="#4CAF50" stroke-width="2"/>
+                <text x="100" y="205" text-anchor="middle" font-size="12" fill="#333">待开始</text>
+                
+                <circle cx="300" cy="200" r="40" fill="#e3f2fd" stroke="#2196F3" stroke-width="2"/>
+                <text x="300" y="205" text-anchor="middle" font-size="12" fill="#333">进行中</text>
+                
+                <circle cx="500" cy="120" r="40" fill="#fff3e0" stroke="#FF9800" stroke-width="2"/>
+                <text x="500" y="125" text-anchor="middle" font-size="12" fill="#333">已终止</text>
+                
+                <circle cx="500" cy="280" r="40" fill="#fce4ec" stroke="#E91E63" stroke-width="2"/>
+                <text x="500" y="285" text-anchor="middle" font-size="12" fill="#333">已结束</text>
+                
+                <!-- 箭头 -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+                    </marker>
+                </defs>
+                
+                <!-- 待开始 -> 进行中 -->
+                <line x1="140" y1="200" x2="260" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="200" y="190" text-anchor="middle" font-size="10" fill="#666">到达生效时间</text>
+                
+                <!-- 进行中 -> 已终止 -->
+                <line x1="330" y1="180" x2="470" y2="140" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="400" y="150" text-anchor="middle" font-size="10" fill="#666">手动终止</text>
+                
+                <!-- 进行中 -> 已结束 -->
+                <line x1="330" y1="220" x2="470" y2="260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="400" y="250" text-anchor="middle" font-size="10" fill="#666">到达失效时间</text>
+            </svg>
+        </div>
+
+        <h3>6.2 状态说明</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>状态</th>
+                    <th>说明</th>
+                    <th>可执行操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>待开始</td>
+                    <td>活动已创建但尚未到生效时间</td>
+                    <td>编辑、删除、查看</td>
+                </tr>
+                <tr>
+                    <td>进行中</td>
+                    <td>活动正在进行，可以发放和核销优惠券</td>
+                    <td>编辑、终止、查看</td>
+                </tr>
+                <tr>
+                    <td>已终止</td>
+                    <td>活动被手动终止，不再发放新的优惠券</td>
+                    <td>查看</td>
+                </tr>
+                <tr>
+                    <td>已结束</td>
+                    <td>活动已到失效时间，自动结束</td>
+                    <td>查看</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>6.3 操作权限控制</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>角色</th>
+                    <th>查看</th>
+                    <th>创建</th>
+                    <th>编辑</th>
+                    <th>终止</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>管理员</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>操作员</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>审计员</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section>
+        <h2>7. 批量操作功能</h2>
+        <a href="promotion_prototype.html" target="_blank" class="function-link">📋 体验批量操作功能</a>
+        
+        <h3>7.1 功能概述</h3>
+        <p>系统支持对多个活动进行批量操作，提高管理效率。批量操作包括批量暂停、批量导出等功能。</p>
+        
+        <h3>7.2 支持的批量操作</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>操作类型</th>
+                    <th>适用状态</th>
+                    <th>操作说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>批量暂停</td>
+                    <td>进行中</td>
+                    <td>将选中的进行中活动批量设置为已终止状态</td>
+                </tr>
+                <tr>
+                    <td>批量导出</td>
+                    <td>全部</td>
+                    <td>导出选中活动的详细信息到Excel文件</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section>
+        <h2>8. 技术规范</h2>
+        
+        <h3>8.1 数据字典</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>描述</th>
+                    <th>约束</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>activity_id</td>
+                    <td>VARCHAR</td>
+                    <td>32</td>
+                    <td>活动唯一标识</td>
+                    <td>主键，UUID格式</td>
+                </tr>
+                <tr>
+                    <td>activity_name</td>
+                    <td>VARCHAR</td>
+                    <td>100</td>
+                    <td>活动名称</td>
+                    <td>非空，唯一</td>
+                </tr>
+                <tr>
+                    <td>theme_activity_id</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>主题活动ID</td>
+                    <td>非空，外键</td>
+                </tr>
+                <tr>
+                    <td>batch_number</td>
+                    <td>VARCHAR</td>
+                    <td>9</td>
+                    <td>批次号</td>
+                    <td>非空，9位数字</td>
+                </tr>
+                <tr>
+                    <td>effective_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>生效时间</td>
+                    <td>非空，未来时间</td>
+                </tr>
+                <tr>
+                    <td>expire_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>失效时间</td>
+                    <td>非空，晚于生效时间</td>
+                </tr>
+                <tr>
+                    <td>channel</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>通道</td>
+                    <td>枚举值：微信支付/支付宝/云闪付</td>
+                </tr>
+                <tr>
+                    <td>channel_code</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>渠道代码</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>organization</td>
+                    <td>VARCHAR</td>
+                    <td>200</td>
+                    <td>报名机构</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>coupon_type</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>优惠券类型</td>
+                    <td>枚举值：满减券/折扣券/代金券</td>
+                </tr>
+                <tr>
+                    <td>face_value</td>
+                    <td>DECIMAL</td>
+                    <td>10,2</td>
+                    <td>面值</td>
+                    <td>非空，大于0</td>
+                </tr>
+                <tr>
+                    <td>threshold</td>
+                    <td>DECIMAL</td>
+                    <td>10,2</td>
+                    <td>使用门槛</td>
+                    <td>大于等于0</td>
+                </tr>
+                <tr>
+                    <td>usage_rules</td>
+                    <td>TEXT</td>
+                    <td>-</td>
+                    <td>使用规则</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>usage_period</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>使用周期</td>
+                    <td>枚举值：固定天数/指定日期范围</td>
+                </tr>
+                <tr>
+                    <td>show_in_miniprogram</td>
+                    <td>TINYINT</td>
+                    <td>1</td>
+                    <td>是否在小程序显示</td>
+                    <td>0或1</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>活动状态</td>
+                    <td>枚举值：待开始/进行中/已终止/已结束</td>
+                </tr>
+                <tr>
+                    <td>create_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>创建时间</td>
+                    <td>自动生成</td>
+                </tr>
+                <tr>
+                    <td>update_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>更新时间</td>
+                    <td>自动更新</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>8.2 API接口规范</h3>
+        <h4>8.2.1 查询活动列表</h4>
+        <div class="api-endpoint">GET /api/activities</div>
+        <div class="parameter-list">
+            <p><strong>请求参数：</strong></p>
+            <ul>
+                <li>activityName: 活动名称（可选）</li>
+                <li>themeActivityId: 主题活动ID（可选）</li>
+                <li>batchNumber: 批次号（可选）</li>
+                <li>channel: 通道（可选）</li>
+                <li>channelCode: 渠道（可选）</li>
+                <li>organization: 报名机构（可选）</li>
+                <li>status: 状态（可选）</li>
+                <li>startTime: 开始时间（可选）</li>
+                <li>endTime: 结束时间（可选）</li>
+                <li>page: 页码（默认1）</li>
+                <li>size: 每页大小（默认20）</li>
+            </ul>
+        </div>
+        
+        <h4>8.2.2 创建活动</h4>
+        <div class="api-endpoint">POST /api/activities</div>
+        <div class="parameter-list">
+            <p><strong>请求体：</strong>包含活动的所有必填字段</p>
+        </div>
+        
+        <h4>8.2.3 更新活动</h4>
+        <div class="api-endpoint">PUT /api/activities/{id}</div>
+        <div class="parameter-list">
+            <p><strong>请求体：</strong>包含需要更新的字段</p>
+        </div>
+        
+        <h4>8.2.4 终止活动</h4>
+        <div class="api-endpoint">POST /api/activities/{id}/terminate</div>
+        
+        <h3>8.3 性能要求</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>指标</th>
+                    <th>要求</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>响应时间</td>
+                    <td>≤500ms</td>
+                    <td>95%的请求响应时间</td>
+                </tr>
+                <tr>
+                    <td>并发处理</td>
+                    <td>≥1000 TPS</td>
+                    <td>系统峰值处理能力</td>
+                </tr>
+                <tr>
+                    <td>数据库连接</td>
+                    <td>连接池大小50</td>
+                    <td>支持高并发访问</td>
+                </tr>
+                <tr>
+                    <td>缓存命中率</td>
+                    <td>≥90%</td>
+                    <td>热点数据缓存</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>8.4 安全要求</h3>
+        <ul>
+            <li><strong>数据加密</strong>：敏感数据采用AES-256加密存储</li>
+            <li><strong>访问控制</strong>：基于角色的权限控制（RBAC）</li>
+            <li><strong>操作审计</strong>：记录所有操作日志，保留36个月</li>
+            <li><strong>输入验证</strong>：所有用户输入进行严格验证和过滤</li>
+            <li><strong>SQL注入防护</strong>：使用参数化查询防止SQL注入</li>
+            <li><strong>XSS防护</strong>：对输出内容进行HTML转义</li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>© 2024 银行联合营销平台 - 微信活动管理系统需求说明文档</p>
+        <p>文档版本：v1.0 | 最后更新：2024年</p>
+    </footer>
 </body>
 </html>
