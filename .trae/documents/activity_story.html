@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题活动需求说明文档</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            text-align: center; 
+            margin-bottom: 30pt; 
+            border-bottom: 3pt solid #007bff; 
+            padding-bottom: 20pt;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 0;
+        }
+        
+        h1 {
+            font-size: 20pt; 
+            color: #2c3e50; 
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 10pt; 
+            margin-top: 20pt;
+            margin-bottom: 15pt;
+            page-break-after: avoid;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: #495057;
+        }
+        
+        h4 {
+            color: #333;
+            margin-top: 1.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .status-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        
+        .status-flow div {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .status-flow .arrow {
+            font-size: 2em;
+            color: #007bff;
+        }
+        
+        .status-flow .status {
+            padding: 1rem;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .permission-table {
+            margin: 1rem 0;
+        }
+        
+        .permission-table th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .prototype-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+        
+        .prototype-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* 统一活动状态样式 */
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .status-terminated {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        /* 原型图片预览样式 */
+        .prototype-preview {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .prototype-preview img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .prototype-preview figcaption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #6c757d;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>主题活动需求说明文档</h1>
+    </header>
+    
+    <!-- 原型图片预览 -->
+    <figure class="prototype-preview">
+        <img src="image/activity_prototype.png" alt="主题活动原型预览">
+        <figcaption>主题活动原型界面预览</figcaption>
+    </figure>
+    
+    <div class="section">
+        <h2>1. 功能概述</h2>
+        <p>主题活动管理功能允许管理员创建、编辑、查看和管理营销主题活动。通过该功能，可以配置活动的基本信息、时间安排、规则设置等，并对活动状态进行管理。</p>
+        
+        <div class="subsection">
+            <h3>1.1 功能目标</h3>
+            <ul class="requirement-list">
+                <li>提供主题活动的全生命周期管理（创建、编辑、查看、终止）</li>
+                <li>支持活动状态的自动流转和手动控制</li>
+                <li>提供活动数据的可视化展示和操作</li>
+                <li>确保活动管理的安全性和权限控制</li>
+            </ul>
+        </div>
+        
+        <div class="subsection">
+            <h3>1.2 适用角色</h3>
+            <ul class="requirement-list">
+                <li><span class="highlight">管理员</span>：拥有活动管理的全部权限</li>
+                <li><span class="highlight">操作员</span>：拥有活动查看、创建、编辑权限</li>
+                <li><span class="highlight">审计员</span>：仅拥有活动查看权限</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>2. 功能详细说明</h2>
+        
+        <div class="subsection">
+            <h3>2.1 查看活动列表</h3>
+            <p>用户进入主题活动管理页面，默认展示活动列表，支持按条件查询和分页展示。</p>
+            
+            <h4>界面设计</h4>
+            <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看产品原型</a></p>
+            
+            <h4>查询条件</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>字段名称</th>
+                        <th>字段编码</th>
+                        <th>字段类型</th>
+                        <th>是否必填</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主题活动ID</td>
+                        <td>activityId</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>支持模糊查询</td>
+                    </tr>
+                    <tr>
+                        <td>主题名称</td>
+                        <td>themeName</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>支持模糊查询</td>
+                    </tr>
+                    <tr>
+                        <td>头寸编号</td>
+                        <td>headerNumber</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>支持模糊查询</td>
+                    </tr>
+                    <tr>
+                        <td>报名机构</td>
+                        <td>institution</td>
+                        <td>下拉选择</td>
+                        <td>否</td>
+                        <td>支持机构搜索，支持多选</td>
+                    </tr>
+                    <tr>
+                        <td>关联银行</td>
+                        <td>relatedBank</td>
+                        <td>下拉选择</td>
+                        <td>否</td>
+                        <td>支持银行搜索，支持多选</td>
+                    </tr>
+                    <tr>
+                        <td>活动时间</td>
+                        <td>activityTime</td>
+                        <td>日期范围</td>
+                        <td>否</td>
+                        <td>开始时间和结束时间</td>
+                    </tr>
+                    <tr>
+                        <td>状态</td>
+                        <td>status</td>
+                        <td>下拉选择</td>
+                        <td>否</td>
+                        <td>生效中、已终止</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>列表字段</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>主题活动ID</th>
+                        <th>头寸编号</th>
+                        <th>主题名称</th>
+                        <th>报名机构</th>
+                        <th>关联银行</th>
+                        <th>活动时间</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>最后修改人</th>
+                        <th>最后修改时间</th>
+                        <th>是否开启大转盘</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>HD20231001001</td>
+                        <td>TC20231001</td>
+                        <td>国庆大促活动</td>
+                        <td><a href="#">查看详情</a></td>
+                        <td><a href="#">查看详情</a></td>
+                        <td>2023-10-01至2023-10-07</td>
+                        <td>张三</td>
+                        <td>2023-09-25 14:30:00</td>
+                        <td>李四</td>
+                        <td>2023-09-30 10:15:00</td>
+                        <td>是</td>
+                        <td>生效中</td>
+                        <td>
+                            <a href="#">查看</a> | 
+                            <a href="#">编辑</a> | 
+                            <a href="#">配置转盘</a> | 
+                            <a href="#">终止</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>操作按钮</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">查看</span>：查看活动详情</li>
+                <li><span class="highlight">编辑</span>：编辑活动信息（仅在生效中状态可操作）</li>
+                <li><span class="highlight">配置转盘</span>：配置大转盘的奖品内容、权重等设置</li>
+                <li><span class="highlight">终止</span>：手动终止活动（仅在生效中状态可操作）</li>
+            </ul>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.2 创建活动</h3>
+            <p>管理员和操作员可以创建新的主题活动，填写活动基本信息。</p>
+            
+            <h4>界面设计</h4>
+            <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看产品原型</a></p>
+            
+            <h4>表单字段</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>字段名称</th>
+                        <th>字段编码</th>
+                        <th>字段类型</th>
+                        <th>是否必填</th>
+                        <th>校验规则</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主题名称</td>
+                        <td>themeName</td>
+                        <td>文本框</td>
+                        <td>是</td>
+                        <td>长度不超过50个字符</td>
+                        <td>活动主题名称</td>
+                    </tr>
+                    <tr>
+                        <td>头寸编号</td>
+                        <td>headerNumber</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>数字格式，长度不超过20位</td>
+                        <td>活动关联的头寸编号</td>
+                    </tr>
+                    <tr>
+                        <td>报名机构</td>
+                        <td>institution</td>
+                        <td>多选下拉</td>
+                        <td>是</td>
+                        <td>必须选择有效的机构</td>
+                        <td>支持机构搜索和添加，数组类型</td>
+                    </tr>
+                    <tr>
+                        <td>关联银行</td>
+                        <td>relatedBank</td>
+                        <td>多选下拉</td>
+                        <td>是</td>
+                        <td>必须选择有效的银行</td>
+                        <td>支持银行搜索和添加，数组类型</td>
+                    </tr>
+                    <tr>
+                        <td>活动时间</td>
+                        <td>activityTime</td>
+                        <td>日期时间</td>
+                        <td>是</td>
+                        <td>结束时间必须晚于开始时间</td>
+                        <td>开始时间和结束时间</td>
+                    </tr>
+                    <tr>
+                        <td>背景图</td>
+                        <td>backgroundImage</td>
+                        <td>图片上传</td>
+                        <td>否</td>
+                        <td>JPG/PNG格式，大小不超过2MB</td>
+                        <td>活动页面背景图</td>
+                    </tr>
+                    <tr>
+                        <td>规则说明</td>
+                        <td>rules</td>
+                        <td>文本域</td>
+                        <td>是</td>
+                        <td>长度不超过500个字符</td>
+                        <td>活动参与规则说明</td>
+                    </tr>
+                    <tr>
+                        <td>参与限制</td>
+                        <td>participationLimit</td>
+                        <td>数字输入框</td>
+                        <td>否</td>
+                        <td>正整数或"不限"</td>
+                        <td>用户参与活动的最大领取次数</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>操作流程</h4>
+            <ol class="requirement-list">
+                <li>点击"新增"按钮，弹出创建活动表单</li>
+                <li>填写活动基本信息</li>
+                <li>点击"确定"提交表单或"取消"关闭表单</li>
+                <li>系统验证表单数据，验证通过后保存并刷新列表</li>
+            </ol>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.3 编辑活动</h3>
+            <p>管理员和操作员可以编辑已创建的活动信息（仅限生效中状态的活动）。</p>
+            
+            <h4>界面设计</h4>
+            <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看产品原型</a></p>
+            
+            <h4>表单字段</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>字段名称</th>
+                        <th>字段编码</th>
+                        <th>字段类型</th>
+                        <th>是否必填</th>
+                        <th>校验规则</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主题活动ID</td>
+                        <td>activityId</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>只读</td>
+                        <td>系统自动生成</td>
+                    </tr>
+                    <tr>
+                        <td>主题名称</td>
+                        <td>themeName</td>
+                        <td>文本框</td>
+                        <td>是</td>
+                        <td>长度不超过50个字符</td>
+                        <td>活动主题名称</td>
+                    </tr>
+                    <tr>
+                        <td>头寸编号</td>
+                        <td>headerNumber</td>
+                        <td>文本框</td>
+                        <td>否</td>
+                        <td>数字格式，长度不超过20位</td>
+                        <td>活动关联的头寸编号</td>
+                    </tr>
+                    <tr>
+                        <td>报名机构</td>
+                        <td>institution</td>
+                        <td>多选下拉</td>
+                        <td>是</td>
+                        <td>必须选择有效的机构</td>
+                        <td>支持机构搜索和添加，数组类型</td>
+                    </tr>
+                    <tr>
+                        <td>关联银行</td>
+                        <td>relatedBank</td>
+                        <td>多选下拉</td>
+                        <td>是</td>
+                        <td>必须选择有效的银行</td>
+                        <td>支持银行搜索和添加，数组类型</td>
+                    </tr>
+                    <tr>
+                        <td>活动时间</td>
+                        <td>activityTime</td>
+                        <td>日期时间</td>
+                        <td>是</td>
+                        <td>结束时间必须晚于开始时间</td>
+                        <td>开始时间和结束时间</td>
+                    </tr>
+                    <tr>
+                        <td>背景图</td>
+                        <td>backgroundImage</td>
+                        <td>图片上传</td>
+                        <td>否</td>
+                        <td>JPG/PNG格式，大小不超过2MB</td>
+                        <td>活动页面背景图</td>
+                    </tr>
+                    <tr>
+                        <td>规则说明</td>
+                        <td>rules</td>
+                        <td>文本域</td>
+                        <td>是</td>
+                        <td>长度不超过500个字符</td>
+                        <td>活动参与规则说明</td>
+                    </tr>
+                    <tr>
+                        <td>参与限制</td>
+                        <td>participationLimit</td>
+                        <td>数字输入框</td>
+                        <td>否</td>
+                        <td>正整数或"不限"</td>
+                        <td>用户参与活动的最大领取次数</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>操作流程</h4>
+            <ol class="requirement-list">
+                <li>在活动列表中点击"编辑"按钮</li>
+                <li>弹出编辑活动表单，显示当前活动信息</li>
+                <li>修改活动信息</li>
+                <li>点击"确定"提交表单或"取消"关闭表单</li>
+                <li>系统验证表单数据，验证通过后保存并刷新列表</li>
+            </ol>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.4 查看活动详情</h3>
+            <p>用户可以查看活动的详细信息，包括基本信息、批次数据、商户信息和二维码/链接。</p>
+            
+            <h4>界面设计</h4>
+            <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看产品原型</a></p>
+            
+            <h4>标签页</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">活动详情</span>：展示活动基本信息</li>
+                <li><span class="highlight">批次数据</span>：展示活动关联的批次信息</li>
+                <li><span class="highlight">商户</span>：展示活动关联的商户信息</li>
+                <li><span class="highlight">二维码/链接</span>：展示活动的二维码和链接信息</li>
+            </ul>
+            
+            <h4>活动详情字段</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>字段名称</th>
+                        <th>字段编码</th>
+                        <th>字段值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主题活动ID</td>
+                        <td>activityId</td>
+                        <td>HD20231001001</td>
+                    </tr>
+                    <tr>
+                        <td>主题名称</td>
+                        <td>themeName</td>
+                        <td>国庆大促活动</td>
+                    </tr>
+                    <tr>
+                        <td>头寸编号</td>
+                        <td>headerNumber</td>
+                        <td>TC20231001</td>
+                    </tr>
+                    <tr>
+                        <td>报名机构</td>
+                        <td>institution</td>
+                        <td>湖北银行、工商银行</td>
+                    </tr>
+                    <tr>
+                        <td>关联银行</td>
+                        <td>relatedBank</td>
+                        <td>中国银行、建设银行</td>
+                    </tr>
+                    <tr>
+                        <td>活动时间</td>
+                        <td>activityTime</td>
+                        <td>2023-10-01 00:00:00 至 2023-10-07 23:59:59</td>
+                    </tr>
+                    <tr>
+                        <td>背景图</td>
+                        <td>backgroundImage</td>
+                        <td>https://example.com/bg.jpg</td>
+                    </tr>
+                    <tr>
+                        <td>规则说明</td>
+                        <td>rules</td>
+                        <td>每日签到获得抽奖机会，每次抽奖可获得积分或优惠券</td>
+                    </tr>
+                    <tr>
+                        <td>参与限制</td>
+                        <td>participationLimit</td>
+                        <td>不限</td>
+                    </tr>
+                    <tr>
+                        <td>创建人</td>
+                        <td>creator</td>
+                        <td>张三</td>
+                    </tr>
+                    <tr>
+                        <td>创建时间</td>
+                        <td>createTime</td>
+                        <td>2023-09-25 14:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>最后修改人</td>
+                        <td>lastModifier</td>
+                        <td>李四</td>
+                    </tr>
+                    <tr>
+                        <td>最后修改时间</td>
+                        <td>lastModifyTime</td>
+                        <td>2023-09-30 10:15:00</td>
+                    </tr>
+                    <tr>
+                        <td>是否开启大转盘</td>
+                        <td>wheelEnabled</td>
+                        <td>是</td>
+                    </tr>
+                    <tr>
+                        <td>状态</td>
+                        <td>status</td>
+                        <td>生效中</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.5 配置转盘</h3>
+            <p>管理员和操作员可以为生效中的活动配置大转盘的奖品内容、权重等设置。</p>
+            
+            <h4>界面设计</h4>
+            <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看产品原型</a></p>
+            
+            <h4>配置内容</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">奖品内容</span>：设置转盘中的奖品名称和描述</li>
+                <li><span class="highlight">奖品权重</span>：设置各奖品的中奖概率权重</li>
+                <li><span class="highlight">奖品颜色</span>：设置转盘扇形区域的显示颜色</li>
+                <li><span class="highlight">奖品顺序</span>：调整奖品在转盘中的排列顺序</li>
+            </ul>
+            
+            <h4>操作流程</h4>
+            <ol class="requirement-list">
+                <li>在活动列表中点击"配置转盘"按钮</li>
+                <li>弹出转盘配置界面</li>
+                <li>添加或编辑奖品信息</li>
+                <li>设置奖品权重和颜色</li>
+                <li>预览转盘效果</li>
+                <li>保存配置</li>
+            </ol>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.6 查看报名机构详情</h3>
+            <p>用户可以查看活动关联的报名机构的详细信息。</p>
+            
+            <h4>查看方式</h4>
+            <ul class="requirement-list">
+                <li>在活动列表的"报名机构"列点击"查看详情"链接</li>
+                <li>弹出机构详情模态框，展示机构基本信息</li>
+            </ul>
+            
+            <h4>机构信息字段</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">机构名称</span>：机构的完整名称</li>
+                <li><span class="highlight">机构代码</span>：机构的唯一标识代码</li>
+                <li><span class="highlight">联系方式</span>：机构的联系电话和邮箱</li>
+                <li><span class="highlight">地址信息</span>：机构的详细地址</li>
+                <li><span class="highlight">状态</span>：机构的当前状态（正常、暂停等）</li>
+            </ul>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.7 查看关联银行详情</h3>
+            <p>用户可以查看活动关联的银行的详细信息。</p>
+            
+            <h4>查看方式</h4>
+            <ul class="requirement-list">
+                <li>在活动列表的"关联银行"列点击"查看详情"链接</li>
+                <li>弹出银行详情模态框，展示银行基本信息</li>
+            </ul>
+            
+            <h4>银行信息字段</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">银行名称</span>：银行的完整名称</li>
+                <li><span class="highlight">银行代码</span>：银行的唯一标识代码</li>
+                <li><span class="highlight">联系方式</span>：银行的联系电话和邮箱</li>
+                <li><span class="highlight">总行地址</span>：银行总行的详细地址</li>
+                <li><span class="highlight">合作状态</span>：与银行的合作状态（正常、暂停等）</li>
+            </ul>
+        </div>
+        
+        <div class="subsection">
+            <h3>2.8 终止活动</h3>
+            <p>管理员可以手动终止正在进行的活动。</p>
+            
+            <h4>操作条件</h4>
+            <ul class="requirement-list">
+                <li>仅限生效中状态的活动可以被终止</li>
+                <li>需要管理员权限</li>
+            </ul>
+            
+            <h4>操作流程</h4>
+            <ol class="requirement-list">
+                <li>在活动列表中点击"终止"按钮</li>
+                <li>弹出确认对话框</li>
+                <li>确认终止操作</li>
+                <li>系统更新活动状态为"已终止"</li>
+                <li>刷新活动列表</li>
+            </ol>
+            
+            <h4>批量终止</h4>
+            <ol class="requirement-list">
+                <li>勾选需要终止的活动</li>
+                <li>点击"批量终止"按钮</li>
+                <li>弹出确认对话框，显示将要终止的活动列表</li>
+                <li>确认批量终止操作</li>
+                <li>系统批量更新活动状态为"已终止"</li>
+                <li>刷新活动列表</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>3. 活动状态管理</h2>
+        
+        <div class="subsection">
+            <h3>3.1 状态定义</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>状态名称</th>
+                        <th>状态编码</th>
+                        <th>状态说明</th>
+                        <th>可执行操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="status-badge status-active">生效中</span></td>
+                        <td>ACTIVE</td>
+                        <td>活动正在进行中，用户可以参与</td>
+                        <td>查看、编辑、配置转盘、终止</td>
+                    </tr>
+                    <tr>
+                        <td><span class="status-badge status-terminated">已终止</span></td>
+                        <td>TERMINATED</td>
+                        <td>活动已被手动终止或自动结束</td>
+                        <td>查看</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="subsection">
+            <h3>3.2 状态流转</h3>
+            <div class="status-flow">
+                <div class="status">
+                    <span class="status-badge status-active">生效中</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="status">
+                    <span class="status-badge status-terminated">已终止</span>
+                </div>
+            </div>
+            
+            <h4>流转规则</h4>
+            <ul class="requirement-list">
+                <li><span class="highlight">生效中 → 已终止</span>：管理员手动终止活动或活动到期自动终止</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>4. 操作权限控制</h2>
+        
+        <table class="permission-table">
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>管理员</th>
+                    <th>操作员</th>
+                    <th>审计员</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>查看活动列表</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>创建活动</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>编辑活动</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>查看活动详情</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>配置转盘</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                </tr>
+                <tr>
+                    <td>查看机构详情</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>查看银行详情</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>终止活动</td>
+                    <td>✓</td>
+                    <td>✗</td>
+                    <td>✗</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>5. 产品原型</h2>
+        <p><a href="activity_prototype.html" class="prototype-btn" target="_blank">查看完整产品原型</a></p>
+    </div>
+    
+    <div class="section">
+        <h2>6. 操作流程图</h2>
+        <svg width="800" height="600" viewBox="0 0 800 600">
+            <!-- 开始 -->
+            <ellipse cx="100" cy="50" rx="60" ry="30" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+            <text x="100" y="55" text-anchor="middle" font-size="14" fill="#333">开始</text>
+            
+            <!-- 查看活动列表 -->
+            <rect x="50" y="100" width="100" height="40" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+            <text x="100" y="125" text-anchor="middle" font-size="12" fill="#333">查看活动列表</text>
+            
+            <!-- 选择操作 -->
+            <polygon points="70,180 130,180 150,200 130,220 70,220 50,200" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+            <text x="100" y="205" text-anchor="middle" font-size="12" fill="#333">选择操作</text>
+            
+            <!-- 创建活动 -->
+            <rect x="200" y="120" width="80" height="40" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+            <text x="240" y="145" text-anchor="middle" font-size="12" fill="#333">创建活动</text>
+            
+            <!-- 编辑活动 -->
+            <rect x="300" y="180" width="80" height="40" rx="5" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
+            <text x="340" y="205" text-anchor="middle" font-size="12" fill="#333">编辑活动</text>
+            
+            <!-- 查看详情 -->
+            <rect x="200" y="240" width="80" height="40" rx="5" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+            <text x="240" y="265" text-anchor="middle" font-size="12" fill="#333">查看详情</text>
+            
+            <!-- 配置转盘 -->
+            <rect x="400" y="120" width="80" height="40" rx="5" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+            <text x="440" y="145" text-anchor="middle" font-size="12" fill="#333">配置转盘</text>
+            
+            <!-- 查看机构详情 -->
+            <rect x="500" y="180" width="100" height="40" rx="5" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+            <text x="550" y="205" text-anchor="middle" font-size="12" fill="#333">查看机构详情</text>
+            
+            <!-- 查看银行详情 -->
+            <rect x="500" y="240" width="100" height="40" rx="5" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+            <text x="550" y="265" text-anchor="middle" font-size="12" fill="#333">查看银行详情</text>
+            
+            <!-- 终止活动 -->
+            <rect x="400" y="300" width="80" height="40" rx="5" fill="#ffebee" stroke="#f44336" stroke-width="2"/>
+            <text x="440" y="325" text-anchor="middle" font-size="12" fill="#333">终止活动</text>
+            
+            <!-- 确认操作 -->
+            <polygon points="420,380 460,380 480,400 460,420 420,420 400,400" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+            <text x="440" y="405" text-anchor="middle" font-size="12" fill="#333">确认操作</text>
+            
+            <!-- 更新状态 -->
+            <rect x="400" y="460" width="80" height="40" rx="5" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+            <text x="440" y="485" text-anchor="middle" font-size="12" fill="#333">更新状态</text>
+            
+            <!-- 结束 -->
+            <ellipse cx="440" cy="550" rx="60" ry="30" fill="#ffebee" stroke="#f44336" stroke-width="2"/>
+            <text x="440" y="555" text-anchor="middle" font-size="14" fill="#333">结束</text>
+            
+            <!-- 连接线 -->
+            <line x1="100" y1="80" x2="100" y2="100" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="100" y1="140" x2="100" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- 分支连接线 -->
+            <line x1="130" y1="190" x2="200" y2="140" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="150" y1="200" x2="300" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="130" y1="210" x2="200" y2="260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="150" y1="200" x2="400" y2="140" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="150" y1="200" x2="500" y2="200" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="150" y1="200" x2="500" y2="260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="130" y1="210" x2="400" y2="320" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <line x1="440" y1="340" x2="440" y2="380" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="440" y1="420" x2="440" y2="460" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="440" y1="500" x2="440" y2="520" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- 箭头标记 -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+                </marker>
+            </defs>
+            
+            <!-- 标签 -->
+            <text x="165" y="135" font-size="10" fill="#666">创建</text>
+            <text x="225" y="195" font-size="10" fill="#666">编辑</text>
+            <text x="165" y="255" font-size="10" fill="#666">查看</text>
+            <text x="275" y="135" font-size="10" fill="#666">配置</text>
+            <text x="325" y="195" font-size="10" fill="#666">机构</text>
+            <text x="325" y="255" font-size="10" fill="#666">银行</text>
+            <text x="265" y="315" font-size="10" fill="#666">终止</text>
+        </svg>
+    </div>
+    
+    <div class="section">
+        <h2>7. 数据字典</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名称</th>
+                    <th>字段编码</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>是否必填</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>主题活动ID</td>
+                    <td>activity_id</td>
+                    <td>VARCHAR</td>
+                    <td>32</td>
+                    <td>是</td>
+                    <td>主键，系统自动生成</td>
+                </tr>
+                <tr>
+                    <td>主题名称</td>
+                    <td>theme_name</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>是</td>
+                    <td>活动主题名称</td>
+                </tr>
+                <tr>
+                    <td>头寸编号</td>
+                    <td>header_number</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>否</td>
+                    <td>活动关联的头寸编号</td>
+                </tr>
+                <tr>
+                    <td>报名机构</td>
+                    <td>institution</td>
+                    <td>ARRAY</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>参与活动的机构列表，数组类型</td>
+                </tr>
+                <tr>
+                    <td>关联银行</td>
+                    <td>related_bank</td>
+                    <td>ARRAY</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>活动关联的银行列表，数组类型</td>
+                </tr>
+                <tr>
+                    <td>活动开始时间</td>
+                    <td>start_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>活动开始时间</td>
+                </tr>
+                <tr>
+                    <td>活动结束时间</td>
+                    <td>end_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>活动结束时间</td>
+                </tr>
+                <tr>
+                    <td>背景图URL</td>
+                    <td>background_image</td>
+                    <td>VARCHAR</td>
+                    <td>255</td>
+                    <td>否</td>
+                    <td>活动页面背景图片地址</td>
+                </tr>
+                <tr>
+                    <td>规则说明</td>
+                    <td>rules</td>
+                    <td>TEXT</td>
+                    <td>500</td>
+                    <td>是</td>
+                    <td>活动参与规则说明</td>
+                </tr>
+                <tr>
+                    <td>参与限制</td>
+                    <td>participation_limit</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>否</td>
+                    <td>用户参与活动的最大领取次数，NULL表示不限</td>
+                </tr>
+                <tr>
+                    <td>创建人</td>
+                    <td>creator</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>是</td>
+                    <td>活动创建人</td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td>create_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>活动创建时间</td>
+                </tr>
+                <tr>
+                    <td>最后修改人</td>
+                    <td>last_modifier</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>否</td>
+                    <td>最后修改活动的人员</td>
+                </tr>
+                <tr>
+                    <td>最后修改时间</td>
+                    <td>last_modify_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>否</td>
+                    <td>最后修改时间</td>
+                </tr>
+                <tr>
+                    <td>是否开启大转盘</td>
+                    <td>wheel_enabled</td>
+                    <td>BOOLEAN</td>
+                    <td>-</td>
+                    <td>是</td>
+                    <td>是否启用大转盘功能</td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>是</td>
+                    <td>活动状态：ACTIVE(生效中)、TERMINATED(已终止)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>7.1 时间规范</h3>
+        <ul class="requirement-list">
+            <li>所有时间字段均采用 YYYY-MM-DD HH:mm:ss 格式</li>
+            <li>时区统一使用系统默认时区</li>
+            <li>活动结束时间必须晚于开始时间</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>8. 非功能需求</h2>
+        
+        <div class="subsection">
+            <h3>8.1 性能指标</h3>
+            <ul class="requirement-list">
+                <li>页面加载时间不超过3秒</li>
+                <li>查询响应时间不超过2秒</li>
+                <li>支持并发用户数不少于100</li>
+                <li>数据库查询优化，建立必要的索引</li>
+            </ul>
+        </div>
+        
+        <div class="subsection">
+            <h3>8.2 安全要求</h3>
+            <ul class="requirement-list">
+                <li>所有操作需要用户身份验证</li>
+                <li>敏感操作需要权限验证</li>
+                <li>数据传输采用HTTPS加密</li>
+                <li>操作日志记录和审计</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 主题活动管理系统 - 需求说明文档 v2.0</p>
+    </footer>
+</body>
+</html>

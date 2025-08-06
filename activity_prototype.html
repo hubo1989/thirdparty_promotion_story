@@ -1671,17 +1671,41 @@
             margin-bottom: 20px;
         }
         
-        .modal .tab-item {
+        .slide-modal .tab-header {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e4e7ed;
+            margin-bottom: 20px;
+            padding: 0;
+            border-radius: 6px 6px 0 0;
+            overflow: hidden;
+        }
+        
+        .slide-modal .tab-item {
             padding: 10px 20px;
             cursor: pointer;
             color: #606266;
             font-size: 14px;
             border-bottom: 2px solid transparent;
+            background-color: #f8f9fa;
+            border: 1px solid #e4e7ed;
+            border-radius: 6px 6px 0 0;
+            margin-right: 2px;
+            transition: all 0.3s;
         }
         
-        .modal .tab-item.active {
+        .slide-modal .tab-item:hover:not(.active) {
             color: #409eff;
+            background-color: #ecf5ff;
+            border-color: #b3d8ff;
+        }
+        
+        .slide-modal .tab-item.active {
+            color: #409eff;
+            background-color: white;
             border-bottom: 2px solid #409eff;
+            border-color: #409eff;
+            font-weight: 500;
         }
         
         .tab-content {
@@ -2504,8 +2528,8 @@
                                 <td>5000000084</td>
                                 <td>02001018113100000000000</td>
                                 <td>湖北银行扫码权益</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000084'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000084'); return false;">查看详情</a></td>
+                                <td>10000001</td>
+                                <td>20100001</td>
                                 <td>2025-07-30 15:02:56 - 2025-08-30 15:02:56</td>
                                 <td>曹政</td>
                                 <td>2025-07-30 15:02:56</td>
@@ -2528,8 +2552,8 @@
                                 <td>5000000085</td>
                                 <td>02001018113100000000001</td>
                                 <td>建设银行信用卡活动</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000085'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000085'); return false;">查看详情</a></td>
+                                <td>10000002</td>
+                                <td>20100002</td>
                                 <td>2025-08-01 09:00:00 - 2025-09-01 09:00:00</td>
                                 <td>李明</td>
                                 <td>2025-07-31 10:15:22</td>
@@ -2552,8 +2576,8 @@
                                 <td>5000000086</td>
                                 <td>02001018113100000000002</td>
                                 <td>工商银行消费返现</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000086'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000086'); return false;">查看详情</a></td>
+                                <td>10000003</td>
+                                <td>20100003</td>
                                 <td>2025-08-05 00:00:00 - 2025-09-05 23:59:59</td>
                                 <td>王芳</td>
                                 <td>2025-08-01 14:30:45</td>
@@ -2576,8 +2600,8 @@
                                 <td>5000000087</td>
                                 <td>02001018113100000000003</td>
                                 <td>农业银行新户专享</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000087'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000087'); return false;">查看详情</a></td>
+                                <td>10000004</td>
+                                <td>20100004</td>
                                 <td>2025-07-25 00:00:00 - 2025-08-25 23:59:59</td>
                                 <td>张伟</td>
                                 <td>2025-07-24 16:45:12</td>
@@ -2600,8 +2624,8 @@
                                 <td>5000000088</td>
                                 <td>02001018113100000000004</td>
                                 <td>中国银行周末特惠</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000088'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000088'); return false;">查看详情</a></td>
+                                <td>10000005</td>
+                                <td>20100005</td>
                                 <td>2025-08-10 00:00:00 - 2025-09-10 23:59:59</td>
                                 <td>刘强</td>
                                 <td>2025-08-05 11:20:33</td>
@@ -2624,8 +2648,8 @@
                                 <td>5000000089</td>
                                 <td>02001018113100000000005</td>
                                 <td>招商银行餐饮优惠</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000089'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000089'); return false;">查看详情</a></td>
+                                <td>10000006</td>
+                                <td>20100006</td>
                                 <td>2025-07-20 00:00:00 - 2025-08-20 23:59:59</td>
                                 <td>陈丽</td>
                                 <td>2025-07-19 09:15:47</td>
@@ -2648,8 +2672,8 @@
                                 <td>5000000090</td>
                                 <td>02001018113100000000006</td>
                                 <td>交通银行出行权益</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000090'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000090'); return false;">查看详情</a></td>
+                                <td>10000007</td>
+                                <td>20100007</td>
                                 <td>2025-08-15 00:00:00 - 2025-09-15 23:59:59</td>
                                 <td>赵磊</td>
                                 <td>2025-08-10 13:40:21</td>
@@ -2672,8 +2696,8 @@
                                 <td>5000000091</td>
                                 <td>02001018113100000000007</td>
                                 <td>中信银行购物节</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000091'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000091'); return false;">查看详情</a></td>
+                                <td>10000008</td>
+                                <td>20100008</td>
                                 <td>2025-08-18 00:00:00 - 2025-09-18 23:59:59</td>
                                 <td>孙莉</td>
                                 <td>2025-08-12 15:25:36</td>
@@ -2696,8 +2720,8 @@
                                 <td>5000000092</td>
                                 <td>02001018113100000000008</td>
                                 <td>光大银行电影票优惠</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000092'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000092'); return false;">查看详情</a></td>
+                                <td>10000009</td>
+                                <td>20100009</td>
                                 <td>2025-07-28 00:00:00 - 2025-08-28 23:59:59</td>
                                 <td>周杰</td>
                                 <td>2025-07-27 10:05:18</td>
@@ -2720,8 +2744,8 @@
                                 <td>5000000093</td>
                                 <td>02001018113100000000009</td>
                                 <td>华夏银行生活缴费</td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showInstitutionModal('5000000093'); return false;">查看详情</a></td>
-                                <td><a href="#" class="action-link" onclick="event.stopPropagation(); showBankModal('5000000093'); return false;">查看详情</a></td>
+                                <td>10000010</td>
+                                <td>20100010</td>
                                 <td>2025-08-01 00:00:00 - 2025-09-01 23:59:59</td>
                                 <td>吴敏</td>
                                 <td>2025-07-30 17:50:44</td>
@@ -2848,56 +2872,39 @@
                 </div>
                 <!-- 报名机构选择 -->
                 <div class="form-group">
-                    <label>* 报名机构：</label>
-                    <div class="institution-selector">
-                        <div class="selector-input-group">
-                            <select id="institutionSelectModal" class="selector-select" title="选择报名机构">
-                                <option value="">请选择机构</option>
-                                <option value="10000001">湖北银行 (10000001)</option>
-                                <option value="10000002">建设银行 (10000002)</option>
-                                <option value="10000003">工商银行 (10000003)</option>
-                                <option value="10000004">农业银行 (10000004)</option>
-                                <option value="10000005">中国银行 (10000005)</option>
-                                <option value="10000006">招商银行 (10000006)</option>
-                                <option value="10000007">交通银行 (10000007)</option>
-                                <option value="10000008">中信银行 (10000008)</option>
-                                <option value="10000009">光大银行 (10000009)</option>
-                                <option value="10000010">华夏银行 (10000010)</option>
-                            </select>
-                            <button type="button" class="selector-btn" onclick="addSelectedInstitution()">添加</button>
-                        </div>
-                        <div class="selected-institutions" id="selectedInstitutions">
-                            <div class="placeholder-text">请选择并添加报名机构</div>
-                        </div>
-                        <div class="error-message">请至少选择一个报名机构</div>
-                    </div>
+                    <label for="newInstitution">* 报名机构：</label>
+                    <select id="newInstitution" required>
+                        <option value="">请选择机构</option>
+                        <option value="10000001">湖北银行 (10000001)</option>
+                        <option value="10000002">建设银行 (10000002)</option>
+                        <option value="10000003">工商银行 (10000003)</option>
+                        <option value="10000004">农业银行 (10000004)</option>
+                        <option value="10000005">中国银行 (10000005)</option>
+                        <option value="10000006">招商银行 (10000006)</option>
+                        <option value="10000007">交通银行 (10000007)</option>
+                        <option value="10000008">中信银行 (10000008)</option>
+                        <option value="10000009">光大银行 (10000009)</option>
+                        <option value="10000010">华夏银行 (10000010)</option>
+                    </select>
                 </div>
                 
                 <!-- 关联银行选择 -->
                 <div class="form-group">
-                    <label>关联银行：</label>
-                    <div class="bank-selector">
-                        <div class="selector-input-group">
-                            <select id="bankSelectModal" class="selector-select" title="选择关联银行">
-                                <option value="">请选择银行</option>
-                                <option value="20100001">中国工商银行</option>
-                                <option value="20100002">中国银行</option>
-                                <option value="20100003">中国建设银行</option>
-                                <option value="20100004">中国农业银行</option>
-                                <option value="20100005">招商银行</option>
-                                <option value="20100006">交通银行</option>
-                                <option value="20100007">中信银行</option>
-                                <option value="20100008">光大银行</option>
-                                <option value="20100009">华夏银行</option>
-                                <option value="20100010">民生银行</option>
-                                <option value="20100015">湖北银行</option>
-                            </select>
-                            <button type="button" class="selector-btn" onclick="addSelectedBank()">添加</button>
-                        </div>
-                        <div class="selected-banks" id="selectedBanks">
-                            <div class="placeholder-text">请选择并添加关联银行（可选）</div>
-                        </div>
-                    </div>
+                    <label for="newBank">关联银行：</label>
+                    <select id="newBank">
+                        <option value="">请选择银行</option>
+                        <option value="20100001">中国工商银行</option>
+                        <option value="20100002">中国银行</option>
+                        <option value="20100003">中国建设银行</option>
+                        <option value="20100004">中国农业银行</option>
+                        <option value="20100005">招商银行</option>
+                        <option value="20100006">交通银行</option>
+                        <option value="20100007">中信银行</option>
+                        <option value="20100008">光大银行</option>
+                        <option value="20100009">华夏银行</option>
+                        <option value="20100010">民生银行</option>
+                        <option value="20100015">湖北银行</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="newActivityTime">* 活动时间：</label>
@@ -2963,56 +2970,39 @@
                 </div>
                 <!-- 报名机构选择 -->
                 <div class="form-group">
-                    <label>* 报名机构：</label>
-                    <div class="institution-selector">
-                        <div class="selector-input-group">
-                            <select id="editInstitutionSelectModal" class="selector-select" title="选择报名机构">
-                                <option value="">请选择机构</option>
-                                <option value="10000001">湖北银行 (10000001)</option>
-                                <option value="10000002">建设银行 (10000002)</option>
-                                <option value="10000003">工商银行 (10000003)</option>
-                                <option value="10000004">农业银行 (10000004)</option>
-                                <option value="10000005">中国银行 (10000005)</option>
-                                <option value="10000006">招商银行 (10000006)</option>
-                                <option value="10000007">交通银行 (10000007)</option>
-                                <option value="10000008">中信银行 (10000008)</option>
-                                <option value="10000009">光大银行 (10000009)</option>
-                                <option value="10000010">华夏银行 (10000010)</option>
-                            </select>
-                            <button type="button" class="selector-btn" onclick="addSelectedInstitutionEdit()">添加</button>
-                        </div>
-                        <div class="selected-institutions" id="editSelectedInstitutions">
-                            <div class="placeholder-text">请选择并添加报名机构</div>
-                        </div>
-                        <div class="error-message">请至少选择一个报名机构</div>
-                    </div>
+                    <label for="editInstitution">* 报名机构：</label>
+                    <select id="editInstitution" required>
+                        <option value="">请选择机构</option>
+                        <option value="10000001">湖北银行 (10000001)</option>
+                        <option value="10000002">建设银行 (10000002)</option>
+                        <option value="10000003">工商银行 (10000003)</option>
+                        <option value="10000004">农业银行 (10000004)</option>
+                        <option value="10000005">中国银行 (10000005)</option>
+                        <option value="10000006">招商银行 (10000006)</option>
+                        <option value="10000007">交通银行 (10000007)</option>
+                        <option value="10000008">中信银行 (10000008)</option>
+                        <option value="10000009">光大银行 (10000009)</option>
+                        <option value="10000010">华夏银行 (10000010)</option>
+                    </select>
                 </div>
                 
                 <!-- 关联银行选择 -->
                 <div class="form-group">
-                    <label>关联银行：</label>
-                    <div class="bank-selector">
-                        <div class="selector-input-group">
-                            <select id="editBankSelectModal" class="selector-select" title="选择关联银行">
-                                <option value="">请选择银行</option>
-                                <option value="20100001">中国工商银行</option>
-                                <option value="20100002">中国银行</option>
-                                <option value="20100003">中国建设银行</option>
-                                <option value="20100004">中国农业银行</option>
-                                <option value="20100005">招商银行</option>
-                                <option value="20100006">交通银行</option>
-                                <option value="20100007">中信银行</option>
-                                <option value="20100008">光大银行</option>
-                                <option value="20100009">华夏银行</option>
-                                <option value="20100010">民生银行</option>
-                                <option value="20100015">湖北银行</option>
-                            </select>
-                            <button type="button" class="selector-btn" onclick="addSelectedBankEdit()">添加</button>
-                        </div>
-                        <div class="selected-banks" id="editSelectedBanks">
-                            <div class="placeholder-text">请选择并添加关联银行（可选）</div>
-                        </div>
-                    </div>
+                    <label for="editBank">* 关联银行：</label>
+                    <select id="editBank" required>
+                        <option value="">请选择银行</option>
+                        <option value="20100001">中国工商银行</option>
+                        <option value="20100002">中国银行</option>
+                        <option value="20100003">中国建设银行</option>
+                        <option value="20100004">中国农业银行</option>
+                        <option value="20100005">招商银行</option>
+                        <option value="20100006">交通银行</option>
+                        <option value="20100007">中信银行</option>
+                        <option value="20100008">光大银行</option>
+                        <option value="20100009">华夏银行</option>
+                        <option value="20100010">民生银行</option>
+                        <option value="20100015">湖北银行</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="editActivityTime">* 活动时间：</label>
@@ -3611,13 +3601,12 @@
             // 获取表单数据
             const themeName = document.getElementById('newThemeName').value;
             const headerNumber = document.getElementById('newHeaderNumber').value;
+            const institution = document.getElementById('newInstitution').value;
+            const associatedBank = document.getElementById('newAssociatedBank').value;
             const startTime = document.getElementById('newStartTime').value;
             const endTime = document.getElementById('newEndTime').value;
             const rules = document.getElementById('newRules').value;
             const maxDraws = document.getElementById('newMaxDraws').value;
-            
-            // 获取选中的机构和银行
-            const { institutions, banks } = getSelectedInstitutionsAndBanks();
             
             // 验证必填项
             if (!themeName || !startTime || !endTime || !rules || !maxDraws) {
@@ -3626,16 +3615,15 @@
             }
             
             // 验证报名机构
-            const institutionGroup = document.querySelector('.institution-selector').parentElement;
-            if (institutions.length === 0) {
-                institutionGroup.classList.add('error');
-                setTimeout(() => {
-                    institutionGroup.classList.remove('error');
-                }, 3000);
-                alert('请至少选择一个报名机构！');
+            if (!institution) {
+                alert('请选择报名机构！');
                 return;
-            } else {
-                institutionGroup.classList.remove('error');
+            }
+            
+            // 验证关联银行
+            if (!associatedBank) {
+                alert('请选择关联银行！');
+                return;
             }
             
             // 这里可以添加实际的表单提交逻辑
@@ -3643,8 +3631,8 @@
             console.log('新增主题活动:', {
                 themeName,
                 headerNumber,
-                institutions,
-                banks,
+                institution,
+                associatedBank,
                 startTime,
                 endTime,
                 rules,
@@ -3678,69 +3666,64 @@
 
         // 加载活动数据到编辑表单
         function loadActivityData(activityId) {
-            // 模拟从后端获取活动数据
-            const mockData = {
-                'ACT20240001': {
-                    activityId: 'ACT20240001',
-                    themeName: '春节红包活动',
-                    headerNumber: 'HEAD001',
-                    institutions: [
-                        { value: '10000001', text: '湖北银行 (10000001)' },
-                        { value: '10000003', text: '工商银行 (10000003)' }
-                    ],
-                    banks: [
-                        { value: 'ICBC', text: '中国工商银行' },
-                        { value: 'BOC', text: '中国银行' }
-                    ],
-                    startTime: '2024-01-01',
-                    endTime: '2024-02-29',
-                    rules: '每日签到即可参与抽奖，每天最多抽奖3次。',
-                    maxDraws: 3
-                },
-                'ACT20240002': {
-                    activityId: 'ACT20240002',
-                    themeName: '端午节活动',
-                    headerNumber: 'HEAD002',
-                    institutions: [
-                        { value: '10000005', text: '中国银行 (10000005)' }
-                    ],
-                    banks: [
-                        { value: 'CMB', text: '招商银行' }
-                    ],
-                    startTime: '2024-06-01',
-                    endTime: '2024-06-30',
-                    rules: '完成任务即可获得抽奖机会。',
-                    maxDraws: 5
+            // 从数据表格中获取对应行的真实数据
+            const tableRows = document.querySelectorAll('.table-container table tbody tr');
+            let rowData = null;
+            
+            // 查找对应的行数据
+            for (let row of tableRows) {
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 2 && cells[2].textContent.trim() === activityId) {
+                    rowData = {
+                        activityId: cells[2].textContent.trim(),
+                        headerNumber: cells[3].textContent.trim(),
+                        themeName: cells[4].textContent.trim(),
+                        institution: cells[5].textContent.trim(),
+                        associatedBank: cells[6].textContent.trim(),
+                        activityTime: cells[7].textContent.trim()
+                    };
+                    break;
                 }
-            };
-
-            const data = mockData[activityId] || {
-                activityId: activityId,
-                themeName: '示例活动',
-                headerNumber: '',
-                institutions: [
-                    { value: '10000001', text: '湖北银行 (10000001)' }
-                ],
-                banks: [],
-                startTime: '2024-01-01',
-                endTime: '2024-12-31',
-                rules: '活动规则示例',
-                maxDraws: 1
-            };
+            }
+            
+            // 如果没有找到对应数据，使用默认值
+            if (!rowData) {
+                rowData = {
+                    activityId: activityId,
+                    headerNumber: '',
+                    themeName: '示例活动',
+                    institution: '',
+                    associatedBank: '',
+                    activityTime: '2024-01-01 00:00:00 - 2024-12-31 23:59:59'
+                };
+            }
+            
+            // 解析活动时间
+            const timeRange = rowData.activityTime.split(' - ');
+            const startTime = timeRange[0] ? timeRange[0].split(' ')[0] : '2024-01-01';
+            const endTime = timeRange[1] ? timeRange[1].split(' ')[0] : '2024-12-31';
 
             // 填充表单字段
-            document.getElementById('editActivityId').value = data.activityId;
-            document.getElementById('editThemeName').value = data.themeName;
-            document.getElementById('editHeaderNumber').value = data.headerNumber;
-            document.getElementById('editStartTime').value = data.startTime;
-            document.getElementById('editEndTime').value = data.endTime;
-            document.getElementById('editRules').value = data.rules;
-            document.getElementById('editMaxDraws').value = data.maxDraws;
+            document.getElementById('editActivityId').value = rowData.activityId;
+            document.getElementById('editThemeName').value = rowData.themeName;
+            document.getElementById('editHeaderNumber').value = rowData.headerNumber;
+            document.getElementById('editStartTime').value = startTime;
+            document.getElementById('editEndTime').value = endTime;
+            document.getElementById('editRules').value = '活动规则示例';
+            document.getElementById('editMaxDraws').value = '3';
 
-            // 加载选择器数据
-            loadEditData(data.institutions, data.banks);
+            // 设置单选下拉框的值并设为只读
+            const institutionSelect = document.getElementById('editInstitution');
+            const bankSelect = document.getElementById('editBank');
+            
+            institutionSelect.value = rowData.institution;
+            bankSelect.value = rowData.associatedBank;
+            
+            // 设置为只读状态
+            institutionSelect.disabled = true;
+            bankSelect.disabled = true;
 
-            console.log('已加载活动数据:', data);
+            console.log('已加载活动数据:', rowData);
         }
 
         function closeEditActivityModal() {
@@ -3757,8 +3740,14 @@
             // 重置图片上传区域
             document.getElementById('editPreviewImage').style.display = 'none';
             document.getElementById('editUploadText').style.display = 'block';
-            // 重置选择器
-            resetSelectorsEdit();
+            // 重置单选下拉框并恢复可编辑状态
+            const institutionSelect = document.getElementById('editInstitution');
+            const bankSelect = document.getElementById('editBank');
+            
+            institutionSelect.value = '';
+            bankSelect.value = '';
+            institutionSelect.disabled = false;
+            bankSelect.disabled = false;
         }
 
         function submitEditActivityForm() {
@@ -3767,21 +3756,15 @@
             const themeName = document.getElementById('editThemeName').value;
             const headerNumber = document.getElementById('editHeaderNumber').value;
             const institution = document.getElementById('editInstitution').value;
-            const associatedBank = document.getElementById('editAssociatedBank').value;
+            const associatedBank = document.getElementById('editBank').value;
             const startTime = document.getElementById('editStartTime').value;
             const endTime = document.getElementById('editEndTime').value;
             const rules = document.getElementById('editRules').value;
             const maxDraws = document.getElementById('editMaxDraws').value;
             
-            // 验证必填项
+            // 验证必填项（报名机构和关联银行为只读，不需要验证）
             if (!themeName || !startTime || !endTime || !rules || !maxDraws) {
                 alert('请填写所有必填项！');
-                return;
-            }
-            
-            // 验证报名机构
-            if (!institution) {
-                alert('请选择报名机构！');
                 return;
             }
             
@@ -4157,8 +4140,9 @@
             // 重置图片上传区域
             document.getElementById('previewImage').style.display = 'none';
             document.getElementById('uploadText').style.display = 'block';
-            // 重置选择器
-            resetSelectors();
+            // 重置单选下拉框
+            document.getElementById('newInstitution').value = '';
+            document.getElementById('newAssociatedBank').value = '';
         }
         
         // 模拟机构数据（实际项目中应该从后端获取）
@@ -4384,28 +4368,31 @@
             // 注意：函数定义应该在全局作用域中，这里只是事件绑定
 
             
-            // 标签页切换事件
-            const tabItems = document.querySelectorAll('.tab-item');
-            tabItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // 移除所有标签页的active类
-                    tabItems.forEach(tab => tab.classList.remove('active'));
-                    
-                    // 为当前点击的标签页添加active类
-                    this.classList.add('active');
-                    
-                    // 隐藏所有内容面板
-                    const tabPanes = document.querySelectorAll('.tab-pane');
-                    tabPanes.forEach(pane => pane.classList.remove('active'));
-                    
-                    // 显示对应的内容面板
-                    const tabId = this.getAttribute('data-tab');
-                    const contentPane = document.getElementById(`${tabId}-content`);
-                    if (contentPane) {
-                        contentPane.classList.add('active');
-                    }
+            // 查看模态框标签页切换事件
+            const viewModal = document.getElementById('viewActivityModal');
+            if (viewModal) {
+                const viewTabItems = viewModal.querySelectorAll('.tab-item');
+                viewTabItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // 移除查看模态框内所有标签页的active类
+                        viewTabItems.forEach(tab => tab.classList.remove('active'));
+                        
+                        // 为当前点击的标签页添加active类
+                        this.classList.add('active');
+                        
+                        // 隐藏查看模态框内所有内容面板
+                        const viewTabPanes = viewModal.querySelectorAll('.tab-pane');
+                        viewTabPanes.forEach(pane => pane.classList.remove('active'));
+                        
+                        // 显示对应的内容面板
+                        const tabId = this.getAttribute('data-tab');
+                        const contentPane = viewModal.querySelector(`#${tabId}-content`);
+                        if (contentPane) {
+                            contentPane.classList.add('active');
+                        }
+                    });
                 });
-            });
+            }
             
             // 报名机构模态框关闭按钮事件
             const closeInstitutionModalBtn = document.getElementById('closeInstitutionModal');
@@ -4887,343 +4874,20 @@
             showAddActivityModal();
         }
 
-        // 报名机构选择相关函数
-        function addSelectedInstitution() {
-            const select = document.getElementById('institutionSelectModal');
-            const container = document.getElementById('selectedInstitutions');
-            const selectedValue = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
-            
-            if (!selectedValue) {
-                alert('请先选择一个机构！');
-                return;
-            }
-            
-            // 检查是否已经添加过
-            const existingTags = container.querySelectorAll('.selected-tag');
-            for (let tag of existingTags) {
-                if (tag.dataset.value === selectedValue) {
-                    alert('该机构已经添加过了！');
-                    return;
-                }
-            }
-            
-            // 移除占位符
-            const placeholder = container.querySelector('.placeholder-text');
-            if (placeholder) {
-                placeholder.remove();
-            }
-            
-            // 创建标签
-            const tag = document.createElement('div');
-            tag.className = 'selected-tag';
-            tag.dataset.value = selectedValue;
-            tag.innerHTML = `
-                <span class="tag-text">${selectedText}</span>
-                <span class="tag-remove" onclick="removeSelectedInstitution(this)">×</span>
-            `;
-            
-            container.appendChild(tag);
-            
-            // 重置选择框
-            select.value = '';
-            
-            console.log('添加报名机构:', selectedText);
-        }
+        // 报名机构选择相关函数已移除（改为单选下拉框）
 
-        function removeSelectedInstitution(removeBtn) {
-            const tag = removeBtn.parentElement;
-            const container = tag.parentElement;
-            
-            tag.remove();
-            
-            // 如果没有标签了，显示占位符
-            const remainingTags = container.querySelectorAll('.selected-tag');
-            if (remainingTags.length === 0) {
-                container.innerHTML = '<div class="placeholder-text">请选择并添加报名机构</div>';
-            }
-        }
+        // 关联银行选择相关函数已移除（改为单选下拉框）
 
-        // 关联银行选择相关函数
-        function addSelectedBank() {
-            const select = document.getElementById('bankSelectModal');
-            const container = document.getElementById('selectedBanks');
-            const selectedValue = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
-            
-            if (!selectedValue) {
-                alert('请先选择一个银行！');
-                return;
-            }
-            
-            // 检查是否已经添加过
-            const existingTags = container.querySelectorAll('.selected-tag');
-            for (let tag of existingTags) {
-                if (tag.dataset.value === selectedValue) {
-                    alert('该银行已经添加过了！');
-                    return;
-                }
-            }
-            
-            // 移除占位符
-            const placeholder = container.querySelector('.placeholder-text');
-            if (placeholder) {
-                placeholder.remove();
-            }
-            
-            // 创建标签
-            const tag = document.createElement('div');
-            tag.className = 'selected-tag bank-tag';
-            tag.dataset.value = selectedValue;
-            tag.innerHTML = `
-                <span class="tag-text">${selectedText}</span>
-                <span class="tag-remove" onclick="removeSelectedBank(this)">×</span>
-            `;
-            
-            container.appendChild(tag);
-            
-            // 重置选择框
-            select.value = '';
-            
-            console.log('添加关联银行:', selectedText);
-        }
+        // 多选相关函数已移除（改为单选下拉框）
+        // - getSelectedInstitutionsAndBanks
+        // - resetSelectors
 
-        function removeSelectedBank(removeBtn) {
-            const tag = removeBtn.parentElement;
-            const container = tag.parentElement;
-            
-            tag.remove();
-            
-            // 如果没有标签了，显示占位符
-            const remainingTags = container.querySelectorAll('.selected-tag');
-            if (remainingTags.length === 0) {
-                container.innerHTML = '<div class="placeholder-text">请选择并添加关联银行（可选）</div>';
-            }
-        }
+        // ===== 编辑模态框的选择器函数已移除（改为单选下拉框） =====
 
-        // 获取选中的机构和银行数据
-        function getSelectedInstitutionsAndBanks() {
-            const institutionTags = document.querySelectorAll('#selectedInstitutions .selected-tag');
-            const bankTags = document.querySelectorAll('#selectedBanks .selected-tag');
-            
-            const institutions = Array.from(institutionTags).map(tag => ({
-                value: tag.dataset.value,
-                text: tag.querySelector('.tag-text').textContent
-            }));
-            
-            const banks = Array.from(bankTags).map(tag => ({
-                value: tag.dataset.value,
-                text: tag.querySelector('.tag-text').textContent
-            }));
-            
-            return { institutions, banks };
-        }
-
-        // 重置选择器
-        function resetSelectors() {
-            // 重置报名机构
-            const institutionContainer = document.getElementById('selectedInstitutions');
-            institutionContainer.innerHTML = '<div class="placeholder-text">请选择并添加报名机构</div>';
-            
-            // 重置关联银行
-            const bankContainer = document.getElementById('selectedBanks');
-            bankContainer.innerHTML = '<div class="placeholder-text">请选择并添加关联银行（可选）</div>';
-            
-            // 重置选择框
-            document.getElementById('institutionSelectModal').value = '';
-            document.getElementById('bankSelectModal').value = '';
-        }
-
-        // ===== 编辑模态框的选择器函数 =====
-        
-        // 编辑模态框 - 报名机构选择相关函数
-        function addSelectedInstitutionEdit() {
-            const select = document.getElementById('editInstitutionSelectModal');
-            const container = document.getElementById('editSelectedInstitutions');
-            const selectedValue = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
-            
-            if (!selectedValue) {
-                alert('请先选择一个机构！');
-                return;
-            }
-            
-            // 检查是否已经添加过
-            const existingTags = container.querySelectorAll('.selected-tag');
-            for (let tag of existingTags) {
-                if (tag.dataset.value === selectedValue) {
-                    alert('该机构已经添加过了！');
-                    return;
-                }
-            }
-            
-            // 移除占位符
-            const placeholder = container.querySelector('.placeholder-text');
-            if (placeholder) {
-                placeholder.remove();
-            }
-            
-            // 创建标签
-            const tag = document.createElement('div');
-            tag.className = 'selected-tag';
-            tag.dataset.value = selectedValue;
-            tag.innerHTML = `
-                <span class="tag-text">${selectedText}</span>
-                <span class="tag-remove" onclick="removeSelectedInstitutionEdit(this)">×</span>
-            `;
-            
-            container.appendChild(tag);
-            
-            // 重置选择框
-            select.value = '';
-            
-            console.log('编辑模式-添加报名机构:', selectedText);
-        }
-
-        function removeSelectedInstitutionEdit(removeBtn) {
-            const tag = removeBtn.parentElement;
-            const container = tag.parentElement;
-            
-            tag.remove();
-            
-            // 如果没有标签了，显示占位符
-            const remainingTags = container.querySelectorAll('.selected-tag');
-            if (remainingTags.length === 0) {
-                container.innerHTML = '<div class="placeholder-text">请选择并添加报名机构</div>';
-            }
-        }
-
-        // 编辑模态框 - 关联银行选择相关函数
-        function addSelectedBankEdit() {
-            const select = document.getElementById('editBankSelectModal');
-            const container = document.getElementById('editSelectedBanks');
-            const selectedValue = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
-            
-            if (!selectedValue) {
-                alert('请先选择一个银行！');
-                return;
-            }
-            
-            // 检查是否已经添加过
-            const existingTags = container.querySelectorAll('.selected-tag');
-            for (let tag of existingTags) {
-                if (tag.dataset.value === selectedValue) {
-                    alert('该银行已经添加过了！');
-                    return;
-                }
-            }
-            
-            // 移除占位符
-            const placeholder = container.querySelector('.placeholder-text');
-            if (placeholder) {
-                placeholder.remove();
-            }
-            
-            // 创建标签
-            const tag = document.createElement('div');
-            tag.className = 'selected-tag bank-tag';
-            tag.dataset.value = selectedValue;
-            tag.innerHTML = `
-                <span class="tag-text">${selectedText}</span>
-                <span class="tag-remove" onclick="removeSelectedBankEdit(this)">×</span>
-            `;
-            
-            container.appendChild(tag);
-            
-            // 重置选择框
-            select.value = '';
-            
-            console.log('编辑模式-添加关联银行:', selectedText);
-        }
-
-        function removeSelectedBankEdit(removeBtn) {
-            const tag = removeBtn.parentElement;
-            const container = tag.parentElement;
-            
-            tag.remove();
-            
-            // 如果没有标签了，显示占位符
-            const remainingTags = container.querySelectorAll('.selected-tag');
-            if (remainingTags.length === 0) {
-                container.innerHTML = '<div class="placeholder-text">请选择并添加关联银行（可选）</div>';
-            }
-        }
-
-        // 获取编辑模态框选中的机构和银行数据
-        function getSelectedInstitutionsAndBanksEdit() {
-            const institutionTags = document.querySelectorAll('#editSelectedInstitutions .selected-tag');
-            const bankTags = document.querySelectorAll('#editSelectedBanks .selected-tag');
-            
-            const institutions = Array.from(institutionTags).map(tag => ({
-                value: tag.dataset.value,
-                text: tag.querySelector('.tag-text').textContent
-            }));
-            
-            const banks = Array.from(bankTags).map(tag => ({
-                value: tag.dataset.value,
-                text: tag.querySelector('.tag-text').textContent
-            }));
-            
-            return { institutions, banks };
-        }
-
-        // 重置编辑模态框选择器
-        function resetSelectorsEdit() {
-            // 重置报名机构
-            const institutionContainer = document.getElementById('editSelectedInstitutions');
-            institutionContainer.innerHTML = '<div class="placeholder-text">请选择并添加报名机构</div>';
-            
-            // 重置关联银行
-            const bankContainer = document.getElementById('editSelectedBanks');
-            bankContainer.innerHTML = '<div class="placeholder-text">请选择并添加关联银行（可选）</div>';
-            
-            // 重置选择框
-            document.getElementById('editInstitutionSelectModal').value = '';
-            document.getElementById('editBankSelectModal').value = '';
-        }
-
-        // 预设编辑数据到选择器
-        function loadEditData(institutions = [], banks = []) {
-            const institutionContainer = document.getElementById('editSelectedInstitutions');
-            const bankContainer = document.getElementById('editSelectedBanks');
-            
-            // 清空现有内容
-            institutionContainer.innerHTML = '';
-            bankContainer.innerHTML = '';
-            
-            // 加载报名机构
-            if (institutions.length > 0) {
-                institutions.forEach(institution => {
-                    const tag = document.createElement('div');
-                    tag.className = 'selected-tag';
-                    tag.dataset.value = institution.value;
-                    tag.innerHTML = `
-                        <span class="tag-text">${institution.text}</span>
-                        <span class="tag-remove" onclick="removeSelectedInstitutionEdit(this)">×</span>
-                    `;
-                    institutionContainer.appendChild(tag);
-                });
-            } else {
-                institutionContainer.innerHTML = '<div class="placeholder-text">请选择并添加报名机构</div>';
-            }
-            
-            // 加载关联银行
-            if (banks.length > 0) {
-                banks.forEach(bank => {
-                    const tag = document.createElement('div');
-                    tag.className = 'selected-tag bank-tag';
-                    tag.dataset.value = bank.value;
-                    tag.innerHTML = `
-                        <span class="tag-text">${bank.text}</span>
-                        <span class="tag-remove" onclick="removeSelectedBankEdit(this)">×</span>
-                    `;
-                    bankContainer.appendChild(tag);
-                });
-            } else {
-                bankContainer.innerHTML = '<div class="placeholder-text">请选择并添加关联银行（可选）</div>';
-            }
-        }
+        // 多选相关函数已移除（改为单选下拉框）
+        // - getSelectedInstitutionsAndBanksEdit
+        // - resetSelectorsEdit  
+        // - loadEditData
 
         // ===== 银行模态框管理函数 =====
         
