@@ -3766,13 +3766,12 @@
             const activityId = document.getElementById('editActivityId').value;
             const themeName = document.getElementById('editThemeName').value;
             const headerNumber = document.getElementById('editHeaderNumber').value;
+            const institution = document.getElementById('editInstitution').value;
+            const associatedBank = document.getElementById('editAssociatedBank').value;
             const startTime = document.getElementById('editStartTime').value;
             const endTime = document.getElementById('editEndTime').value;
             const rules = document.getElementById('editRules').value;
             const maxDraws = document.getElementById('editMaxDraws').value;
-            
-            // 获取选中的机构和银行
-            const { institutions, banks } = getSelectedInstitutionsAndBanksEdit();
             
             // 验证必填项
             if (!themeName || !startTime || !endTime || !rules || !maxDraws) {
@@ -3781,35 +3780,33 @@
             }
             
             // 验证报名机构
-            const institutionGroup = document.querySelector('#editActivityModal .institution-selector').parentElement;
-            if (institutions.length === 0) {
-                institutionGroup.classList.add('error');
-                setTimeout(() => {
-                    institutionGroup.classList.remove('error');
-                }, 3000);
-                alert('请至少选择一个报名机构！');
+            if (!institution) {
+                alert('请选择报名机构！');
                 return;
-            } else {
-                institutionGroup.classList.remove('error');
             }
             
-            // 这里可以添加实际的表单提交逻辑
-            // 例如发送AJAX请求到后端
-            console.log('编辑主题活动:', {
-                activityId,
-                themeName,
-                headerNumber,
-                institutions,
-                banks,
-                startTime,
-                endTime,
-                rules,
-                maxDraws
-            });
-            
-            // 模拟提交成功，关闭模态框
+            // 先关闭模态框
             closeEditActivityModal();
-            alert('主题活动编辑成功！');
+            
+            // 延迟显示确认弹窗，确保模态框完全关闭
+            setTimeout(() => {
+                // 这里可以添加实际的表单提交逻辑
+                // 例如发送AJAX请求到后端
+                console.log('编辑主题活动:', {
+                    activityId,
+                    themeName,
+                    headerNumber,
+                    institution,
+                    associatedBank,
+                    startTime,
+                    endTime,
+                    rules,
+                    maxDraws
+                });
+                
+                // 显示成功提示
+                alert('主题活动编辑成功！');
+            }, 300);
         }
         
         // 开启转盘确认相关函数
@@ -4429,8 +4426,12 @@
                     const isDetailButton = event.target.closest('.action-link') && 
                                          event.target.textContent.includes('查看详情');
                     
-                    // 如果是详情按钮点击，不执行关闭逻辑
-                    if (isDetailButton) {
+                    // 检查是否是编辑按钮的点击
+                    const isEditButton = event.target.closest('.action-link') && 
+                                        event.target.textContent.includes('编辑');
+                    
+                    // 如果是详情按钮或编辑按钮点击，不执行关闭逻辑
+                    if (isDetailButton || isEditButton) {
                         return;
                     }
                     
@@ -5689,6 +5690,80 @@
             const input = document.getElementById('associatedBank');
             input.value = value;
             const dropdown = document.getElementById('bankDropdown');
+            dropdown.classList.remove('show');
+        }
+        
+        // 编辑模态框的机构下拉选择器功能
+        function showInstitutionDropdownEdit() {
+            const dropdown = document.getElementById('editInstitutionDropdown');
+            dropdown.classList.add('show');
+        }
+        
+        function hideInstitutionDropdownEdit() {
+            setTimeout(() => {
+                const dropdown = document.getElementById('editInstitutionDropdown');
+                dropdown.classList.remove('show');
+            }, 200);
+        }
+        
+        function filterInstitutionsEdit(value) {
+            const dropdown = document.getElementById('editInstitutionDropdown');
+            const items = dropdown.querySelectorAll('.dropdown-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const searchValue = value.toLowerCase();
+                if (text.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            dropdown.classList.add('show');
+        }
+        
+        function selectInstitutionEdit(value) {
+            const input = document.getElementById('editInstitution');
+            input.value = value;
+            const dropdown = document.getElementById('editInstitutionDropdown');
+            dropdown.classList.remove('show');
+        }
+        
+        // 编辑模态框的银行下拉选择器功能
+        function showBankDropdownEdit() {
+            const dropdown = document.getElementById('editBankDropdown');
+            dropdown.classList.add('show');
+        }
+        
+        function hideBankDropdownEdit() {
+            setTimeout(() => {
+                const dropdown = document.getElementById('editBankDropdown');
+                dropdown.classList.remove('show');
+            }, 200);
+        }
+        
+        function filterBanksEdit(value) {
+            const dropdown = document.getElementById('editBankDropdown');
+            const items = dropdown.querySelectorAll('.dropdown-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const searchValue = value.toLowerCase();
+                if (text.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            dropdown.classList.add('show');
+        }
+        
+        function selectBankEdit(value) {
+            const input = document.getElementById('editAssociatedBank');
+            input.value = value;
+            const dropdown = document.getElementById('editBankDropdown');
             dropdown.classList.remove('show');
         }
     </script>
