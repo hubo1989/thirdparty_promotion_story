@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>银行联合营销平台 - 微信活动管理</title>
+    <title>联合营销平台 - 活动优惠券管理</title>
     <style>
         * {
             margin: 0;
@@ -1897,7 +1897,7 @@
                             <td>张三</td>
                             <td>2025-07-28 17:15:04</td>
                             <td>李四</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <!-- 操作列：根据活动状态动态显示可用操作 -->
                             <!-- 开发注意事项：
                                  1. 查看：所有状态的活动都可查看，只读模式
@@ -1932,7 +1932,7 @@
                             <td>王五</td>
                             <td>2025-07-28 17:06:48</td>
                             <td>赵六</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -1957,7 +1957,7 @@
                             <td>孙七</td>
                             <td>2025-07-28 17:06:48</td>
                             <td>周八</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -1982,7 +1982,7 @@
                             <td>吴九</td>
                             <td>2025-07-28 18:59:38</td>
                             <td>郑十</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2007,7 +2007,7 @@
                             <td>冯一</td>
                             <td>2025-07-29 17:30:59</td>
                             <td>陈二</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2032,7 +2032,7 @@
                             <td>褚三</td>
                             <td>2025-07-23 17:30:59</td>
                             <td>卫四</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2057,7 +2057,7 @@
                             <td>蒋五</td>
                             <td>2025-07-23 16:54:44</td>
                             <td>沈六</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2082,7 +2082,7 @@
                             <td>韩七</td>
                             <td>2025-07-23 18:59:04</td>
                             <td>杨八</td>
-                            <td><span class="status-badge status-inactive">失效</span></td>
+                            <td><span class="status-badge status-danger">失效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2107,7 +2107,7 @@
                             <td>朱九</td>
                             <td>2025-07-23 13:22:08</td>
                             <td>秦十</td>
-                            <td><span class="status-badge status-active">生效</span></td>
+                            <td><span class="status-badge status-success">生效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -2132,7 +2132,7 @@
                             <td>尤一</td>
                             <td>2025-07-22 16:38:35</td>
                             <td>许二</td>
-                            <td><span class="status-badge status-inactive">失效</span></td>
+                            <td><span class="status-badge status-danger">失效</span></td>
                             <td class="action-col">
                                 <a href="#" class="action-link" onclick="viewActivity(this); return false;">查看</a>
                                 <a href="#" class="action-link" onclick="editActivity(this); return false;">编辑</a>
@@ -3721,8 +3721,8 @@
                  console.log('失效活动:', activityName);
                  
                  // 模拟失效成功，更新状态
-                 const statusCell = row.cells[10];
-                 statusCell.innerHTML = '<span class="status-badge status-inactive">失效</span>';
+                 const statusCell = row.cells[12];
+                 statusCell.innerHTML = '<span class="status-badge status-danger">失效</span>';
                  
                  // 将失效按钮改为生效按钮
                  currentPauseElement.textContent = '生效';
@@ -3765,8 +3765,8 @@
                  console.log('生效活动:', activityName);
                  
                  // 模拟生效成功，更新状态
-                 const statusCell = row.cells[10];
-                 statusCell.innerHTML = '<span class="status-badge status-active">生效</span>';
+                 const statusCell = row.cells[12];
+                 statusCell.innerHTML = '<span class="status-badge status-success">生效</span>';
                  
                  // 将生效按钮改为失效按钮
                  currentEnableElement.textContent = '失效';
@@ -3812,13 +3812,13 @@
              
              checkedBoxes.forEach(checkbox => {
                  const row = checkbox.closest('tr');
-                 const statusCell = row.cells[10];
+                 const statusCell = row.cells[12];
                  const pauseLink = row.querySelector('.action-link[onclick*="showPauseConfirm"]');
                  
                  // 只失效生效中的活动
                  if (statusCell.textContent.includes('生效')) {
                      // 更新状态
-                     statusCell.innerHTML = '<span class="status-badge status-inactive">失效</span>';
+                     statusCell.innerHTML = '<span class="status-badge status-danger">失效</span>';
                      
                      // 将失效按钮改为生效按钮
                      if (pauseLink) {
