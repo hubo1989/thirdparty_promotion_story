@@ -99,6 +99,87 @@
             transition: all 0.3s ease;
         }
         
+        /* 状态标签样式 */
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .status-success {
+            background-color: #f0f9ff;
+            color: #67c23a;
+            border: 1px solid #b3e19d;
+        }
+        
+        .status-danger {
+            background-color: #fef0f0;
+            color: #f56c6c;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-warning {
+            background-color: #fdf6ec;
+            color: #e6a23c;
+            border: 1px solid #f0d0a0;
+        }
+        
+        .status-info {
+            background-color: #f4f4f5;
+            color: #909399;
+            border: 1px solid #d3d4d6;
+        }
+        
+        /* 标签页样式 */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e6e6e6;
+            margin: 20px 0;
+        }
+        
+        .tab-item {
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            color: #606266;
+        }
+        
+        .tab-item:hover {
+            color: #409eff;
+        }
+        
+        .tab-item.active {
+            color: #409eff;
+            border-bottom: 2px solid #409eff;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 示例区域样式 */
+        .example-section {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+        
         .prototype-btn:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
@@ -793,6 +874,39 @@
             <li><strong>状态保持</strong>：切换标签后保持当前激活状态，直到点击其他标签</li>
         </ul>
         
+        <h4>5.4.5 样式效果示例</h4>
+        <div class="example-section">
+            <div class="example-title">状态标签样式示例：</div>
+            <p>
+                <span class="status-badge status-success">生效</span>
+                <span class="status-badge status-danger">失效</span>
+                <span class="status-badge status-warning">待生效</span>
+                <span class="status-badge status-info">已过期</span>
+            </p>
+            
+            <div class="example-title">标签页切换示例：</div>
+            <div class="tabs">
+                <div class="tab-item active" data-tab="details" onclick="switchTab('details')">活动详情</div>
+                <div class="tab-item" data-tab="issuance" onclick="switchTab('issuance')">发放明细</div>
+                <div class="tab-item" data-tab="verification" onclick="switchTab('verification')">核销明细</div>
+            </div>
+            
+            <div class="tab-content active" id="details-content">
+                <p><strong>活动详情内容区域</strong></p>
+                <p>显示活动的基本配置信息，包括活动ID、活动名称、主题活动ID等字段。</p>
+            </div>
+            
+            <div class="tab-content" id="issuance-content">
+                <p><strong>发放明细内容区域</strong></p>
+                <p>显示优惠券的发放统计和明细数据，包括总发放数量、已核销数量等信息。</p>
+            </div>
+            
+            <div class="tab-content" id="verification-content">
+                <p><strong>核销明细内容区域</strong></p>
+                <p>显示优惠券的核销统计和明细数据，包括核销金额、订单金额等信息。</p>
+            </div>
+        </div>
+        
         <h3>5.5 操作流程</h3>
         <div class="workflow-step">
             <div class="step-number">1</div>
@@ -1190,5 +1304,42 @@
         <p>© 2024 银行联合营销平台 - 微信活动管理系统需求说明文档</p>
         <p>文档版本：v1.0 | 最后更新：2024年</p>
     </footer>
+    
+    <script>
+        // 标签页切换功能
+        function switchTab(tabId) {
+            // 移除所有标签的active状态
+            const allTabs = document.querySelectorAll('.tab-item');
+            allTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 隐藏所有内容区域
+            const allContents = document.querySelectorAll('.tab-content');
+            allContents.forEach(content => content.classList.remove('active'));
+            
+            // 激活当前点击的标签
+            const currentTab = document.querySelector(`[data-tab="${tabId}"]`);
+            if (currentTab) {
+                currentTab.classList.add('active');
+            }
+            
+            // 显示对应的内容区域
+            const currentContent = document.getElementById(`${tabId}-content`);
+            if (currentContent) {
+                currentContent.classList.add('active');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保默认激活第一个标签
+            const firstTab = document.querySelector('.tab-item[data-tab="details"]');
+            const firstContent = document.getElementById('details-content');
+            
+            if (firstTab && firstContent) {
+                firstTab.classList.add('active');
+                firstContent.classList.add('active');
+            }
+        });
+    </script>
 </body>
 </html>
