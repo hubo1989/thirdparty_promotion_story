@@ -175,6 +175,7 @@
         }
 
         .content-title {
+            margin: 0;
             font-size: 24px;
             color: #303133;
             font-weight: 500;
@@ -186,8 +187,8 @@
             margin-bottom: 20px;
         }
 
-        .tab-item {
-            padding: 10px 15px;
+        .tab-nav .tab-item {
+            padding: 10px 17px;
             background-color: white;
             border: 1px solid #dcdfe6;
             cursor: pointer;
@@ -196,42 +197,63 @@
             color: #4a90e2;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            min-width: 120px;
+            justify-content: center;
+            width: 150px !important;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4;
+            text-align: center;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .tab-item.active {
+        .tab-nav .tab-item.active {
             background-color: white;
             color: #4a90e2;
             border-color: #4a90e2;
             border-bottom-color: white;
             position: relative;
             z-index: 1;
+            font-weight: 500;
         }
 
-        .tab-item:hover:not(.active) {
+        .tab-nav .tab-item:hover:not(.active) {
             background-color: #f8f9fa;
             color: #4a90e2;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
         }
 
-        .tab-close {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: transparent;
-            color: #999;
-            font-size: 14px;
-            line-height: 1;
-            transition: all 0.3s;
+        /* 标签栏响应式 */
+        @media (max-width: 768px) {
+            .tab-nav {
+                gap: 1px;
+                margin-bottom: 15px;
+            }
+            
+            .tab-nav .tab-item {
+                padding: 8px 13px;
+                width: 150px !important;
+                font-size: 13px;
+            }
         }
 
-        .tab-close:hover {
-            background-color: #f56c6c;
-            color: white;
+        @media (max-width: 480px) {
+            .tab-nav {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .tab-nav .tab-item {
+                border-radius: 4px;
+                margin-bottom: 2px;
+                width: 100%;
+                padding: 10px 17px;
+            }
+            
+            .tab-nav .tab-item.active {
+                border-bottom-color: #4a90e2;
+            }
         }
 
         /* 渠道标签 */
@@ -292,19 +314,26 @@
             align-items: center;
             flex-wrap: wrap;
         }
+        
+        .form-row:last-child {
+            margin-bottom: 0;
+        }
 
         .form-group {
             display: flex;
             align-items: center;
             gap: 8px;
             flex: 0 0 auto;
+            min-width: 280px;
         }
 
         .form-group label {
-            min-width: 80px;
+            min-width: 120px;
             color: #606266;
             font-size: 14px;
             white-space: nowrap;
+            text-align: right;
+            padding-right: 8px;
         }
 
         .form-group input,
@@ -317,29 +346,47 @@
         }
 
         /* 响应式布局 */
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             .form-row {
                 gap: 15px;
             }
             .form-group {
-                min-width: 280px;
+                min-width: 300px;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .form-row {
-                gap: 10px;
+                gap: 12px;
             }
             .form-group {
                 min-width: 100%;
                 flex: 1 1 100%;
             }
             .form-group label {
-                min-width: 70px;
+                min-width: 100px;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                gap: 10px;
+                flex-direction: column;
+            }
+            .form-group {
+                min-width: 100%;
+                flex: 1 1 100%;
+                gap: 4px;
+            }
+            .form-group label {
+                min-width: 80px;
+                text-align: left;
+                padding-right: 4px;
             }
             .form-group input,
             .form-group select {
-                min-width: 120px;
+                min-width: 180px;
                 flex: 1;
             }
         }
@@ -421,6 +468,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow: hidden;
+            width: 100%;
+            margin-top: 20px;
         }
 
         .table-header {
@@ -889,7 +938,7 @@
             margin-bottom: 20px;
         }
 
-        .tab-item {
+        .modal .tab-item {
             padding: 12px 24px;
             cursor: pointer;
             border-bottom: 2px solid transparent;
@@ -898,12 +947,12 @@
             transition: all 0.3s ease;
         }
 
-        .tab-item.active {
+        .modal .tab-item.active {
             color: #409eff;
             border-bottom-color: #409eff;
         }
 
-        .tab-item:hover {
+        .modal .tab-item:hover {
             color: #409eff;
         }
 
@@ -917,9 +966,10 @@
 
         /* 查询表单 */
         .query-form {
-            background: #f8f9fa;
+            background-color: white;
             padding: 20px;
-            border-radius: 6px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
 
@@ -1168,15 +1218,6 @@
             color: #666;
             margin-top: 5px;
         }
-            padding: 12px 16px;
-            border: 1px solid #e5e6eb;
-            border-radius: 6px;
-            font-size: 14px;
-            line-height: 20px;
-            outline: none;
-            transition: all 0.2s ease;
-            background-color: #ffffff;
-        }
 
         .form-field input::placeholder,
         .form-field textarea::placeholder {
@@ -1382,17 +1423,17 @@
         .date-range {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .date-range input {
             flex: 1;
+            min-width: 120px;
         }
 
         .date-range span {
-            color: #86909c;
+            color: #606266;
             font-size: 14px;
-            font-weight: 500;
             white-space: nowrap;
         }
 
@@ -1491,14 +1532,14 @@
             <span>联合营销平台</span>
         </div>
         <div class="nav-info">
-            <span>活动管理 / 微信活动管理</span>
+            <span>三方营销配置 / 活动优惠券管理</span>
             <span>管理员</span>
         </div>
     </div>
 
     <!-- 面包屑导航 -->
     <div class="breadcrumb">
-        <a href="#">活动管理</a> / 微信活动管理
+        <a href="#">三方营销配置</a> / 活动优惠券管理
     </div>
 
     <!-- 主体内容 -->
@@ -1507,56 +1548,52 @@
         <div class="sidebar">
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>首页</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>运营中心</span>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>机构管理</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>数据中心</span>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>用户管理</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>配置中心</span>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>商户管理</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>下载中心</span>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>数据中心</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>营销中心</span>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title active" onclick="toggleSubmenu(this)">
-                    <span><span class="menu-icon">■</span>活动管理</span>
+                    <span>三方营销配置</span>
                     <span class="menu-arrow expanded">▶</span>
                 </div>
                 <div class="submenu show">
-                    <div class="submenu-item active">微信活动管理</div>
-                    <div class="submenu-item">活动模板管理</div>
-                    <div class="submenu-item">活动审核管理</div>
-                    <div class="submenu-item">活动统计分析</div>
+                    <div class="submenu-item" onclick="navigateToPage('activity_prototype.html')">主题活动管理</div>
+                    <div class="submenu-item active" onclick="navigateToPage('wxpromotionprototype.html')">活动优惠券管理</div>
                 </div>
             </div>
-
             <div class="menu-item">
                 <div class="menu-title">
-                    <span><span class="menu-icon">■</span>系统设置</span>
-                    <span class="menu-arrow">▶</span>
+                    <span>机构管理</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span>对账中心</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-title">
+                    <span>银行服务管理</span>
                 </div>
             </div>
         </div>
@@ -1564,22 +1601,28 @@
         <!-- 右侧内容区 -->
         <div class="content">
             <div class="content-header">
-                <h2 class="content-title">微信活动管理</h2>
+                <h2 class="content-title">活动优惠券管理</h2>
             </div>
 
             <!-- 标签页 -->
+            <style>
+                /* 强制标签宽度 - 最高优先级 */
+                .tab-nav .tab-item {
+                    width: 150px !important;
+                    min-width: 150px !important;
+                    max-width: 150px !important;
+                    flex: none !important;
+                    flex-shrink: 0 !important;
+                    flex-grow: 0 !important;
+                    box-sizing: border-box !important;
+                }
+            </style>
             <div class="tab-nav">
-                <div class="tab-item active">
-                    <span>微信活动管理</span>
-                    <span class="tab-close">×</span>
+                <div class="tab-item" onclick="navigateToPage('activity_prototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
+                    <span>主题活动管理</span>
                 </div>
-                <div class="tab-item">
-                    <span>活动模板管理</span>
-                    <span class="tab-close">×</span>
-                </div>
-                <div class="tab-item">
-                    <span>活动审核管理</span>
-                    <span class="tab-close">×</span>
+                <div class="tab-item active" onclick="navigateToPage('wxpromotionprototype.html')" style="width: 150px !important; min-width: 150px !important; max-width: 150px !important; flex: none !important;">
+                    <span>活动优惠券管理</span>
                 </div>
             </div>
 
@@ -1692,11 +1735,11 @@
                     <!-- 权限控制：新增、导出、终止操作需要相应权限 -->
                     <div class="table-actions">
                         <!-- 新增活动：打开新增弹窗，需要填写完整活动信息 -->
-                        <button class="btn btn-primary" onclick="openAddActivityModal()">新增活动</button>
+                        <button class="btn btn-secondary" onclick="openAddActivityModal()">新增</button>
                         <!-- 导出功能：支持Excel格式，最多导出10000条记录 -->
-                        <button class="btn btn-secondary" onclick="exportActivities()">导出</button>
+                        <button class="btn btn-default" onclick="exportActivities()">导出</button>
                         <!-- 终止活动：批量操作，需要二次确认，只能终止进行中的活动 -->
-                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止活动</button>
+                        <button class="btn btn-gray" onclick="showBatchTerminateConfirm()">终止</button>
                     </div>
                 </div>
 
@@ -2395,7 +2438,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>发券流水号</th>
+                                        <th>券ID</th>
                                         <th>活动ID</th>
                                         <th>OpenID</th>
                                         <th>优惠券类型</th>
@@ -2552,7 +2595,7 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>发券流水号</th>
+                                        <th>券 ID</th>
                                         <th>交易流水号</th>
                                         <th>活动ID</th>
                                         <th>OpenID</th>
@@ -3432,9 +3475,14 @@
              // 更新全选状态
              updateSelectAll();
              
-             alert(`成功终止 ${terminatedCount} 个活动！`);
-             closeBatchTerminateConfirm();
-         }
+                         alert(`成功终止 ${terminatedCount} 个活动！`);
+            closeBatchTerminateConfirm();
+        }
+
+        // 页面跳转函数
+        function navigateToPage(pageName) {
+            window.location.href = pageName;
+        }
     </script>
 
     <!-- 二次确认弹窗 -->
