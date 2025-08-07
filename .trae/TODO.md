@@ -1,8 +1,6 @@
 # TODO:
 
-- [x] modify_activity_prototype: 修改activity_prototype.html文件中的终止按钮为暂停按钮，实现暂停/启用切换功能 (priority: High)
-- [x] modify_wxpromotion_prototype: 修改wxpromotionprototype.html文件中的终止按钮为暂停按钮，实现暂停/启用切换功能 (priority: High)
-- [x] update_table_buttons: 修改数据表格中的按钮逻辑，根据状态显示暂停或启用按钮 (priority: High)
-- [x] update_javascript_functions: 修改相关JavaScript函数名和逻辑，添加状态切换功能 (priority: High)
-- [x] update_confirmation_dialogs: 修改确认弹窗的文本内容 (priority: Medium)
-- [x] test_functionality: 测试修改后的功能是否正常工作 (priority: Low)
+- [x] update_index_html: 修改index.html中的系统架构概览和后台管理系统介绍，将"微信活动管理系统"改为"活动优惠券管理系统" (priority: High)
+- [x] update_promotion_story: 修改promotion_story.html的文档标题和系统描述，更新为支持微信、支付宝、银联多渠道的活动优惠券管理 (priority: High)
+- [x] update_readme: 修改README.md中的项目说明，更新相关系统描述为活动优惠券管理系统 (priority: Medium)
+- [x] verify_changes: 检查所有文档确保"微信活动管理系统"都已正确修改为"活动优惠券管理系统" (priority: Low)

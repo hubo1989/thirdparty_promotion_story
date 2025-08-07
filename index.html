@@ -5,7 +5,7 @@
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>云数汇权益营销平台微信优惠券服务接入需求文档</title>
+    <title>联合营销平台三方营销管理-云数汇接入需求文档</title>
     <!--[if gte mso 9]>
     <xml>
         <w:WordDocument>
@@ -146,6 +146,21 @@
             font-family: 'Courier New', monospace;
             font-size: 12pt;
         }
+        .meta {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
         @page {
             margin: 1in 10% 1in 10%;
         }
@@ -156,23 +171,65 @@
 </head>
 <body>
     <div class="header">
-        <h1>云数汇权益营销平台微信优惠券服务接入需求文档</h1>
+        <h1>联合营销平台三方营销管理-云数汇接入需求文档</h1>
+        <div class="meta">
+            <p>版本：v1.0 | 创建日期：2025年1月 | 最后更新：2025年1月</p>
+        </div>
     </div>
 
     <h1>1. 项目概述</h1>
     
     <h3>1.1 项目背景</h3>
-    <p>接入云数汇第三方微信优惠券服务商，封装其获取openid的h5、发券、数据回调、数据查询接口，为合作银行提供统一的优惠券发放服务，并在联合营销平台、银行联合营销平台展示相关数据。</p>
+    <p>本项目旨在构建一个完整的微信优惠券营销管理平台，通过接入云数汇第三方微信优惠券服务商，为合作银行提供统一的优惠券发放服务。项目包含三个核心组成部分：云数汇API接入层、主题活动管理系统和活动优惠券管理系统，形成完整的营销活动管理闭环。</p>
 
     <h3>1.2 项目目标</h3>
     <ul>
-        <li>与云数汇API对接，实现优惠券发放功能</li>
-        <li>封装标准化接口供合作银行调用</li>
-        <li>提供数据统计和查询功能</li>
-        <li>建立完善的回调处理机制</li>
+        <li><strong>统一接入服务：</strong>与云数汇API对接，实现优惠券发放功能</li>
+        <li><strong>标准化接口：</strong>封装标准化接口供合作银行调用</li>
+        <li><strong>完整业务管理：</strong>提供主题活动和微信活动的全生命周期管理</li>
+        <li><strong>数据统计分析：</strong>提供完善的数据统计和查询功能</li>
+        <li><strong>可靠回调机制：</strong>建立完善的异步回调处理机制</li>
     </ul>
 
-    <h1>2. 业务需求</h1>
+    <h3>1.3 系统架构概览</h3>
+    <div class="highlight-box">
+        <p><strong>系统整体架构：</strong></p>
+        <ul>
+            <li><strong>主题活动管理系统：</strong>负责营销活动的策划、配置和管理，包含转盘抽奖等互动功能</li>
+            <li><strong>活动优惠券管理系统：</strong>专门管理多渠道优惠券活动（微信、支付宝、银联），与主题活动关联，提供优惠券发放和核销管理</li>
+            <li><strong>云数汇接入层：</strong>封装云数汇API，提供统一的优惠券发放服务接口</li>
+            <li><strong>联合营销平台：</strong>为运营人员提供统一的管理界面和数据查询功能</li>
+        </ul>
+    </div>
+
+    <h3>1.4 业务价值</h3>
+    <div class="success-box">
+        <p><strong>核心价值：</strong></p>
+        <ul>
+            <li><strong>降低接入成本：</strong>银行无需直接对接云数汇，通过标准化接口快速接入</li>
+            <li><strong>统一管理平台：</strong>提供完整的活动管理和数据分析能力</li>
+            <li><strong>扩展性保障：</strong>中间层设计支持后续接入多个上游发券通道</li>
+            <li><strong>数据安全可控：</strong>完整的权限控制和数据隔离机制</li>
+        </ul>
+    </div>
+
+    <h1>2. 业务逻辑与流程</h1>
+    
+    <h3>2.1 整体业务逻辑</h3>
+    <div class="highlight-box">
+        <p><strong>业务逻辑核心：</strong></p>
+        <p>整个系统围绕"主题活动"和"微信活动"两个核心概念构建。主题活动作为营销活动的顶层设计，定义活动的基本信息、参与规则和奖品配置；微信活动作为主题活动的具体实施载体，负责优惠券的发放和管理。两者通过活动关联形成完整的营销闭环。</p>
+        
+        <p><strong>系统协作关系：</strong></p>
+        <ol>
+            <li><strong>活动策划阶段：</strong>运营人员在主题活动管理系统中创建营销活动，配置活动规则、奖品和转盘等互动元素</li>
+            <li><strong>优惠券配置：</strong>在活动优惠券管理系统中创建优惠券活动，关联到对应的主题活动</li>
+            <li><strong>用户参与：</strong>用户通过H5页面参与主题活动，获取微信OpenID，触发优惠券发放流程</li>
+            <li><strong>发券执行：</strong>系统调用云数汇API发放优惠券，记录发放结果</li>
+            <li><strong>核销管理：</strong>用户使用优惠券时，通过回调机制更新核销状态</li>
+            <li><strong>数据分析：</strong>在联合营销平台查看活动效果和数据统计</li>
+        </ol>
+    </div>
     
     <h3>2.1 业务流程</h3>
     <div class="highlight-box">
@@ -350,20 +407,352 @@
         </a>
     </div>
 
-    <h1>3. 系统架构</h1>
+    <h1>3. 后台管理系统</h1>
     
-    <h3>3.1 系统组成</h3>
+    <p>本项目包含两个核心的后台管理系统，分别负责不同层面的营销活动管理。两个系统既相互独立又紧密协作，共同构成完整的营销活动管理平台。</p>
+    
+    <h3>3.1 主题活动管理系统</h3>
+    <div class="success-box">
+        <p><strong>系统定位：</strong>营销活动的顶层设计和管理平台</p>
+        <p><strong>核心功能：</strong></p>
+        <ul>
+            <li><strong>活动策划：</strong>创建和配置营销主题活动，定义活动基本信息、时间范围和参与规则</li>
+            <li><strong>互动设计：</strong>配置转盘抽奖、积分兑换等互动玩法，提升用户参与度</li>
+            <li><strong>奖品管理：</strong>设置活动奖品池，包括优惠券、实物奖品等多种奖励形式</li>
+            <li><strong>状态管理：</strong>支持活动的启动、暂停、恢复和结束等状态流转</li>
+            <li><strong>数据统计：</strong>提供活动参与度、转化率等核心指标分析</li>
+        </ul>
+        
+        <div class="warning-box">
+            <p><strong>📋 详细需求文档：</strong></p>
+            <p>主题活动管理系统的完整功能规格、界面设计、技术规范等详细内容，请参考：</p>
+            <p><a href="activity_story.html" class="url-link" style="font-size: 14pt; font-weight: bold;">📖 主题活动管理系统需求文档</a></p>
+        </div>
+    </div>
+    
+    <h3>3.2 活动优惠券管理系统</h3>
+    <div class="success-box">
+        <p><strong>系统定位：</strong>多渠道优惠券活动的专业管理平台</p>
+        <p><strong>核心功能：</strong></p>
+        <ul>
+            <li><strong>活动关联：</strong>创建多渠道优惠券活动（微信、支付宝、银联）并关联到对应的主题活动</li>
+            <li><strong>券种管理：</strong>配置不同类型的优惠券，设置发放规则和使用条件</li>
+            <li><strong>发放监控：</strong>实时监控优惠券发放状态，支持发放明细查询</li>
+            <li><strong>核销管理：</strong>管理优惠券核销流程，提供核销数据统计</li>
+            <li><strong>数据分析：</strong>提供发放量、核销率、活动ROI等关键指标分析</li>
+        </ul>
+        
+        <div class="warning-box">
+            <p><strong>📋 详细需求文档：</strong></p>
+            <p>活动优惠券管理系统的完整功能规格、界面设计、技术规范等详细内容，请参考：</p>
+            <p><a href="promotion_story.html" class="url-link" style="font-size: 14pt; font-weight: bold;">📖 活动优惠券管理系统需求文档</a></p>
+        </div>
+    </div>
+    
+    <h3>3.3 系统协作关系</h3>
+    <div class="highlight-box">
+        <p><strong>协作模式：</strong></p>
+        <ul>
+            <li><strong>数据关联：</strong>优惠券活动通过活动ID与主题活动建立关联关系</li>
+            <li><strong>状态同步：</strong>主题活动状态变更会影响关联的优惠券活动状态</li>
+            <li><strong>统一入口：</strong>通过联合营销平台提供统一的管理入口和数据视图</li>
+            <li><strong>权限继承：</strong>优惠券活动的操作权限基于主题活动的权限设置</li>
+        </ul>
+    </div>
+    
+    <h1>4. 系统架构与技术设计</h1>
+    
+    <h3>4.1 云数汇API接口技术规范</h3>
+    
+    <p>本节详细描述云数汇API接口的技术实现规范，包括四个核心接口的详细说明。</p>
+    
+    <h4>4.1.1 获取OpenID接口</h4>
+    <div class="highlight-box">
+        <p><strong>接口说明：</strong>在券列表或详情页嵌入H5链接，用于获取用户的openid，以便进行后续的业务操作。</p>
+        
+        <p><strong>接入方式：</strong>嵌入H5</p>
+        
+        <p><strong>测试环境地址：</strong></p>
+        <div class="code-block">
+            https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=xxx
+        </div>
+        
+        <p><strong>生产环境地址：</strong></p>
+        <div class="code-block">
+            https://market.dsaika.com/deliverWM/1019393703635943424?wmcb=xxx
+        </div>
+        
+        <p><strong>回调请求方式：</strong>GET</p>
+        <p><strong>回调参数：</strong>${redirect_url}&openid=${response.data.openId}&from=dshy</p>
+        
+        <p><strong>请求示例：</strong></p>
+        <div class="code-block">
+            GET /callback?redirect_url=https:\\example.com&openid=oRvltwHjF4p7g5j3h2k1j0i9h8g7&from=dshy HTTP/1.1<br>
+            Host: your-domain.com
+        </div>
+        
+        <p><strong>返回示例：</strong></p>
+        <div class="code-block">
+            {
+              "status": "success",
+              "msg": "OpenID retrieved successfully",
+              "data": {
+                "openid": "oRvltwHjF4p7g5j3h2k1j0i9h8g7",
+                "from": "dshy"
+              }
+            }
+        </div>
+    </div>
+    
+    <h4>4.1.2 发放优惠券接口</h4>
+    <div class="highlight-box">
+        <p><strong>请求URL：</strong></p>
+        <ul>
+            <li>测试环境：https://test.wsmsd.cn/sit/api/...</li>
+            <li>生产环境：待提供</li>
+        </ul>
+        
+        <p><strong>请求参数说明：</strong></p>
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+            <tr style="background-color: #f5f5f5;">
+                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">内容</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">是否必输</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">最大长度</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">示例值</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">member_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">会员号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(10-20)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">AAA200154561278</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">activity_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">活动号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(10)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">1100000086</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">owner_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">业主Id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(8)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">80000007</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">promotion_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">优惠Id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(32)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">WX1623452352312523523</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">channel_openid</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">接口1中获取到的openid</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(128)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">oKL-mwRzR-SBfI4QDAI1QXOpkyc8</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">mer_order_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">商户订单号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">20211203092301</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">writeOffNotify</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">核销事件通知地址</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(256)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">https://test.bank.com/notif</td>
+            </tr>
+        </table>
+        
+        <p><strong>请求示例：</strong></p>
+        <div class="code-block">
+            {
+              "member_id": "AAA200154561278",
+              "activity_id": "1100000086",
+              "owner_id": "80000007",
+              "promotion_id": "WX1623452352312523523",
+              "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
+              "mer_order_id": "20211203092301",
+              "writeOffNotify": "https://test.bank.com/notif"
+            }
+        </div>
+        
+        <p><strong>返回示例：</strong></p>
+        <div class="code-block">
+            {
+              "msg": "处理成功",
+              "code": "000000",
+              "data": {
+                "resCode": "000000",
+                "failMsg": "",
+                "activity_id": "1100000086",
+                "owner_id": "80000007",
+                "promotion_id": "WX1623452352312523523",
+                "third_coupon_id": "wxd596543989121024",
+                "mer_order_id": "20211203092301",
+                "trade_no": "202112030923010001",
+                "batch_code": "1254325364564365",
+                "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
+                "trade_status": "SUCCESS"
+              }
+            }
+        </div>
+    </div>
+    
+    <h4>4.1.3 核销回调接口</h4>
+    <div class="highlight-box">
+        <p><strong>接口说明：</strong>通知接入方系统，通过延时队列进行散列通知，通知频率：间隔：1s/5s/5s/10s/3m/10m/20m/30m/1h/2h - 总计 4h3m21s。商户返回应答SUCCESS，将终止通知。</p>
+        
+        <p><strong>Header认证：</strong></p>
+        <div class="code-block">
+            Authorization: "LKLAPI-SHA256withRSA timestamp="${timeStamp}",nonce_str="${nonceStr}",signature="${signature}""
+        </div>
+        
+        <p><strong>通知报文参数：</strong></p>
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+            <tr style="background-color: #f5f5f5;">
+                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">约束</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">字段类型</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">字段描述</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">取值说明</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">member_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">会员ID</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">AAA200154561278</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">tradeStatus</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">核销状态</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">USED：已实扣<br>EXPIRED：已过期</td>
+            </tr>
+        </table>
+        
+        <p><strong>请求示例：</strong></p>
+        <div class="code-block">
+            {
+              "member_id": "AAA200154561278",
+              "owner_id": "80000007",
+              "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
+              "promotion_id": "WX1623452352312523523",
+              "third_coupon_id": "wxd596543989121024",
+              "activity_id": "1100000086",
+              "promo_amount": "1000",
+              "total_amount": "9000",
+              "org_amount": "10000",
+              "trade_no": "202112030923010001",
+              "mer_order_id": "20211203092301",
+              "gmt_used": "2021-12-03 10:30:00",
+              "tradeStatus": "USED"
+            }
+        </div>
+        
+        <p><strong>响应示例：</strong></p>
+        <div class="code-block">
+            {
+              "code": "SUCCESS",
+              "msg": "处理成功"
+            }
+        </div>
+    </div>
+    
+    <h4>4.1.4 数据查询接口</h4>
+    <div class="highlight-box">
+        <p><strong>接口说明：</strong>用于查询发券结果和核销结果。</p>
+        
+        <p><strong>请求参数：</strong></p>
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+            <tr style="background-color: #f5f5f5;">
+                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">内容</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">是否必输</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">最大长度</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">示例值</th>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">owner_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">业主Id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(8)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">80000007</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">mer_order_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">商户订单号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">20211203092301</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">activity_id</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">活动号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(32)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">1100000086</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">trade_no</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">平台订单号</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">202112030923010001</td>
+            </tr>
+        </table>
+        
+        <p><strong>请求示例：</strong></p>
+        <div class="code-block">
+            {
+              "owner_id": "80000007",
+              "mer_order_id": "20211203092301",
+              "activity_id": "1100000086",
+              "trade_no": "202112030923010001"
+            }
+        </div>
+        
+        <p><strong>返回示例：</strong></p>
+        <div class="code-block">
+            {
+              "msg": "处理成功",
+              "code": "000000",
+              "data": {
+                "resCode": "000000",
+                "failMsg": "",
+                "trade_status": "SUCCESS",
+                "promo_amount": "1000",
+                "total_amount": "9000",
+                "org_amount": "10000",
+                "gmt_used": "2021-12-03 10:30:00",
+                "tradeStatus": "USED"
+              }
+            }
+        </div>
+    </div>
+    
+    <h3>4.2 系统组成</h3>
     <ul>
-        <li><strong>云数汇接入层：</strong>对接云数汇API</li>
-        <li><strong>业务封装层：</strong>封装标准化接口</li>
-        <li><strong>数据存储层：</strong>存储发放和核销数据</li>
-        <li><strong>营销平台层：</strong>数据展示和权限管理</li>
-        <li><strong>联合营销平台：</strong>银行端数据查询</li>
+        <li><strong>云数汇接入层：</strong>对接云数汇API，处理发券和回调</li>
+        <li><strong>业务封装层：</strong>封装标准化接口，提供统一服务</li>
+        <li><strong>数据存储层：</strong>存储活动、发放和核销数据</li>
+        <li><strong>营销平台层：</strong>主题活动和微信活动管理</li>
+        <li><strong>联合营销平台：</strong>统一的数据查询和管理界面</li>
     </ul>
-
-    <h3>3.2 业务流程</h3>
     
-    <h4>3.2.1 发券流程</h4>
+    <h3>4.3 业务流程</h3>
+    
+    <h4>4.3.1 发券流程</h4>
     <p>线下创建优惠券，优惠券信息填入联合营销平台——活动编码(营销平台提供即微信活动批次号)：batchCode；活动编码关联主题活动ID。</p>
     
     <div class="code-block">
@@ -372,7 +761,7 @@
     
     <p>——使用活动编码+用户访问h5时获取的openid发放优惠券，并实时记录发放结果。</p>
 
-    <h4>3.2.2 详细流程步骤</h4>
+    <h4>4.3.2 详细流程步骤</h4>
     <div class="code-block">
         <strong>第一阶段：获取用户OpenID</strong>
         <ol>
@@ -400,138 +789,13 @@
         </ol>
     </div>
 
-    <h1>4. 技术需求</h1>
-
-    <h3>4.1 接口封装架构</h3>
-    <div class="highlight-box">
-        <p><strong>接口封装设计：</strong>我方系统作为中间层，对外提供标准化接口给合作银行，对内对接云数汇API，实现参数转换、权限控制、数据记录等功能。</p>
-        <p><strong>中间层重要意义：</strong>后续可能同时接入多个上游发券通道，中间层设计确保为合作银行提供统一的外部接口规范，避免因上游通道变更影响下游系统，提高系统的可扩展性和稳定性。</p>
-    </div>
-
-    <h4>4.1.1 银行请求我方系统接口</h4>
-    <div class="success-box">
-        <p><strong>接口名称：</strong>优惠券发放接口</p>
-        <p><strong>接口用途：</strong>行方系统调用我方系统发放微信优惠券</p>
-        
-        <div class="parameter-list">
-            <p><strong>请求参数：</strong></p>
-            <ul>
-                <li><strong>bankId</strong>: 合作银行唯一标识，用于区分调用方银行</li>
-                <li><strong>openId</strong>: 微信用户唯一标识，通过H5授权页面获取（透传给云数汇）</li>
-                <li><strong>batchCode</strong>: 活动编码/微信活动批次号，关联主题活动ID（透传给云数汇）</li>
-                <li><strong>callTradeNo</strong>: 银行方交易流水号，用于幂等性控制（记录后关联，调用云数汇时生成我方系统流水号）</li>
-                <li><strong>writeOffNotify</strong>: 银行方核销回调地址（记录后关联，调用云数汇时使用我方系统回调地址）</li>
-            </ul>
-        </div>
-        
-        <div class="parameter-list">
-            <p><strong>处理逻辑：</strong></p>
-            <ol>
-                <li><strong>权限校验：</strong>验证bankId的合法性（现阶段暂无具体权限控制）</li>
-                <li><strong>参数校验：</strong>验证openId格式、batchCode有效性等</li>
-                <li><strong>数据记录：</strong>记录银行方callTradeNo和writeOffNotify</li>
-                <li><strong>流水号生成：</strong>生成我方系统交易流水号</li>
-                <li><strong>调用云数汇：</strong>使用转换后的参数调用云数汇发放接口</li>
-                <li><strong>结果处理：</strong>处理云数汇返回结果，记录发放明细</li>
-            </ol>
-        </div>
-    </div>
-
-    <h4>4.1.2 我方系统调用云数汇接口</h4>
-    <div class="success-box">
-        <p><strong>接口名称：</strong>云数汇优惠券发放接口</p>
-        <p><strong>接口用途：</strong>我方系统调用云数汇API发放微信优惠券</p>
-        
-        <div class="parameter-list">
-            <p><strong>请求参数（向云数汇发送）：</strong></p>
-            <ul>
-                <li><strong>openId</strong>: 微信用户唯一标识（从银行请求透传）</li>
-                <li><strong>batchCode</strong>: 活动编码/微信活动批次号（从银行请求透传）</li>
-                <li><strong>callTradeNo</strong>: 我方系统生成的交易流水号（非银行方流水号）</li>
-                <li><strong>writeOffNotify</strong>: 我方系统的核销回调地址（非银行回调地址）</li>
-            </ul>
-        </div>
-        
-        <div class="code-block">
-            <strong>示例请求参数：</strong><br>
-            "openId": "oPa1U6a_nhfiR-5bdeZrnxzlx3_k",<br>
-            "batchCode": "1017578611540230144",<br>
-            "callTradeNo": "SYS1731749631383",<br>
-            "writeOffNotify": "https://our-system.com/callback/writeoff"
-        </div>
-    </div>
-
-    <h4>4.1.3 回调处理接口（异步架构）</h4>
-    <div class="success-box">
-        <p><strong>接口名称：</strong>核销回调处理接口</p>
-        <p><strong>接口用途：</strong>接收云数汇的核销回调通知，采用异步架构处理银行通知</p>
-        <p><strong>架构特点：</strong>接收云数汇回调后立即返回处理结果，后续异步处理合作银行通知逻辑</p>
-        
-        <div class="parameter-list">
-            <p><strong>同步处理阶段：</strong></p>
-            <ol>
-                <li><strong>接收回调：</strong>接收云数汇发送的核销通知</li>
-                <li><strong>数据校验：</strong>校验回调数据完整性和合法性</li>
-                <li><strong>立即响应：</strong>向云数汇返回处理确认，确保回调链路畅通</li>
-            </ol>
-        </div>
-        
-        <div class="parameter-list">
-            <p><strong>异步处理阶段：</strong></p>
-            <ol>
-                <li><strong>数据解析：</strong>解析回调数据，提取核销信息和关联的原始请求记录</li>
-                <li><strong>更新记录：</strong>更新我方系统的核销明细记录状态</li>
-                <li><strong>参数转换：</strong>将云数汇回调参数转换为下游合作银行所需的请求格式</li>
-                <li><strong>银行通知：</strong>根据原始请求记录中的bankId和writeOffNotify地址，异步向对应银行发送核销通知</li>
-                <li><strong>通知重试：</strong>实现通知失败重试机制，确保银行能够接收到核销状态变更</li>
-                <li><strong>日志记录：</strong>记录完整的回调处理和银行通知日志，便于问题排查</li>
-            </ol>
-        </div>
-        
-        <div class="warning-box">
-            <p><strong>异步架构优势：</strong></p>
-            <ul>
-                <li><strong>响应速度：</strong>云数汇回调立即得到响应，避免超时重发</li>
-                <li><strong>系统解耦：</strong>云数汇回调处理与银行通知解耦，提高系统稳定性</li>
-                <li><strong>容错能力：</strong>银行系统异常不影响云数汇回调确认</li>
-                <li><strong>重试保障：</strong>异步重试机制确保银行最终能收到通知</li>
-            </ul>
-        </div>
-    </div>
-
-    <h4>4.1.4 数据查询接口封装</h4>
-    <div class="success-box">
-        <p><strong>接口用途：</strong>为联合营销平台提供发放结果查询服务</p>
-        <p><strong>查询范围：</strong>仅支持发放结果查询，核销数据基于回调机制获取，不提供对外查询接口</p>
-        
-        <div class="parameter-list">
-            <p><strong>支持的查询接口：</strong></p>
-            <ul>
-                <li><strong>发放明细查询：</strong>根据银行ID、活动编码等条件查询发放记录和发放状态</li>
-                <li><strong>发放结果对账：</strong>调用云数汇查询接口进行数据对账，确保数据一致性</li>
-            </ul>
-        </div>
-        
-        <div class="warning-box">
-            <p><strong>查询限制说明：</strong></p>
-            <ul>
-                <li><strong>核销数据：</strong>核销状态变更通过回调机制实时更新，不提供对外主动查询接口</li>
-                <li><strong>数据来源：</strong>查询数据来源于我方系统存储</li>
-                <li><strong>功能区分：</strong>此处为对外接口设计，内部控制台功能页面另有数据查询功能</li>
-            </ul>
-        </div>
-        
-        <div class="parameter-list">
-            <p><strong>权限控制：</strong></p>
-            <ul>
-                <li>基于bankId进行数据权限隔离</li>
-                <li>银行只能查询自己发放的优惠券数据</li>
-                <li>现阶段暂无具体权限控制实现</li>
-            </ul>
-        </div>
-    </div>
+    <h1>5. 云数汇接入技术需求</h1>
     
-    <h3>4.2 云数汇API接口</h3>
+    <p>本章节详细描述云数汇API接入的技术实现方案，包括接口封装、数据处理、回调机制等核心技术需求。</p>
+
+
+    
+    <h3>4.4 接口封装架构</h3>
     <p><strong>请求格式及加密方式说明文档：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffipkojor8up" class="url-link">
@@ -539,36 +803,12 @@
         </a>
     </div>
     
-    <p><strong>接口列表：</strong></p>
-    <ul>
-        <li>发放优惠券</li>
-        <li>核销回调通知</li>
-        <li>查询发放结果（用于对账）</li>
-    </ul>
-
     <p><strong>公共参数说明：</strong></p>
     <div class="code-block">
         <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffiqbedg1eea" class="url-link">
         https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffiqbedg1eea
         </a>
     </div>
-
-    <h3>4.3 云数汇数据回调</h3>
-    <p><strong>接口文档：</strong></p>
-    <div class="code-block">
-        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi" class="url-link">
-        https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi
-        </a>
-    </div>
-    
-    <h3>4.4 云数汇数据查询</h3>
-    <p><strong>接口文档：</strong></p>
-    <div class="code-block">
-        <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv" class="url-link">
-            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv
-        </a>
-    </div> 
-    <p>接通发放结果查询接口，用于对账</p>
 
     <h3>4.5 数据存储要求</h3>
     <div class="success-box">
@@ -580,16 +820,35 @@
         </ul>
     </div>
 
-    <h1>5. 后台需求</h1>
+    <h1>5. 联合营销平台集成需求</h1>
    
-    <h3>5.1 联合营销平台查询</h3>
+    <h3>5.1 平台集成概述</h3>
+    <div class="highlight-box">
+        <p><strong>集成目标：</strong>将主题活动管理、微信活动管理和云数汇接入服务整合到联合营销平台中，为运营人员和合作银行提供统一的管理和查询界面。</p>
+        
+        <p><strong>集成范围：</strong></p>
+        <ul>
+            <li><strong>活动管理集成：</strong>在联合营销平台中嵌入主题活动和微信活动的管理功能</li>
+            <li><strong>数据查询集成：</strong>提供统一的数据查询和统计分析功能</li>
+            <li><strong>权限管理集成：</strong>基于银行机构的数据权限隔离和访问控制</li>
+            <li><strong>回调数据处理：</strong>接收并处理云数汇回调数据，更新本地记录</li>
+        </ul>
+    </div>
+    
+    <h3>5.2 数据存储与同步</h3>
     <div class="warning-box">
-        <p>主题活动是微信活动的核心组成部分，定义了活动的基本信息、规则和状态流转。详细的主题活动需求请参考 <a href="activity_story.html" class="url-link">主题活动需求文档</a>。</p>
-        <p>微信活动管理后台需要提供完整的数据查询功能，支持运营人员查询相关的发放和核销数据，包含明细查询和汇总统计功能。 详细的微信活动需求请参考 <a href="promotion_story.html" class="url-link">微信活动需求.html</a></p>
-        <p>后台系统需对接云数汇回调接口，在联合营销平台创建微信活动绑定主题活动后，活动数据存在本地，回调的优惠券数据除接口透传外，也需将数据进行保存，并用于后续的查询服务。</p>
+        <p><strong>数据处理策略：</strong></p>
+        <p>后台系统需对接云数汇回调接口，在联合营销平台创建优惠券活动绑定主题活动后，活动数据存储在本地。回调的优惠券数据除接口透传外，也需将数据进行保存，并用于后续的查询服务。</p>
+        
+        <p><strong>数据同步机制：</strong></p>
+        <ul>
+            <li><strong>实时同步：</strong>发放和核销数据通过API调用和回调机制实时更新</li>
+            <li><strong>定时对账：</strong>定期调用云数汇查询接口进行数据对账</li>
+            <li><strong>异常处理：</strong>数据不一致时的告警和修复机制</li>
+        </ul>
     </div>
 
-    <h4>5.1.1 查询功能技术特性</h4>
+    <h3>5.3 查询功能技术特性</h3>
     <div class="highlight-box">
         <p><strong>用户体验设计：</strong></p>
         <ul>
@@ -611,61 +870,60 @@
         <ul>
             <li><strong>权限控制：</strong>基于银行机构的数据权限隔离</li>
             <li><strong>操作日志：</strong>记录所有查询操作的审计日志</li>
-            <li><strong>敏感信息脱敏：</strong>OpenID等敏感信息部分脱敏显示</li>
-            <li><strong>导出限制：</strong>大批量数据导出需要审批流程</li>
         </ul>
     </div>
+    
 
+
+    <div class="footer">
+        <p>© 2025 联合营销平台 | 产品组</p>
+        <p>文档版本：v2.0 | 最后更新：2025年8月</p>
+    </div>
+    
     <script>
-        // 打开活动明细抽屉
-        function openActivityDetailModal(activityId, activityName, activityCode) {
-            // 创建抽屉容器
-            const drawer = document.createElement('div');
-            drawer.id = 'activityDetailDrawer';
-            drawer.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 9999;
-            `;
-            
-            const iframe = document.createElement('iframe');
-            iframe.src = 'wxpromotionsotry.html?activityId=' + encodeURIComponent(activityId) + 
-                        '&activityName=' + encodeURIComponent(activityName) + 
-                        '&activityCode=' + encodeURIComponent(activityCode);
-            iframe.style.cssText = `
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 80%;
-                max-width: 1200px;
-                height: 100%;
-                border: none;
-                background: white;
-            `;
-            
-            drawer.appendChild(iframe);
-            document.body.appendChild(drawer);
-        }
-        
-
-        
-        // 示例：为页面中的"查看明细"按钮添加点击事件
-        // 实际使用时，这些按钮应该在活动管理页面中
+        // 文档导航功能
         document.addEventListener('DOMContentLoaded', function() {
-            // 示例按钮事件绑定
-            // const detailButtons = document.querySelectorAll('.view-detail-btn');
-            // detailButtons.forEach(button => {
-            //     button.addEventListener('click', function() {
-            //         const activityId = this.getAttribute('data-activity-id');
-            //         const activityName = this.getAttribute('data-activity-name');
-            //         const activityCode = this.getAttribute('data-activity-code');
-            //         openActivityDetailModal(activityId, activityName, activityCode);
-            //     });
-            // });
+            // 为外部链接添加新窗口打开功能
+            const externalLinks = document.querySelectorAll('a[href$=".html"]');
+            externalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.open(this.href, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+                });
+            });
+            
+            // 添加目录导航
+            const headers = document.querySelectorAll('h1, h2, h3');
+            if (headers.length > 0) {
+                const nav = document.createElement('div');
+                nav.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    width: 200px;
+                    background: white;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 10px;
+                    font-size: 12px;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                `;
+                
+                let navContent = '<div style="font-weight: bold; margin-bottom: 8px;">文档导航</div>';
+                headers.forEach((header, index) => {
+                    const id = 'header-' + index;
+                    header.id = id;
+                    const level = header.tagName.toLowerCase();
+                    const indent = level === 'h1' ? '0px' : level === 'h2' ? '10px' : '20px';
+                    navContent += `<div style="margin-left: ${indent}; margin-bottom: 4px;"><a href="#${id}" style="text-decoration: none; color: #007bff;">${header.textContent}</a></div>`;
+                });
+                
+                nav.innerHTML = navContent;
+                document.body.appendChild(nav);
+            }
         });
     </script>
 </body>

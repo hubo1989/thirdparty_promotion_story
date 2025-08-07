@@ -8,15 +8,15 @@
 
 ### 需求文档
 - **[index.html](index.html)** - 云数汇权益营销平台微信优惠券服务接入需求文档（主文档）
-- **[promotion_story.html](promotion_story.html)** - 微信活动管理系统需求文档
+- **[promotion_story.html](promotion_story.html)** - 活动优惠券管理系统需求文档
 - **[activity_story.html](activity_story.html)** - 主题活动需求文档
 
 ### 功能原型
-- **[promotion_prototype.html](promotion_prototype.html)** - 微信活动管理功能原型
+- **[promotion_prototype.html](promotion_prototype.html)** - 活动优惠券管理功能原型
 - **[activity_prototype.html](activity_prototype.html)** - 主题活动管理功能原型
 
 ### 开发文档
-- **[微信活动管理系统开发说明文档.md](微信活动管理系统开发说明文档.md)** - 系统开发技术文档
+- **[活动优惠券管理系统开发说明文档.md](活动优惠券管理系统开发说明文档.md)** - 系统开发技术文档
 
 ## 核心功能
 
@@ -121,7 +121,7 @@
 #### v2.2.0 (2025年1月)
 - **promotion_story.html 文档优化**
   - 采用现代化的视觉风格，与activity_story.html保持一致
-  - 更新文档标题为"银行联合营销平台 - 微信活动管理需求说明文档"
+  - 更新文档标题为"银行联合营销平台 - 活动优惠券管理需求说明文档"
   - 重构CSS样式，引入卡片式设计和现代化布局
   - 添加原型预览区域，提供直接链接到promotion_prototype.html
   - 重新组织内容结构：系统概述、查询筛选功能、新增活动功能等
@@ -141,7 +141,7 @@
 
 #### v2.0.0 (2024年12月)
 - **核心功能**：完成主题活动管理系统开发
-- **原型设计**：完成微信活动管理功能原型
+- **原型设计**：完成活动优惠券管理功能原型
 - **接口封装**：完成云数汇第三方服务接入
 - **数据管理**：实现优惠券发放和核销数据统计
 

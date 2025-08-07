@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主题活动管理系统需求说明文档</title>
+    <title>联合营销平台 - 主题活动管理需求说明文档</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -270,19 +270,19 @@
 </head>
 <body>
     <header>
-        <h1>主题活动管理系统需求说明文档</h1>
+        <h1>联合营销平台-主题活动管理需求说明文档</h1>
         <p class="subtitle">基于原型界面的详细功能需求与开发指南</p>
     </header>
     
     <!-- 原型图片预览 -->
     <figure class="prototype-preview">
-        <img src="image/activity_prototype.png" alt="主题活动管理系统原型预览">
+        <img src="image/activity_preview.png" alt="主题活动管理系统原型预览">
         <figcaption>主题活动管理系统原型界面预览 - <a href="activity_prototype.html" target="_blank" class="prototype-btn">查看完整原型</a></figcaption>
     </figure>
     
     <section>
         <h2>1. 系统概述</h2>
-        <p>主题活动管理系统是一个基于Web的企业级活动管理平台，主要用于管理营销主题活动的全生命周期。系统提供活动创建、查询、编辑、状态管理、转盘配置等核心功能，支持批量操作和多维度数据筛选。</p>
+        <p>联合营销平台主题活动管理系统是一个基于Web的企业级营销活动管理平台，主要用于管理营销主题活动的全生命周期。系统提供活动创建、查询、编辑、状态管理、转盘配置等核心功能，支持批量操作和多维度数据筛选。</p>
         
         <h3>1.1 核心功能模块</h3>
         <p>系统包含以下主要功能模块：</p>
@@ -293,16 +293,11 @@
             <li><strong>机构管理</strong>：管理报名机构和关联银行信息</li>
             <li><strong>批量操作</strong>：支持批量暂停、导出等操作</li>
             <li><strong>数据查看</strong>：查看批次数据、商户信息、二维码等</li>
-            </ul>
-
-        <h3>1.2 原型界面访问</h3>
-        <p>完整的功能原型可通过以下链接访问：</p>
-        <a href="activity_prototype.html" target="_blank" class="prototype-btn">🔗 查看完整功能原型</a>
+        </ul>
     </section>
     
     <section>
         <h2>2. 查询筛选功能</h2>
-        <a href="activity_prototype.html" target="_blank" class="function-link">🔍 体验查询筛选功能</a>
         
         <h3>2.1 功能描述</h3>
         <p>系统提供多维度的活动查询筛选功能，支持精确查找和模糊搜索，帮助用户快速定位目标活动。</p>
@@ -423,7 +418,6 @@
 
     <section>
         <h2>3. 活动列表展示</h2>
-        <a href="activity_prototype.html" target="_blank" class="function-link">📊 查看活动列表展示</a>
         
         <h3>3.1 数据表格字段</h3>
             <table>
@@ -591,8 +585,6 @@
 
     <section>
         <h2>4. 新增活动功能</h2>
-        <a href="activity_prototype.html?action=add" target="_blank" class="function-link">🆕 打开新增活动模态框</a>
-        
         <h3>4.1 功能描述</h3>
         <p>通过右侧弹出模态框的方式，提供新增主题活动的功能。模态框占据浏览器高度100%，提供良好的表单填写体验。</p>
 
@@ -729,7 +721,6 @@
     
     <section>
         <h2>5. 编辑活动功能</h2>
-        <a href="activity_prototype.html?action=edit&id=5000000084" target="_blank" class="function-link">✏️ 打开编辑活动模态框</a>
         
         <h3>5.1 功能描述</h3>
         <p>允许用户编辑已存在的主题活动信息。编辑功能采用与新增相同的右侧弹出模态框设计，但会预填充当前活动的数据。</p>
@@ -805,7 +796,6 @@
 
     <section>
         <h2>6. 查看活动详情</h2>
-        <a href="activity_prototype.html?action=view&id=5000000084" target="_blank" class="function-link">👁️ 打开活动详情模态框</a>
         
         <h3>6.1 功能描述</h3>
         <p>提供活动详细信息的只读查看功能，包含三个标签页：查看批次数据、查看商户、查看二维码/链接。</p>
@@ -924,7 +914,6 @@
 
     <section>
         <h2>7. 大转盘配置功能</h2>
-        <a href="activity_prototype.html?action=wheel&id=5000000085" target="_blank" class="function-link">🎰 打开转盘配置模态框</a>
         
         <h3>7.1 功能描述</h3>
         <p>为已开启转盘功能的活动配置转盘奖品和抽奖规则。支持动态添加奖品、设置中奖概率、配置奖品展示样式等。</p>
@@ -1040,8 +1029,6 @@
     
     <section>
         <h2>8. 机构银行管理</h2>
-        <a href="activity_prototype.html?action=institution&id=5000000084" target="_blank" class="function-link">🏢 打开机构管理模态框</a>
-        <a href="activity_prototype.html?action=bank&id=5000000084" target="_blank" class="function-link">🏦 打开银行管理模态框</a>
         
         <h3>8.1 功能描述</h3>
         <p>为活动管理报名机构和关联银行信息，支持机构和银行的增删改查操作，确保活动参与主体的准确性。</p>
@@ -1125,7 +1112,6 @@
 
     <section>
         <h2>9. 批量操作功能</h2>
-        <a href="activity_prototype.html" target="_blank" class="function-link">📦 体验批量操作功能</a>
         
         <h3>9.1 批量暂停</h3>
         <p>支持同时暂停多个"生效中"状态的活动，提高管理效率。</p>
@@ -1184,7 +1170,6 @@
 
     <section>
         <h2>10. 分页和全选功能</h2>
-        <a href="activity_prototype.html" target="_blank" class="function-link">📄 体验分页和全选功能</a>
         
         <h3>10.1 分页配置</h3>
         <table>
@@ -1228,7 +1213,7 @@
     </section>
 
     <section>
-        <h2>11. 技术要求与约束</h2>
+        <h2>11. 技术规范</h2>
         
         <h3>11.1 前端技术要求</h3>
         <div class="dev-note">
@@ -1343,17 +1328,407 @@
         </table>
     </section>
 
-    <section>
-        <h2>12. 数据字典</h2>
+        <h3>11.2 数据字典</h3>
         
-        <h3>12.1 活动状态字典</h3>
+        <h4>11.2.1 主题活动表（bmt_theme_activity）</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>描述</th>
+                    <th>约束</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>BIGINT</td>
+                    <td>-</td>
+                    <td>主键</td>
+                    <td>主键，自增，非空</td>
+                </tr>
+                <tr>
+                    <td>owner_id</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>业主id</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>bank_id</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>银行id</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>theme_activity_id</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>主题活动号</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>header_number</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>头寸编号</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>activity_start_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>活动开始时间</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>activity_end_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>活动结束时间</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>rules</td>
+                    <td>TEXT</td>
+                    <td>-</td>
+                    <td>参与规则</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>participation_limit</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>参与次数上限（null为没有上限，0为没有参与次数）</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>max_draws</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>当日参与次数上限（null为没有上限，0为没有参与次数）</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>background_image</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>背景图</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>活动状态</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>gmt_create</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>创建时间</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>create_by</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>创建人</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>gmt_modified</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>修改时间</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>modified_by</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>修改人</td>
+                    <td>可空</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>11.2.2 大转盘配置表（wheel_config）</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>描述</th>
+                    <th>约束</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>BIGINT</td>
+                    <td>-</td>
+                    <td>主键ID</td>
+                    <td>主键，自增</td>
+                </tr>
+                <tr>
+                    <td>activity_id</td>
+                    <td>BIGINT</td>
+                    <td>-</td>
+                    <td>关联活动ID</td>
+                    <td>外键，非空</td>
+                </tr>
+                <tr>
+                    <td>prize_name</td>
+                    <td>VARCHAR</td>
+                    <td>100</td>
+                    <td>奖品名称</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>prize_type</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>奖品类型（COUPON-优惠券，CASH-现金，GIFT-实物）</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>prize_value</td>
+                    <td>DECIMAL</td>
+                    <td>10,2</td>
+                    <td>奖品价值</td>
+                    <td>非空，>=0</td>
+                </tr>
+                <tr>
+                    <td>probability</td>
+                    <td>DECIMAL</td>
+                    <td>5,4</td>
+                    <td>中奖概率（0-1之间）</td>
+                    <td>非空，0<=值<=1</td>
+                </tr>
+                <tr>
+                    <td>total_count</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>奖品总数量</td>
+                    <td>非空，>=0</td>
+                </tr>
+                <tr>
+                    <td>remaining_count</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>剩余数量</td>
+                    <td>非空，>=0</td>
+                </tr>
+                <tr>
+                    <td>sort_order</td>
+                    <td>INT</td>
+                    <td>-</td>
+                    <td>显示顺序</td>
+                    <td>非空，默认0</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>状态（ACTIVE-生效，INACTIVE-失效）</td>
+                    <td>非空，默认ACTIVE</td>
+                </tr>
+                <tr>
+                    <td>create_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>创建时间</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>update_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>更新时间</td>
+                    <td>可空</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>11.2.3 报名机构表（institution）</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>描述</th>
+                    <th>约束</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>BIGINT</td>
+                    <td>-</td>
+                    <td>主键ID</td>
+                    <td>主键，自增</td>
+                </tr>
+                <tr>
+                    <td>institution_code</td>
+                    <td>VARCHAR</td>
+                    <td>8</td>
+                    <td>机构编码</td>
+                    <td>唯一，非空</td>
+                </tr>
+                <tr>
+                    <td>institution_name</td>
+                    <td>VARCHAR</td>
+                    <td>100</td>
+                    <td>机构名称</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>institution_type</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>机构类型</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>contact_person</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>联系人</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>contact_phone</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>联系电话</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>状态（NORMAL-正常，DISABLED-停用）</td>
+                    <td>非空，默认NORMAL</td>
+                </tr>
+                <tr>
+                    <td>create_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>创建时间</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>update_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>更新时间</td>
+                    <td>可空</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>11.2.4 关联银行表（bank）</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>字段名</th>
+                    <th>数据类型</th>
+                    <th>长度</th>
+                    <th>描述</th>
+                    <th>约束</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>BIGINT</td>
+                    <td>-</td>
+                    <td>主键ID</td>
+                    <td>主键，自增</td>
+                </tr>
+                <tr>
+                    <td>bank_code</td>
+                    <td>VARCHAR</td>
+                    <td>8</td>
+                    <td>银行编码</td>
+                    <td>唯一，非空</td>
+                </tr>
+                <tr>
+                    <td>bank_name</td>
+                    <td>VARCHAR</td>
+                    <td>100</td>
+                    <td>银行名称</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>bank_type</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>银行类型</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>bank_standard_code</td>
+                    <td>VARCHAR</td>
+                    <td>10</td>
+                    <td>银行标准代码</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>contact_person</td>
+                    <td>VARCHAR</td>
+                    <td>50</td>
+                    <td>联系人</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>contact_phone</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>联系电话</td>
+                    <td>可空</td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>VARCHAR</td>
+                    <td>20</td>
+                    <td>状态（NORMAL-正常，DISABLED-停用）</td>
+                    <td>非空，默认NORMAL</td>
+                </tr>
+                <tr>
+                    <td>create_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>创建时间</td>
+                    <td>非空</td>
+                </tr>
+                <tr>
+                    <td>update_time</td>
+                    <td>DATETIME</td>
+                    <td>-</td>
+                    <td>更新时间</td>
+                    <td>可空</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>11.3 状态字典</h3>
+        
+        <h4>11.3.1 活动状态字典</h4>
         <table>
             <thead>
                 <tr>
                     <th>状态编码</th>
                     <th>状态名称</th>
                     <th>状态描述</th>
-                    <th>是否可操作</th>
+                    <th>可执行操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -1361,25 +1736,31 @@
                     <td>ACTIVE</td>
                     <td>生效中</td>
                     <td>活动正常运行，用户可以参与</td>
-                    <td>可暂停、编辑、查看</td>
+                    <td>暂停、编辑、查看、删除</td>
                 </tr>
                 <tr>
                     <td>PAUSED</td>
                     <td>已暂停</td>
                     <td>活动暂时停止，用户无法参与</td>
-                    <td>可启用、编辑、查看</td>
+                    <td>启用、编辑、查看、删除</td>
+                </tr>
+                <tr>
+                    <td>EXPIRED</td>
+                    <td>已过期</td>
+                    <td>活动已结束，不可参与</td>
+                    <td>查看</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>12.2 转盘状态字典</h3>
+        <h4>11.3.2 转盘状态字典</h4>
         <table>
             <thead>
                 <tr>
                     <th>状态编码</th>
                     <th>状态名称</th>
                     <th>状态描述</th>
-                    <th>操作权限</th>
+                    <th>可执行操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -1387,245 +1768,18 @@
                     <td>ENABLED</td>
                     <td>已开启</td>
                     <td>转盘功能已启用，可配置奖品</td>
-                    <td>可配置转盘、查看</td>
+                    <td>配置奖品、关闭转盘、查看</td>
                 </tr>
                 <tr>
                     <td>DISABLED</td>
                     <td>未开启</td>
                     <td>转盘功能未启用</td>
-                    <td>可开启转盘</td>
+                    <td>开启转盘</td>
                 </tr>
             </tbody>
         </table>
 
-        <h3>12.3 头寸编号字段列表</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>字段名称</th>
-                    <th>字段类型</th>
-                    <th>字段长度</th>
-                        <th>是否必填</th>
-                    <th>字段说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>头寸编号</td>
-                        <td>String</td>
-                    <td>23位</td>
-                    <td>否</td>
-                    <td>金融业务标识编号，格式：02001018113100000000000</td>
-                </tr>
-                <tr>
-                    <td>头寸编号ID</td>
-                    <td>Long</td>
-                    <td>-</td>
-                        <td>是</td>
-                    <td>头寸编号唯一标识</td>
-                    </tr>
-                    <tr>
-                    <td>头寸编号状态</td>
-                    <td>Enum</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>可用/不可用</td>
-                </tr>
-                <tr>
-                    <td>创建时间</td>
-                    <td>DateTime</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>头寸编号创建时间</td>
-                </tr>
-                <tr>
-                    <td>更新时间</td>
-                    <td>DateTime</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>头寸编号最后更新时间</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>12.4 报名机构字段列表</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>字段名称</th>
-                    <th>字段类型</th>
-                    <th>字段长度</th>
-                    <th>是否必填</th>
-                    <th>字段说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>机构ID</td>
-                    <td>Long</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>机构唯一标识</td>
-                </tr>
-                <tr>
-                    <td>机构编码</td>
-                        <td>String</td>
-                    <td>8位</td>
-                        <td>是</td>
-                    <td>机构业务编码，如：10000001</td>
-                    </tr>
-                    <tr>
-                    <td>机构名称</td>
-                        <td>String</td>
-                    <td>100字符</td>
-                    <td>是</td>
-                    <td>机构全称</td>
-                </tr>
-                <tr>
-                    <td>机构简称</td>
-                    <td>String</td>
-                    <td>50字符</td>
-                        <td>否</td>
-                    <td>机构简称</td>
-                    </tr>
-                    <tr>
-                    <td>机构类型</td>
-                    <td>Enum</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>国有银行/股份制银行/商业银行/地方银行</td>
-                </tr>
-                <tr>
-                    <td>机构状态</td>
-                    <td>Enum</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>正常/停用/注销</td>
-                </tr>
-                <tr>
-                    <td>联系人</td>
-                        <td>String</td>
-                    <td>50字符</td>
-                    <td>否</td>
-                    <td>机构联系人姓名</td>
-                </tr>
-                <tr>
-                    <td>联系电话</td>
-                    <td>String</td>
-                    <td>20字符</td>
-                    <td>否</td>
-                    <td>机构联系电话</td>
-                </tr>
-                <tr>
-                    <td>创建时间</td>
-                    <td>DateTime</td>
-                    <td>-</td>
-                        <td>是</td>
-                    <td>机构信息创建时间</td>
-                    </tr>
-                    <tr>
-                    <td>更新时间</td>
-                    <td>DateTime</td>
-                        <td>-</td>
-                        <td>是</td>
-                    <td>机构信息最后更新时间</td>
-                    </tr>
-            </tbody>
-        </table>
-
-        <h3>12.5 关联银行字段列表</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>字段名称</th>
-                    <th>字段类型</th>
-                    <th>字段长度</th>
-                    <th>是否必填</th>
-                    <th>字段说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>银行ID</td>
-                    <td>Long</td>
-                        <td>-</td>
-                        <td>是</td>
-                    <td>银行唯一标识</td>
-                    </tr>
-                    <tr>
-                    <td>银行编码</td>
-                        <td>String</td>
-                    <td>8位</td>
-                        <td>是</td>
-                    <td>银行业务编码，如：20100001</td>
-                    </tr>
-                    <tr>
-                    <td>银行名称</td>
-                    <td>String</td>
-                    <td>100字符</td>
-                    <td>是</td>
-                    <td>银行全称</td>
-                </tr>
-                <tr>
-                    <td>银行简称</td>
-                    <td>String</td>
-                    <td>50字符</td>
-                        <td>否</td>
-                    <td>银行简称</td>
-                    </tr>
-                    <tr>
-                    <td>银行类型</td>
-                    <td>Enum</td>
-                        <td>-</td>
-                        <td>是</td>
-                    <td>国有银行/股份制银行/地方银行/外资银行</td>
-                    </tr>
-                    <tr>
-                    <td>银行状态</td>
-                    <td>Enum</td>
-                    <td>-</td>
-                    <td>是</td>
-                    <td>正常/停用/注销</td>
-                </tr>
-                <tr>
-                    <td>银行代码</td>
-                        <td>String</td>
-                    <td>10字符</td>
-                        <td>否</td>
-                    <td>银行标准代码，如：ICBC</td>
-                </tr>
-                <tr>
-                    <td>联系人</td>
-                    <td>String</td>
-                    <td>50字符</td>
-                    <td>否</td>
-                    <td>银行联系人姓名</td>
-                </tr>
-                <tr>
-                    <td>联系电话</td>
-                    <td>String</td>
-                    <td>20字符</td>
-                    <td>否</td>
-                    <td>银行联系电话</td>
-                    </tr>
-                    <tr>
-                        <td>创建时间</td>
-                    <td>DateTime</td>
-                        <td>-</td>
-                        <td>是</td>
-                    <td>银行信息创建时间</td>
-                    </tr>
-                    <tr>
-                    <td>更新时间</td>
-                    <td>DateTime</td>
-                    <td>-</td>
-                        <td>是</td>
-                    <td>银行信息最后更新时间</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        <h3>12.6 错误码字典</h3>
+        <h3>11.4 错误码字典</h3>
         <table>
             <thead>
                 <tr>
@@ -1694,14 +1848,15 @@
         </table>
 
         <div class="dev-note">
-            <div class="dev-note-title">数据字典说明：</div>
+            <div class="dev-note-title">技术规范说明：</div>
             <ul>
-                <li><strong>状态编码</strong>：用于系统内部状态标识，建议使用英文大写字母</li>
-                <li><strong>机构编码</strong>：8位数字编码，用于唯一标识机构</li>
-                <li><strong>银行编码</strong>：8位数字编码，用于唯一标识银行</li>
-                <li><strong>头寸编号</strong>：23位数字编码，用于金融业务标识</li>
-                <li><strong>错误码</strong>：HTTP标准状态码，用于API响应</li>
-                <li><strong>数据维护</strong>：所有字典数据需要支持动态配置和管理</li>
+                <li><strong>数据表设计</strong>：所有表均包含主键、创建时间、更新时间等基础字段</li>
+                <li><strong>字段约束</strong>：严格按照约束条件进行数据验证，确保数据完整性</li>
+                <li><strong>状态管理</strong>：采用枚举值进行状态控制，便于扩展和维护</li>
+                <li><strong>编码规范</strong>：机构编码8位、银行编码8位、头寸编号23位，保持格式统一</li>
+                <li><strong>错误处理</strong>：遵循HTTP标准状态码，提供清晰的错误信息</li>
+                <li><strong>数据维护</strong>：支持动态配置管理，便于业务规则调整</li>
+                <li><strong>性能优化</strong>：关键字段建立索引，提升查询效率</li>
             </ul>
         </div>
     </section>
@@ -1773,7 +1928,10 @@
             <li><strong>移动端适配</strong>：触摸操作和响应式布局</li>
             </ul>
     </section>
-
+    <footer>
+        <p>© 2025 联合营销平台 - 主题活动管理系统需求说明文档</p>
+        <p>文档版本：v1.0 | 最后更新：2025年8月8日</p>
+    </footer>
 
 
 </body>
