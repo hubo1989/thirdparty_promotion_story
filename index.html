@@ -234,9 +234,9 @@
     <h3>2.1 业务流程</h3>
     <div class="highlight-box">
         <p><strong>业务流程时序图：</strong></p>
-        <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px;">
+        <div style="text-align: center; margin: 20px 0; padding: 20px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; height: 1200px;">
             <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1000 1300" xmlns="http://www.w3.org/2000/svg">
   <style>
     .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
     .participant { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; text-anchor: middle; }
@@ -265,109 +265,153 @@
   
   <rect x="730" y="60" width="120" height="40" class="participant-box"/>
   <text x="790" y="85" class="participant">微信平台</text>
-  
-  <line x1="110" y1="100" x2="110" y2="750" class="line"/>
-  <line x1="280" y1="100" x2="280" y2="750" class="line"/>
-  <line x1="450" y1="100" x2="450" y2="750" class="line"/>
-  <line x1="620" y1="100" x2="620" y2="750" class="line"/>
-  <line x1="790" y1="100" x2="790" y2="750" class="line"/>
+  <line x1="110" y1="100" x2="110" y2="1300" class="line"/>
+  <line x1="280" y1="100" x2="280" y2="1300" class="line"/>
+  <line x1="450" y1="100" x2="450" y2="1300" class="line"/>
+  <line x1="620" y1="100" x2="620" y2="1300" class="line"/>
+  <line x1="790" y1="100" x2="790" y2="1300" class="line"/>
   
   <rect x="50" y="130" width="800" height="25" class="phase-box"/>
   <text x="450" y="147" class="phase">第一阶段：获取用户OpenID</text>
   
-  <line x1="110" y1="170" x2="620" y2="170" class="arrow"/>
-  <polygon points="615,165 625,170 615,175" fill="#34495e"/>
-  <text x="360" y="165" class="step">1. H5页面获取OpenID</text>
+  <line x1="110" y1="180" x2="620" y2="180" class="arrow"/>
+  <polygon points="615,175 625,180 615,185" fill="#34495e"/>
+  <text x="360" y="175" class="step">1. H5页面获取OpenID</text>
   
-  <line x1="620" y1="190" x2="790" y2="190" class="arrow"/>
-  <polygon points="785,185 795,190 785,195" fill="#34495e"/>
-  <text x="700" y="185" class="step">2. 微信授权</text>
+  <line x1="620" y1="200" x2="790" y2="200" class="arrow"/>
+  <polygon points="785,195 795,200 785,205" fill="#34495e"/>
+  <text x="700" y="195" class="step">2. 微信授权</text>
   
-  <line x1="790" y1="210" x2="620" y2="210" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="625,205 615,210 625,215" fill="#34495e"/>
-  <text x="700" y="205" class="step">3. 返回OpenID</text>
+  <line x1="790" y1="220" x2="620" y2="220" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="625,215 615,220 625,225" fill="#34495e"/>
+  <text x="700" y="215" class="step">3. 返回OpenID</text>
   
-  <line x1="620" y1="230" x2="110" y2="230" class="arrow"/>
-  <polygon points="115,225 105,230 115,235" fill="#34495e"/>
-  <text x="360" y="225" class="step">4. 回调返回OpenID</text>
+  <line x1="620" y1="240" x2="110" y2="240" class="arrow"/>
+  <polygon points="115,235 105,240 115,245" fill="#34495e"/>
+  <text x="360" y="235" class="step">4. 回调返回OpenID</text>
   
-  <rect x="50" y="260" width="800" height="25" class="phase-box"/>
-  <text x="450" y="277" class="phase">第二阶段：优惠券发放</text>
+  <rect x="50" y="280" width="800" height="25" class="phase-box"/>
+  <text x="450" y="297" class="phase">第二阶段：优惠券发放</text>
   
-  <line x1="110" y1="300" x2="280" y2="300" class="arrow"/>
-  <polygon points="275,295 285,300 275,305" fill="#34495e"/>
-  <text x="190" y="295" class="step">5. 发券请求</text>
+  <line x1="110" y1="330" x2="280" y2="330" class="arrow"/>
+  <polygon points="275,325 285,330 275,335" fill="#34495e"/>
+  <text x="190" y="325" class="step">5. 发券请求</text>
   
-  <line x1="280" y1="320" x2="450" y2="320" class="arrow"/>
-  <polygon points="445,315 455,320 445,325" fill="#34495e"/>
-  <text x="360" y="315" class="step">6. 调用发券接口</text>
+  <line x1="280" y1="350" x2="450" y2="350" class="arrow"/>
+  <polygon points="445,345 455,350 445,355" fill="#34495e"/>
+  <text x="360" y="345" class="step">6. 调用发券接口</text>
   
-  <line x1="450" y1="340" x2="620" y2="340" class="arrow"/>
-  <polygon points="615,335 625,340 615,345" fill="#34495e"/>
-  <text x="530" y="335" class="step">7. 云数汇发券API</text>
+  <line x1="450" y1="370" x2="620" y2="370" class="arrow"/>
+  <polygon points="615,365 625,370 615,375" fill="#34495e"/>
+  <text x="530" y="365" class="step">7. 云数汇发券API</text>
   
-  <line x1="620" y1="360" x2="790" y2="360" class="arrow"/>
-  <polygon points="785,355 795,360 785,365" fill="#34495e"/>
-  <text x="700" y="355" class="step">8. 微信发券</text>
+  <line x1="620" y1="390" x2="790" y2="390" class="arrow"/>
+  <polygon points="785,385 795,390 785,395" fill="#34495e"/>
+  <text x="700" y="385" class="step">8. 微信发券</text>
   
-  <line x1="790" y1="380" x2="620" y2="380" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="625,375 615,380 625,385" fill="#34495e"/>
-  <text x="700" y="375" class="step">9. 发放结果</text>
+  <line x1="790" y1="410" x2="620" y2="410" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="625,405 615,410 625,415" fill="#34495e"/>
+  <text x="700" y="405" class="step">9. 发放结果</text>
   
-  <line x1="620" y1="400" x2="450" y2="400" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="455,395 445,400 455,405" fill="#34495e"/>
-  <text x="530" y="395" class="step">10. 返回结果</text>
+  <line x1="620" y1="430" x2="450" y2="430" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="455,425 445,430 455,435" fill="#34495e"/>
+  <text x="530" y="425" class="step">10. 返回结果</text>
   
-  <circle cx="450" cy="420" r="15" fill="#e8f5e8" stroke="#28a745"/>
-  <text x="450" y="425" class="step" text-anchor="middle">11. 保存记录</text>
+  <circle cx="450" cy="450" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="455" class="step" text-anchor="middle">11. 保存记录</text>
   
-  <line x1="450" y1="440" x2="280" y2="440" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="285,435 275,440 285,445" fill="#34495e"/>
-  <text x="360" y="435" class="step">12. 返回结果</text>
+  <line x1="450" y1="470" x2="280" y2="470" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,465 275,470 285,475" fill="#34495e"/>
+  <text x="360" y="465" class="step">12. 返回结果</text>
   
-  <line x1="280" y1="460" x2="110" y2="460" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="115,455 105,460 115,465" fill="#34495e"/>
-  <text x="190" y="455" class="step">13. 返回状态</text>
+  <line x1="280" y1="490" x2="110" y2="490" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="115,485 105,490 115,495" fill="#34495e"/>
+  <text x="190" y="485" class="step">13. 返回状态</text>
   
-  <rect x="50" y="490" width="800" height="25" class="phase-box"/>
-  <text x="450" y="507" class="phase">第三阶段：核销回调</text>
+  <rect x="50" y="530" width="800" height="40" class="phase-box"/>
+  <text x="450" y="557" class="phase">第三阶段：发放回调</text>
   
-  <rect x="720" y="530" width="100" height="30" fill="#fff3cd" stroke="#ffeaa7"/>
-  <text x="770" y="545" class="step" text-anchor="middle">用户使用优惠券</text>
+  <line x1="790" y1="590" x2="620" y2="590" class="arrow"/>
+  <polygon points="625,585 615,590 625,595" fill="#34495e"/>
+  <text x="700" y="585" class="step">14. 微信后台推送发券结果</text>
   
-  <line x1="790" y1="575" x2="620" y2="575" class="arrow"/>
-  <polygon points="625,570 615,575 625,580" fill="#34495e"/>
-  <text x="700" y="570" class="step">14. 核销通知</text>
+  <line x1="620" y1="620" x2="450" y2="620" class="arrow"/>
+  <polygon points="455,615 445,620 455,625" fill="#34495e"/>
+  <text x="530" y="615" class="step">15. 发放通知</text>
   
-  <line x1="620" y1="595" x2="450" y2="595" class="arrow"/>
-  <polygon points="445,590 455,595 445,600" fill="#34495e"/>
-  <text x="530" y="590" class="step">15. 回调通知</text>
+  <line x1="280" y1="740" x2="450" y2="740" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="445,735 455,740 445,745" fill="#34495e"/>
+  <text x="360" y="735" class="step">19. 行方系统确认</text>
+
+  <line x1="450" y1="650" x2="620" y2="650" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="615,645 625,650 615,655" fill="#34495e"/>
+  <text x="530" y="645" class="step">16. 确认回调</text>
+
+  <circle cx="450" cy="680" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="685" class="step" text-anchor="middle">17. 更新记录</text>
+
+  <line x1="450" y1="710" x2="280" y2="710" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,705 275,710 285,715" fill="#34495e"/>
+  <text x="360" y="705" class="step">18. 通知行方系统</text>
   
-  <circle cx="450" cy="615" r="15" fill="#e8f5e8" stroke="#28a745"/>
-  <text x="450" y="620" class="step" text-anchor="middle">16. 更新记录</text>
+  <rect x="50" y="810" width="800" height="40" class="phase-box"/>
+  <text x="450" y="837" class="phase">第四阶段：核销回调</text>
+
+  <rect x="720" y="860" width="100" height="30" fill="#fff3cd" stroke="#ffeaa7"/>
+  <text x="770" y="875" class="step" text-anchor="middle">用户使用优惠券</text>
+
+  <line x1="790" y1="905" x2="620" y2="905" class="arrow"/>
+  <polygon points="625,900 615,905 625,910" fill="#34495e"/>
+  <text x="700" y="900" class="step">21. 核销通知</text>
+
+  <line x1="620" y1="925" x2="450" y2="925" class="arrow"/>
+  <polygon points="455,920 445,925 455,930" fill="#34495e"/>
+  <text x="530" y="920" class="step">22. 回调通知</text>
   
-  <line x1="450" y1="635" x2="620" y2="635" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="615,630 625,635 615,640" fill="#34495e"/>
-  <text x="530" y="630" class="step">17. 确认回调</text>
+  <line x1="450" y1="950" x2="620" y2="950" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="615,945 625,950 615,955" fill="#34495e"/>
+  <text x="530" y="945" class="step">23. 新增确认回调</text>
   
-  <rect x="50" y="665" width="800" height="25" class="phase-box"/>
-  <text x="450" y="682" class="phase">第四阶段：数据查询与展示</text>
+  <circle cx="450" cy="975" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="980" class="step" text-anchor="middle">24. 更新记录</text>
+
+  <line x1="450" y1="1015" x2="280" y2="1015" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,1010 275,1015 285,1020" fill="#34495e"/>
+  <text x="360" y="1010" class="step">25. 通知行方系统</text>
+
+  <line x1="280" y1="1045" x2="450" y2="1045" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="445,1040 455,1045 445,1050" fill="#34495e"/>
+  <text x="360" y="1040" class="step">26. 行方系统确认</text>
+
+  <rect x="50" y="1080" width="800" height="25" class="phase-box"/>
+  <text x="450" y="1097" class="phase">第五阶段：数据查询与展示</text>
+
+  <line x1="110" y1="1140" x2="280" y2="1140" class="arrow"/>
+  <polygon points="275,1135 285,1140 275,1145" fill="#34495e"/>
+  <text x="190" y="1135" class="step">27. 查询请求</text>
+
+  <line x1="280" y1="1170" x2="450" y2="1170" class="arrow"/>
+  <polygon points="445,1165 455,1170 445,1175" fill="#34495e"/>
+  <text x="360" y="1165" class="step">28. 查询接口</text>
+
+  <line x1="450" y1="1190" x2="620" y2="1190" class="arrow"/>
+  <polygon points="615,1185 625,1190 615,1195" fill="#34495e"/>
+  <text x="530" y="1185" class="step">29. 再次查询</text>
   
-  <line x1="110" y1="705" x2="280" y2="705" class="arrow"/>
-  <polygon points="275,700 285,705 275,710" fill="#34495e"/>
-  <text x="190" y="700" class="step">18. 查询请求</text>
-  
-  <line x1="280" y1="720" x2="450" y2="720" class="arrow"/>
-  <polygon points="445,715 455,720 445,725" fill="#34495e"/>
-  <text x="360" y="715" class="step">19. 查询接口</text>
-  
-  <line x1="450" y1="735" x2="280" y2="735" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="285,730 275,735 285,740" fill="#34495e"/>
-  <text x="360" y="730" class="step">20. 返回数据</text>
-  
-  <line x1="280" y1="750" x2="110" y2="750" class="arrow" stroke-dasharray="5,5"/>
-  <polygon points="115,745 105,750 115,755" fill="#34495e"/>
-  <text x="190" y="745" class="step">21. 展示结果</text>
+  <line x1="620" y1="1220" x2="450" y2="1220" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="455,1215 445,1220 455,1225" fill="#34495e"/>
+  <text x="530" y="1215" class="step">30. 返回数据</text>
+
+  <circle cx="450" cy="1250" r="15" fill="#e8f5e8" stroke="#28a745"/>
+  <text x="450" y="1255" class="step" text-anchor="middle">31. 更新记录</text>
+
+  <line x1="450" y1="1280" x2="280" y2="1280" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="285,1275 275,1280 285,1285" fill="#34495e"/>
+  <text x="360" y="1275" class="step">32. 返回查询结果</text>
+
+  <line x1="280" y1="1500" x2="110" y2="1500" class="arrow" stroke-dasharray="5,5"/>
+  <polygon points="115,1495 105,1500 115,1505" fill="#34495e"/>
+  <text x="190" y="1495" class="step">33. 展示结果</text>
 </svg>
             <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">图2.1 云数汇微信优惠券业务流程时序图（详细版）</p>
         </div>
@@ -378,6 +422,7 @@
             <ol style="margin-top: 10px; margin-left: 20px;">
                 <li><strong>H5获取OpenID：</strong>跳转到拉卡拉提供的中转地址，最终跳转到云数汇H5页面获取用户微信OpenID</li>
                 <li><strong>发券API调用：</strong>行方系统调用云数汇发放接口，参数包含openid和活动信息</li>
+                <li><strong>发放回调处理：</strong>微信后台推送发券结果，云数汇发送发放通知并更新记录</li>
                 <li><strong>核销回调通知：</strong>用户使用优惠券时，通过回调机制通知相关系统</li>
                 <li><strong>数据查询：</strong>支持实时查询发放结果和核销状态</li>
             </ol>
@@ -385,6 +430,7 @@
         
         <p><strong>简化流程概述：</strong></p>
         <p>用户 → 接入方系统 → 我方系统 → 云数汇 → 微信</p>
+        <p style="margin-top: 10px; font-size: 14px; color: #666; font-style: italic;">注：在云数汇和微信之间增加了发放回调处理阶段，用于处理微信后台推送的发券结果等回调信息</p>
     </div>
 
     <h3>2.2 接入节点：</h3>
@@ -506,241 +552,43 @@
     
     <h4>4.1.2 发放优惠券接口</h4>
     <div class="highlight-box">
-        <p><strong>请求URL：</strong></p>
-        <ul>
-            <li>测试环境：https://test.wsmsd.cn/sit/api/...</li>
-            <li>生产环境：待提供</li>
-        </ul>
-        
-        <p><strong>请求参数说明：</strong></p>
-        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
-            <tr style="background-color: #f5f5f5;">
-                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">内容</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">是否必输</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">最大长度</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">示例值</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">member_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">会员号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(10-20)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">AAA200154561278</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">activity_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">活动号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(10)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">1100000086</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">owner_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">业主Id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(8)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">80000007</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">promotion_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">优惠Id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(32)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">WX1623452352312523523</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">channel_openid</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">接口1中获取到的openid</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(128)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">oKL-mwRzR-SBfI4QDAI1QXOpkyc8</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">mer_order_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">商户订单号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">20211203092301</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">writeOffNotify</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">核销事件通知地址</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(256)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">https://test.bank.com/notif</td>
-            </tr>
-        </table>
-        
-        <p><strong>请求示例：</strong></p>
+        <p><strong>接口文档链接：</strong></p>
         <div class="code-block">
-            {
-              "member_id": "AAA200154561278",
-              "activity_id": "1100000086",
-              "owner_id": "80000007",
-              "promotion_id": "WX1623452352312523523",
-              "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
-              "mer_order_id": "20211203092301",
-              "writeOffNotify": "https://test.bank.com/notif"
-            }
-        </div>
-        
-        <p><strong>返回示例：</strong></p>
-        <div class="code-block">
-            {
-              "msg": "处理成功",
-              "code": "000000",
-              "data": {
-                "resCode": "000000",
-                "failMsg": "",
-                "activity_id": "1100000086",
-                "owner_id": "80000007",
-                "promotion_id": "WX1623452352312523523",
-                "third_coupon_id": "wxd596543989121024",
-                "mer_order_id": "20211203092301",
-                "trade_no": "202112030923010001",
-                "batch_code": "1254325364564365",
-                "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
-                "trade_status": "SUCCESS"
-              }
-            }
+            <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn" class="url-link">
+            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239aa7hmfvn
+            </a>
         </div>
     </div>
     
-    <h4>4.1.3 核销回调接口</h4>
+    <h4>4.1.3 发放回调接口</h4>
     <div class="highlight-box">
-        <p><strong>接口说明：</strong>通知接入方系统，通过延时队列进行散列通知，通知频率：间隔：1s/5s/5s/10s/3m/10m/20m/30m/1h/2h - 总计 4h3m21s。商户返回应答SUCCESS，将终止通知。</p>
-        
-        <p><strong>Header认证：</strong></p>
+        <p><strong>接口文档链接：</strong></p>
         <div class="code-block">
-            Authorization: "LKLAPI-SHA256withRSA timestamp="${timeStamp}",nonce_str="${nonceStr}",signature="${signature}""
-        </div>
-        
-        <p><strong>通知报文参数：</strong></p>
-        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
-            <tr style="background-color: #f5f5f5;">
-                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">约束</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">字段类型</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">字段描述</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">取值说明</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">member_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">会员ID</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">AAA200154561278</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">tradeStatus</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">核销状态</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">USED：已实扣<br>EXPIRED：已过期</td>
-            </tr>
-        </table>
-        
-        <p><strong>请求示例：</strong></p>
-        <div class="code-block">
-            {
-              "member_id": "AAA200154561278",
-              "owner_id": "80000007",
-              "channel_openid": "oKL-mwRzR-SBfI4QDAI1QXOpkyc8",
-              "promotion_id": "WX1623452352312523523",
-              "third_coupon_id": "wxd596543989121024",
-              "activity_id": "1100000086",
-              "promo_amount": "1000",
-              "total_amount": "9000",
-              "org_amount": "10000",
-              "trade_no": "202112030923010001",
-              "mer_order_id": "20211203092301",
-              "gmt_used": "2021-12-03 10:30:00",
-              "tradeStatus": "USED"
-            }
-        </div>
-        
-        <p><strong>响应示例：</strong></p>
-        <div class="code-block">
-            {
-              "code": "SUCCESS",
-              "msg": "处理成功"
-            }
+            <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj3m4l2hlkm" class="url-link">
+            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj3m4l2hlkm
+            </a>
         </div>
     </div>
-    
-    <h4>4.1.4 数据查询接口</h4>
+
+    <h4>4.1.4 核销回调接口</h4>
     <div class="highlight-box">
-        <p><strong>接口说明：</strong>用于查询发券结果和核销结果。</p>
-        
-        <p><strong>请求参数：</strong></p>
-        <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
-            <tr style="background-color: #f5f5f5;">
-                <th style="border: 1px solid #ddd; padding: 8px;">字段名称</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">内容</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">是否必输</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">最大长度</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">示例值</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">owner_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">业主Id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(8)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">80000007</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">mer_order_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">商户订单号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">20211203092301</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">activity_id</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">活动号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(32)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">1100000086</td>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">trade_no</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">平台订单号</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">M</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">String(64)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">202112030923010001</td>
-            </tr>
-        </table>
-        
-        <p><strong>请求示例：</strong></p>
+        <p><strong>接口文档链接：</strong></p>
         <div class="code-block">
-            {
-              "owner_id": "80000007",
-              "mer_order_id": "20211203092301",
-              "activity_id": "1100000086",
-              "trade_no": "202112030923010001"
-            }
-        </div>
-        
-        <p><strong>返回示例：</strong></p>
-        <div class="code-block">
-            {
-              "msg": "处理成功",
-              "code": "000000",
-              "data": {
-                "resCode": "000000",
-                "failMsg": "",
-                "trade_status": "SUCCESS",
-                "promo_amount": "1000",
-                "total_amount": "9000",
-                "org_amount": "10000",
-                "gmt_used": "2021-12-03 10:30:00",
-                "tradeStatus": "USED"
-              }
-            }
+            <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi" class="url-link">
+            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1g239odi41rqi
+            </a>
         </div>
     </div>
-    
+  
+    <h4>4.1.5 数据查询接口</h4>
+       <div class="highlight-box">
+        <p><strong>接口文档链接：</strong></p>
+        <div class="code-block">
+            <a href="https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv" class="url-link">
+            https://doc.huiyundata.com/docs/bmk_api/bmk_api-1ffj363i8c3kv
+            </a>
+        </div>
+    </div>
     <h3>4.2 系统组成</h3>
     <ul>
         <li><strong>云数汇接入层：</strong>对接云数汇API，处理发券和回调</li>
@@ -781,11 +629,28 @@
             <li><strong>同步保存：</strong>同步保存发放记录</li>
         </ol>
         
-        <strong>第三阶段：回调与查询</strong>
+        <strong>第三阶段：发放回调</strong>
         <ol start="9">
+            <li><strong>微信后台推送：</strong>微信后台推送发券结果</li>
+            <li><strong>发放通知：</strong>云数汇发送发放通知</li>
+            <li><strong>更新记录：</strong>更新发放记录状态</li>
+            <li><strong>确认回调：</strong>确认回调处理完成</li>
+            <li><strong>返回状态：</strong>返回处理状态给微信</li>
+        </ol>
+        
+        <strong>第四阶段：核销回调</strong>
+        <ol start="14">
             <li><strong>核销回调：</strong>用户使用优惠券时，云数汇通过回调通知系统</li>
-            <li><strong>数据查询：</strong>查询发放结果</li>
-            <li><strong>结果展示：</strong>行方系统返回查询结果</li>
+            <li><strong>更新记录：</strong>更新核销记录状态</li>
+            <li><strong>确认回调：</strong>确认回调处理完成</li>
+        </ol>
+        
+        <strong>第五阶段：数据查询与展示</strong>
+        <ol start="17">
+            <li><strong>查询请求：</strong>行方系统发起数据查询请求</li>
+            <li><strong>接口调用：</strong>调用查询接口获取发放和核销数据</li>
+            <li><strong>数据返回：</strong>返回查询结果给行方系统</li>
+            <li><strong>结果展示：</strong>行方系统展示查询结果</li>
         </ol>
     </div>
 
