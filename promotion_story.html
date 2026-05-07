@@ -392,12 +392,12 @@
         <a href="promotion_prototype.html" target="_blank" class="function-link">🔄 体验通道切换功能</a>
         
         <h3>2.1 功能概述</h3>
-        <p>通道管理功能支持多个第三方支付通道的统一管理，用户可以通过标签页切换查看不同通道的活动数据。系统当前支持云数汇通道，并预留了其他通道的扩展接口。</p>
+        <p>通道管理功能支持多个第三方支付通道的统一管理，用户可以通过标签页切换查看不同通道的活动数据。系统当前支持开放平台通道，并预留了其他通道的扩展接口。</p>
         
         <h3>2.2 通道标签栏设计</h3>
         <p>通道标签栏采用水平标签页布局，支持动态加载和切换：</p>
         <ul>
-            <li><strong>云数汇通道</strong>：主要支付通道，处理微信、支付宝、云闪付等渠道的优惠券活动</li>
+            <li><strong>开放平台通道</strong>：主要支付通道，处理微信、支付宝、云闪付等渠道的优惠券活动</li>
             <li><strong>内部通道</strong>：预留通道，支持拉卡拉支付体系的优惠券管理</li>
             <li><strong>其他通道</strong>：可扩展的第三方支付通道接口</li>
         </ul>
@@ -410,8 +410,8 @@
             <li><strong>加载提示</strong>：通道切换时显示加载动画，提升用户体验</li>
         </ul>
         
-        <h4>2.2.2 云数汇通道功能详述</h4>
-        <p>云数汇通道作为主要支付通道，提供完整的优惠券活动管理功能：</p>
+        <h4>2.2.2 开放平台通道功能详述</h4>
+        <p>开放平台通道作为主要支付通道，提供完整的优惠券活动管理功能：</p>
         <ul>
             <li><strong>渠道支持</strong>：支持微信、支付宝支付渠道</li>
             <li><strong>活动管理</strong>：支持满减券的创建和管理</li>
@@ -439,7 +439,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>云数汇</td>
+                    <td>开放平台</td>
                     <td>微信、支付宝</td>
                     <td>开发中</td>
                     <td>REST API</td>
@@ -460,15 +460,15 @@
         <div class="example-section">
             <div class="example-title">通道标签页示例：</div>
             <div class="tabs">
-                <div class="tab-item active" data-tab="yunshuhui" onclick="switchChannel('yunshuhui')">云数汇</div>
+                <div class="tab-item active" data-tab="yunshuhui" onclick="switchChannel('yunshuhui')">开放平台</div>
                 <div class="tab-item" data-tab="lakala" onclick="switchChannel('lakala')">拉卡拉</div>
                 <div class="tab-item" data-tab="unionpay" onclick="switchChannel('unionpay')">直连</div>
                 <div class="tab-item" data-tab="others" onclick="switchChannel('others')">其他</div>
             </div>
             
             <div class="tab-content active" id="yunshuhui">
-                <p><strong>云数汇通道</strong></p>
-                <p>显示云数汇通道下的所有活动数据，包括微信、支付宝、云闪付等渠道的优惠券活动。</p>
+                <p><strong>开放平台通道</strong></p>
+                <p>显示开放平台通道下的所有活动数据，包括微信、支付宝、云闪付等渠道的优惠券活动。</p>
             </div>
             
             <div class="tab-content" id="lakala">
@@ -490,7 +490,7 @@
         <h3>2.6 操作流程</h3>
         <div class="workflow-step">
             <div class="step-number">1</div>
-            <div>用户进入活动管理页面，默认显示云数汇通道</div>
+            <div>用户进入活动管理页面，默认显示开放平台通道</div>
         </div>
         <div class="workflow-step">
             <div class="step-number">2</div>
@@ -1057,7 +1057,7 @@
                         <tr>
                             <td>通道</td>
                             <td>varchar(20)</td>
-                            <td>发放通道：云数汇等</td>
+                            <td>发放通道：开放平台等</td>
                         </tr>
                         <tr>
                             <td>渠道</td>
@@ -1180,7 +1180,7 @@
                         <tr>
                             <td>通道</td>
                             <td>varchar(20)</td>
-                            <td>核销通道：云数汇等</td>
+                            <td>核销通道：开放平台等</td>
                         </tr>
                         <tr>
                             <td>渠道</td>

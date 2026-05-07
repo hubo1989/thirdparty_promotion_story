@@ -4,21 +4,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Joint Marketing Platform Third-Party Marketing Management - Yunshuhui Integration Project** (联合营销平台三方营销管理-云数汇接入项目). It's a requirement documentation repository for building a multi-channel coupon marketing platform that integrates with Yunshuhui third-party coupon services.
+This is a **Joint Marketing Platform Third-Party Marketing Management - WeChat Open Platform Integration Project** (联合营销平台三方营销管理-微信支付开放平台发券项目). It's a requirement documentation repository for building a multi-channel pre-funded voucher marketing platform that integrates with WeChat Open Platform for pre-funded voucher services.
 
 ## System Architecture
 
 The platform consists of three interconnected systems:
 
 - **Theme Activity Management System**: Handles marketing campaign planning, configuration, and management including lottery wheel interactions
-- **Activity Coupon Management System**: Manages multi-channel coupon campaigns (WeChat/Alipay/UnionPay) and links to theme activities
-- **Yunshuhui Integration Layer**: Wraps Yunshuhui APIs to provide unified coupon distribution services
+- **Activity Voucher Management System**: Manages multi-channel pre-funded voucher campaigns (WeChat/Alipay/UnionPay) and links to theme activities
+- **Open Platform Integration Layer**: Wraps WeChat Open Platform APIs to provide unified pre-funded voucher distribution services
 
 ### Core Architecture Flow
 
 ```
-User → Bank System → Joint Marketing Platform → Yunshuhui → WeChat Platform
-Each layer handles: Authorization → Coupon Distribution → Redemption → Data Sync
+User → Bank System → Joint Marketing Platform → WeChat Open Platform → WeChat
+Each layer handles: Authorization → Voucher Distribution → Redemption → Data Sync
 ```
 
 ## Development Commands
@@ -33,7 +33,7 @@ open index.html
 
 # View specific system documentation
 open activity_story.html     # Theme Activity Management System requirements
-open promotion_story.html    # Activity Coupon Management System requirements
+open promotion_story.html    # Activity Voucher Management System requirements
 
 # View prototypes
 open activity_prototype.html   # Theme activity management mockups
@@ -79,13 +79,13 @@ thirdparty_promotion_story/
 ├── promotion_prototype.html       # Coupon Activity System - UI prototypes
 ├── IFLOW.md                       # iFlow CLI context documentation
 ├── api/
-│   └── 接口文档.md                # Yunshuhui API technical specifications
+│   └── 接口文档.md                # Open Platform API technical specifications
 └── image/
     ├── activity_preview.png       # Theme activity system preview screenshots
     └── promotion_preview.png      # Coupon management system preview screenshots
 ```
 
-## Yunshuhui API Integration
+## Open Platform API Integration
 
 ### Core API Endpoints
 
@@ -93,7 +93,7 @@ thirdparty_promotion_story/
    - Test: `https://bmk-market.dshytest.com/deliverWM/1017578611540230144?wmcb=[callback_url]`
    - Prod: `https://market.dsaika.com/deliverWM/1019393703635943424?wmcb=[callback_url]`
 
-2. **Coupon Distribution**: POST endpoint with SHA256+RBA signature
+2. **Voucher Distribution**: POST endpoint with SHA256+RBA signature
    - Uses: member_id, activity_id, owner_id, promotion_id, channel_openid
 
 3. **Distribution Callback**: Retry mechanism with exponential backoff (1s→2h→4h total)
@@ -136,11 +136,11 @@ python3 -m http.server 8000  # Python 3
 ### Theme Activity System
 - High-level campaign container
 - Configures lottery wheels, prize pools, rules
-- Links to specific coupon campaigns
+- Links to specific pre-funded voucher campaigns
 - Manages campaign lifecycle: draft→active→paused→ended
 
-### Activity Coupon System  
-- Channel-specific coupon campaigns (WeChat/Alipay/UnionPay)
+### Activity Voucher System  
+- Channel-specific pre-funded voucher campaigns (WeChat/Alipay/UnionPay)
 - Links to parent theme activity via activity_id
 - Handles coupon lifecycle: creation→distribution→redemption→reporting
 - Tracks ROI metrics and redemption rates
